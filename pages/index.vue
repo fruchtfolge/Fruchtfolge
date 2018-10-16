@@ -1,44 +1,27 @@
 <template>
   <section class="container">
-    <button @click="toggle" class="registrieren-oben">DRUCKEN</button>
+    <button class="registrieren-oben">DRUCKEN</button>
     <div class="main">
       <img id="background" class="background" src="background.jpeg" alt="background" />
     </div>
-    <navSidebar></navSidebar>
   </section>
 </template>
 
 <script>
-import navSidebar from '~/components/navbar.vue' 
 
-export default {
-  methods: {
-    toggle() {
-      return navSidebar.methods.toggle()
-    }
-  },
-  components: {
-    navSidebar
-  }
-}
+export default {}
 </script>
 
 <style>
 .container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 .background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  /* Preserve aspect ratio */
-  min-width: 100%;
-  min-height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .main {

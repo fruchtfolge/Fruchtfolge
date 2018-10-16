@@ -84,7 +84,10 @@ body,html {
 }
 
 .nuxt {
+  position: relative;
+  top: 60px;
   transition: margin-left .5s;
+  overflow-x: hidden;
 }
 
 .sidenav {
