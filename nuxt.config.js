@@ -1,6 +1,6 @@
 module.exports = {
   mode: 'spa',
-  head: {title: 'fruchtfolge'}, // Headers of the page
+  head: {title: 'Fruchtfolge'}, // Headers of the page
   loading: {
     color: '#79ae98',
     height: '3px'

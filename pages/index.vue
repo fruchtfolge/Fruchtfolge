@@ -1,27 +1,24 @@
 <template>
   <section class="container">
-    <div>
-      <button @click="toggle" class="registrieren-oben">REGISTRIEREN</button>
+    <button @click="toggle" class="registrieren-oben">DRUCKEN</button>
+    <div class="main">
       <img id="background" class="background" src="background.jpeg" alt="background" />
     </div>
+    <navSidebar></navSidebar>
   </section>
 </template>
 
 <script>
+import navSidebar from '~/components/navbar.vue' 
 
 export default {
   methods: {
-    toggle (event) {
-      let button = event.target
-      let loginBox = document.getElementById('login')
-      if (button.innerHTML === 'REGISTRIEREN') {
-        loginBox.classList.toggle('flip')
-        button.innerHTML = 'ANMELDEN'
-      } else {
-        loginBox.classList.toggle('flip')
-        button.innerHTML = 'REGISTRIEREN'
-      }
+    toggle() {
+      return navSidebar.methods.toggle()
     }
+  },
+  components: {
+    navSidebar
   }
 }
 </script>
@@ -42,6 +39,10 @@ export default {
   /* Preserve aspect ratio */
   min-width: 100%;
   min-height: 100%;
+}
+
+.main {
+  transition: margin-left .5s;
 }
 
 .registrieren-oben {
