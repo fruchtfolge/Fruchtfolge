@@ -51,6 +51,7 @@ body,html {
   padding: 0px;
   height: 100%;
   width: 100%;
+  overflow-x: hidden;
   background-color: #F5F5F5;
   font-family: 'Open Sans Condensed', sans-serif;
 }
@@ -87,7 +88,6 @@ body,html {
   position: relative;
   top: 60px;
   transition: margin-left .5s;
-  overflow-x: hidden;
 }
 
 .sidenav {

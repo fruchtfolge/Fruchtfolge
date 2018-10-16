@@ -21,16 +21,12 @@ export default {}
 
 .background {
   width: 100%;
-  height: 100%;
-}
-
-.main {
-  transition: margin-left .5s;
+  min-height: 100vh;
 }
 
 .registrieren-oben {
 	display: block;
-	position: absolute;
+	position: fixed;
 	top: 12px;
 	right: 35px;
 	width: 110px;
