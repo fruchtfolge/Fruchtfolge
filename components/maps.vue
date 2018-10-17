@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     createMap() {
-      console.log(this);
+      console.log(this.$bucket.state);
       const mapboxgl = require('mapbox-gl')
       const MapboxDraw = require('@mapbox/mapbox-gl-draw')
 
