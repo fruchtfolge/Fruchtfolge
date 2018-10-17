@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 50vw; position: absolute; top: 120px; left: 50%; margin-left: -25vw">
+  <div style="width: 50vw; position: absolute; top: 120px; left: 15%; margin-left: -25vw">
       <h1 style="font-family: 'Open Sans Condensed'; font-weight: normal; letter-spacing: 0.2em">DATENEINGABE</h1>
       <span>Für die Optimierung werden Daten bezüglich Ihrer bewirtschafteten Flächen benötigt. Dabei werden insbesondere die Schlagskizzen (Geodaten) sowie die Vorfrüchte der Felder für die Optimierungsrechnung verwendet. Die Flächendaten können aus dem ELAN-Downloadportal durch eingabe der ZID-Nummer und Passwort bzw. durch einen Dateiupload hochgeladen werden.
       <br>
@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  middleware: 'auth'
+
 }
 </script>
 
@@ -39,29 +39,29 @@ export default {
   width: 233px;
   height: 33px;
   border-style: solid;
-    border-width: 1px;
-    border-color: grey;
-    background-color: transparent;
-    font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
-    letter-spacing: 0.1em;
-    font-size: 18px;
-    color: grey;
-    padding-left: 5px;
-    border-radius: 0 !important;
+  border-width: 1px;
+  border-color: grey;
+  background-color: transparent;
+  font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
+  letter-spacing: 0.1em;
+  font-size: 18px;
+  color: grey;
+  padding-left: 5px;
+  border-radius: 0 !important;
 }
 .invekosBtn {
-    margin-top: 20px;
+  margin-top: 20px;
   width: 241px;
   height: 40px;
   border-style: solid;
-    border-width: 2px;
-    border-color: black;
-    background-color: transparent;
-    font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
-    letter-spacing: 0.2em;
-    font-size: 18px;
-    color: black;
-    padding: 5px;
-    border-radius: 0px !important;
+  border-width: 2px;
+  border-color: black;
+  background-color: transparent;
+  font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
+  letter-spacing: 0.2em;
+  font-size: 18px;
+  color: black;
+  padding: 5px;
+  border-radius: 0px !important;
 }
 </style>

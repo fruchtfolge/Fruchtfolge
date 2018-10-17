@@ -1,14 +1,20 @@
 module.exports = {
   mode: 'spa',
-  head: {title: 'Fruchtfolge'}, // Headers of the page
+  head: {
+    title: 'Fruchtfolge',
+    link: [{
+      rel: 'stylesheet',
+      href: 'https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css'
+    },
+    {
+      rel: 'stylesheet',
+      href: 'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.4/mapbox-gl-draw.css'
+    }]},
   loading: {
     color: '#79ae98',
-    height: '3px'
+    height: '5px'
   },
-  link: [{
-    rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300'
-  }],
+  plugins: ['~/plugins/vue-pouch-db'],
   build: {
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {
