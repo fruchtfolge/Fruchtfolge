@@ -2,7 +2,7 @@
   <section class="container">
     <button class="registrieren-oben">DRUCKEN</button>
     <div class="main">
-      <img id="background" class="background" src="background.jpeg" alt="background" />
+      <img id="background" class="background" src="~assets/img/background.jpeg" alt="background" />
     </div>
   </section>
 </template>

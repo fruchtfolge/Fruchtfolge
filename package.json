@@ -19,7 +19,9 @@
     "@mapbox/mapbox-gl-draw": "^1.0.9",
     "mapbox-gl": "^0.50.0",
     "nuxt": "^1.4.0",
-    "vue-pouch-db": "^2.0.2"
+    "pouchdb-browser": "^7.0.0",
+    "pouchdb-find": "^7.0.0",
+    "pouchdb-live-find": "^0.4.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

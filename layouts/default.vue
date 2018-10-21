@@ -96,7 +96,7 @@ body,html {
 }
 
 .header {
-  position: absolute;
+  position: fixed;
   cursor: default;
   top: 0px;
   left: 0px;
@@ -127,6 +127,7 @@ body,html {
   position: relative;
   top: 60px;
   transition: margin-left .5s;
+  padding-bottom: 50px;
 }
 
 .sidenav {
