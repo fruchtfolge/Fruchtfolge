@@ -10,6 +10,8 @@
       </div>
       <input v-model="street" type="text" class="input" placeholder="Straße und Hausnummer">
       <br>
+      <input v-model="postcode" type="text" class="input" placeholder="PLZ">
+      <br>
       <input v-model="city" type="text" class="input" placeholder="Stadt">
       <br>
       <div style="width: 100%; height: 12px; border-bottom: 1px solid black; text-align: center; margin-top: 40px; margin-bottom: 40px">
@@ -38,6 +40,9 @@
 </template>
 
 <script>
+import Setting from '~/constructors/settings'
+import mapquest from '~/assets/js/mapquest'
+
 export default {
   data() {
     return {
@@ -46,9 +51,22 @@ export default {
       curYear: 2019,
       street: '',
       city: '',
+      postcode: ''
+    }
+  },
+  watch: {
+    street() {
+      this.debouncedGetHome()
+    },
+    city() {
+      this.debouncedGetHome()
     }
   },
   async created() {
+    // we don't want to call MapQuest for geocoding the new address
+    // while the user is still typing -> debouncing request
+    this.debouncedGetHome = _.debounce(this.getHome, 500)
+
     try {
       // get settings from db (if available)
       const settings = await this.$db.get('settings')
@@ -58,19 +76,35 @@ export default {
       this.zidPass = settings.zidPass
       this.curYear = settings.curYear
       this.street = settings.street
-      this.citty = settings.city
+      this.postcode = settings.postcode
+      this.city = settings.city
     } catch (e) {
+      // if no settings found, construct settings object
       if (e.status === 404) {
-        // if no settings found, construct settings object
-        this.$db.put({
-          _id: 'settings',
-          zidId: '',
-          zidPass: '',
-          curYear: this.curYear,
-          street: this.street,
-          city: this.city
-        })
+        const settings = new Settings()
+        this.$db.put(settings)
       } else {
+        console.log(e)
+      }
+    }
+  },
+  methods: {
+    // get settings object, forward gecode the farm address
+    // and store coordinates in settings.home
+    async getHome() {
+      if (!this.street || !this.city) return console.log('Bitte vollständige Adresse angeben!')
+      try {
+        const settings = await this.$db.get('settings')
+        const home = await mapquest.forward(this.street, this.postcode, this.city)
+        console.log(home)
+
+        settings.street = this.street
+        settings.city = this.city
+        settings.postcode = this.postcode
+        settings.home = home
+
+        await this.$db.put(settings)
+      } catch (e) {
         console.log(e)
       }
     }

@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 module.exports = {
   mode: 'spa',
   head: {
@@ -28,7 +30,12 @@ module.exports = {
       }
       // Extend only webpack config for client-bundle
       if (isClient) { config.target = 'electron-renderer' }
-    }
+    },
+    plugins: [
+      new webpack.ProvidePlugin({
+        '_': 'lodash'
+      })
+    ]
   },
   dev: process.env.NODE_ENV === 'DEV',
   css: [

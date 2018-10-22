@@ -15,7 +15,22 @@ export default {
     async createMap() {
       const mapboxgl = require('mapbox-gl')
       const MapboxDraw = require('@mapbox/mapbox-gl-draw')
-      const settings = await this.$db.get('settings')
+
+      let settings
+      try {
+        settings = await this.$db.get('settings')
+      } catch (e) {
+        if (e.status === 404) {
+          console.log('Keine Hof-Adresse angegeben. Bitte in den Einstellungen die Hof-Adresse eintragen.')
+          return $nuxt.$router.replace({path: 'settings'})
+        }
+        console.log(e)
+      }
+
+      if (!settings.home) {
+        console.log('Keine Hof-Adresse angegeben. Bitte in den Einstellungen die Hof-Adresse eintragen.')
+        return $nuxt.$router.replace({path: 'settings'})
+      }
 
       mapboxgl.accessToken = 'pk.eyJ1IjoidG9mZmkiLCJhIjoiY2l3cXRnNHplMDAxcTJ6cWY1YWp5djBtOSJ9.mBYmcCSgNdaRJ1qoHW5KSQ'
 
