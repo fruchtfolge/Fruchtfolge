@@ -1,12 +1,12 @@
-const distance = require('./distance')
-const bgr = require('bgr-apis')
-const Plot = require('~/constructors/Plot')
+import distance from './mapquest'
+import * as bgr from 'bgr-apis'
+import Plot from '~/constructors/Plot'
 
-async function createPlot(properties) {
+export default async function createPlot(properties) {
   // start by getting the settings object
   // where the current planning year and the
   // farms location are stored
-  const settings = this.$db.get('settings')
+  const settings = await this.$db.get('settings')
 
   // get all required information to create a new plot
   if (!properties.year) {

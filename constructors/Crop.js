@@ -1,4 +1,4 @@
-module.exports = class Crop {
+export default class Crop {
   constructor(properties) {
     // database info
     this._id = properties._id || `crop:${new Date.toIsoString()}`
@@ -13,7 +13,7 @@ module.exports = class Crop {
     this.subseqCrops = properties.subseqCrops || [],
     this.efaFactor = properties.efaFactor || 0,
     this.minSoilQuality = properties.minSoilQuality || 0,
-    
+
     // contribution margin related data
     this.price = properties.price,
     this.yield = properties.yield,

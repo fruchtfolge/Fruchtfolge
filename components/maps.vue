@@ -4,7 +4,13 @@
 </template>
 
 <script>
-// const createPlot = require('~/assets/js/createPlot')
+import createPlot from '~/assets/js/createPlot'
+import mapboxgl from 'mapbox-gl'
+import MapboxDraw from '@mapbox/mapbox-gl-draw'
+
+// load Mapbox Draw configuration file
+import drawConfig from '../assets/js/draw.config.js'
+
 export default {
   name: 'MapBox',
   async mounted () {
@@ -13,9 +19,6 @@ export default {
   },
   methods: {
     async createMap() {
-      const mapboxgl = require('mapbox-gl')
-      const MapboxDraw = require('@mapbox/mapbox-gl-draw')
-
       let settings
       try {
         settings = await this.$db.get('settings')
@@ -45,17 +48,17 @@ export default {
         drageRotate: false
       })
 
-      // load Mapbox Draw configuration file
-      const drawConfig = require('../assets/js/draw.config.js')
       this.Draw = new MapboxDraw(drawConfig)
       this.map.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
       this.map.addControl(this.Draw, 'bottom-left')
 
       // add drawing event listeners
       this.map.on('draw.create', async data => {
-        const plot = new Plot()
-
         try {
+          const plot = await createPlot({
+            name: plotName,
+            geometry: data.features[0]
+          })
           await this.$db.put(plot)
         } catch (e) {
           throw new Error(e)
