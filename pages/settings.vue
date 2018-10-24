@@ -81,7 +81,7 @@ export default {
     } catch (e) {
       // if no settings found, construct settings object
       if (e.status === 404) {
-        const settings = new Settings()
+        const settings = new Setting()
         this.$db.put(settings)
       } else {
         console.log(e)
@@ -95,14 +95,15 @@ export default {
       if (!this.street || !this.city) return console.log('Bitte vollständige Adresse angeben!')
       try {
         const settings = await this.$db.get('settings')
-        const home = await mapquest.forward(this.street, this.postcode, this.city)
-        console.log(home)
+        const address = await mapquest.forward(this.street, this.postcode, this.city)
+        console.log(address)
 
         settings.street = this.street
         settings.city = this.city
         settings.postcode = this.postcode
-        settings.home = home
-
+        settings.home = address.home
+        settings.state_district = address.state_district
+        
         await this.$db.put(settings)
       } catch (e) {
         console.log(e)

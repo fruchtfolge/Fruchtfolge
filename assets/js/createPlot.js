@@ -1,24 +1,23 @@
-import distance from './mapquest'
-import * as bgr from 'bgr-apis'
+import { centerOfMass } from '@turf/turf'
+import mapquest from './mapquest'
+import { soilType, sqr } from 'bgr-apis'
 import Plot from '~/constructors/Plot'
 
-export default async function createPlot(properties) {
-  // start by getting the settings object
-  // where the current planning year and the
-  // farms location are stored
-  const settings = await this.$db.get('settings')
 
+export default async function createPlot(properties, settings) {
   // get all required information to create a new plot
   if (!properties.year) {
     properties.year = settings.curPlanYear
   }
+  // save centroid of plot to polygon
+  properties.center = centerOfMass(properties.geometry).geometry.coordinates
   // create a promise array so that requests are
   // carried out in parallel
   const requests = await Promise.all([
-    bgr.quality(this.geometry),
-    bgr.soilType(this.geometry),
-    region(this.geometry),
-    distance(this.geometry, settings.home)
+    sqr(properties.geometry),
+    soilType(properties.geometry),
+    mapquest.reverse(properties),
+    mapquest.distance(properties, settings.home)
   ])
 
   // fill the properties with the values acquired

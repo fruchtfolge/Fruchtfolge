@@ -1,34 +1,37 @@
 <template>
   <div id="plotsSidebar">
-    <h1 class="sumHa">GESAMT {{ totalHa }} ha</h1>
-    <div v-for="subregion in regions">
-      <h2 @click="expand($event)" class="plotsExpand regionText"> {{ subregion[0].region.toUpperCase() }} </h2>
+    <h1 class="sumHa">GESAMT ha</h1>
+    <div v-if="regions">
+      <h2 v-for="(subregion, n) in regions" :key='n' class="plotsExpand regionText"> {{ subregion.name }}</h2>
       <div class="expand">
-        <p v-for="plot of subregion" @click="this.map.flyTo(plot.centroid)" class="plotsText"> {{ plot.name }} ({{plot.size}} ha) </p>
+        <p v-for="(plot, m) of subregion" :key='m' class="plotsText">  ( ha) </p>
       </div>
     </div>
   </div>
 </template>
 <script>
-import _ from 'lodash'
+
 
 export default {
   data () {
     return {
+      regions: null,
+      
       isClicked: false
     }
   },
+  /*
   computed: {
-    regions: function () {
-      const region = _.groupBy(this.userDB, 'region')
-      return region
+    regions() {
+      return _.groupBy(this.$db., 'region')
     },
-    totalHa: function () {
+    totalHa() {
       if (this.userDB && this.userDB.length > 0) {
         return _.sumBy(this.userDB, 'size')
       }
     }
   },
+  */
   methods: {
     expand: (e) => {
       const event = e.target
@@ -44,10 +47,6 @@ export default {
         event.classList.add('plotsExpand')
         target.style.height = 0
       }
-    },
-    flyTo: function (location) {
-      this.isClicked = true
-      this.mainMap.flyTo({center: location, zoom: 16})
     }
   }
 }

@@ -11,28 +11,32 @@ export default {
     const url = `https://open.mapquestapi.com/directions/v2/route?key=eoEN8KRKeFAMe9JR8UG53yw5Gh3XU9Ex&location&from=${start}&to=${end}&unit=k`
     const request = await axios.get(url)
     console.log(request)
-    return request.distance
+    return request.data.route.distance
   },
 
   async forward(street, postcode, city) {
-    const url = `https://open.mapquestapi.com/geocoding/v1/address?key=eoEN8KRKeFAMe9JR8UG53yw5Gh3XU9Ex&location=${street},${postcode} ${city}`
+    const url = `http://open.mapquestapi.com/nominatim/v1/search.php?key=eoEN8KRKeFAMe9JR8UG53yw5Gh3XU9Ex&format=json&q=${street},${postcode},${city}&addressdetails=1&limit=1`
     const results = await axios.get(url)
-    const coordinates = [results.data.results[0].locations[0].latLng.lng, results.data.results[0].locations[0].latLng.lat]
+    console.log(results)
+    const coordinates = [results.data[0].lon, results.data[0].lat]
+    const state_district = results.data[0].address.state_district.split(' ')[1]
 
-    return coordinates
+    return {
+      home: coordinates, 
+      state_district: state_district
+    }
   },
 
   async reverse(plot) {
     const url = `https://open.mapquestapi.com/geocoding/v1/reverse?key=eoEN8KRKeFAMe9JR8UG53yw5Gh3XU9Ex&location=${plot.center[1]},${plot.center[0]}`
     const request = await axios.get(url)
-    const results = JSON.parse(request)[0]
-    console.log(results)
-    if (results.locations[0].adminArea6) {
-      return results.locations[0].adminArea6
-    } else if (results.locations[0].street){
-      return results.locations[0].street
+    console.log(request)
+    if (request.data.results[0].locations[0].adminArea6) {
+      return request.data.results[0].locations[0].adminArea6
+    } else if (request.data.results[0].locations[0].street){
+      return request.data.results[0].locations[0].street
     } else {
-      return results.locations[0].adminArea5
+      return request.data.results[0].locations[0].adminArea5
     }
   }
 

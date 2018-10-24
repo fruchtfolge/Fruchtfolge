@@ -54,11 +54,13 @@ export default {
 
       // add drawing event listeners
       this.map.on('draw.create', async data => {
+        const plotName = 'Test'
+        const settings = await this.$db.get('settings')
         try {
           const plot = await createPlot({
             name: plotName,
             geometry: data.features[0]
-          })
+          }, settings)
           await this.$db.put(plot)
         } catch (e) {
           throw new Error(e)
@@ -104,12 +106,12 @@ export default {
         })
         const plots = await this.$db.find({
           selector: {type: 'plot'}
-        }).docs
-
+        })
+        
         // if any plots are found, draw them on the map
-        if (plots) {
-          plots.rows.forEach(plot => {
-            this.Draw.add(plot.doc.feature)
+        if (plots.docs) {
+          plots.docs.forEach(plot => {
+            this.Draw.add(plot.geometry)
           })
         }
       } catch (e) {

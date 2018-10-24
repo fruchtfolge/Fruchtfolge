@@ -1,12 +1,18 @@
-import turf from 'turf'
+import { area } from '@turf/turf'
+
+function getId() {
+  const date = new Date()
+  return date.toISOString()
+}
 
 export default class Plot {
   constructor(properties) {
-    this._id = properties._id || `plot:${new Date.toIsoString()}`
+    this._id = properties._id || getId()
     this.type = 'plot',
     this.name = properties.name || 'Unbenannt',
     this.year = properties.year,
     this.geometry = properties.geometry,
+    this.center = properties.center,
     this.quality = properties.quality,
     this.soilType = properties.soilType,
     this.distance = properties.distance,
@@ -17,13 +23,9 @@ export default class Plot {
 
   get size() {
     // calculate area of polygon in m2
-    const m2 = turf.area(this.geometry)
+    const m2 = area(this.geometry)
     // convert to ha and round to 2 decimal points
-    const ha = (m2 / 10000).toFixed(2)
+    const ha = Number((m2 / 10000).toFixed(2))
     return ha
-  }
-
-  get center() {
-    return turf.centerOfMass(plot.geometry).geometry.coordinates
   }
 }
