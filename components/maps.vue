@@ -107,10 +107,11 @@ export default {
         const plots = await this.$db.find({
           selector: {type: 'plot'}
         })
-        
+
         // if any plots are found, draw them on the map
         if (plots.docs) {
           plots.docs.forEach(plot => {
+            console.log(plot)
             this.Draw.add(plot.geometry)
           })
         }
