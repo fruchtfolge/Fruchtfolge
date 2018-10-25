@@ -56,10 +56,13 @@ export default {
   },
   watch: {
     street() {
-      this.debouncedGetHome()
+      if (this.street !== this.settings.street) this.debouncedGetHome()
+    },
+    postcode() {
+      if (this.postcode !== this.settings.postcode) this.debouncedGetHome()
     },
     city() {
-      this.debouncedGetHome()
+      if (this.city !== this.settings.city) this.debouncedGetHome()
     }
   },
   async created() {
@@ -69,20 +72,28 @@ export default {
 
     try {
       // get settings from db (if available)
-      const settings = await this.$db.get('settings')
+      this.settings = await this.$db.get('settings')
 
       // allocate settings to reactive properties
-      this.zidId = settings.zidId
-      this.zidPass = settings.zidPass
-      this.curYear = settings.curYear
-      this.street = settings.street
-      this.postcode = settings.postcode
-      this.city = settings.city
+      this.zidId = this.settings.zidId
+      this.zidPass = this.settings.zidPass
+      this.curYear = this.settings.curYear
+      this.street = this.settings.street
+      this.postcode = this.settings.postcode
+      this.city = this.settings.city
     } catch (e) {
       // if no settings found, construct settings object
       if (e.status === 404) {
-        const settings = new Setting()
-        this.$db.put(settings)
+        this.settings = new Setting()
+        // allocate settings to reactive properties
+        this.zidId = this.settings.zidId
+        this.zidPass = this.settings.zidPass
+        this.curYear = this.settings.curYear
+        this.street = this.settings.street
+        this.postcode = this.settings.postcode
+        this.city = this.settings.city
+        // store in db
+        this.$db.put(this.settings)
       } else {
         console.log(e)
       }
@@ -103,7 +114,7 @@ export default {
         settings.postcode = this.postcode
         settings.home = address.home
         settings.state_district = address.state_district
-        
+
         await this.$db.put(settings)
       } catch (e) {
         console.log(e)

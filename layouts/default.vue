@@ -60,8 +60,8 @@ export default {
   },
   methods: {
     open() {
-      this.sidenavStyle.width = '275px'
-      this.mainStyle.marginLeft = '275px'
+      this.sidenavStyle.width = '250px'
+      this.mainStyle.marginLeft = '250px'
       this.isOpen = true
     },
     close() {

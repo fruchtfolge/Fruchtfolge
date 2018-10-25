@@ -16,7 +16,7 @@ export default {
   data () {
     return {
       regions: null,
-      
+
       isClicked: false
     }
   },
@@ -58,7 +58,7 @@ export default {
   overflow-y: scroll;
   top: 60px;
   right: 0px;
-  width: 350px;
+  width: 275px;
   cursor: default;
   height: calc(100vh - 70px);
   background: #ececec;
