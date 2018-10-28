@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   displayControlsDefault: false,
   controls: {
     polygon: true,
@@ -64,7 +64,7 @@ module.exports = {
         ['!=', 'mode', 'static']
       ],
       'paint': {
-        'circle-radius': 5,
+        'circle-radius': 8,
         'circle-color': '#FFF'
       }
     },
@@ -77,7 +77,7 @@ module.exports = {
         ['!=', 'mode', 'static']
       ],
       'paint': {
-        'circle-radius': 3,
+        'circle-radius': 5,
         'circle-color': '#79ae98'
       }
     },

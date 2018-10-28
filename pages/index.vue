@@ -1,52 +1,32 @@
 <template>
   <section class="container">
-    <div>
-      <button @click="toggle" class="registrieren-oben">REGISTRIEREN</button>
-      <img id="background" class="background" src="background.jpeg" alt="background" />
+    <button class="registrieren-oben">DRUCKEN</button>
+    <div class="main">
+      <img id="background" class="background" src="~assets/img/background.jpeg" alt="background" />
     </div>
   </section>
 </template>
 
 <script>
 
-export default {
-  methods: {
-    toggle (event) {
-      let button = event.target
-      let loginBox = document.getElementById('login')
-      if (button.innerHTML === 'REGISTRIEREN') {
-        loginBox.classList.toggle('flip')
-        button.innerHTML = 'ANMELDEN'
-      } else {
-        loginBox.classList.toggle('flip')
-        button.innerHTML = 'REGISTRIEREN'
-      }
-    }
-  }
-}
+export default {}
 </script>
 
 <style>
 .container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 .background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  /* Preserve aspect ratio */
-  min-width: 100%;
-  min-height: 100%;
+  width: 100%;
+  min-height: 100vh;
 }
 
 .registrieren-oben {
 	display: block;
-	position: absolute;
+	position: fixed;
 	top: 12px;
 	right: 35px;
 	width: 110px;
