@@ -3,6 +3,10 @@
     <div class="header">
       <button @click='toggle' type="button" name="button" class="navIcon"></button>
       <nuxt-link to="/" class="logo">FRUCHTFOLGE</nuxt-link>
+      <select v-model="curPlanYear" class="planYear" type="button" value="2019">
+        <option disabled value="">Planungsjahr</option>
+        <option v-for="(year,i) in years" :key="i" :value="year.single"> {{ year.full }}</option>
+      </select>
     </div>
     <!-- this is the navigation bar on the side -->
     <div class="sidenav" v-bind:style="sidenavStyle">
@@ -17,9 +21,13 @@
 </template>
 
 <script>
+import Setting from '~/constructors/settings'
+
 export default {
   data () {
     return {
+      curPlanYear: null,
+      years: [],
       isOpen: false,
       sidenavStyle: {
         width: '0px'
@@ -56,6 +64,47 @@ export default {
         name: 'Ergebnisse',
         icon: 'static/results.png'
       }]
+    }
+  },
+  async created() {
+    const date = new Date()
+    const year = date.getFullYear()
+    const month = date.getMonth()
+    // construct planning periods for future/past
+    for (var i = year - 1; i < year + 6; i++) {
+      this.years.push({
+        single: i,
+        full: `${i - 1}/${i}`
+      })
+    }
+    // switch to new planning period after April
+    if (month > 4) {
+      this.curPlanYear = year + 1
+    } else {
+      this.curPlaYear = year
+    }
+    // construct settings object if it doesn't exist
+    try {
+      // get settings from db (if available)
+      await this.$db.get('settings')
+    } catch(e) {
+      if (e.status === 404) {
+        const settings = new Setting(this.curPlanYear)
+        // store in db
+        await this.$db.put(settings)
+      }
+    }
+  },
+  watch: {
+    async curPlanYear() {
+      try {
+        // get settings from db (if available)
+        const settings = await this.$db.get('settings')
+        settings.curYear = this.curPlanYear
+        await this.$db.put(settings)
+      } catch(e) {
+        console.log(e)
+      }
     }
   },
   methods: {
@@ -123,6 +172,22 @@ body,html {
   text-decoration: none;
 }
 
+.planYear {
+  width: 125px;
+  font-size: 18px;
+  border-color: black;
+  padding-left: 12px;
+  margin-bottom: 15px;
+  height: 40px;
+  padding-right: 25px;
+  background: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24' height='24' viewBox='0 0 24 24'><path fill='#444' d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'></path></svg>");
+  background-repeat: no-repeat;
+  background-position: 100% 50%;
+  position: fixed;
+  right: 30px;
+  top: 10px;
+}
+
 .nuxt {
   position: relative;
   top: 60px;
@@ -137,7 +202,7 @@ body,html {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: rgb(210, 210, 210);
+  background-color: #ececec;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;

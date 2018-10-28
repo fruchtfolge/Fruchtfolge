@@ -22,7 +22,7 @@ export default {
     const state_district = results.data[0].address.state_district.split(' ')[1]
 
     return {
-      home: coordinates, 
+      home: coordinates,
       state_district: state_district
     }
   },
@@ -33,10 +33,11 @@ export default {
     console.log(request)
     if (request.data.results[0].locations[0].adminArea6) {
       return request.data.results[0].locations[0].adminArea6
-    } else if (request.data.results[0].locations[0].street){
-      return request.data.results[0].locations[0].street
-    } else {
+      request.data.results[0].locations[0].adminArea5
+    } else if (request.data.results[0].locations[0].adminArea5){
       return request.data.results[0].locations[0].adminArea5
+    } else {
+      return request.data.results[0].locations[0].street
     }
   }
 

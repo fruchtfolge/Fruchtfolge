@@ -12,6 +12,8 @@ export default class Plot {
     this.name = properties.name || 'Unbenannt',
     this.year = properties.year,
     this.geometry = properties.geometry,
+    this.geometry.properties._id = this._id,
+    this.size = () => {return Number((area(this.geometry) / 10000).toFixed(2))},
     this.center = properties.center,
     this.quality = properties.quality,
     this.soilType = properties.soilType,
@@ -19,13 +21,5 @@ export default class Plot {
     this.region = properties.region,
     this.crop = properties.crop,
     this.rootCrops = properties.rootCrops || true
-  }
-
-  get size() {
-    // calculate area of polygon in m2
-    const m2 = area(this.geometry)
-    // convert to ha and round to 2 decimal points
-    const ha = Number((m2 / 10000).toFixed(2))
-    return ha
   }
 }

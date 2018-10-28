@@ -1,9 +1,9 @@
 export default class Setting {
-  constructor() {
+  constructor(curYear) {
     this._id = 'settings'
     this.zidId = ''
     this.zidPass = ''
-    this.curYear = '2019'
+    this.curYear = curYear
     this.street = ''
     this.postcode = ''
     this.city = ''

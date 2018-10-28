@@ -6,7 +6,6 @@ export default class Crop {
     this.year = properties.year,
 
     // general crop data
-    this.cropGroup = properties.cropGroup,
     this.name = properties.name,
     this.code = properties.code,
     this.variety = properties.variety,
@@ -19,17 +18,14 @@ export default class Crop {
     this.yield = properties.yield,
     this.directCosts = properties.directCosts,
     this.otherCosts = properties.otherCosts,
-    this.machineCosts = properties.machineCosts,
+    this.fixedCosts = properties.fixedCosts,
     this.workingSteps = properties.workingSteps || [],
     this.cultivationType = properties.cultivationType
-  }
-  get variableCosts() {
-    return this.directCosts + this.machineCosts + this.otherCosts
-  }
-  get revenue() {
-    return this.price * this.yield
-  }
-  get contributionMargin() {
-    return this.revenue() - this.variableCosts()
+
+    // gross margin functions
+    this.revenue = () => {return this.price * this.yield}
+    this.dirCostsFreeRev = () => {return this.revenue() - this.directCosts}
+    this.variableCosts = () => {return this.directCosts + this.otherCosts}
+    this.contributionMargin = () => {return this.revenue() - this.variableCosts()}
   }
 }

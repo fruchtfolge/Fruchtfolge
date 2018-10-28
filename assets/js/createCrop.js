@@ -1,10 +1,7 @@
-import { centerOfMass, area } from '@turf/turf'
-import mapquest from './mapquest'
-import { soilType, sqr } from 'bgr-apis'
-import Plot from '~/constructors/Plot'
+import ktbl from 'ktbl-apis'
+import Crop from '~/constructors/Crop'
 
-
-export default async function createPlot(properties, settings) {
+export default async function createCrop(properties, settings) {
   // get all required information to create a new plot
   if (!properties.year) {
     properties.year = settings.curPlanYear

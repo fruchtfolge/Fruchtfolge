@@ -61,6 +61,7 @@ export default {
             name: plotName,
             geometry: data.features[0]
           }, settings)
+          console.log(plot)
           await this.$db.put(plot)
         } catch (e) {
           throw new Error(e)
@@ -70,9 +71,9 @@ export default {
       this.map.on('draw.update', async data => {
         try {
           // get plot object from Database
-          const plot = await this.$db.get(data.features[0].id)
+          const plot = await this.$db.get(data.features[0].properties._id)
           // update geometry
-          plot.feature = data.features[0]
+          plot.geometry = data.features[0]
           // store changes in Database
           await this.$db.put(plot)
         } catch (e) {
@@ -83,7 +84,9 @@ export default {
       this.map.on('draw.delete', async (data) => {
         try {
           // fetch plot object from DB
-          const plot = await this.$db.get(data.features[0].id)
+          console.log(data.features[0].properties._id)
+          const plot = await this.$db.get(data.features[0].properties._id)
+          console.log(plot)
           // remove from Database
           await this.$db.remove(plot)
         } catch (e) {

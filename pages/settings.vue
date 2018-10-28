@@ -40,7 +40,6 @@
 </template>
 
 <script>
-import Setting from '~/constructors/settings'
 import mapquest from '~/assets/js/mapquest'
 
 export default {
@@ -82,21 +81,7 @@ export default {
       this.postcode = this.settings.postcode
       this.city = this.settings.city
     } catch (e) {
-      // if no settings found, construct settings object
-      if (e.status === 404) {
-        this.settings = new Setting()
-        // allocate settings to reactive properties
-        this.zidId = this.settings.zidId
-        this.zidPass = this.settings.zidPass
-        this.curYear = this.settings.curYear
-        this.street = this.settings.street
-        this.postcode = this.settings.postcode
-        this.city = this.settings.city
-        // store in db
-        this.$db.put(this.settings)
-      } else {
-        console.log(e)
-      }
+      console.log(e)
     }
   },
   methods: {
