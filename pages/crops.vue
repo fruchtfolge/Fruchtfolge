@@ -1,7 +1,7 @@
 <template>
   <div>
-    <cropsSidebar/>
-    <addCrop/>
+    <cropsSidebar v-on:showAddCrop="addCrop = true"/>
+    <addCrop v-if="addCrop" v-on:closeAddCrop="addCrop = false"/>
     <div v-for="(crop, i) in crops" :key='i' v-if="crop === clickedCrop" >
       <cropTable/>
       <cropSettings/>
@@ -14,7 +14,8 @@
 export default {
   data: () => {
     return {
-      crops: null
+      crops: null,
+      addCrop: true
     }
   },
   components: {

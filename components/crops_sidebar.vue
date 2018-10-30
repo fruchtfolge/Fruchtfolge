@@ -8,10 +8,10 @@
         </div>
       </div>
     </div>
-    <div v-else>
-      Klicken Sie auf das + Zeichen um neue Kulturen hinzuzufügen
+    <div v-else class="helpText">
+      Klicken Sie auf den Button (+) um neue Kulturen für das aktuelle Planungsjahr hinzuzufügen
     </div>
-    <div class="addCrop"></div>
+    <div class="addCrop" @click="addCrop"></div>
   </div>
 </template>
 <script>
@@ -39,6 +39,9 @@ export default {
         event.classList.add('cropsExpand')
         target.style.height = 0
       }
+    },
+    addCrop() {
+      this.$emit('showAddCrop')
     }
   }
 }
@@ -50,7 +53,7 @@ export default {
   overflow-y: scroll;
   top: 60px;
   right: 0px;
-  width: 350px;
+  width: 275px;
   cursor: default;
   height: calc(100vh - 70px);
   background: #ececec;
@@ -95,6 +98,11 @@ export default {
   font-weight: normal;
 }
 
+.helpText {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 .expand{
     height: 0;
     overflow: hidden;
@@ -113,25 +121,30 @@ export default {
   letter-spacing: 0.1em;
 }
 .addCrop {
-   padding: 0px;
-   margin-top: 20px;
-   margin-bottom: 20px;
-   position: relative;
-   margin-left: 143.5px;
-   margin-bottom: 15px;
-   width: 33px;
-   height: 33px;
-   background: transparent;
-   border: none;
-   margin-right: 143.5px;
-   background-image: url(~assets/img/add.svg), none;
-   background-size:     cover;
-   background-repeat:   no-repeat;
-   background-position: center center;
+  padding: 0px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  left: 50%;
+  margin-left: -16.5px;
+  margin-bottom: 15px;
+  width: 33px;
+  height: 33px;
+  background: transparent;
+  border: none;
+  background-color: grey;
+  -webkit-mask: url(~assets/img/add.svg), none;
+  -webkit-mask-size: cover;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center center;
 }
 
 .addCrop svg {
   width: 33px;
   height: 33px;
+}
+
+.addCrop:hover {
+  background-color: black;
 }
 </style>

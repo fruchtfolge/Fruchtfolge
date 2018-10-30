@@ -2,6 +2,7 @@
   <div class="blur">
     <div class="box">
       <div class="inputs">
+        <h2 class="infoText">NEUE KULTUR HINZUFÜGEN</h2>
         <label for="add.crop.type">Anbauverfahren</label>
         <select class="dropdown" id="add.crop.type" v-model="type">
           <option v-for="(type, i) in types" :key="i" :value="type">{{ type }}</option>
@@ -17,8 +18,8 @@
         <label for="add.crop.variety">Sorte</label>
         <input type="text" id="add.crop.variety" placeholder="Optional" class="input" v-model="variety">
       </div>
-      <button class="buttonOk">ÜBERNEHMEN</button>
-      <button class="buttonCancel">ABBRECHEN</button>
+      <button class="buttonOk" @click="addCrop">ÜBERNEHMEN</button>
+      <button class="buttonCancel" @click="cancel">ABBRECHEN</button>
     </div>
   </div>
 </template>
@@ -48,8 +49,11 @@ export default {
   },
   methods: {
     async addCrop() {
-      const settings = await this.$db.get('settings')
-
+      //const settings = await this.$db.get('settings')
+      this.$emit('closeAddCrop')
+    },
+    cancel() {
+      this.$emit('closeAddCrop')
     }
   }
 }
@@ -97,6 +101,14 @@ export default {
   margin-top: 0px;
   top: 0px;
   margin-bottom: 5px;
+}
+.infoText {
+  text-align: center;
+  font-size: 18px;
+  padding-bottom: 15px;
+  letter-spacing: 0.2em;
+  font-weight: normal;
+  font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
 }
 
 .dropdown {

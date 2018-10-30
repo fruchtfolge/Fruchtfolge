@@ -11,8 +11,13 @@
     <!-- this is the navigation bar on the side -->
     <div class="sidenav" v-bind:style="sidenavStyle">
       <ul class="sidenav-container">
-        <li v-for="(link, index) in links" class="sidenav-links"
-            :key='index' @click="follow(link.route)">{{ link.name }}</li>
+        <li v-for="(link, index) in links"
+            :key='index' @click="follow(link)">
+            <p class="sidenav-links" v-bind:class="{ active: isClicked(link.name)}">
+              <!--v-bind:class="{ active: isClicked(link.name)}"-->
+              {{ link.name }}
+            </p>
+          </li>
       </ul>
     </div>
     <!-- this is where the main application lives -->
@@ -27,6 +32,7 @@ export default {
   data () {
     return {
       curPlanYear: null,
+      curPage: 'Home',
       years: [],
       isOpen: false,
       sidenavStyle: {
@@ -34,6 +40,9 @@ export default {
       },
       mainStyle: {
         marginLeft: '0px'
+      },
+      clickedPage: {
+        backgroundColor: 'rgba(0, 0, 0, .05)'
       },
       links: [{
         route: '/',
@@ -126,7 +135,11 @@ export default {
       }
     },
     follow(link) {
-      return $nuxt.$router.replace({path: link})
+      this.curPage = link.name
+      return $nuxt.$router.replace({path: link.route})
+    },
+    isClicked(name) {
+      return this.curPage === name
     }
   }
 }
@@ -188,6 +201,10 @@ body,html {
   top: 10px;
 }
 
+.planYear:hover {
+  background-color: rgba(0, 0, 0, .05);
+}
+
 .nuxt {
   position: relative;
   top: 60px;
@@ -204,25 +221,34 @@ body,html {
   left: 0;
   background-color: #ececec;
   overflow-x: hidden;
-  transition: 0.5s;
+  transition: width .5s;
   padding-top: 60px;
 }
 
+
 .sidenav-container {
   list-style: none;
+  padding-left: 0px;
 }
 
 .sidenav-links {
   position: relative;
-  width: 200px;
+  width: 100%;
   cursor: pointer;
   font-size: 18px;
   letter-spacing: 0.1em;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-left: 40px;
   top: 60px;
+  line-height: 40px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
-
+.sidenav-links:hover {
+  background-color: rgba(0, 0, 0, .02);
+}
+.active {
+  background-color: rgba(0, 0, 0, .05);
+}
 .navIcon {
 	position: fixed;
 	left: 22px;
