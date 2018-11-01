@@ -4,6 +4,7 @@
 </template>
 
 <script>
+import { area } from '@turf/turf'
 import createPlot from '~/assets/js/createPlot'
 import mapboxgl from 'mapbox-gl'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
@@ -53,50 +54,10 @@ export default {
       this.map.addControl(this.Draw, 'bottom-left')
 
       // add drawing event listeners
-      this.map.on('draw.create', async data => {
-        const plotName = 'Test'
-        const settings = await this.$db.get('settings')
-        try {
-          const plot = await createPlot({
-            name: plotName,
-            geometry: data.features[0]
-          }, settings)
-          console.log(plot)
-          await this.$db.put(plot)
-        } catch (e) {
-          throw new Error(e)
-        }
-      })
-
-      this.map.on('draw.update', async data => {
-        try {
-          // get plot object from Database
-          const plot = await this.$db.get(data.features[0].properties._id)
-          // update geometry
-          plot.geometry = data.features[0]
-          // store changes in Database
-          await this.$db.put(plot)
-        } catch (e) {
-          console.log(e)
-        }
-      })
-
-      this.map.on('draw.delete', async (data) => {
-        try {
-          // fetch plot object from DB
-          console.log(data.features[0].properties._id)
-          const plot = await this.$db.get(data.features[0].properties._id)
-          console.log(plot)
-          // remove from Database
-          await this.$db.remove(plot)
-        } catch (e) {
-          console.log(e)
-        }
-      })
-
-      this.map.on('draw.combine', (data) => {
-
-      })
+      this.map.on('draw.create', this.create)
+      this.map.on('draw.update', this.update)
+      this.map.on('draw.delete', this.delete)
+      this.map.on('draw.combine', this.combine)
 
     },
     async drawPlots() {
@@ -120,6 +81,55 @@ export default {
         }
       } catch (e) {
         console.log(e)
+      }
+    },
+    getSize(geometry) {
+      const m2 = area(geometry)
+      return Number((m2 / 10000).toFixed(2))
+    },
+    async delete(data) {
+      try {
+        // fetch plot object from DB
+        console.log(data.features[0].properties._id)
+        const plot = await this.$db.get(data.features[0].properties._id)
+        console.log(plot)
+        // remove from Database
+        await this.$db.remove(plot)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async update(data) {
+      try {
+        // get plot object from Database
+        const plot = await this.$db.get(data.features[0].properties._id)
+        // update geometry
+        plot.geometry = data.features[0]
+        // update size
+        plot.size = this.getSize(plot.geometry)
+        // store changes in Database
+        await this.$db.put(plot)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async combine() {
+
+    },
+    async create(data) {
+      const plotName = 'Test'
+      const settings = await this.$db.get('settings')
+      const size = this.getSize(data.features[0])
+      try {
+        const plot = await createPlot({
+          name: plotName,
+          geometry: data.features[0],
+          size: size
+        }, settings)
+        //console.log(plot)
+        await this.$db.put(plot)
+      } catch (e) {
+        throw new Error(e)
       }
     }
   }

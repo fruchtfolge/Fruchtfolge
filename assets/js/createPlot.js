@@ -1,4 +1,4 @@
-import { centerOfMass, area } from '@turf/turf'
+import { centerOfMass } from '@turf/turf'
 import mapquest from './mapquest'
 import { soilType, sqr } from 'bgr-apis'
 import Plot from '~/constructors/Plot'
@@ -6,13 +6,12 @@ import Plot from '~/constructors/Plot'
 
 export default async function createPlot(properties, settings) {
   // get all required information to create a new plot
+  console.log(settings)
   if (!properties.year) {
-    properties.year = settings.curPlanYear
+    properties.year = settings.curYear
   }
   // save centroid of plot to polygon
   properties.center = centerOfMass(properties.geometry).geometry.coordinates
-  // save field size
-  properties.size = Number((area(properties.geometry) / 10000).toFixed(2))
   // create a promise array so that requests are
   // carried out in parallel
   const requests = await Promise.all([
@@ -30,6 +29,5 @@ export default async function createPlot(properties, settings) {
 
   // create the plot
   const plot = new Plot(properties)
-
   return plot
 }

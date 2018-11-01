@@ -3,7 +3,7 @@
     <div class="header">
       <button @click='toggle' type="button" name="button" class="navIcon"></button>
       <nuxt-link to="/" class="logo">FRUCHTFOLGE</nuxt-link>
-      <select v-model="curPlanYear" class="planYear" type="button" value="2019">
+      <select v-model="curPlanYear" @change="changePlanYear" class="planYear" type="button" value="2019">
         <option disabled value="">Planungsjahr</option>
         <option v-for="(year,i) in years" :key="i" :value="year.single"> {{ year.full }}</option>
       </select>
@@ -104,18 +104,6 @@ export default {
       }
     }
   },
-  watch: {
-    async curPlanYear() {
-      try {
-        // get settings from db (if available)
-        const settings = await this.$db.get('settings')
-        settings.curYear = this.curPlanYear
-        await this.$db.put(settings)
-      } catch(e) {
-        console.log(e)
-      }
-    }
-  },
   methods: {
     open() {
       this.sidenavStyle.width = '250px'
@@ -140,6 +128,16 @@ export default {
     },
     isClicked(name) {
       return this.curPage === name
+    },
+    async changePlanYear() {
+      try {
+        // get settings from db (if available)
+        const settings = await this.$db.get('settings')
+        settings.curYear = this.curPlanYear
+        await this.$db.put(settings)
+      } catch(e) {
+        console.log(e)
+      }
     }
   }
 }

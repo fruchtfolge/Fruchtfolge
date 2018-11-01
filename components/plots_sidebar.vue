@@ -46,7 +46,7 @@ export default {
         .on('update', (update, aggregate) => {
           this.plots = aggregate
           this.regions = _.groupBy(this.plots, 'region')
-          this.totalHa = Number(_.sumBy(this.plots, (plot) => {return plot.size()}).toFixed(2)) || 0
+          this.totalHa = Number(_.sumBy(this.plots, (plot) => {return plot.size}).toFixed(2)) || 0
           console.log(this.plots)
         })
         .on('error', (err) => {
