@@ -111,7 +111,7 @@ export default {
   overflow: hidden;
 }
 
-.expand-enter, .expand-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.expand-enter, .expand-leave-to {
   height: 0;
 }
 
