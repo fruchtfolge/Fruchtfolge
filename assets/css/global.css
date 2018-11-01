@@ -43,6 +43,9 @@ input, textarea, select, button, img {
   -webkit-user-select: auto;
   cursor: auto;
 }
+select:focus {
+    outline: none;
+}
 /*
 .page-enter-active, .page-leave-active {
   transition: opacity .5s;

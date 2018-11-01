@@ -243,7 +243,7 @@ body,html {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-.sidenav-links:hover {
+.sidenav-links:not(.active):hover {
   background-color: rgba(0, 0, 0, .02);
 }
 .active {
