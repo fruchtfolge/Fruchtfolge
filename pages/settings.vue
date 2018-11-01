@@ -121,7 +121,6 @@ export default {
   font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
   letter-spacing: 0.1em;
   font-size: 18px;
-  color: grey;
   padding-left: 5px;
   border-radius: 0 !important;
 }

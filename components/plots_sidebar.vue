@@ -2,10 +2,17 @@
   <div class="plotsSidebar">
     <h1 class="sumHa">GESAMT {{ totalHa }} ha</h1>
     <div v-if="regions" v-for="(region, n) in regions" :key='n'>
-      <h2 @click="expand" class="plotsExpand regionText"> {{ region[0].region.toUpperCase() }}</h2>
-      <div class="expand">
-        <p v-for="(plot, m) in region" :key='m' class="plotsText"> {{plot.name}} ({{plot.size}} ha) </p>
+      <div class="container" @click="collapsed = !collapsed">
+        <h2 class="regionText"> {{ region[0].region.toUpperCase() }}</h2>
+        <div class="arrow" v-bind:class="{ rotate: !collapsed}"></div>
       </div>
+      <transition name="expand"
+      v-on:before-enter="beforeEnter" v-on:enter="enter"
+      v-on:before-leave="beforeLeave" v-on:leave="leave">
+        <div class="body" v-show="!collapsed">
+          <p v-for="(plot, m) in region" :key='m' class="plotsText"> {{plot.name}} ({{plot.size}} ha) </p>
+        </div>
+      </transition>
     </div>
     <div v-else>
       <p class="regionText">Klicken Sie auf den Rechteck-Button in der Karte links-unten um ein neues Feld eizuzeichnen.</p>
@@ -20,7 +27,8 @@ export default {
     return {
       regions: null,
       totalHa: 0,
-      isClicked: false
+      isClicked: false,
+      collapsed: true
     }
   },
   async created() {
@@ -38,7 +46,7 @@ export default {
         .on('update', (update, aggregate) => {
           this.plots = aggregate
           this.regions = _.groupBy(this.plots, 'region')
-          this.totalHa = Number(_.sumBy(this.plots, (plot) => {return plot.size()}).toFixed(2)) || 0
+          this.totalHa = Number(_.sumBy(this.plots, (plot) => {return plot.size}).toFixed(2)) || 0
           console.log(this.plots)
         })
         .on('error', (err) => {
@@ -49,20 +57,17 @@ export default {
     }
   },
   methods: {
-    expand: (e) => {
-      const event = e.target
-      event.__toggle = !event.__toggle
-      var target = event.nextSibling
-
-      if (event.__toggle) {
-        event.classList.remove('plotsExpand')
-        event.classList.add('plotsCollaps')
-        target.style.height = target.scrollHeight + 'px'
-      } else {
-        event.classList.remove('plotsCollaps')
-        event.classList.add('plotsExpand')
-        target.style.height = 0
-      }
+    beforeEnter(el) {
+      el.style.height = '0px';
+    },
+    enter(el) {
+      el.style.height = el.scrollHeight + 'px';
+    },
+    beforeLeave(el) {
+      el.style.height = el.scrollHeight + 'px';
+    },
+    leave(el) {
+      el.style.height = '0px';
     }
   }
 }
@@ -80,21 +85,34 @@ export default {
   background: #ececec;
   z-index: 94;
 }
-.plotsCollaps {
-  background: url("data:image/svg+xml;utf8,<svg width='24' height='24' xmlns='http://www.w3.org/2000/svg'> <g> <title>background</title> <rect fill='none' id='canvas_background' height='402' width='582' y='-1' x='-1'/> </g> <g> <title>Layer 1</title> <path transform='rotate(-180 12,11.531000137329102) ' id='svg_1' d='m7.406,7.828l4.594,4.594l4.594,-4.594l1.406,1.406l-6,6l-6,-6l1.406,-1.406z' fill='#444'/> </g> </svg>");
-    background-position: 100% 50%;
-    background-repeat: no-repeat;
-}
-.plotsExpand:hover {
-  background: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24' height='24' viewBox='0 0 24 24'><path fill='#444' d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'></path></svg>");
-    background-position: 100% 50%;
-    background-repeat: no-repeat;
+
+.container {
+  display: inline-flex;
+  align-items: center;
 }
 
-.expand{
-    height: 0;
-    overflow: hidden;
-    transition: height 0.8s ease;
+.arrow {
+  width: 24px;
+  height: 24px;
+  background: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24' height='24' viewBox='0 0 24 24'><path fill='#444' d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'></path></svg>");
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  transform: rotate(0deg);
+  transition-duration: .5s;
+}
+
+.arrow.rotate {
+  transform: rotate(180deg);
+  transition: .5s;
+}
+
+.expand-enter-active, .expand-leave-active {
+  transition: height .5s ease-in-out;
+  overflow: hidden;
+}
+
+.expand-enter, .expand-leave-to {
+  height: 0;
 }
 
 .geclickt {
@@ -127,17 +145,6 @@ export default {
   font-weight: normal;
 }
 
-.expand{
-    height: 0;
-    overflow: hidden;
-    transition: height 0.8s ease;
-}
-
-.cropsExpand:hover {
-  background: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24' height='24' viewBox='0 0 24 24'><path fill='#444' d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'></path></svg>");
-    background-position: 100% 50%;
-    background-repeat: no-repeat;
-}
 
 .plotInput {
   font-family: 'open_sanscondensed_light', sans-serif;

@@ -22,10 +22,9 @@ export default class Crop {
     this.workingSteps = properties.workingSteps || [],
     this.cultivationType = properties.cultivationType
 
-    // gross margin functions
-    this.revenue = () => {return this.price * this.yield}
-    this.dirCostsFreeRev = () => {return this.revenue() - this.directCosts}
-    this.variableCosts = () => {return this.directCosts + this.otherCosts}
-    this.contributionMargin = () => {return this.revenue() - this.variableCosts()}
+    this.revenue = properties.revenue
+    this.dirCostsFreeRev = properties.dirCostsFreeRev
+    this.variableCosts = properties.variableCosts
+    this.contributionMargin = properties.contributionMargin
   }
 }

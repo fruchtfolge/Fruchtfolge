@@ -1,6 +1,5 @@
 <template>
   <section class="container">
-    <button class="registrieren-oben">DRUCKEN</button>
     <div class="main">
       <img id="background" class="background" src="~assets/img/background.jpeg" alt="background" />
     </div>
@@ -20,6 +19,8 @@ export default {}
 }
 
 .background {
+  padding: 0px;
+  border: 0px;
   width: 100%;
   min-height: 100vh;
 }
