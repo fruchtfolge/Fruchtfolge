@@ -33,7 +33,11 @@ export default {
         aggregate: true
       })
         .on('update', (update, aggregate) => {
-          console.log(update,aggregate)
+          if(this.curYear !== aggregate[0].curYear) {
+            this.curYear = aggregate[0].curYear
+            this.removeDraw()
+            this.drawPlots(this.curYear)
+          }
         })
         .on('error', (err) => {
           console.log(err)
