@@ -14,28 +14,44 @@ import drawConfig from '../assets/js/draw.config.js'
 
 export default {
   name: 'MapBox',
-  async mounted () {
-    await this.createMap()
-    await this.drawPlots()
+  data() {
+    return {
+      curYear: ''
+    }
   },
-  methods: {
-    async createMap() {
-      let settings
-      try {
-        settings = await this.$db.get('settings')
-      } catch (e) {
-        if (e.status === 404) {
-          console.log('Keine Hof-Adresse angegeben. Bitte in den Einstellungen die Hof-Adresse eintragen.')
-          return $nuxt.$router.replace({path: 'settings'})
-        }
-        console.log(e)
-      }
-
-      if (!settings.home) {
+  async mounted () {
+    let settings
+    try {
+      settings = await this.$db.get('settings')
+      this.curYear = settings.curYear
+      await this.createMap(settings)
+      await this.drawPlots(this.curYear)
+      // listen to changes in settings (current planning year and update)
+      await this.$db.createIndex({ index: { fields: ['type'] } })
+      const feed = this.$db.liveFind({
+        selector: {type: 'settings'},
+        aggregate: true
+      })
+        .on('update', (update, aggregate) => {
+          console.log(update,aggregate)
+        })
+        .on('error', (err) => {
+          console.log(err)
+        })
+    } catch (e) {
+      if (e.status === 404) {
         console.log('Keine Hof-Adresse angegeben. Bitte in den Einstellungen die Hof-Adresse eintragen.')
         return $nuxt.$router.replace({path: 'settings'})
       }
-
+      console.log(e)
+    }
+    if (!settings.home) {
+      console.log('Keine Hof-Adresse angegeben. Bitte in den Einstellungen die Hof-Adresse eintragen.')
+      return $nuxt.$router.replace({path: 'settings'})
+    }
+  },
+  methods: {
+    async createMap(settings) {
       mapboxgl.accessToken = 'pk.eyJ1IjoidG9mZmkiLCJhIjoiY2l3cXRnNHplMDAxcTJ6cWY1YWp5djBtOSJ9.mBYmcCSgNdaRJ1qoHW5KSQ'
 
       // init the map
@@ -60,7 +76,7 @@ export default {
       this.map.on('draw.combine', this.combine)
 
     },
-    async drawPlots() {
+    async drawPlots(year) {
       try {
         // get all plots from the Database
         await this.$db.createIndex({
@@ -69,13 +85,12 @@ export default {
           }
         })
         const plots = await this.$db.find({
-          selector: {type: 'plot'}
+          selector: {type: 'plot', year: year}
         })
 
         // if any plots are found, draw them on the map
         if (plots.docs) {
           plots.docs.forEach(plot => {
-            console.log(plot)
             this.Draw.add(plot.geometry)
           })
         }
@@ -131,6 +146,9 @@ export default {
       } catch (e) {
         throw new Error(e)
       }
+    },
+    removeDraw() {
+      this.Draw.deleteAll()
     }
   }
 }

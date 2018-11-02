@@ -2,14 +2,14 @@
   <div class="plotsSidebar">
     <h1 class="sumHa">GESAMT {{ totalHa }} ha</h1>
     <div v-if="regions" v-for="(region, n) in regions" :key='n'>
-      <div class="container" @click="collapsed = !collapsed">
+      <div class="container" @click="expand(region[0].region)">
         <h2 class="regionText"> {{ region[0].region.toUpperCase() }}</h2>
-        <div class="arrow" v-bind:class="{ rotate: !collapsed}"></div>
+        <div class="arrow" v-bind:class="{ rotate: shown[region[0].region]}"></div>
       </div>
       <transition name="expand"
       v-on:before-enter="beforeEnter" v-on:enter="enter"
       v-on:before-leave="beforeLeave" v-on:leave="leave">
-        <div class="body" v-show="!collapsed">
+        <div class="body" v-show="shown[region[0].region]">
           <p v-for="(plot, m) in region" :key='m' class="plotsText"> {{plot.name}} ({{plot.size}} ha) </p>
         </div>
       </transition>
@@ -21,33 +21,27 @@
 </template>
 <script>
 
-
 export default {
   data () {
     return {
       regions: null,
       totalHa: 0,
       isClicked: false,
-      collapsed: true
+      shown: {}
     }
   },
   async created() {
     try {
+      // get current planning year
+      const settings = await this.$db.get('settings')
       // get all plots from the Database
-      await this.$db.createIndex({
-        index: {
-          fields: ['type']
-        }
-      })
+      await this.$db.createIndex({ index: { fields: ['type'] } })
       const plots = this.$db.liveFind({
-        selector: {type: 'plot'},
+        selector: {type: 'plot', year: settings.curYear},
         aggregate: true
       })
         .on('update', (update, aggregate) => {
-          this.plots = aggregate
-          this.regions = _.groupBy(this.plots, 'region')
-          this.totalHa = Number(_.sumBy(this.plots, (plot) => {return plot.size}).toFixed(2)) || 0
-          console.log(this.plots)
+          return this.updatePlots(update, aggregate)
         })
         .on('error', (err) => {
           console.log(err)
@@ -68,6 +62,32 @@ export default {
     },
     leave(el) {
       el.style.height = '0px';
+    },
+    expand(region) {
+      if (!this.shown[region]) {
+        this.shown[region] = true
+      } else {
+        this.shown[region] = false
+      }
+    },
+    updatePlots(update, aggregate) {
+      this.plots = aggregate
+      this.regions = _.groupBy(this.plots, 'region')
+      // initially collapse all regions, if they aren't opended yet
+      Object.keys(this.regions).forEach((region) => {
+        let shown = false
+        if (this.shown[region]) shown = true
+        this.$set(this.shown,region,shown)
+      })
+      this.totalHa = this.calcTotal()
+    },
+    calcTotal() {
+      const total = _.sumBy(this.plots, (plot) => { return plot.size })
+      if (total) {
+        return Number(total).toFixed(2)
+      } else {
+        return 0
+      }
     }
   }
 }
