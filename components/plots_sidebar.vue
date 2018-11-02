@@ -10,7 +10,10 @@
       v-on:before-enter="beforeEnter" v-on:enter="enter"
       v-on:before-leave="beforeLeave" v-on:leave="leave">
         <div class="body" v-show="shown[region[0].region]">
-          <p v-for="(plot, m) in region" :key='m' class="plotsText"> {{plot.name}} ({{plot.size}} ha) </p>
+          <p v-for="(plot, m) in region" :key='m' 
+          @click="flyTo(plot)" 
+          class="plotsText"
+          v-bind:class="{ active: isClicked(plot)}"> {{plot.name}} ({{plot.size}} ha) </p>
         </div>
       </transition>
     </div>
@@ -26,29 +29,18 @@ export default {
     return {
       regions: null,
       totalHa: 0,
-      isClicked: false,
+      curPlot: '',
       shown: {}
     }
   },
   async created() {
-    try {
-      // get current planning year
-      const settings = await this.$db.get('settings')
-      // get all plots from the Database
-      await this.$db.createIndex({ index: { fields: ['type'] } })
-      const plots = this.$db.liveFind({
-        selector: {type: 'plot', year: settings.curYear},
-        aggregate: true
-      })
-        .on('update', (update, aggregate) => {
-          return this.updatePlots(update, aggregate)
-        })
-        .on('error', (err) => {
-          console.log(err)
-        })
-    } catch (e) {
-      console.log(e)
-    }
+    // create initial state
+    this.updateState()  
+    this.$bus.$on('changeCurrents', this.updateState)
+    // when a plot is clicked upon on the map, open the region and select a plot in the sidebar
+    this.$bus.$on('selectedPlot', id => {
+      return this.activatePlot(id)
+    })
   },
   methods: {
     beforeEnter(el) {
@@ -70,17 +62,6 @@ export default {
         this.shown[region] = false
       }
     },
-    updatePlots(update, aggregate) {
-      this.plots = aggregate
-      this.regions = _.groupBy(this.plots, 'region')
-      // initially collapse all regions, if they aren't opended yet
-      Object.keys(this.regions).forEach((region) => {
-        let shown = false
-        if (this.shown[region]) shown = true
-        this.$set(this.shown,region,shown)
-      })
-      this.totalHa = this.calcTotal()
-    },
     calcTotal() {
       const total = _.sumBy(this.plots, (plot) => { return plot.size })
       if (total) {
@@ -88,6 +69,31 @@ export default {
       } else {
         return 0
       }
+    },
+    updateState() {
+      this.plots = this.$store.curPlots
+      this.regions = _.groupBy(this.plots, 'region')
+      // initially collapse all regions, if they aren't opended yet
+      Object.keys(this.regions).forEach((region) => {
+        let shown = false
+        if (this.shown[region]) shown = true
+        this.$set(this.shown,region,shown)
+      })
+      // update ha count
+      this.totalHa = this.calcTotal()
+    },
+    flyTo(plot) {
+      this.curPlot = plot
+      this.$bus.$emit('flyTo', plot)
+    },
+    isClicked(plot) {
+      return plot === this.curPlot
+    },
+    activatePlot(id) {
+      const plot = this.plots.filter(o => {return o._id === id})
+      if (!plot) return
+      this.shown[plot[0].region] = true
+      this.curPlot = plot[0]
     }
   }
 }
@@ -107,8 +113,13 @@ export default {
 }
 
 .container {
+  width: 100%;
   display: inline-flex;
   align-items: center;
+}
+
+.container:hover {
+  background-color: rgba(0, 0, 0, .02);
 }
 
 .arrow {
@@ -135,8 +146,13 @@ export default {
   height: 0;
 }
 
-.geclickt {
-  background-color: #E0E0E0;
+.body:hover {
+  background-color: rgba(0, 0, 0, .02);
+}
+
+
+.active {
+  background-color: rgba(0, 0, 0, .05);
 }
 
 .plotsText {

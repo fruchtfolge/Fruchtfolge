@@ -75,7 +75,7 @@ export default {
   position: relative;
   width: 400px;
   height: 500px;
-  top: 50%;
+  top: 40%;
   margin-top: -250px;
   left: 50%;
   margin-left: -200px;

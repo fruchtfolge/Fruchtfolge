@@ -95,7 +95,8 @@ export default {
     // construct settings object if it doesn't exist
     try {
       // get settings from db (if available)
-      await this.$db.get('settings')
+      const settings = await this.$db.get('settings')
+      this.curPlanYear = settings.curYear
     } catch(e) {
       if (e.status === 404) {
         const settings = new Setting(this.curPlanYear)
@@ -200,7 +201,7 @@ body,html {
 }
 
 .planYear:hover {
-  background-color: rgba(0, 0, 0, .05);
+  background-color: rgba(0, 0, 0, .02);
 }
 
 .nuxt {
