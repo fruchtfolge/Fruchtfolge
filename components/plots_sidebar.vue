@@ -2,15 +2,18 @@
   <div class="plotsSidebar">
     <h1 class="sumHa">GESAMT {{ totalHa }} ha</h1>
     <div v-if="regions" v-for="(region, n) in regions" :key='n'>
-      <div class="container" @click="collapsed = !collapsed">
+      <div class="container" @click="expand(region[0].region)">
         <h2 class="regionText"> {{ region[0].region.toUpperCase() }}</h2>
-        <div class="arrow" v-bind:class="{ rotate: !collapsed}"></div>
+        <div class="arrow" v-bind:class="{ rotate: shown[region[0].region]}"></div>
       </div>
       <transition name="expand"
       v-on:before-enter="beforeEnter" v-on:enter="enter"
       v-on:before-leave="beforeLeave" v-on:leave="leave">
-        <div class="body" v-show="!collapsed">
-          <p v-for="(plot, m) in region" :key='m' class="plotsText"> {{plot.name}} ({{plot.size}} ha) </p>
+        <div class="body" v-show="shown[region[0].region]">
+          <p v-for="(plot, m) in region" :key='m' 
+          @click="flyTo(plot)" 
+          class="plotsText"
+          v-bind:class="{ active: isClicked(plot)}"> {{plot.name}} ({{plot.size}} ha) </p>
         </div>
       </transition>
     </div>
@@ -21,40 +24,23 @@
 </template>
 <script>
 
-
 export default {
   data () {
     return {
       regions: null,
       totalHa: 0,
-      isClicked: false,
-      collapsed: true
+      curPlot: '',
+      shown: {}
     }
   },
   async created() {
-    try {
-      // get all plots from the Database
-      await this.$db.createIndex({
-        index: {
-          fields: ['type']
-        }
-      })
-      const plots = this.$db.liveFind({
-        selector: {type: 'plot'},
-        aggregate: true
-      })
-        .on('update', (update, aggregate) => {
-          this.plots = aggregate
-          this.regions = _.groupBy(this.plots, 'region')
-          this.totalHa = Number(_.sumBy(this.plots, (plot) => {return plot.size}).toFixed(2)) || 0
-          console.log(this.plots)
-        })
-        .on('error', (err) => {
-          console.log(err)
-        })
-    } catch (e) {
-      console.log(e)
-    }
+    // create initial state
+    this.updateState()  
+    this.$bus.$on('changeCurrents', this.updateState)
+    // when a plot is clicked upon on the map, open the region and select a plot in the sidebar
+    this.$bus.$on('selectedPlot', id => {
+      return this.activatePlot(id)
+    })
   },
   methods: {
     beforeEnter(el) {
@@ -68,6 +54,47 @@ export default {
     },
     leave(el) {
       el.style.height = '0px';
+    },
+    expand(region) {
+      if (!this.shown[region]) {
+        this.shown[region] = true
+      } else {
+        this.shown[region] = false
+      }
+    },
+    calcTotal() {
+      const total = _.sumBy(this.plots, (plot) => { return plot.size })
+      if (total) {
+        return Number(total).toFixed(2)
+      } else {
+        return 0
+      }
+    },
+    updateState() {
+      this.plots = this.$store.curPlots
+      this.regions = _.groupBy(this.plots, 'region')
+      // initially collapse all regions, if they aren't opended yet
+      Object.keys(this.regions).forEach((region) => {
+        let shown = false
+        if (this.shown[region]) shown = true
+        this.$set(this.shown,region,shown)
+      })
+      // update ha count
+      this.totalHa = this.calcTotal()
+    },
+    flyTo(plot) {
+      this.curPlot = plot
+      this.$bus.$emit('flyTo', plot)
+    },
+    isClicked(plot) {
+      return plot === this.curPlot
+    },
+    activatePlot(id) {
+      if (!this.plots) return
+      const plot = this.plots.filter(o => {return o._id === id})
+      if (!plot || !plot[0] || !plot[0].region) return
+      this.shown[plot[0].region] = true
+      this.curPlot = plot[0]
     }
   }
 }
@@ -87,8 +114,13 @@ export default {
 }
 
 .container {
+  width: 100%;
   display: inline-flex;
   align-items: center;
+}
+
+.container:hover {
+  background-color: rgba(0, 0, 0, .02);
 }
 
 .arrow {
@@ -115,8 +147,13 @@ export default {
   height: 0;
 }
 
-.geclickt {
-  background-color: #E0E0E0;
+.body p:hover {
+  background-color: rgba(0, 0, 0, .02);
+}
+
+
+.active {
+  background-color: rgba(0, 0, 0, .05);
 }
 
 .plotsText {

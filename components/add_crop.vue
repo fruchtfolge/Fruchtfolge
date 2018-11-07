@@ -3,13 +3,13 @@
     <div class="box">
       <div class="inputs">
         <h2 class="infoText">NEUE KULTUR HINZUFÜGEN</h2>
-        <label for="add.crop.type">Anbauverfahren</label>
-        <select class="dropdown" id="add.crop.type" v-model="type">
-          <option v-for="(type, i) in types" :key="i" :value="type">{{ type }}</option>
+        <label for="add.crop.farmingType">Anbauverfahren</label>
+        <select class="dropdown" id="add.crop.farmingType" v-model="farmingType">
+          <option v-for="(farmingType, i) in farmingTypes" :key="i" :value="farmingType">{{ farmingType }}</option>
         </select>
         <label for="add.crop.crop">Kultur</label>
         <select class="dropdown" id="add.crop.crop" v-model="crop">
-          <option v-for="(crop, i) in crops" :key="i" :value="crop.name">{{ crop.name }}</option>
+          <option v-for="(crop, i) in crops" :key="i" :value="crop">{{ crop }}</option>
         </select>
         <label for="add.crop.system">System</label>
         <select class="dropdown" id="add.crop.system" v-model="system">
@@ -31,21 +31,29 @@ import Crop from '~/constructors/Crop'
 export default {
   data() {
     return {
-      type: 'konventionell/integriert',
+      farmingType: 'konventionell/integriert',
       crop: 'Ackergras - Anwelksilage',
       system: 'Ballen',
       variety: '',
-      types: ['konventionell/integriert', 'ökologisch'],
-      crops: ['Ackergras - Anwelksilage']
+      farmingTypes: ['konventionell/integriert', 'ökologisch']
     }
   },
   computed: {
+    crops() {
+      const data = _.filter(ktblCrops, {farmingType: this.farmingType})
+      let unique = _.uniqBy(data, 'crop')
+      if (data) {
+        unique = unique.map(o => {return o.crop})
+        return unique
+      }
+    },
     systems() {
-      return _.find(ktblCrops, {name: this.crop}).tillage
+      let data = _.filter(ktblCrops, {farmingType: this.farmingType, crop: this.crop})
+      if (data) {
+        data = data.map(o => {return o.system})
+        return data
+      }
     }
-  },
-  created() {
-    this.crops = ktblCrops
   },
   methods: {
     async addCrop() {
@@ -75,7 +83,7 @@ export default {
   position: relative;
   width: 400px;
   height: 500px;
-  top: 50%;
+  top: 40%;
   margin-top: -250px;
   left: 50%;
   margin-left: -200px;

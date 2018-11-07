@@ -14,28 +14,56 @@ import drawConfig from '../assets/js/draw.config.js'
 
 export default {
   name: 'MapBox',
-  async mounted () {
-    await this.createMap()
-    await this.drawPlots()
+  data() {
+    return {
+      curYear: ''
+    }
   },
-  methods: {
-    async createMap() {
-      let settings
-      try {
-        settings = await this.$db.get('settings')
-      } catch (e) {
-        if (e.status === 404) {
-          console.log('Keine Hof-Adresse angegeben. Bitte in den Einstellungen die Hof-Adresse eintragen.')
-          return $nuxt.$router.replace({path: 'settings'})
-        }
-        console.log(e)
+  async mounted () {
+    let settings
+    try {
+      settings = await this.$db.get('settings')
+      this.curYear = settings.curYear
+      await this.createMap(settings)
+      // initially draw plots, if available
+      if (this.$store.curPlots) {
+        this.curPlots = this.$store.curPlots
+        console.log(this.curPlots);
+        await this.drawPlots(this.curYear, this.curPlots)
       }
-
-      if (!settings.home) {
+    } catch (e) {
+      if (e.status === 404) {
         console.log('Keine Hof-Adresse angegeben. Bitte in den Einstellungen die Hof-Adresse eintragen.')
         return $nuxt.$router.replace({path: 'settings'})
       }
-
+      console.log(e)
+    }
+    if (!settings.home) {
+      console.log('Keine Hof-Adresse angegeben. Bitte in den Einstellungen die Hof-Adresse eintragen.')
+      return $nuxt.$router.replace({path: 'settings'})
+    }
+  },
+  async created() {
+    // listen to changes in settings and plots (current planning year etc.)
+    this.$bus.$on('changeCurrents', () => {
+      this.curYear = this.$store.curYear
+      this.curPlots = this.$store.curPlots
+      this.removeDraw()
+      if (this.curPlots) {
+        this.drawPlots(this.curYear, this.curPlots)
+      }
+    })
+    // listen to flyTo events
+    this.$bus.$on('flyTo', (plot) => {
+      console.log(plot.center)
+      this.map.flyTo({
+        center: plot.center,
+        zoom: 15
+      })
+    })
+  },
+  methods: {
+    async createMap(settings) {
       mapboxgl.accessToken = 'pk.eyJ1IjoidG9mZmkiLCJhIjoiY2l3cXRnNHplMDAxcTJ6cWY1YWp5djBtOSJ9.mBYmcCSgNdaRJ1qoHW5KSQ'
 
       // init the map
@@ -58,27 +86,13 @@ export default {
       this.map.on('draw.update', this.update)
       this.map.on('draw.delete', this.delete)
       this.map.on('draw.combine', this.combine)
-
+      this.map.on('draw.selectionchange', this.select)
     },
-    async drawPlots() {
+    async drawPlots(year, plots) {
       try {
-        // get all plots from the Database
-        await this.$db.createIndex({
-          index: {
-            fields: ['type']
-          }
+        plots.forEach(plot => {
+          this.Draw.add(plot.geometry)
         })
-        const plots = await this.$db.find({
-          selector: {type: 'plot'}
-        })
-
-        // if any plots are found, draw them on the map
-        if (plots.docs) {
-          plots.docs.forEach(plot => {
-            console.log(plot)
-            this.Draw.add(plot.geometry)
-          })
-        }
       } catch (e) {
         console.log(e)
       }
@@ -117,7 +131,7 @@ export default {
 
     },
     async create(data) {
-      const plotName = 'Test'
+      const plotName = 'Test'//prompt('Bitte geben Sie einen Name für das Feld ein', 'Unbenannt')
       const settings = await this.$db.get('settings')
       const size = this.getSize(data.features[0])
       try {
@@ -126,11 +140,23 @@ export default {
           geometry: data.features[0],
           size: size
         }, settings)
-        //console.log(plot)
+        
+        // delete plot from map and replace with newly created one with correct id
+        this.Draw.delete(data.features[0].id)
+        this.Draw.add(plot.geometry)
+        // store new plot in database
         await this.$db.put(plot)
       } catch (e) {
         throw new Error(e)
       }
+    },
+    removeDraw() {
+      this.Draw.deleteAll()
+    },
+    select(data) {
+      if (data.features.length !== 1)  return
+      console.log(data);
+      this.$bus.$emit('selectedPlot', data.features[0].properties._id)
     }
   }
 }
@@ -139,7 +165,7 @@ export default {
 <style>
 .map {
   position: relative;
-  width: 100%;
+  width: calc(100% - 255px);
   height: calc(100vh - 60px);
 }
 </style>
