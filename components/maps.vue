@@ -140,7 +140,11 @@ export default {
           geometry: data.features[0],
           size: size
         }, settings)
-
+        
+        // delete plot from map and replace with newly created one with correct id
+        this.Draw.delete(data.features[0].id)
+        this.Draw.add(plot.geometry)
+        // store new plot in database
         await this.$db.put(plot)
       } catch (e) {
         throw new Error(e)
@@ -151,6 +155,7 @@ export default {
     },
     select(data) {
       if (data.features.length !== 1)  return
+      console.log(data);
       this.$bus.$emit('selectedPlot', data.features[0].properties._id)
     }
   }

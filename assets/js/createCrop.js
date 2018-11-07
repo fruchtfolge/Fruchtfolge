@@ -6,27 +6,23 @@ export default async function createCrop(properties, settings) {
   if (!properties.year) {
     properties.year = settings.curPlanYear
   }
-  // save centroid of plot to polygon
-  properties.center = centerOfMass(properties.geometry).geometry.coordinates
-  // save field size
-  properties.size = Number((area(properties.geometry) / 10000).toFixed(2))
   // create a promise array so that requests are
   // carried out in parallel
   const requests = await Promise.all([
-    sqr(properties.geometry),
-    soilType(properties.geometry),
-    mapquest.reverse(properties),
-    mapquest.distance(properties, settings.home)
-  ])
+    ktbl.contributionMargin(properties),
+    ktbl.standardGrossMargin(properties),
+    ktbl.getProcedures(properties),
+  ]).catch(err => {
+    console.log(e)
+  })
 
   // fill the properties with the values acquired
   properties.quality = requests[0]
   properties.soilType = requests[1]
   properties.region = requests[2]
-  properties.distance = requests[3]
 
   // create the plot
-  const plot = new Plot(properties)
+  const plot = new Crop(properties)
 
   return plot
 }

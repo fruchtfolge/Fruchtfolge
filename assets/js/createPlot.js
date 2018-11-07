@@ -19,7 +19,9 @@ export default async function createPlot(properties, settings) {
     soilType(properties.geometry),
     mapquest.reverse(properties),
     mapquest.distance(properties, settings.home)
-  ])
+  ]).catch(err => {
+    console.log(e)
+  })
 
   // fill the properties with the values acquired
   properties.quality = requests[0]

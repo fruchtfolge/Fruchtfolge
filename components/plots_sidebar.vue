@@ -90,8 +90,9 @@ export default {
       return plot === this.curPlot
     },
     activatePlot(id) {
+      if (!this.plots) return
       const plot = this.plots.filter(o => {return o._id === id})
-      if (!plot) return
+      if (!plot || !plot[0] || !plot[0].region) return
       this.shown[plot[0].region] = true
       this.curPlot = plot[0]
     }
@@ -146,7 +147,7 @@ export default {
   height: 0;
 }
 
-.body:hover {
+.body p:hover {
   background-color: rgba(0, 0, 0, .02);
 }
 
