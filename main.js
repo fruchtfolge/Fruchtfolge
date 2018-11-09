@@ -7,10 +7,15 @@ let config = require('./nuxt.config.js')
 config.rootDir = __dirname // for electron-builder
 
 // Init Nuxt.js
-
 const nuxt = new Nuxt(config)
 const builder = new Builder(nuxt)
-const server = http.createServer(nuxt.render)
+
+
+// routes
+const route = require('./api/index.js').route(nuxt)
+// create server
+const server = http.createServer(route)
+
 
 // Build only in dev mode
 if (config.dev) {

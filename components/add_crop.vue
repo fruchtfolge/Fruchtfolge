@@ -26,7 +26,6 @@
 
 <script>
 import ktblCrops from '~/assets/js/crops.js'
-import Crop from '~/constructors/Crop'
 
 export default {
   data() {
@@ -57,7 +56,21 @@ export default {
   },
   methods: {
     async addCrop() {
-      //const settings = await this.$db.get('settings')
+      try {
+        const settings = await this.$db.get('settings')
+        const properties = {
+          year: settings.curYear,
+          farmingType: this.farmingType,
+          crop: this.crop,
+          system: this.system,
+          variety: this.variety
+        }
+        const { data } = await axios.get(`createCrop?properties=${properties}`)
+        console.log(data)
+      } catch (e) {
+        console.log(e);
+      }
+      
       this.$emit('closeAddCrop')
     },
     cancel() {

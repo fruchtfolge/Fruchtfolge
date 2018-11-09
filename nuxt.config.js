@@ -33,7 +33,8 @@ module.exports = {
     },
     plugins: [
       new webpack.ProvidePlugin({
-        '_': 'lodash'
+        '_': 'lodash',
+        'axios': 'axios'
       })
     ]
   },
