@@ -1,4 +1,4 @@
-export default class Crop {
+module.exports = class Crop {
   constructor(properties) {
     // database info
     this._id = properties._id || `crop:${new Date.toIsoString()}`

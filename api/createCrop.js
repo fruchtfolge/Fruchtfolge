@@ -1,28 +1,23 @@
-const ktbl = require('ktbl-apis')
-const Crop = require('./constructors/Crop')
+const Crop = require('../constructors/Crop')
+const PouchDB = require('PouchDB')
+
+// we use CouchDB instead of Nano so that we can use 
+// a replication stream from a file later
+// for now, use data from local couch
+const crops = new PouchDB('http://localhost:5984/crops')
 
 module.exports = async function createCrop(query, res) {
   const properties = query.properties
-  // create a promise array so that requests are
-  // carried out in parallel
+  const id = `${properties.farmingType}::${properties.crop}::${properties.system}`
+
   try {
-    const requests = await Promise.all([
-      ktbl.contributionMargin(properties),
-      ktbl.standardGrossMargin(properties),
-      ktbl.getProcedures(properties),
-    ])
+    const data = await crops.get(id)
   } catch (e) {
     console.log(e)
   }
 
-
-  // fill the properties with the values acquired
-  properties.contributionMargin = requests[0]
-  properties.standardGrossMargin = requests[1]
-  properties.procedures = requests[2]
-
-  // create the plot
-  const crop = new Crop(properties)
+  // create the crop
+  const crop = new Crop(data)
   console.log(crop);
   return crop
 }
