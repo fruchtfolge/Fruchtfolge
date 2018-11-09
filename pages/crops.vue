@@ -15,6 +15,7 @@ export default {
   data: () => {
     return {
       crops: null,
+      curCrop: null,
       addCrop: true
     }
   },

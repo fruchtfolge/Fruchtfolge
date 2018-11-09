@@ -2,23 +2,21 @@
   <div class="blur">
     <div class="box">
       <div class="inputs">
-        <h2 class="infoText">NEUE KULTUR HINZUFÜGEN</h2>
-        <label for="add.crop.farmingType">Anbauverfahren</label>
-        <select class="dropdown" id="add.crop.farmingType" v-model="farmingType">
-          <option v-for="(farmingType, i) in farmingTypes" :key="i" :value="farmingType">{{ farmingType }}</option>
+        <h2 class="infoText">NEUEN SCHLAG HINZUFÜGEN</h2>
+        <label for="add.plot.name">Name</label>
+        <input type="text" id="add.plot.name" placeholder="Optional" class="input" v-model="name">
+        <label for="add.plot.system">Hauptfrucht {{ curYear - 1 }}</label>
+        <select class="dropdown" id="add.crop.prevCrop" v-model="prevCrop1">
+          <option v-for="(prevCrop, i) in crops" :key="i" :value="prevCrop">{{ prevCrop }}</option>
         </select>
-        <label for="add.crop.crop">Kultur</label>
-        <select class="dropdown" id="add.crop.crop" v-model="crop">
-          <option v-for="(crop, i) in crops" :key="i" :value="crop">{{ crop }}</option>
+        <select class="dropdown" id="add.crop.prevCrop" v-model="prevCrop2">
+          <option v-for="(prevCrop, i) in crops" :key="i" :value="prevCrop">{{ prevCrop }}</option>
         </select>
-        <label for="add.crop.system">System</label>
-        <select class="dropdown" id="add.crop.system" v-model="system">
-          <option v-for="(system, i) in systems" :key="i" :value="system">{{ system }}</option>
+        <select class="dropdown" id="add.crop.prevCrop" v-model="prevCrop3">
+          <option v-for="(prevCrop, i) in crops" :key="i" :value="prevCrop">{{ prevCrop }}</option>
         </select>
-        <label for="add.crop.variety">Sorte</label>
-        <input type="text" id="add.crop.variety" placeholder="Optional" class="input" v-model="variety">
       </div>
-      <button class="buttonOk" @click="addCrop">ÜBERNEHMEN</button>
+      <button class="buttonOk" @click="addPlot">ÜBERNEHMEN</button>
       <button class="buttonCancel" @click="cancel">ABBRECHEN</button>
     </div>
   </div>
@@ -26,6 +24,7 @@
 
 <script>
 import ktblCrops from '~/assets/js/crops.js'
+import Plot from '~/constructors/Plot'
 
 export default {
   data() {
@@ -42,7 +41,6 @@ export default {
       const data = _.filter(ktblCrops, {farmingType: this.farmingType})
       let unique = _.uniqBy(data, 'crop')
       if (data) {
-        console.log(unique)
         unique = unique.map(o => {return o.crop})
         return unique
       }
@@ -57,21 +55,7 @@ export default {
   },
   methods: {
     async addCrop() {
-      try {
-        const settings = await this.$db.get('settings')
-        const properties = {
-          year: settings.curYear,
-          farmingType: this.farmingType,
-          crop: this.crop,
-          system: this.system,
-          variety: this.variety
-        }
-        const { data } = await axios.get(`createCrop?properties=${properties}`)
-        console.log(data)
-      } catch (e) {
-        console.log(e);
-      }
-      
+      //const settings = await this.$db.get('settings')
       this.$emit('closeAddCrop')
     },
     cancel() {
