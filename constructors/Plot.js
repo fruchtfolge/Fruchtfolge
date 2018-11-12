@@ -5,7 +5,7 @@ function getId() {
 
 export default class Plot {
   constructor(properties) {
-    this._id = properties._id || getId()
+    //this._id = getId()
     this.type = 'plot',
     this.name = properties.name || 'Unbenannt',
     this.year = properties.year,

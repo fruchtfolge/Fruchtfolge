@@ -1,10 +1,10 @@
 <template>
   <div class="cropsSidebar">
     <div v-if="crops">
-      <div  v-for="(crop, i) in crops" :key='i'>
-        <h2 @click="expand($event)" class="cropsExpand groupText"> {{ crop[0].name.toUpperCase() }} </h2>
+      <div  v-for="(crops, i) in cropGroups" :key='i'>
+        <h2 @click="expand($event)" class="cropsExpand groupText"> {{ crops[0].cropGroup.toUpperCase() }} </h2>
         <div class="expand">
-          <p v-for="(type, n) of crop" :key='n' @click="clickedCrop === type" class="cropsText"> {{ crop.type }} </p>
+          <p v-for="(crop, n) of crops" :key='n' @click="$emit('changeCrop', crop)" class="cropsText"> {{ crop.name }} </p>
         </div>
       </div>
     </div>
@@ -18,11 +18,22 @@
 export default {
   data() {
     return {
-      crops: null
+
     }
   },
-  async created() {
-
+  created() {
+    //console.log(crops);
+  },
+  props: {
+    crops: {
+      type: Array,
+      required: false
+    }
+  },
+  computed: {
+    cropGroups() {
+      return _.groupBy(this.crops, 'cropGroup')
+    }
   },
   methods: {
     expand: (e) => {

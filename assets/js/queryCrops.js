@@ -2,6 +2,59 @@ const ktbl = require('ktbl-apis')
 const async = require('async')
 const fs = require('fs')
 
+const cropGroups = [
+  "Gras",
+  "Leguminosen",
+  "Blühmischung",
+  "Kohl",
+  "Bohnen",
+  "Brokkoli",
+  "Dauergrünland",
+  "Durchwachsene Silphie",
+  "Salat",
+  "Erbsen",
+  "Rüben",
+  "Kartoffeln",
+  "Gurke",
+  "Mais",
+  "Mini-Romana",
+  "Miscanthus",
+  "Möhren",
+  "Pappeln",
+  "Radies",
+  "Porree",
+  "Rote Bete",
+  "Rucola",
+  "Sellerie",
+  "Sorghum",
+  "Soja",
+  "Sommergerste",
+  "Sommerhafer",
+  "Zwischenfrucht",
+  "Sonnenblumen",
+  "Spargel",
+  "Zwiebel",
+  "Kürbis",
+  "Spinat",
+  "Weiden",
+  "Wintergerste",
+  "Winterraps",
+  "Winterroggen",
+  "Wintertriticale",
+  "Winterweizen",
+  "Zucchini",
+  "Dinkel",
+  "Luzerne",
+  "Öllein",
+  "Sommergetreide - Saatgutproduktion",
+  "Sommerroggen",
+  "Sommertriticale",
+  "Sommerweizen",
+  "Lupine",
+  "Unkrautbekämpfung",
+  "Wintergetreide - Saatgutproduktion"
+]
+
 const result = []
 
 async function buildDB() {
@@ -28,7 +81,8 @@ function getSystemsForCrops(farmingType, crops) {
         result.push({
           farmingType: farmingType,
           crop: crop,
-          system: system
+          system: system,
+          cropGroup: getCropGroup(crop)
         })
       })
     }, (err) => {
@@ -39,5 +93,17 @@ function getSystemsForCrops(farmingType, crops) {
   })
 }
 
+function getCropGroup(crop) {
+  let match
+  cropGroups.forEach(group => {
+    if (crop.toUpperCase().includes(group.toUpperCase())) {
+      match = group
+    }
+  })
+  if (match === 'Mini-Romana') match = 'Tomaten'
+  else if (match === 'Gras') match = 'Gräser'
+  if (match) return match
+  else return crop
+}
 
 buildDB()

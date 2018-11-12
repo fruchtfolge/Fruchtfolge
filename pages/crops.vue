@@ -1,26 +1,42 @@
 <template>
   <div>
-    <cropsSidebar v-on:showAddCrop="addCrop = true"/>
+    <cropsSidebar v-on:showAddCrop="addCrop = true" v-on:changeCrop="changeCrop" :crops="crops"/>
     <addCrop v-if="addCrop" v-on:closeAddCrop="addCrop = false"/>
-    <div v-for="(crop, i) in crops" :key='i' v-if="crop === clickedCrop" >
-      <cropTable/>
-      <cropSettings/>
-      <cropRevYields/>
+    <div v-for="(crop, i) in crops" :key='i' v-if="crop === selectedCrop" >
+      <cropTable :crop="crop"/>
+      <!--<cropSettings/>
+      <cropRevYields/>-->
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data: () => {
+  data() {
     return {
       crops: null,
-      curCrop: null,
+      selectedCrop: null,
       addCrop: true
     }
   },
+  created() {
+    this.$bus.$on('changeCurrents', () => {
+      if (this.$store.curCrops) {
+        this.crops = this.$store.curCrops
+        this.selectedCrop = this.$store.curCrops[0]
+        //console.log(this.selectedCrop);
+        // temporary
+        //this.$bus.$emit('selectedCrop', this.selectedCrop)
+      }
+    })
+  },
+  methods: {
+    changeCrop(crop) {
+      this.selectedCrop = crop
+    }
+  },
   components: {
-    // cropTable: () => import('~/components/cropTable.vue'),
+    cropTable: () => import('~/components/crop_table.vue'),
     addCrop: () => import('~/components/add_crop.vue'),
     cropsSidebar: () => import('~/components/crops_sidebar.vue'),
     // cropSettings: () => import('~/components/cropSettings.vue'),

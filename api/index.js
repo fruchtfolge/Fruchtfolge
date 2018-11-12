@@ -7,14 +7,13 @@ const createCrop = require('./createCrop')
 //const seasons = require('./seasons.js')
 
 exports.route = (nuxt) => {
-  return (req, res) => {
+  return async (req, res) => {
     const url = new URL(req.url)
-    const query = querystring.parse(url.query.replace('?',''))
-    
+    // const query = querystring.parse(url.query.replace('?',''))
+
     switch (url.pathname) {
     case '/createCrop':
-      
-      createCrop(query, res)
+      createCrop.getInfo(req, res)
       break
 
     default:

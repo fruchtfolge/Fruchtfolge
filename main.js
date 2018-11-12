@@ -49,7 +49,10 @@ const newWin = () => {
     const { default: installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer')
     installExtension(VUEJS_DEVTOOLS.id).then(name => {
       console.log(`Added Extension:  ${name}`)
-      win.webContents.openDevTools()
+      //win.webContents.openDevTools()
+      win.webContents.once('dom-ready', () => {
+        win.webContents.openDevTools()
+      })
     }).catch(err => console.log('An error occurred: ', err))
     // Wait for nuxt to build
     const pollServer = () => {

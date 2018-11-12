@@ -27,7 +27,7 @@ const settings = Vue.prototype.$db.liveFind({
   .on('error', (err) => {
     console.log(err)
   })
-  
+
 // plots
 const plots = Vue.prototype.$db.liveFind({
   selector: {type: 'plot'},
@@ -43,30 +43,31 @@ const plots = Vue.prototype.$db.liveFind({
 
 // crops
 const crops = Vue.prototype.$db.liveFind({
-  selector: {type: 'crops'},
+  selector: {type: 'crop'},
   aggregate: true
 })
   .on('update', (update, aggregate) => {
     Vue.set(Vue.prototype.$store, 'crops', aggregate)
+    updateCurrent()
   })
   .on('error', (err) => {
     console.log(err)
   })
-  
+
 function updateCurrent() {
   if(Vue.prototype.$store.plots) {
-    Vue.set(Vue.prototype.$store, 'curPlots',  
+    Vue.set(Vue.prototype.$store, 'curPlots',
       Vue.prototype.$store.plots.filter(plot => { return plot.year === Vue.prototype.$store.settings.curYear})
-    )    
+    )
   }
   if (Vue.prototype.$store.crops) {
-    Vue.set(Vue.prototype.$store, 'curCrops', 
+    Vue.set(Vue.prototype.$store, 'curCrops',
       Vue.prototype.$store.crops.filter(crop => { return crop.year === Vue.prototype.$store.settings.curYear})
     )
   }
   Vue.prototype.$bus.$emit('changeCurrents')
 }
-  
+
 export default (ctx) => {
 
 }

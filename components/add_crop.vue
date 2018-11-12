@@ -33,12 +33,14 @@ export default {
       farmingType: 'konventionell/integriert',
       crop: 'Ackergras - Anwelksilage',
       system: 'Ballen',
+      cropGroup: 'Gras',
       variety: '',
       farmingTypes: ['konventionell/integriert', 'ökologisch']
     }
   },
   computed: {
     crops() {
+      console.log(_.groupBy(ktblCrops, 'cropGroup'))
       const data = _.filter(ktblCrops, {farmingType: this.farmingType})
       let unique = _.uniqBy(data, 'crop')
       if (data) {
@@ -53,25 +55,33 @@ export default {
         data = data.map(o => {return o.system})
         return data
       }
+    },
+    curCrop() {
+      let data = _.filter(ktblCrops, {farmingType: this.farmingType, crop: this.crop, system: this.system})
+      if (data) {
+        return data[0]
+      }
     }
   },
   methods: {
     async addCrop() {
       try {
         const settings = await this.$db.get('settings')
-        const properties = {
+        // check if crop already exists, or exists for previous years
+
+        const properties = Object.assign(this.curCrop, {
           year: settings.curYear,
           farmingType: this.farmingType,
-          crop: this.crop,
-          system: this.system,
+          region: settings.region,
           variety: this.variety
-        }
-        const { data } = await axios.get(`createCrop?properties=${properties}`)
+        })
+        const { data } = await axios.post('createCrop', properties)
+        await this.$db.bulkDocs(data)
         console.log(data)
       } catch (e) {
         console.log(e);
       }
-      
+
       this.$emit('closeAddCrop')
     },
     cancel() {

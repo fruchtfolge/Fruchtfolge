@@ -3,31 +3,31 @@ module.exports = [
     "farmingType": "konventionell/integriert",
     "crop": "Ackergras - Bodenheu",
     "system": "Ballen",
-    "cropGroup": "Gras"
+    "cropGroup": "Gräser"
   },
   {
     "farmingType": "konventionell/integriert",
     "crop": "Ackergras - Bodenheu",
     "system": "Ladewagen",
-    "cropGroup": "Gras"
+    "cropGroup": "Gräser"
   },
   {
     "farmingType": "konventionell/integriert",
     "crop": "Ackergras - Anwelksilage",
     "system": "Ballen",
-    "cropGroup": "Gras"
+    "cropGroup": "Gräser"
   },
   {
     "farmingType": "konventionell/integriert",
     "crop": "Ackergras - Anwelksilage",
     "system": "Häcksler",
-    "cropGroup": "Gras"
+    "cropGroup": "Gräser"
   },
   {
     "farmingType": "konventionell/integriert",
     "crop": "Ackergras - Anwelksilage",
     "system": "Ladewagen",
-    "cropGroup": "Gras"
+    "cropGroup": "Gräser"
   },
   {
     "farmingType": "konventionell/integriert",
@@ -225,7 +225,7 @@ module.exports = [
     "farmingType": "konventionell/integriert",
     "crop": "Grassamen",
     "system": "nichtwendend, Kreiseleggensaat",
-    "cropGroup": "Gras"
+    "cropGroup": "Gräser"
   },
   {
     "farmingType": "konventionell/integriert",
@@ -789,13 +789,13 @@ module.exports = [
     "farmingType": "konventionell/integriert",
     "crop": "Sudangrashybrid (Biogasproduktion)",
     "system": "nichtwendend, Kreiseleggen, Saat",
-    "cropGroup": "Gras"
+    "cropGroup": "Gräser"
   },
   {
     "farmingType": "konventionell/integriert",
     "crop": "Sudangrashybrid (Biogasproduktion)",
     "system": "wendend, gezogene Saatbettbereitung, Saat",
-    "cropGroup": "Gras"
+    "cropGroup": "Gräser"
   },
   {
     "farmingType": "konventionell/integriert",
@@ -1401,13 +1401,13 @@ module.exports = [
     "farmingType": "ökologisch",
     "crop": "Grassamen",
     "system": "Deutsches Weidelgras, nichtwendend, Gülle",
-    "cropGroup": "Gras"
+    "cropGroup": "Gräser"
   },
   {
     "farmingType": "ökologisch",
     "crop": "Grassamen",
     "system": "Deutsches Weidelgras, wendend, Gülle",
-    "cropGroup": "Gras"
+    "cropGroup": "Gräser"
   },
   {
     "farmingType": "ökologisch",
@@ -1419,13 +1419,13 @@ module.exports = [
     "farmingType": "ökologisch",
     "crop": "Kleegras - Frischfutter",
     "system": "Ladewagen, einjährig",
-    "cropGroup": "Gras"
+    "cropGroup": "Gräser"
   },
   {
     "farmingType": "ökologisch",
     "crop": "Kleegras - Frischfutter",
     "system": "Ladewagen, zweijährig",
-    "cropGroup": "Gras"
+    "cropGroup": "Gräser"
   },
   {
     "farmingType": "ökologisch",
@@ -1641,31 +1641,31 @@ module.exports = [
     "farmingType": "ökologisch",
     "crop": "Rotklee-Gras-Gemenge - Anwelksilage",
     "system": "Ballen",
-    "cropGroup": "Gras"
+    "cropGroup": "Gräser"
   },
   {
     "farmingType": "ökologisch",
     "crop": "Rotklee-Gras-Gemenge - Anwelksilage",
     "system": "Häcksler",
-    "cropGroup": "Gras"
+    "cropGroup": "Gräser"
   },
   {
     "farmingType": "ökologisch",
     "crop": "Rotklee-Gras-Gemenge - Anwelksilage",
     "system": "Ladewagen",
-    "cropGroup": "Gras"
+    "cropGroup": "Gräser"
   },
   {
     "farmingType": "ökologisch",
     "crop": "Rotklee-Gras-Gemenge - Bodenheu",
     "system": "Ballen",
-    "cropGroup": "Gras"
+    "cropGroup": "Gräser"
   },
   {
     "farmingType": "ökologisch",
     "crop": "Rotklee-Gras-Gemenge - Bodenheu",
     "system": "Ladewagen",
-    "cropGroup": "Gras"
+    "cropGroup": "Gräser"
   },
   {
     "farmingType": "ökologisch",
