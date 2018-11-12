@@ -145,7 +145,7 @@ export default {
         this.Draw.delete(data.features[0].id)
         this.Draw.add(plot.geometry)
         // store new plot in database
-        await this.$db.put(plot)
+        await this.$db.post(plot)
       } catch (e) {
         throw new Error(e)
       }

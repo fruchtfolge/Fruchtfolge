@@ -20,19 +20,18 @@ export default {
     }
   },
   created() {
-    this.$bus.$on('changeCurrents', () => {
-      if (this.$store.curCrops) {
-        this.crops = this.$store.curCrops
-        this.selectedCrop = this.$store.curCrops[0]
-        //console.log(this.selectedCrop);
-        // temporary
-        //this.$bus.$emit('selectedCrop', this.selectedCrop)
-      }
-    })
+    this.update()
+    this.$bus.$on('changeCurrents', this.update)
   },
   methods: {
     changeCrop(crop) {
       this.selectedCrop = crop
+    },
+    update() {
+      if (this.$store.curCrops) {
+        this.crops = this.$store.curCrops
+        this.selectedCrop = this.$store.curCrops[0]
+      }
     }
   },
   components: {

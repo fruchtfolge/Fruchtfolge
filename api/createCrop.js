@@ -1,7 +1,7 @@
 const querystring = require('querystring')
 const _ = require('lodash')
 const Crop = require('../constructors/Crop')
-const PouchDB = require('PouchDB')
+const nano = require('nano')('http://localhost:5984');
 
 // we use CouchDB instead of Nano so that we can use
 // a replication stream from a file later
@@ -53,7 +53,7 @@ module.exports = {
     try {
       const properties = await this.query(req, res)
       const id = `${properties.farmingType}::${properties.crop}::${properties.system}`
-      const crops = new PouchDB('http://localhost:5984/crops')
+      const crops = nano.db.use('crops')
       const data = await crops.get(id)
       // upsert crop for every year from 2000, in order to show price and yield variation
       // when SDB's are present, use that data

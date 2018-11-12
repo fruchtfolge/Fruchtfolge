@@ -13,9 +13,9 @@
         <!-- Revenues-->
         <tr v-for="(source, i) in cm.revenues" :key="revenues + i">
           <td>{{ source.name }}</td>
-          <td contenteditable="true" @blur="update">{{ source.amount.value }}</td>
+          <td contenteditable="true" @blur="update($event, 'revenues', i, 'amount')">{{ source.amount.value }}</td>
           <td>{{ source.amount.unit }}</td>
-          <td contenteditable="true" @input="update">{{ source.price.value }}</td>
+          <td contenteditable="true" @blur="update($event, 'revenues', i, 'price')">{{ source.price.value }}</td>
           <td>{{ source.price.unit }}</td>
           <td>{{ source.total.value }}</td>
           <td>{{ source.total.unit }}</td>
@@ -28,11 +28,11 @@
         <!-- Direct Costs-->
         <tr v-for="(source, i) in cm.directCosts" :key="directCosts + i">
           <td>{{ source.name }}</td>
-          <td contenteditable="true">{{ source.amount.value }}</td>
+          <td contenteditable="true" @blur="update($event, 'directCosts', i, 'amount')">{{ source.amount.value }}</td>
           <td>{{ source.amount.unit }}</td>
-          <td contenteditable="true">{{ source.price.value }}</td>
+          <td contenteditable="true" @blur="update($event, 'directCosts', i, 'price')"> {{ source.price.value }}</td>
           <td>{{ source.price.unit }}</td>
-          <td>{{ source.amount.value * source.price.value}}</td>
+          <td>{{ source.total.value}}</td>
           <td>{{ source.total.unit }}</td>
         </tr>
         <tr class="highlightRow">
@@ -43,9 +43,9 @@
         <!-- Other Variable Costs-->
         <tr v-for="(source, i) in cm.variableCosts" :key="variableCosts + i">
           <td>{{ source.name }}</td>
-          <td contenteditable="true">{{ source.amount.value }}</td>
+          <td contenteditable="true" @blur="update($event, 'variableCosts', i, 'amount')">{{ source.amount.value }}</td>
           <td>{{ source.amount.unit }}</td>
-          <td contenteditable="true">{{ source.price.value }}</td>
+          <td contenteditable="true" @blur="update($event, 'variableCosts', i, 'price')">{{ source.price.value }}</td>
           <td>{{ source.price.unit }}</td>
           <td>{{ source.total.value }}</td>
           <td>{{ source.total.unit }}</td>
@@ -64,9 +64,9 @@
         <!-- Fix Costs-->
         <tr v-for="(source, i) in cm.fixCosts" :key="fixCosts + i">
           <td>{{ source.name }}</td>
-          <td contenteditable="true">{{ source.amount.value }}</td>
+          <td contenteditable="true" @blur="update($event, 'fixCosts', i, 'amount')">{{ source.amount.value }}</td>
           <td>{{ source.amount.unit }}</td>
-          <td contenteditable="true">{{ source.price.value }}</td>
+          <td contenteditable="true" @blur="update($event, 'fixCosts', i, 'price')">{{ source.price.value }}</td>
           <td>{{ source.price.unit }}</td>
           <td>{{ source.total.value }}</td>
           <td>{{ source.total.unit }}</td>
@@ -126,15 +126,26 @@ export default {
     }
   },
   created() {
-    console.log(this.cm);
     this.$bus.$on('selectedCrop', selectedCrop => {
       //this.selectedCrop = selectedCrop
       //console.log(this.selectedCrop)
     })
   },
   methods: {
-    update(e) {
-      console.log(e.target.innerText);
+    async update(e, key, index, prop) {
+      try {
+        // get new value that was entered in to the table cell
+        const newValue = Number(e.target.innerText)
+        this.$set(this.cm[key][index][prop], 'value', newValue)
+        // calculate new total amount
+        const amount = this.cm[key][index].amount.value
+        const price = this.cm[key][index].price.value
+        this.$set(this.cm[key][index]['total'], 'value', _.round(amount * price, 2))
+        // store in Database
+        await this.$db.put(this.crop)
+      } catch (e) {
+        console.log(e)
+      } 
     }
   }
 }
@@ -142,10 +153,11 @@ export default {
 <style>
 .cropsTable table {
   width: calc(100% - 275px);
+  font-family: 'Open Sans';
   max-width: 650px;
   border-collapse: collapse;
-  letter-spacing: 0.01 em;
-  font-size: 16px;
+  letter-spacing: 0em;
+  font-size: 14px;
 }
 th {
   background-color: #79ae98;
@@ -177,9 +189,11 @@ td:nth-child(6) {
 
 .highlightRow {
   height: 40px;
+  font-family: 'Open Sans';
   font-weight: bold;
+  /*font-weight: bold;
   letter-spacing: 0.05 em;
-  color: #4e4b4b;
+  color: #4e4b4b;*/
 }
 
 .cropsTable tr:nth-child(odd) {
