@@ -12,7 +12,7 @@ module.exports = class Crop {
     this.active = properties.active || false,
 
     // general crop data
-    this.name = properties.crop,
+    this.name = properties.variety || properties.crop,
     this.crop = properties.crop,
     this.code = properties.code,
     this.cropGroup = properties.cropGroup,

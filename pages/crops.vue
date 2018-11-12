@@ -1,8 +1,8 @@
 <template>
   <div>
-    <cropsSidebar v-on:showAddCrop="addCrop = true" v-on:changeCrop="changeCrop" :crops="crops"/>
+    <cropsSidebar v-on:showAddCrop="addCrop = true" v-on:changeCrop="changeCrop" :crops="crops" :selectedCrop="selectedCrop"/>
     <addCrop v-if="addCrop" v-on:closeAddCrop="addCrop = false"/>
-    <div v-for="(crop, i) in crops" :key='i' v-if="crop === selectedCrop" >
+    <div v-for="(crop, i) in crops" :key='i' v-if="isSelected(crop)" >
       <cropTable :crop="crop"/>
       <!--<cropSettings/>
       <cropRevYields/>-->
@@ -16,22 +16,25 @@ export default {
     return {
       crops: null,
       selectedCrop: null,
-      addCrop: true
+      addCrop: false
     }
   },
   created() {
     this.update()
-    this.$bus.$on('changeCurrents', this.update)
+    this.$bus.$on('changeCurrents', _.debounce(this.update, 200))
   },
   methods: {
     changeCrop(crop) {
       this.selectedCrop = crop
     },
     update() {
-      if (this.$store.curCrops) {
-        this.crops = this.$store.curCrops
-        this.selectedCrop = this.$store.curCrops[0]
+      this.$set(this, 'crops', this.$store.curCrops)
+      if (!this.selectedCrop && this.$store.curCrops) {
+        this.$set(this, 'selectedCrop', this.$store.curCrops[0])
       }
+    },
+    isSelected(crop) {
+      return crop.name === this.selectedCrop.name
     }
   },
   components: {

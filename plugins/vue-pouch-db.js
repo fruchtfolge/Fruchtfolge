@@ -62,7 +62,7 @@ function updateCurrent() {
   }
   if (Vue.prototype.$store.crops) {
     Vue.set(Vue.prototype.$store, 'curCrops',
-      Vue.prototype.$store.crops.filter(crop => { return crop.year === Vue.prototype.$store.settings.curYear})
+      Vue.prototype.$store.crops.filter(crop => { return crop.year === Vue.prototype.$store.settings.curYear && crop.active === true})
     )
   }
   Vue.prototype.$bus.$emit('changeCurrents')

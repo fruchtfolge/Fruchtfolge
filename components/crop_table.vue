@@ -98,7 +98,8 @@ export default {
       return this.crop.contributionMargin
     },
     revenues() {
-      return _.sumBy(this.cm.revenues, o => { return o.total.value })
+      const revenues = _.sumBy(this.cm.revenues, o => { return o.total.value })
+      return _.round(revenues, 2)
     },
     directCosts() {
       const costs = _.sumBy(this.cm.directCosts, o => { return o.total.value })
@@ -109,7 +110,8 @@ export default {
       return _.round(costs, 2)
     },
     fixCosts() {
-      return _.sumBy(this.cm.fixCosts, o => { return o.total.value })
+      const costs = _.sumBy(this.cm.fixCosts, o => { return o.total.value })
+      return _.round(costs, 2)
     },
     contributionMargin() {
       return _.round(this.revenues - this.variableCosts, 2)
@@ -145,7 +147,7 @@ export default {
         await this.$db.put(this.crop)
       } catch (e) {
         console.log(e)
-      } 
+      }
     }
   }
 }
@@ -153,10 +155,12 @@ export default {
 <style>
 .cropsTable table {
   width: calc(100% - 275px);
-  font-family: 'Open Sans';
-  max-width: 650px;
+  font-family: 'Open Sans Light';
+  margin: auto;
+  margin-top: 30px;
+  min-width: 500px;
+  max-width: 700px;
   border-collapse: collapse;
-  letter-spacing: 0em;
   font-size: 14px;
 }
 th {
@@ -182,15 +186,12 @@ td:nth-child(6) {
 }
 
 .cropsTable {
-  margin-left: 20px;
-  margin-top: 15px;
-  margin-right: 20px;
+  width: calc(100%-275px);
 }
 
 .highlightRow {
   height: 40px;
   font-family: 'Open Sans';
-  font-weight: bold;
   /*font-weight: bold;
   letter-spacing: 0.05 em;
   color: #4e4b4b;*/

@@ -13,7 +13,7 @@
       <ul class="sidenav-container">
         <li v-for="(link, index) in links"
             :key='index' @click="follow(link)">
-            <p class="sidenav-links" v-bind:class="{ active: isClicked(link.name)}">
+            <p class="sidenav-links" v-bind:class="{ active: isClicked(link.route)}">
               <!--v-bind:class="{ active: isClicked(link.name)}"-->
               {{ link.name }}
             </p>
@@ -32,7 +32,7 @@ export default {
   data () {
     return {
       curPlanYear: null,
-      curPage: 'Home',
+      curPage: '',
       years: [],
       isOpen: false,
       sidenavStyle: {
@@ -50,32 +50,36 @@ export default {
         icon: 'static/home.png'
       },
       {
-        route: 'settings',
+        route: '/settings',
         name: 'Einstellungen',
         icon: 'static/settings.png'
       },{
-        route: 'maps',
+        route: '/maps',
         name: 'Felder',
+        file: 'maps',
         icon: 'static/plots.png'
       },
       {
-        route: 'crops',
+        route: '/crops',
         name: 'Kulturen',
         icon: 'static/crops.png'
       },
       {
-        route: 'constraints',
+        route: '/constraints',
         name: 'Nebenbedigungen',
         icon: 'static/constraints.png'
       },
       {
-        route: 'results',
+        route: '/results',
         name: 'Ergebnisse',
         icon: 'static/results.png'
       }]
     }
   },
   async created() {
+    // set active route
+    this.curPage = this.$nuxt.$route.path
+    console.log(this.curPage);
     const date = new Date()
     const year = date.getFullYear()
     const month = date.getMonth()
@@ -124,7 +128,7 @@ export default {
       }
     },
     follow(link) {
-      this.curPage = link.name
+      this.curPage = link.route
       return $nuxt.$router.replace({path: link.route})
     },
     isClicked(name) {

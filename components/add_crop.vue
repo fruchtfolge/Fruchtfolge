@@ -21,6 +21,7 @@
       <button class="buttonOk" @click="addCrop">ÜBERNEHMEN</button>
       <button class="buttonCancel" @click="cancel">ABBRECHEN</button>
     </div>
+    <div class=""></div>
   </div>
 </template>
 
@@ -40,11 +41,9 @@ export default {
   },
   computed: {
     crops() {
-      console.log(_.groupBy(ktblCrops, 'cropGroup'))
       const data = _.filter(ktblCrops, {farmingType: this.farmingType})
       let unique = _.uniqBy(data, 'crop')
       if (data) {
-        console.log(unique)
         unique = unique.map(o => {return o.crop})
         return unique
       }
@@ -77,7 +76,6 @@ export default {
         })
         const { data } = await axios.post('createCrop', properties)
         await this.$db.bulkDocs(data)
-        console.log(data)
       } catch (e) {
         console.log(e);
       }

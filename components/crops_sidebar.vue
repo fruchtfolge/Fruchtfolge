@@ -2,31 +2,45 @@
   <div class="cropsSidebar">
     <div v-if="crops">
       <div  v-for="(crops, i) in cropGroups" :key='i'>
-        <h2 @click="expand($event)" class="cropsExpand groupText"> {{ crops[0].cropGroup.toUpperCase() }} </h2>
-        <div class="expand">
-          <p v-for="(crop, n) of crops" :key='n' @click="$emit('changeCrop', crop)" class="cropsText"> {{ crop.name }} </p>
+        <div class="container" @click="expand(crops[0].cropGroup)">
+          <h2 class="regionText"> {{ crops[0].cropGroup.toUpperCase() }}</h2>
+          <div class="arrow" v-bind:class="{ rotate: shown[crops[0].cropGroup]}"></div>
         </div>
+        <transition name="expand"
+        v-on:before-enter="beforeEnter" v-on:enter="enter"
+        v-on:before-leave="beforeLeave" v-on:leave="leave">
+          <div class="body" v-show="shown[crops[0].cropGroup]">
+            <p v-for="(crop, n) of crops" :key='n'
+            @click="changeCrop(crop)"
+            class="cropsText"
+            v-bind:class="{ active: isClicked(crop)}">{{ crop.name }}</p>
+          </div>
+        </transition>
       </div>
     </div>
     <div v-else class="helpText">
-      Klicken Sie auf den Button (+) um neue Kulturen für das aktuelle Planungsjahr hinzuzufügen
+      Klicken Sie auf den "Hinzufügen" Button um neue Kulturen für das aktuelle Planungsjahr hinzuzufügen
     </div>
-    <div class="addCrop" @click="addCrop"></div>
+    <div class="addCrop" @click="addCrop">HINZUFÜGEN</div>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-
+      shown: {}
     }
   },
   created() {
-    //console.log(crops);
+    this.updateState()
   },
   props: {
     crops: {
       type: Array,
+      required: false
+    },
+    selectedCrop: {
+      type: Object,
       required: false
     }
   },
@@ -35,24 +49,46 @@ export default {
       return _.groupBy(this.crops, 'cropGroup')
     }
   },
+  watch: {
+    crops() {
+      this.updateState()
+    }
+  },
   methods: {
-    expand: (e) => {
-      const event = e.target
-      event.__toggle = !event.__toggle
-      var target = event.nextSibling
-
-      if (event.__toggle) {
-        event.classList.remove('cropsExpand')
-        event.classList.add('cropsCollaps')
-        target.style.height = target.scrollHeight + 'px'
+    beforeEnter(el) {
+      el.style.height = '0px';
+    },
+    enter(el) {
+      el.style.height = el.scrollHeight + 'px';
+    },
+    beforeLeave(el) {
+      el.style.height = el.scrollHeight + 'px';
+    },
+    leave(el) {
+      el.style.height = '0px';
+    },
+    expand(cropGroup) {
+      if (!this.shown[cropGroup]) {
+        this.shown[cropGroup] = true
       } else {
-        event.classList.remove('cropsCollaps')
-        event.classList.add('cropsExpand')
-        target.style.height = 0
+        this.shown[cropGroup] = false
       }
     },
     addCrop() {
       this.$emit('showAddCrop')
+    },
+    updateState() {
+      // initially collapse all regions, if they aren't opended yet
+      Object.keys(this.cropGroups).forEach((group) => {
+        const shown = true
+        this.$set(this.shown,group,shown)
+      })
+    },
+    isClicked(crop) {
+      return crop.name === this.selectedCrop.name
+    },
+    changeCrop(crop) {
+      this.$emit('changeCrop', crop)
     }
   }
 }
@@ -132,6 +168,21 @@ export default {
   letter-spacing: 0.1em;
 }
 .addCrop {
+    margin: auto;
+    text-align: center;
+    line-height: 40px;
+    margin-top: 40px;
+    height: 40px;
+    letter-spacing: 0.1em;
+    width: 125px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    background-color: transparent;
+    padding: 0px;
+}
+/*
+.addCrop {
   padding: 0px;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -149,13 +200,70 @@ export default {
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center center;
 }
-
-.addCrop svg {
-  width: 33px;
-  height: 33px;
-}
+*/
 
 .addCrop:hover {
-  background-color: black;
+  background-color: rgba(0, 0, 0, .02);
+}
+
+.container {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+}
+
+.container:hover {
+  background-color: rgba(0, 0, 0, .02);
+}
+
+.arrow {
+  width: 24px;
+  height: 24px;
+  background: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24' height='24' viewBox='0 0 24 24'><path fill='#444' d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'></path></svg>");
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  transform: rotate(0deg);
+  transition-duration: .5s;
+}
+
+.arrow.rotate {
+  transform: rotate(180deg);
+  transition: .5s;
+}
+
+.expand-enter-active, .expand-leave-active {
+  transition: height .5s ease-in-out;
+  overflow: hidden;
+}
+
+.expand-enter, .expand-leave-to {
+  height: 0;
+}
+
+.body p:hover {
+  background-color: rgba(0, 0, 0, .02);
+}
+
+
+.active {
+  background-color: rgba(0, 0, 0, .05);
+}
+
+.plotsText {
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  padding-left: 45px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 0px;
+}
+
+.regionText {
+  font-size: 18px;
+  letter-spacing: 0.2em;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-left: 30px;
+  font-weight: normal;
 }
 </style>
