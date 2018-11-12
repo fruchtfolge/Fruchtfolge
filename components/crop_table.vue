@@ -13,9 +13,9 @@
         <!-- Revenues-->
         <tr v-for="(source, i) in cm.revenues" :key="revenues + i">
           <td>{{ source.name }}</td>
-          <td contenteditable="true">{{ source.amount.value }}</td>
+          <td contenteditable="true" @blur="update">{{ source.amount.value }}</td>
           <td>{{ source.amount.unit }}</td>
-          <td contenteditable="true">{{ source.price.value }}</td>
+          <td contenteditable="true" @input="update">{{ source.price.value }}</td>
           <td>{{ source.price.unit }}</td>
           <td>{{ source.total.value }}</td>
           <td>{{ source.total.unit }}</td>
@@ -32,7 +32,7 @@
           <td>{{ source.amount.unit }}</td>
           <td contenteditable="true">{{ source.price.value }}</td>
           <td>{{ source.price.unit }}</td>
-          <td>{{ source.total.value }}</td>
+          <td>{{ source.amount.value * source.price.value}}</td>
           <td>{{ source.total.unit }}</td>
         </tr>
         <tr class="highlightRow">
@@ -131,6 +131,11 @@ export default {
       //this.selectedCrop = selectedCrop
       //console.log(this.selectedCrop)
     })
+  },
+  methods: {
+    update(e) {
+      console.log(e.target.innerText);
+    }
   }
 }
 </script>
