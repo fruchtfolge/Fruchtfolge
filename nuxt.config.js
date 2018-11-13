@@ -16,7 +16,7 @@ module.exports = {
     color: '#79ae98',
     height: '5px'
   },
-  plugins: ['~/plugins/vue-pouch-db'],
+  plugins: ['~/plugins/vue-pouch-db', '~/plugins/vue-notifications'],
   build: {
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {

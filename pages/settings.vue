@@ -45,6 +45,13 @@ export default {
       postcode: ''
     }
   },
+  notifications: {
+    showAddressWarn: { // You can have any name you want instead of 'showLoginError'
+      title: 'Adresse unvollständig',
+      message: 'Bitte füllen Sie das Adressfeld komplett aus.',
+      type: 'warn' // You also can use 'VueNotifications.types.error' instead of 'error'
+    }
+  },
   watch: {
     street() {
       if (this.street !== this.settings.street) this.debouncedGetHome()
@@ -80,7 +87,7 @@ export default {
     // get settings object, forward gecode the farm address
     // and store coordinates in settings.home
     async getHome() {
-      if (!this.street || !this.city) return console.log('Bitte vollständige Adresse angeben!')
+      if (!this.street || !this.city) return this.showAddressWarn()
       try {
         const settings = await this.$db.get('settings')
         const address = await mapquest.forward(this.street, this.postcode, this.city)
