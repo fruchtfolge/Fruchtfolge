@@ -1,18 +1,21 @@
 <template lang="html">
-  <div class="blur">
+  <div>
+    <div class="blur"></div>
     <div class="box">
       <div class="inputs">
         <h2 class="infoText">NEUEN SCHLAG HINZUFÜGEN</h2>
         <label for="add.plot.name">Name</label>
-        <input type="text" id="add.plot.name" placeholder="Optional" class="input" v-model="name">
-        <label for="add.plot.system">Hauptfrucht {{ curYear - 1 }}</label>
-        <select class="dropdown" id="add.crop.prevCrop" v-model="prevCrop1">
+        <input type="text" id="add.plot.name" class="input" v-model="name">
+        <label for="add.plot.prevCrop1">Hauptfrucht {{ curYear - 1 }}</label>
+        <select class="dropdown" id="add.plot.prevCrop1" v-model="prevCrop1">
+          <option v-for="(crop, i) in crops" :key="i" :value="crop">{{ crop }}</option>
+        </select>
+        <label for="add.plot.prevCrop2">Hauptfrucht {{ curYear - 2 }}</label>
+        <select class="dropdown" id="add.plot.prevCrop2" v-model="prevCrop2">
           <option v-for="(prevCrop, i) in crops" :key="i" :value="prevCrop">{{ prevCrop }}</option>
         </select>
-        <select class="dropdown" id="add.crop.prevCrop" v-model="prevCrop2">
-          <option v-for="(prevCrop, i) in crops" :key="i" :value="prevCrop">{{ prevCrop }}</option>
-        </select>
-        <select class="dropdown" id="add.crop.prevCrop" v-model="prevCrop3">
+        <label for="add.plot.prevCrop3">Hauptfrucht {{ curYear - 3 }}</label>
+        <select class="dropdown" id="add.plot.prevCrop3" v-model="prevCrop3">
           <option v-for="(prevCrop, i) in crops" :key="i" :value="prevCrop">{{ prevCrop }}</option>
         </select>
       </div>
@@ -23,26 +26,27 @@
 </template>
 
 <script>
+import { area } from '@turf/turf'
+import createPlot from '~/assets/js/createPlot'
 import ktblCrops from '~/assets/js/crops.js'
-import Plot from '~/constructors/Plot'
 
 export default {
+  props: ['plotData'],
   data() {
     return {
-      farmingType: 'konventionell/integriert',
-      crop: 'Ackergras - Anwelksilage',
-      system: 'Ballen',
-      variety: '',
-      farmingTypes: ['konventionell/integriert', 'ökologisch']
+      curYear: 2019,
+      name: 'Unbenannt',
+      prevCrop1: '',
+      prevCrop2: '',
+      prevCrop3: ''
     }
   },
   computed: {
     crops() {
-      const data = _.filter(ktblCrops, {farmingType: this.farmingType})
-      let unique = _.uniqBy(data, 'crop')
-      if (data) {
-        unique = unique.map(o => {return o.crop})
-        return unique
+      let unique = _.uniqBy(ktblCrops, 'cropGroup')
+      if (unique.length > 0) {
+        unique = unique.map(o => {return o.cropGroup})
+        return unique.sort()
       }
     },
     systems() {
@@ -53,13 +57,35 @@ export default {
       }
     }
   },
+  created() {
+    if (this.$store.curYear) this.curYear = this.$store.curYear
+  },
   methods: {
-    async addCrop() {
+    async addPlot() {
+      const settings = await this.$db.get('settings')
+      const size = this.getSize(this.plotData.features[0])
+      try {
+        const plot = await createPlot({
+          name: this.name,
+          geometry: this.plotData.features[0],
+          size: size
+        }, settings)
+        this.$bus.$emit('drawPlot', plot.geometry)
+        // store new plot in database
+        await this.$db.post(plot)
+        this.$emit('closeAddPlot')
+      } catch (e) {
+        console.log(e);
+      }
       //const settings = await this.$db.get('settings')
-      this.$emit('closeAddCrop')
+      //
+    },
+    getSize(geometry) {
+      const m2 = area(geometry)
+      return Number((m2 / 10000).toFixed(2))
     },
     cancel() {
-      this.$emit('closeAddCrop')
+      this.$emit('closeAddPlot')
     }
   }
 }
@@ -68,7 +94,7 @@ export default {
 <style>
 .blur {
   background: #F5F5F5;
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
   z-index: 95;
@@ -78,10 +104,10 @@ export default {
 }
 
 .box {
-  position: relative;
+  position: absolute;
   width: 400px;
   height: 500px;
-  top: 40%;
+  top: 45%;
   margin-top: -250px;
   left: 50%;
   margin-left: -200px;
@@ -135,36 +161,25 @@ export default {
 }
 
 .buttonOk {
-    position: absolute;
-    bottom: 35px;
-    left: 45px;
-    height: 40px;
-    width: 130px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
-    background-color: transparent;
-    padding: 5px;
+  position: absolute;
+  bottom: 35px;
+  left: 45px;
+  width: 130px;
 }
 
 .buttonOk:hover {
-    background-color: #79ae98;
-    color: white;
+  background-color: #79ae98;
+  color: white;
 }
 
 .buttonCancel {
-    position: absolute;
-    bottom: 35px;
-    right: 45px;
-    height: 40px;
-    width: 130px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
-    background-color: transparent;
-    padding: 5px;
+  position: absolute;
+  bottom: 35px;
+  right: 45px;
+  width: 130px;
 }
+
 .buttonCancel:hover {
-    background-color: rgba(0,0,0,0.05);
+  background-color: rgba(0,0,0,0.05);
 }
 </style>

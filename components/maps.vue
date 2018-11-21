@@ -4,8 +4,6 @@
 </template>
 
 <script>
-import { area } from '@turf/turf'
-import createPlot from '~/assets/js/createPlot'
 import mapboxgl from 'mapbox-gl'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 
@@ -61,6 +59,17 @@ export default {
         zoom: 15
       })
     })
+
+    this.$bus.$on('resize', () => {
+      setTimeout(() => {
+        //console.log(this.map);
+        this.map.resize()
+      }, 500);
+    })
+
+    this.$bus.$on('drawPlot', geometry => {
+      this.Draw.add(geometry)
+    })
   },
   methods: {
     async createMap(settings) {
@@ -97,10 +106,6 @@ export default {
         console.log(e)
       }
     },
-    getSize(geometry) {
-      const m2 = area(geometry)
-      return Number((m2 / 10000).toFixed(2))
-    },
     async delete(data) {
       try {
         // fetch plot object from DB
@@ -131,31 +136,15 @@ export default {
 
     },
     async create(data) {
-      const plotName = 'Test'//prompt('Bitte geben Sie einen Name für das Feld ein', 'Unbenannt')
-      const settings = await this.$db.get('settings')
-      const size = this.getSize(data.features[0])
-      try {
-        const plot = await createPlot({
-          name: plotName,
-          geometry: data.features[0],
-          size: size
-        }, settings)
+      this.$emit('addPlot', data)
+      this.Draw.delete(data.features[0].id)
 
-        // delete plot from map and replace with newly created one with correct id
-        this.Draw.delete(data.features[0].id)
-        this.Draw.add(plot.geometry)
-        // store new plot in database
-        await this.$db.post(plot)
-      } catch (e) {
-        console.log(e);
-      }
     },
     removeDraw() {
       this.Draw.deleteAll()
     },
     select(data) {
       if (data.features.length !== 1)  return
-      console.log(data);
       this.$bus.$emit('selectedPlot', data.features[0].properties._id)
     }
   }
@@ -165,7 +154,7 @@ export default {
 <style>
 .map {
   position: relative;
-  width: calc(100% - 255px);
+  width: 100%;
   height: calc(100vh - 60px);
 }
 </style>

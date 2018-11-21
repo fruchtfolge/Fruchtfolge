@@ -10,8 +10,8 @@
       v-on:before-enter="beforeEnter" v-on:enter="enter"
       v-on:before-leave="beforeLeave" v-on:leave="leave">
         <div class="body" v-show="shown[region[0].region]">
-          <p v-for="(plot, m) in region" :key='m' 
-          @click="flyTo(plot)" 
+          <p v-for="(plot, m) in region" :key='m'
+          @click="flyTo(plot)"
           class="plotsText"
           v-bind:class="{ active: isClicked(plot)}"> {{plot.name}} ({{plot.size}} ha) </p>
         </div>
@@ -35,7 +35,7 @@ export default {
   },
   async created() {
     // create initial state
-    this.updateState()  
+    this.updateState()
     this.$bus.$on('changeCurrents', this.updateState)
     // when a plot is clicked upon on the map, open the region and select a plot in the sidebar
     this.$bus.$on('selectedPlot', id => {
@@ -102,6 +102,7 @@ export default {
 <style scoped="true">
 .plotsSidebar {
   position: fixed;
+  float: right;
   padding-top: 20px;
   overflow-y: scroll;
   top: 60px;

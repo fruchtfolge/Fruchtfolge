@@ -1,5 +1,6 @@
 <template lang="html">
-  <div class="blur">
+  <div>
+    <div class="blur"></div>
     <div class="box">
       <div class="inputs">
         <h2 class="infoText">NEUE KULTUR HINZUFÜGEN</h2>
@@ -91,7 +92,7 @@ export default {
 <style>
 .blur {
   background: #F5F5F5;
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
   z-index: 95;
@@ -101,10 +102,10 @@ export default {
 }
 
 .box {
-  position: relative;
+  position: absolute;
   width: 400px;
   height: 500px;
-  top: 40%;
+  top: 15%;
   margin-top: -250px;
   left: 50%;
   margin-left: -200px;

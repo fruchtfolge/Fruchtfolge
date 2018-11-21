@@ -85,14 +85,17 @@ export default {
     open() {
       this.sidenavStyle.width = '250px'
       this.mainStyle.marginLeft = '250px'
+      //this.mainStyle.width = 'calc(100% - 250px)'
       this.isOpen = true
     },
     close() {
       this.sidenavStyle.width = '0px'
       this.mainStyle.marginLeft = '0px'
+      //this.mainStyle.width = '100%'
       this.isOpen = false
     },
     toggle() {
+      this.$bus.$emit('resize', null)
       if (this.isOpen) {
         this.close();
       } else {
