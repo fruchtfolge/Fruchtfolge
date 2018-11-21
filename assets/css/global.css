@@ -1,3 +1,4 @@
+/* import Open Sans and Open Sans Condensed as global font */
 /* latin-ext */
 @font-face {
   font-family: 'Open Sans Condensed';
@@ -47,6 +48,7 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+/* Appearance of overall page */
 html {
   -webkit-user-select: none;
   -webkit-user-drag: none;
@@ -78,6 +80,59 @@ input, textarea, select, button, img {
 select:focus {
     outline: none;
 }
+
+/* Default settings for tables */
+
+table {
+  width: calc(100% - 275px);
+  font-family: 'Open Sans Light';
+  margin: auto;
+  margin-top: 30px;
+  min-width: 500px;
+  max-width: 700px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th {
+  background-color: #79ae98;
+  height: 40px;
+  color: white;
+}
+tr {
+  height: 30px;
+}
+
+tr:nth-child(odd) {
+  background-color: #ECECEC;
+}
+
+td:first-child {
+  padding-left: 10px;
+}
+
+/* Default settings for buttons */
+button {
+    font-family: 'Open Sans Condensed';
+    margin: auto;
+    text-align: center;
+    line-height: 40px;
+    height: 40px;
+    line-height: 40px;
+    letter-spacing: 0.2em;
+    width: 125px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    background-color: transparent;
+    padding: 0px;
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, .02);
+}
+
+button:focus {outline:0;}
 /*
 .page-enter-active, .page-leave-active {
   transition: opacity .5s;

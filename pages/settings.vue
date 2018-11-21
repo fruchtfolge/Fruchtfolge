@@ -126,16 +126,5 @@ export default {
 .invekosBtn {
   margin-top: 20px;
   width: 241px;
-  height: 40px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: black;
-  background-color: transparent;
-  font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
-  letter-spacing: 0.2em;
-  font-size: 18px;
-  color: black;
-  padding: 5px;
-  border-radius: 0px !important;
 }
 </style>

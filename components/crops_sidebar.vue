@@ -21,7 +21,9 @@
     <div v-else class="helpText">
       Klicken Sie auf den "Hinzufügen" Button um neue Kulturen für das aktuelle Planungsjahr hinzuzufügen
     </div>
-    <div class="addCrop" @click="addCrop">HINZUFÜGEN</div>
+    <div style="text-align: center; margin-top: 40px;">
+      <button @click="addCrop">HINZUFÜGEN</button>
+    </div>
   </div>
 </template>
 <script>
@@ -167,20 +169,7 @@ export default {
   font-size: 16px;
   letter-spacing: 0.1em;
 }
-.addCrop {
-    margin: auto;
-    text-align: center;
-    line-height: 40px;
-    margin-top: 40px;
-    height: 40px;
-    letter-spacing: 0.1em;
-    width: 125px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
-    background-color: transparent;
-    padding: 0px;
-}
+
 /*
 .addCrop {
   padding: 0px;
@@ -201,10 +190,6 @@ export default {
   -webkit-mask-position: center center;
 }
 */
-
-.addCrop:hover {
-  background-color: rgba(0, 0, 0, .02);
-}
 
 .container {
   width: 100%;

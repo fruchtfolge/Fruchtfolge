@@ -38,6 +38,7 @@
     "pouchdb-browser": "^7.0.0",
     "pouchdb-find": "^7.0.0",
     "pouchdb-live-find": "^0.4.0",
+    "r": "0.0.5",
     "utf-8-validate": "^5.0.1",
     "vue-notifications": "^0.9.0",
     "xml2js": "^0.4.19"

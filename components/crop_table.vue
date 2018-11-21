@@ -153,28 +153,7 @@ export default {
 }
 </script>
 <style>
-.cropsTable table {
-  width: calc(100% - 275px);
-  font-family: 'Open Sans Light';
-  margin: auto;
-  margin-top: 30px;
-  min-width: 500px;
-  max-width: 700px;
-  border-collapse: collapse;
-  font-size: 14px;
-}
-th {
-  background-color: #79ae98;
-  height: 40px;
-  color: white;
-}
-tr {
-  height: 30px;
-}
 
-td:first-child {
-  padding-left: 10px;
-}
 td:nth-child(2) {
   text-align: right;
 }
@@ -192,12 +171,5 @@ td:nth-child(6) {
 .highlightRow {
   height: 40px;
   font-family: 'Open Sans';
-  /*font-weight: bold;
-  letter-spacing: 0.05 em;
-  color: #4e4b4b;*/
-}
-
-.cropsTable tr:nth-child(odd) {
-  background-color: #ECECEC;
 }
 </style>

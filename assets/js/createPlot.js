@@ -20,7 +20,7 @@ export default async function createPlot(properties, settings) {
     mapquest.reverse(properties),
     mapquest.distance(properties, settings.home)
   ]).catch(err => {
-    console.log(e)
+    console.log(err)
   })
 
   // fill the properties with the values acquired

@@ -1,33 +1,40 @@
 <template>
-  <div class="">
-    <div class="chart-wrapper">
-      <canvas id="labour-chart"></canvas>
+  <div>
+    <div style="width: 100%;">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Größer/Kleiner</th>
+            <th>Menge</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>test</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+    <div style="text-align: center; margin-top: 40px;">
+      <button class="addCrop" style="font-family: 'Open Sans Condensed';">HINZUFÜGEN</button>
+    </div>
+
   </div>
 </template>
 <script>
-import Chart from 'chart.js'
-import labourData from '~/assets/js/labour.js'
-import 'chartjs-plugin-dragdata'
 
 export default {
   data() {
     return {
-      labourData
+
     }
   },
   mounted() {
-    this.createChart('labour-chart', this.labourData)
+
   },
   methods: {
-    createChart(chartId, chartData) {
-      const ctx = document.getElementById(chartId)
-      const myChart = new Chart(ctx, {
-        type: chartData.type,
-        data: chartData.data,
-        options: chartData.options,
-      })
-    }
+
   }
 }
 </script>

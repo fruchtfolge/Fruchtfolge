@@ -2,8 +2,8 @@
   <div class="blur">
     <div class="box">
       <div class="inputs">
-        <h2 class="infoText">NEUE KULTUR HINZUFÜGEN</h2>
-        <label for="add.crop.farmingType">Anbauverfahren</label>
+        <h2 class="infoText">{{ title }}</h2>
+        <label for="...">{{ }}</label>
         <select class="dropdown" id="add.crop.farmingType" v-model="farmingType">
           <option v-for="(farmingType, i) in farmingTypes" :key="i" :value="farmingType">{{ farmingType }}</option>
         </select>

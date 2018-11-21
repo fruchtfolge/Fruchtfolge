@@ -16,17 +16,9 @@ export const planetChartData = {
           'rgba(54,73,93,.5)',
           'rgba(54,73,93,.5)'
         ],
-        borderColor: [
-          '#36495d',
-          '#36495d',
-          '#36495d',
-          '#36495d',
-          '#36495d',
-          '#36495d',
-          '#36495d',
-          '#36495d',
-        ],
-        borderWidth: 3
+        radius: 5,
+        pointHoverRadius: 6,
+        pointHitRadius: 15
       },
       { // another line graph
         label: 'Verfügbare Feldarbeitstage',
@@ -34,16 +26,16 @@ export const planetChartData = {
         backgroundColor: [
           'rgba(71, 183,132,.5)', // Green
         ],
-        borderColor: [
-          '#47b784',
-        ],
-        borderWidth: 3
+        borderWidth: 3,
+        radius: 5,
+        pointHoverRadius: 6,
+        pointHitRadius: 15
       }
     ]
   },
   options: {
     responsive: true,
-    lineTension: 1,
+    //lineTension: 1,
     dragData: true,
     scales: {
       yAxes: [{
