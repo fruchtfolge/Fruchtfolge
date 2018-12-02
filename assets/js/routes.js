@@ -41,7 +41,7 @@ module.exports = [{
 },
 {
   subPage: true,
-  path: '/crops_graphs',
+  path: '/timeseries',
   name: 'Marktentwicklung',
   icon: 'static/crops.png'
 },

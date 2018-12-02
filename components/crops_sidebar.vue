@@ -1,6 +1,6 @@
 <template>
   <div class="cropsSidebar">
-    <div v-if="crops">
+    <div v-if="crops && crops.length > 0">
       <div  v-for="(crops, i) in cropGroups" :key='i'>
         <div class="container" @click="expand(crops[0].cropGroup)">
           <h2 class="regionText"> {{ crops[0].cropGroup.toUpperCase() }}</h2>
@@ -113,11 +113,6 @@ export default {
     background-position: 100% 50%;
     background-repeat: no-repeat;
 }
-.cropsExpand:hover {
-  background: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24' height='24' viewBox='0 0 24 24'><path fill='#444' d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'></path></svg>");
-    background-position: 100% 50%;
-    background-repeat: no-repeat;
-}
 
 .expand{
     height: 0;
@@ -158,12 +153,6 @@ export default {
     transition: height 0.8s ease;
 }
 
-.cropsExpand:hover {
-  background: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24' height='24' viewBox='0 0 24 24'><path fill='#444' d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'></path></svg>");
-    background-position: 100% 50%;
-    background-repeat: no-repeat;
-}
-
 .cropInput {
   font-family: 'open_sanscondensed_light', sans-serif;
   font-size: 16px;
@@ -197,7 +186,7 @@ export default {
   align-items: center;
 }
 
-.container:hover {
+.container:hover:not(.active) {
   background-color: rgba(0, 0, 0, .02);
 }
 
@@ -225,7 +214,7 @@ export default {
   height: 0;
 }
 
-.body p:hover {
+.body p:hover:not(.active) {
   background-color: rgba(0, 0, 0, .02);
 }
 

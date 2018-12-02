@@ -120,7 +120,7 @@ export default {
   align-items: center;
 }
 
-.container:hover {
+.container:hover:not(.active) {
   background-color: rgba(0, 0, 0, .02);
 }
 
@@ -148,7 +148,7 @@ export default {
   height: 0;
 }
 
-.body p:hover {
+.body p:hover:not(.active) {
   background-color: rgba(0, 0, 0, .02);
 }
 

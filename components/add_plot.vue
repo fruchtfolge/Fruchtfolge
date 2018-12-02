@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <div class="blur"></div>
-    <div class="box">
+    <div class="plotBox">
       <div class="inputs">
         <h2 class="infoText">NEUEN SCHLAG HINZUFÜGEN</h2>
         <label for="add.plot.name">Name</label>
@@ -103,7 +103,7 @@ export default {
   visibility: visible;
 }
 
-.box {
+.plotBox {
   position: absolute;
   width: 400px;
   height: 500px;

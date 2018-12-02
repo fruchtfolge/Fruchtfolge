@@ -88,14 +88,14 @@ table {
   font-family: 'Open Sans Light';
   margin: auto;
   margin-top: 30px;
-  min-width: 500px;
+  min-width: 480px;
   max-width: 700px;
   border-collapse: collapse;
   font-size: 14px;
 }
 
 th {
-  background-color: #79ae98;
+  background-color: rgb(121, 173, 151);
   height: 40px;
   color: white;
 }

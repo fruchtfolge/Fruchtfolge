@@ -3,9 +3,6 @@
     <addCrop v-if="addCrop" v-on:closeAddCrop="addCrop = false"/>
     <cropsSidebar v-on:showAddCrop="addCrop = true" v-on:changeCrop="changeCrop" :crops="crops" :selectedCrop="selectedCrop"/>
     <div v-for="(crop, i) in crops" :key='i' v-if="isSelected(crop)" >
-      <cropTable :crop="crop"/>
-      <!--<cropSettings/>
-      <cropRevYields/>-->
     </div>
   </div>
 </template>
@@ -38,11 +35,8 @@ export default {
     }
   },
   components: {
-    cropTable: () => import('~/components/crop_table.vue'),
     addCrop: () => import('~/components/add_crop.vue'),
     cropsSidebar: () => import('~/components/crops_sidebar.vue'),
-    // cropSettings: () => import('~/components/cropSettings.vue'),
-    // cropRevYields: () => import('~/components/cropRevYields.vue')
   }
 }
 </script>

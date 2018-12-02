@@ -20,7 +20,7 @@
       <ul class="sidenav-container">
         <li v-for="(route, index) in routes"
             :key='index' @click="follow(route)">
-            <p class="sidenav-links" v-bind:class="{ active: isClicked(route.path), subPage: route.subPage }">
+            <p class="sidenav-links" v-bind:class="{ active: isClicked(route), subPage: route.subPage }">
               {{ route.name }}
             </p>
           </li>
@@ -106,8 +106,10 @@ export default {
       this.curPage = route.path
       return $nuxt.$router.replace({path: route.path})
     },
-    isClicked(name) {
-      return this.curPage === name
+    isClicked(route) {
+      if (route.subPage) {
+        return this.curPage === route.path
+      }
     },
     async saveSettings() {
       try {
@@ -221,7 +223,7 @@ body,html {
   background-color: #ececec;
   overflow-x: hidden;
   transition: width .5s;
-  padding-top: 60px;
+  padding-top: 10px;
 }
 
 

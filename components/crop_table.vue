@@ -84,6 +84,9 @@
         </tr>
       </tbody>
     </table>
+    <div style="text-align:center;margin-top: 40px;">
+      <button type="button" name="button" @click="remove">ENTFERNEN</button>
+    </div>
   </div>
 </template>
 <script>
@@ -142,12 +145,35 @@ export default {
         // calculate new total amount
         const amount = this.cm[key][index].amount.value
         const price = this.cm[key][index].price.value
-        this.$set(this.cm[key][index]['total'], 'value', _.round(amount * price, 2))
+        const value = this.calcValue(amount,price,this.cm[key][index])
+        this.$set(this.cm[key][index]['total'], 'value', _.round(value, 2))
         // store in Database
         await this.$db.put(this.crop)
       } catch (e) {
         console.log(e)
       }
+    },
+    calcValue(amount,price,entry) {
+      try {
+        const amountUnit = entry.amount.unit.split('/')
+        const priceUnit = entry.price.unit.split('/')
+        if (amountUnit.length < 2 && priceUnit.length < 2) {
+          return amount * price
+        } else if (amountUnit[0].toUpperCase() === priceUnit[1].toUpperCase()) {
+          return amount * price
+        } else {
+          // we assume that this is a case of eur/1000 eur or similar
+          console.log(priceUnit);
+          const factor = Number(priceUnit[1].split(' ')[0])
+          return price / factor * amount
+        }
+      } catch (e) {
+        console.log(e);
+        return amount * price
+      }
+    },
+    async remove() {
+      this.$db.remove(this.crop)
     }
   }
 }

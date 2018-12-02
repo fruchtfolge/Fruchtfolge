@@ -4,6 +4,7 @@
 </template>
 
 <script>
+import { area } from '@turf/turf'
 import mapboxgl from 'mapbox-gl'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 
@@ -131,6 +132,10 @@ export default {
       } catch (e) {
         console.log(e)
       }
+    },
+    getSize(geometry) {
+      const m2 = area(geometry)
+      return Number((m2 / 10000).toFixed(2))
     },
     async combine() {
 

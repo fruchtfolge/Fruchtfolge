@@ -6,20 +6,24 @@
         <h2 class="infoText">NEUE KULTUR HINZUFÜGEN</h2>
         <label for="add.crop.farmingType">Anbauverfahren</label>
         <select class="dropdown" id="add.crop.farmingType" v-model="farmingType">
+          <option disabled value="">Anbauverfahren</option>
           <option v-for="(farmingType, i) in farmingTypes" :key="i" :value="farmingType">{{ farmingType }}</option>
         </select>
         <label for="add.crop.crop">Kultur</label>
         <select class="dropdown" id="add.crop.crop" v-model="crop">
+          <option disabled value="">Kultur</option>
           <option v-for="(crop, i) in crops" :key="i" :value="crop">{{ crop }}</option>
         </select>
         <label for="add.crop.system">System</label>
         <select class="dropdown" id="add.crop.system" v-model="system">
+          <option disabled value="">System</option>
           <option v-for="(system, i) in systems" :key="i" :value="system">{{ system }}</option>
         </select>
         <label for="add.crop.variety">Sorte</label>
         <input type="text" id="add.crop.variety" placeholder="Optional" class="input" v-model="variety">
       </div>
-      <button class="buttonOk" @click="addCrop">ÜBERNEHMEN</button>
+      <p v-if="exists" style="text-align: center; margin-top: 30px; color:red;">Kultur bereits vorhanden. Bitte anderen Sortennamen wählen.</p>
+      <button v-if="!exists" class="buttonOk" @click="addCrop">ÜBERNEHMEN</button>
       <button class="buttonCancel" @click="cancel">ABBRECHEN</button>
     </div>
   </div>
@@ -42,6 +46,7 @@ export default {
   computed: {
     crops() {
       const data = _.filter(ktblCrops, {farmingType: this.farmingType})
+      console.log(_.uniqBy(ktblCrops, 'cropGroup'));
       let unique = _.uniqBy(data, 'crop')
       if (data) {
         unique = unique.map(o => {return o.crop})
@@ -60,6 +65,19 @@ export default {
       if (data) {
         return data[0]
       }
+    },
+    exists() {
+      let bool = false
+      if (this.$store && this.$store.curCrops && this.$store.curCrops.length) {
+        this.$store.curCrops.forEach(crop => {
+          if (this.variety && crop.name !== this.variety) {
+            return bool = false
+          } else if (crop.name === this.crop) {
+            return bool = true
+          }
+        })
+      }
+      return bool
     }
   },
   methods: {
