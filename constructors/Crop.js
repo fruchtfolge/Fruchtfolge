@@ -24,6 +24,7 @@ module.exports = class Crop {
     this.rootCrop = properties.rootCrop,
     this.minSoilQuality = properties.minSoilQuality,
     this.rotBreak = properties.rotBreak,
+    this.maxShare = this.rotBreak === 0 ? 100 : 1 / this.rotBreak * 100,
 
     // contribution margin related data
     this.price = properties.price,

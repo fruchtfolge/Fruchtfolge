@@ -23,7 +23,7 @@ module.exports = [{
 },
 {
   subPage: true,
-  path: '/plotsTable',
+  path: '/plots_overview',
   name: 'Übersicht',
   file: 'plotsTable',
   icon: 'static/plots.png'

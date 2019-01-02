@@ -35,12 +35,15 @@ console.log(`Nuxt working on ${_NUXT_URL_}`)
 */
 let win = null // Current window
 const electron = require('electron')
+console.log(electron);
 const path = require('path')
 const app = electron.app
 
 const newWin = () => {
   win = new electron.BrowserWindow({
-    icon: path.join(__dirname, 'static/icon.png')
+    icon: path.join(__dirname, 'static/icon.png'),
+    minWidth: 1024,
+    minHeight: 768
   })
   win.maximize()
   win.on('closed', () => win = null)
