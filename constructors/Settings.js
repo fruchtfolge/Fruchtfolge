@@ -1,10 +1,11 @@
 export default class Setting {
-  constructor(curYear) {
+  constructor(settings) {
     this._id = 'settings'
     this.type = 'settings'
     this.zidId = ''
     this.zidPass = ''
-    this.curYear = curYear
+    this.curYear = settings.curYear,
+    this.curScenario = settings.curScenario,
     this.street = ''
     this.postcode = ''
     this.city = ''

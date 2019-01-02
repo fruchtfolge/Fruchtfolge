@@ -16,12 +16,15 @@ Vue.prototype.$store = {}
 
 // store settings and keep updated
 const settings = Vue.prototype.$db.liveFind({
-  selector: {type: 'settings'},
+  selector: {
+    type: 'settings'
+  },
   aggregate: true
 })
   .on('update', (update, aggregate) => {
     Vue.set(Vue.prototype.$store, 'settings', aggregate[0])
     Vue.set(Vue.prototype.$store, 'curYear', aggregate[0].curYear)
+    Vue.set(Vue.prototype.$store, 'curScenario', aggregate[0].curScenario)
     updateCurrent()
   })
   .on('error', (err) => {
@@ -30,7 +33,9 @@ const settings = Vue.prototype.$db.liveFind({
 
 // plots
 const plots = Vue.prototype.$db.liveFind({
-  selector: {type: 'plot'},
+  selector: {
+    type: 'plot'
+  },
   aggregate: true
 })
   .on('update', (update, aggregate) => {
@@ -43,7 +48,9 @@ const plots = Vue.prototype.$db.liveFind({
 
 // crops
 const crops = Vue.prototype.$db.liveFind({
-  selector: {type: 'crop'},
+  selector: {
+    type: 'crop'
+  },
   aggregate: true
 })
   .on('update', (update, aggregate) => {
@@ -55,14 +62,21 @@ const crops = Vue.prototype.$db.liveFind({
   })
 
 function updateCurrent() {
-  if(Vue.prototype.$store.plots) {
+  if (Vue.prototype.$store.plots) {
     Vue.set(Vue.prototype.$store, 'curPlots',
-      Vue.prototype.$store.plots.filter(plot => { return plot.year === Vue.prototype.$store.settings.curYear})
+      Vue.prototype.$store.plots.filter(plot => {
+        return plot.year === Vue.prototype.$store.settings.curYear &&
+          plot.scenario === Vue.prototype.$store.settings.curScenario
+      })
     )
   }
   if (Vue.prototype.$store.crops) {
     Vue.set(Vue.prototype.$store, 'curCrops',
-      Vue.prototype.$store.crops.filter(crop => { return crop.year === Vue.prototype.$store.settings.curYear && crop.active === true})
+      Vue.prototype.$store.crops.filter(crop => {
+        return crop.year === Vue.prototype.$store.settings.curYear &&
+          crop.active === true &&
+          crop.scenario === Vue.prototype.$store.settings.curScenario
+      })
     )
   }
   Vue.prototype.$bus.$emit('changeCurrents')

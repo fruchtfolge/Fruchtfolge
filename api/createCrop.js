@@ -1,6 +1,7 @@
 const querystring = require('querystring')
 const _ = require('lodash')
 const Crop = require('../constructors/Crop')
+const rotValues = require('../assets/js/cropRotValues.js')
 const nano = require('nano')('http://localhost:5984');
 
 // we use CouchDB instead of Nano so that we can use
@@ -42,6 +43,16 @@ module.exports = {
       if (properties.year === cropData.year) {
         cropData.active = true
       }
+      // append crop rotational information to crop
+      const rotation = _.find(rotValues, ['cropGroup',properties.cropGroup])
+      console.log(rotation);
+      cropData.subseqCrops = rotation.subseqCrops
+      cropData.efaFactor = rotation.efa
+      cropData.legume = rotation.legume
+      cropData.rootCrop = rotation.rootCrop
+      cropData.minSoilQuality = rotation.minSoil
+      cropData.rotBreak = rotation.rotBreak
+
       // create the crop
       const crop = new Crop(cropData)
       return crop

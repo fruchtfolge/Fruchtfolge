@@ -6,208 +6,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 0,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 4
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 8
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 8
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 6
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 2
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 4,
+      "Leguminosen": 2,
+      "Blühmischung": 4,
+      "Kohl": 4,
+      "Bohnen": 2,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 4,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 8,
+      "Kartoffeln": 8,
+      "Gurke": 4,
+      "Mais": 8,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 6,
+      "Soja": 6,
+      "Sommergerste": 4,
+      "Sommerhafer": 4,
+      "Zwischenfrucht": 2,
+      "Sonnenblumen": 6,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 4,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 6,
+      "Winterraps": 6,
+      "Winterroggen": 8,
+      "Wintertriticale": 8,
+      "Winterweizen": 10,
+      "Zucchini": 4,
+      "Dinkel": 10,
+      "Luzerne": 4,
+      "Öllein": 6,
+      "Sommergetreide - Saatgutproduktion": 4,
+      "Sommerroggen": 4,
+      "Sommertriticale": 4,
+      "Sommerweizen": 10,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Leguminosen",
@@ -216,208 +66,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 30,
     "rotBreak": 4,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 6
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 6
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 5
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 5
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 6
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 5
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 10
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 5
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 8
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 5
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 5
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 5
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 5
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 5
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 5
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 5
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 8
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 2
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 6
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 5
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 5
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 5
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 5
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 3
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 6,
+      "Leguminosen": 2,
+      "Blühmischung": 6,
+      "Kohl": 5,
+      "Bohnen": 4,
+      "Brokkoli": 5,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 6,
+      "Salat": 5,
+      "Erbsen": 4,
+      "Rüben": 8,
+      "Kartoffeln": 10,
+      "Gurke": 5,
+      "Mais": 8,
+      "Mini-Romana": 5,
+      "Miscanthus": 0,
+      "Möhren": 5,
+      "Pappeln": 0,
+      "Radies": 5,
+      "Porree": 5,
+      "Rote Bete": 5,
+      "Rucola": 5,
+      "Sellerie": 5,
+      "Sorghum": 8,
+      "Soja": 2,
+      "Sommergerste": 6,
+      "Sommerhafer": 6,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 6,
+      "Spargel": 5,
+      "Zwiebel": 5,
+      "Kürbis": 4,
+      "Spinat": 5,
+      "Weiden": 0,
+      "Wintergerste": 8,
+      "Winterraps": 6,
+      "Winterroggen": 6,
+      "Wintertriticale": 8,
+      "Winterweizen": 10,
+      "Zucchini": 5,
+      "Dinkel": 10,
+      "Luzerne": 4,
+      "Öllein": 6,
+      "Sommergetreide - Saatgutproduktion": 6,
+      "Sommerroggen": 6,
+      "Sommertriticale": 6,
+      "Sommerweizen": 6,
+      "Lupine": 3,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Blühmischung",
@@ -426,208 +126,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 0,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 4
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 8
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 8
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 6
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 2
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 4,
+      "Leguminosen": 2,
+      "Blühmischung": 4,
+      "Kohl": 4,
+      "Bohnen": 2,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 4,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 8,
+      "Kartoffeln": 8,
+      "Gurke": 4,
+      "Mais": 8,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 6,
+      "Soja": 6,
+      "Sommergerste": 4,
+      "Sommerhafer": 4,
+      "Zwischenfrucht": 2,
+      "Sonnenblumen": 6,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 4,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 6,
+      "Winterraps": 6,
+      "Winterroggen": 8,
+      "Wintertriticale": 8,
+      "Winterweizen": 10,
+      "Zucchini": 4,
+      "Dinkel": 10,
+      "Luzerne": 4,
+      "Öllein": 6,
+      "Sommergetreide - Saatgutproduktion": 4,
+      "Sommerroggen": 4,
+      "Sommertriticale": 4,
+      "Sommerweizen": 10,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Kohl",
@@ -636,208 +186,58 @@ module.exports = [
     "rootCrop": true,
     "minSoil": 20,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 8
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 8
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 3
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 6
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 10
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 2
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 4
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 8
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 8,
+      "Leguminosen": 4,
+      "Blühmischung": 8,
+      "Kohl": 4,
+      "Bohnen": 4,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 8,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 3,
+      "Kartoffeln": 6,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 10,
+      "Soja": 4,
+      "Sommergerste": 10,
+      "Sommerhafer": 10,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 2,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 10,
+      "Winterraps": 4,
+      "Winterroggen": 10,
+      "Wintertriticale": 10,
+      "Winterweizen": 8,
+      "Zucchini": 4,
+      "Dinkel": 8,
+      "Luzerne": 4,
+      "Öllein": 4,
+      "Sommergetreide - Saatgutproduktion": 10,
+      "Sommerroggen": 10,
+      "Sommertriticale": 10,
+      "Sommerweizen": 10,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Bohnen",
@@ -846,208 +246,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 30,
     "rotBreak": 4,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 6
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 6
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 6
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 10
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 6
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 2
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 2
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 2
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 10
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 6,
+      "Leguminosen": 2,
+      "Blühmischung": 6,
+      "Kohl": 4,
+      "Bohnen": 2,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 6,
+      "Salat": 4,
+      "Erbsen": 2,
+      "Rüben": 10,
+      "Kartoffeln": 10,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 6,
+      "Soja": 2,
+      "Sommergerste": 6,
+      "Sommerhafer": 8,
+      "Zwischenfrucht": 2,
+      "Sonnenblumen": 2,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 4,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 6,
+      "Winterraps": 6,
+      "Winterroggen": 8,
+      "Wintertriticale": 10,
+      "Winterweizen": 10,
+      "Zucchini": 4,
+      "Dinkel": 10,
+      "Luzerne": 4,
+      "Öllein": 6,
+      "Sommergetreide - Saatgutproduktion": 8,
+      "Sommerroggen": 8,
+      "Sommertriticale": 8,
+      "Sommerweizen": 6,
+      "Lupine": 2,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 10
+    }
   },
   {
     "cropGroup": "Brokkoli",
@@ -1056,208 +306,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 8
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 8
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 3
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 6
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 10
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 2
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 4
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 8
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 8,
+      "Leguminosen": 4,
+      "Blühmischung": 8,
+      "Kohl": 4,
+      "Bohnen": 4,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 8,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 3,
+      "Kartoffeln": 6,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 10,
+      "Soja": 4,
+      "Sommergerste": 10,
+      "Sommerhafer": 10,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 2,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 10,
+      "Winterraps": 4,
+      "Winterroggen": 10,
+      "Wintertriticale": 10,
+      "Winterweizen": 8,
+      "Zucchini": 4,
+      "Dinkel": 8,
+      "Luzerne": 4,
+      "Öllein": 4,
+      "Sommergetreide - Saatgutproduktion": 10,
+      "Sommerroggen": 10,
+      "Sommertriticale": 10,
+      "Sommerweizen": 10,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Dauergrünland",
@@ -1266,208 +366,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 0,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 0
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 0
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 0
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 1
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 0
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 0
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 0
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 0
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 0
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 0
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 0
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 0
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 0
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 0
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 0
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 0
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 0
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 0
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 0
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 0
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 0
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 0
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 0
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 0
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 0
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 0,
+      "Leguminosen": 0,
+      "Blühmischung": 0,
+      "Kohl": 0,
+      "Bohnen": 0,
+      "Brokkoli": 0,
+      "Dauergrünland": 1,
+      "Durchwachsene Silphie": 0,
+      "Salat": 0,
+      "Erbsen": 0,
+      "Rüben": 0,
+      "Kartoffeln": 0,
+      "Gurke": 0,
+      "Mais": 0,
+      "Mini-Romana": 0,
+      "Miscanthus": 0,
+      "Möhren": 0,
+      "Pappeln": 0,
+      "Radies": 0,
+      "Porree": 0,
+      "Rote Bete": 0,
+      "Rucola": 0,
+      "Sellerie": 0,
+      "Sorghum": 0,
+      "Soja": 0,
+      "Sommergerste": 0,
+      "Sommerhafer": 0,
+      "Zwischenfrucht": 0,
+      "Sonnenblumen": 0,
+      "Spargel": 0,
+      "Zwiebel": 0,
+      "Kürbis": 0,
+      "Spinat": 0,
+      "Weiden": 0,
+      "Wintergerste": 0,
+      "Winterraps": 0,
+      "Winterroggen": 0,
+      "Wintertriticale": 0,
+      "Winterweizen": 0,
+      "Zucchini": 0,
+      "Dinkel": 0,
+      "Luzerne": 0,
+      "Öllein": 0,
+      "Sommergetreide - Saatgutproduktion": 0,
+      "Sommerroggen": 0,
+      "Sommertriticale": 0,
+      "Sommerweizen": 0,
+      "Lupine": 0,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 0
+    }
   },
   {
     "cropGroup": "Durchwachsene Silphie",
@@ -1476,208 +426,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 4
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 8
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 8
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 6
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 2
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 4,
+      "Leguminosen": 2,
+      "Blühmischung": 4,
+      "Kohl": 4,
+      "Bohnen": 2,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 4,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 8,
+      "Kartoffeln": 8,
+      "Gurke": 4,
+      "Mais": 8,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 6,
+      "Soja": 6,
+      "Sommergerste": 4,
+      "Sommerhafer": 4,
+      "Zwischenfrucht": 2,
+      "Sonnenblumen": 6,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 4,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 6,
+      "Winterraps": 6,
+      "Winterroggen": 8,
+      "Wintertriticale": 8,
+      "Winterweizen": 10,
+      "Zucchini": 4,
+      "Dinkel": 10,
+      "Luzerne": 4,
+      "Öllein": 6,
+      "Sommergetreide - Saatgutproduktion": 4,
+      "Sommerroggen": 4,
+      "Sommertriticale": 4,
+      "Sommerweizen": 10,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Salat",
@@ -1686,208 +486,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 8
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 8
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 3
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 6
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 10
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 2
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 4
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 8
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 8,
+      "Leguminosen": 4,
+      "Blühmischung": 8,
+      "Kohl": 4,
+      "Bohnen": 4,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 8,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 3,
+      "Kartoffeln": 6,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 10,
+      "Soja": 4,
+      "Sommergerste": 10,
+      "Sommerhafer": 10,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 2,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 10,
+      "Winterraps": 4,
+      "Winterroggen": 10,
+      "Wintertriticale": 10,
+      "Winterweizen": 8,
+      "Zucchini": 4,
+      "Dinkel": 8,
+      "Luzerne": 4,
+      "Öllein": 4,
+      "Sommergetreide - Saatgutproduktion": 10,
+      "Sommerroggen": 10,
+      "Sommertriticale": 10,
+      "Sommerweizen": 10,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Erbsen",
@@ -1896,208 +546,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 30,
     "rotBreak": 4,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 6
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 6
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 6
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 6
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 10
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 6
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 2
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 2
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 10
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 6,
+      "Leguminosen": 4,
+      "Blühmischung": 6,
+      "Kohl": 4,
+      "Bohnen": 2,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 6,
+      "Salat": 4,
+      "Erbsen": 2,
+      "Rüben": 6,
+      "Kartoffeln": 10,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 6,
+      "Soja": 4,
+      "Sommergerste": 6,
+      "Sommerhafer": 4,
+      "Zwischenfrucht": 2,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 4,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 10,
+      "Winterraps": 6,
+      "Winterroggen": 10,
+      "Wintertriticale": 10,
+      "Winterweizen": 10,
+      "Zucchini": 4,
+      "Dinkel": 10,
+      "Luzerne": 4,
+      "Öllein": 6,
+      "Sommergetreide - Saatgutproduktion": 6,
+      "Sommerroggen": 6,
+      "Sommertriticale": 6,
+      "Sommerweizen": 6,
+      "Lupine": 2,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 10
+    }
   },
   {
     "cropGroup": "Rüben",
@@ -2106,208 +606,58 @@ module.exports = [
     "rootCrop": true,
     "minSoil": 20,
     "rotBreak": 4,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 8
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 8
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 2
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 8
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 8
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 8
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 4
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 8
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 4
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 8,
+      "Leguminosen": 6,
+      "Blühmischung": 8,
+      "Kohl": 4,
+      "Bohnen": 6,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 8,
+      "Salat": 4,
+      "Erbsen": 6,
+      "Rüben": 2,
+      "Kartoffeln": 8,
+      "Gurke": 4,
+      "Mais": 8,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 8,
+      "Soja": 6,
+      "Sommergerste": 10,
+      "Sommerhafer": 10,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 6,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 4,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 0,
+      "Winterraps": 0,
+      "Winterroggen": 0,
+      "Wintertriticale": 4,
+      "Winterweizen": 8,
+      "Zucchini": 4,
+      "Dinkel": 8,
+      "Luzerne": 4,
+      "Öllein": 0,
+      "Sommergetreide - Saatgutproduktion": 10,
+      "Sommerroggen": 10,
+      "Sommertriticale": 10,
+      "Sommerweizen": 10,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 4
+    }
   },
   {
     "cropGroup": "Kartoffeln",
@@ -2316,208 +666,58 @@ module.exports = [
     "rootCrop": true,
     "minSoil": 20,
     "rotBreak": 4,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 6
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 6
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 6
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 2
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 8
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 10
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 6
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 10
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 6,
+      "Leguminosen": 4,
+      "Blühmischung": 6,
+      "Kohl": 4,
+      "Bohnen": 8,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 6,
+      "Salat": 4,
+      "Erbsen": 8,
+      "Rüben": 10,
+      "Kartoffeln": 2,
+      "Gurke": 4,
+      "Mais": 8,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 10,
+      "Soja": 10,
+      "Sommergerste": 6,
+      "Sommerhafer": 10,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 10,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 4,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 8,
+      "Winterraps": 10,
+      "Winterroggen": 8,
+      "Wintertriticale": 10,
+      "Winterweizen": 10,
+      "Zucchini": 4,
+      "Dinkel": 10,
+      "Luzerne": 6,
+      "Öllein": 10,
+      "Sommergetreide - Saatgutproduktion": 10,
+      "Sommerroggen": 10,
+      "Sommertriticale": 10,
+      "Sommerweizen": 6,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 10
+    }
   },
   {
     "cropGroup": "Gurke",
@@ -2526,208 +726,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 8
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 8
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 3
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 6
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 10
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 2
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 4
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 8
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 8,
+      "Leguminosen": 4,
+      "Blühmischung": 8,
+      "Kohl": 4,
+      "Bohnen": 4,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 8,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 3,
+      "Kartoffeln": 6,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 10,
+      "Soja": 4,
+      "Sommergerste": 10,
+      "Sommerhafer": 10,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 2,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 10,
+      "Winterraps": 4,
+      "Winterroggen": 10,
+      "Wintertriticale": 10,
+      "Winterweizen": 8,
+      "Zucchini": 4,
+      "Dinkel": 8,
+      "Luzerne": 4,
+      "Öllein": 4,
+      "Sommergetreide - Saatgutproduktion": 10,
+      "Sommerroggen": 10,
+      "Sommertriticale": 10,
+      "Sommerweizen": 10,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Mais",
@@ -2736,208 +786,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 10
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 10
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 8
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 6
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 8
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 8
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 8
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 10
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 6
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 10,
+      "Leguminosen": 10,
+      "Blühmischung": 10,
+      "Kohl": 4,
+      "Bohnen": 10,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 10,
+      "Salat": 4,
+      "Erbsen": 10,
+      "Rüben": 4,
+      "Kartoffeln": 10,
+      "Gurke": 4,
+      "Mais": 8,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 6,
+      "Soja": 10,
+      "Sommergerste": 10,
+      "Sommerhafer": 8,
+      "Zwischenfrucht": 0,
+      "Sonnenblumen": 10,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 8,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 6,
+      "Winterraps": 0,
+      "Winterroggen": 6,
+      "Wintertriticale": 6,
+      "Winterweizen": 8,
+      "Zucchini": 4,
+      "Dinkel": 8,
+      "Luzerne": 8,
+      "Öllein": 0,
+      "Sommergetreide - Saatgutproduktion": 10,
+      "Sommerroggen": 10,
+      "Sommertriticale": 10,
+      "Sommerweizen": 10,
+      "Lupine": 10,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 6
+    }
   },
   {
     "cropGroup": "Mini-Romana",
@@ -2946,208 +846,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 8
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 8
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 3
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 6
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 10
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 2
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 4
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 8
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 8,
+      "Leguminosen": 4,
+      "Blühmischung": 8,
+      "Kohl": 4,
+      "Bohnen": 4,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 8,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 3,
+      "Kartoffeln": 6,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 10,
+      "Soja": 4,
+      "Sommergerste": 10,
+      "Sommerhafer": 10,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 2,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 10,
+      "Winterraps": 4,
+      "Winterroggen": 10,
+      "Wintertriticale": 10,
+      "Winterweizen": 8,
+      "Zucchini": 4,
+      "Dinkel": 8,
+      "Luzerne": 4,
+      "Öllein": 4,
+      "Sommergetreide - Saatgutproduktion": 10,
+      "Sommerroggen": 10,
+      "Sommertriticale": 10,
+      "Sommerweizen": 10,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Miscanthus",
@@ -3156,208 +906,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 0
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 0
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 0
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 0
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 0
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 0
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 0
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 0
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 0
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 1
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 0
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 0
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 0
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 0
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 0
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 0
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 0
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 0
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 0
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 0
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 0
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 0
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 0
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 0
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 0
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 0,
+      "Leguminosen": 0,
+      "Blühmischung": 0,
+      "Kohl": 0,
+      "Bohnen": 0,
+      "Brokkoli": 0,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 0,
+      "Salat": 0,
+      "Erbsen": 0,
+      "Rüben": 0,
+      "Kartoffeln": 0,
+      "Gurke": 0,
+      "Mais": 0,
+      "Mini-Romana": 0,
+      "Miscanthus": 1,
+      "Möhren": 0,
+      "Pappeln": 0,
+      "Radies": 0,
+      "Porree": 0,
+      "Rote Bete": 0,
+      "Rucola": 0,
+      "Sellerie": 0,
+      "Sorghum": 0,
+      "Soja": 0,
+      "Sommergerste": 0,
+      "Sommerhafer": 0,
+      "Zwischenfrucht": 0,
+      "Sonnenblumen": 0,
+      "Spargel": 0,
+      "Zwiebel": 0,
+      "Kürbis": 0,
+      "Spinat": 0,
+      "Weiden": 0,
+      "Wintergerste": 0,
+      "Winterraps": 0,
+      "Winterroggen": 0,
+      "Wintertriticale": 0,
+      "Winterweizen": 0,
+      "Zucchini": 0,
+      "Dinkel": 0,
+      "Luzerne": 0,
+      "Öllein": 0,
+      "Sommergetreide - Saatgutproduktion": 0,
+      "Sommerroggen": 0,
+      "Sommertriticale": 0,
+      "Sommerweizen": 0,
+      "Lupine": 0,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 0
+    }
   },
   {
     "cropGroup": "Möhren",
@@ -3366,208 +966,58 @@ module.exports = [
     "rootCrop": true,
     "minSoil": 20,
     "rotBreak": 4,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 8
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 8
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 3
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 6
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 10
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 2
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 4
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 8
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 8,
+      "Leguminosen": 4,
+      "Blühmischung": 8,
+      "Kohl": 4,
+      "Bohnen": 4,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 8,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 3,
+      "Kartoffeln": 6,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 10,
+      "Soja": 4,
+      "Sommergerste": 10,
+      "Sommerhafer": 10,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 2,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 10,
+      "Winterraps": 4,
+      "Winterroggen": 10,
+      "Wintertriticale": 10,
+      "Winterweizen": 8,
+      "Zucchini": 4,
+      "Dinkel": 8,
+      "Luzerne": 4,
+      "Öllein": 4,
+      "Sommergetreide - Saatgutproduktion": 10,
+      "Sommerroggen": 10,
+      "Sommertriticale": 10,
+      "Sommerweizen": 10,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Pappeln",
@@ -3576,208 +1026,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 0
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 0
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 0
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 0
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 0
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 0
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 0
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 0
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 0
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 0
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 1
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 0
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 0
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 0
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 0
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 0
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 0
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 0
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 0
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 0
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 0
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 0
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 0
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 0
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 0
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 0,
+      "Leguminosen": 0,
+      "Blühmischung": 0,
+      "Kohl": 0,
+      "Bohnen": 0,
+      "Brokkoli": 0,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 0,
+      "Salat": 0,
+      "Erbsen": 0,
+      "Rüben": 0,
+      "Kartoffeln": 0,
+      "Gurke": 0,
+      "Mais": 0,
+      "Mini-Romana": 0,
+      "Miscanthus": 0,
+      "Möhren": 0,
+      "Pappeln": 1,
+      "Radies": 0,
+      "Porree": 0,
+      "Rote Bete": 0,
+      "Rucola": 0,
+      "Sellerie": 0,
+      "Sorghum": 0,
+      "Soja": 0,
+      "Sommergerste": 0,
+      "Sommerhafer": 0,
+      "Zwischenfrucht": 0,
+      "Sonnenblumen": 0,
+      "Spargel": 0,
+      "Zwiebel": 0,
+      "Kürbis": 0,
+      "Spinat": 0,
+      "Weiden": 0,
+      "Wintergerste": 0,
+      "Winterraps": 0,
+      "Winterroggen": 0,
+      "Wintertriticale": 0,
+      "Winterweizen": 0,
+      "Zucchini": 0,
+      "Dinkel": 0,
+      "Luzerne": 0,
+      "Öllein": 0,
+      "Sommergetreide - Saatgutproduktion": 0,
+      "Sommerroggen": 0,
+      "Sommertriticale": 0,
+      "Sommerweizen": 0,
+      "Lupine": 0,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 0
+    }
   },
   {
     "cropGroup": "Radies",
@@ -3786,208 +1086,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 8
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 8
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 3
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 6
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 10
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 2
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 4
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 8
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 8,
+      "Leguminosen": 4,
+      "Blühmischung": 8,
+      "Kohl": 4,
+      "Bohnen": 4,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 8,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 3,
+      "Kartoffeln": 6,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 10,
+      "Soja": 4,
+      "Sommergerste": 10,
+      "Sommerhafer": 10,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 2,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 10,
+      "Winterraps": 4,
+      "Winterroggen": 10,
+      "Wintertriticale": 10,
+      "Winterweizen": 8,
+      "Zucchini": 4,
+      "Dinkel": 8,
+      "Luzerne": 4,
+      "Öllein": 4,
+      "Sommergetreide - Saatgutproduktion": 10,
+      "Sommerroggen": 10,
+      "Sommertriticale": 10,
+      "Sommerweizen": 10,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Porree",
@@ -3996,208 +1146,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 8
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 8
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 3
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 6
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 10
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 2
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 4
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 8
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 8,
+      "Leguminosen": 4,
+      "Blühmischung": 8,
+      "Kohl": 4,
+      "Bohnen": 4,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 8,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 3,
+      "Kartoffeln": 6,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 10,
+      "Soja": 4,
+      "Sommergerste": 10,
+      "Sommerhafer": 10,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 2,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 10,
+      "Winterraps": 4,
+      "Winterroggen": 10,
+      "Wintertriticale": 10,
+      "Winterweizen": 8,
+      "Zucchini": 4,
+      "Dinkel": 8,
+      "Luzerne": 4,
+      "Öllein": 4,
+      "Sommergetreide - Saatgutproduktion": 10,
+      "Sommerroggen": 10,
+      "Sommertriticale": 10,
+      "Sommerweizen": 10,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Rote Bete",
@@ -4206,208 +1206,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 8
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 8
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 3
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 6
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 10
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 2
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 4
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 8
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 8,
+      "Leguminosen": 4,
+      "Blühmischung": 8,
+      "Kohl": 4,
+      "Bohnen": 4,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 8,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 3,
+      "Kartoffeln": 6,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 10,
+      "Soja": 4,
+      "Sommergerste": 10,
+      "Sommerhafer": 10,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 2,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 10,
+      "Winterraps": 4,
+      "Winterroggen": 10,
+      "Wintertriticale": 10,
+      "Winterweizen": 8,
+      "Zucchini": 4,
+      "Dinkel": 8,
+      "Luzerne": 4,
+      "Öllein": 4,
+      "Sommergetreide - Saatgutproduktion": 10,
+      "Sommerroggen": 10,
+      "Sommertriticale": 10,
+      "Sommerweizen": 10,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Rucola",
@@ -4416,208 +1266,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 8
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 8
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 3
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 6
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 10
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 2
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 4
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 8
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 8,
+      "Leguminosen": 4,
+      "Blühmischung": 8,
+      "Kohl": 4,
+      "Bohnen": 4,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 8,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 3,
+      "Kartoffeln": 6,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 10,
+      "Soja": 4,
+      "Sommergerste": 10,
+      "Sommerhafer": 10,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 2,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 10,
+      "Winterraps": 4,
+      "Winterroggen": 10,
+      "Wintertriticale": 10,
+      "Winterweizen": 8,
+      "Zucchini": 4,
+      "Dinkel": 8,
+      "Luzerne": 4,
+      "Öllein": 4,
+      "Sommergetreide - Saatgutproduktion": 10,
+      "Sommerroggen": 10,
+      "Sommertriticale": 10,
+      "Sommerweizen": 10,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Sellerie",
@@ -4626,208 +1326,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 8
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 8
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 3
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 6
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 10
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 2
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 4
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 8
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 8,
+      "Leguminosen": 4,
+      "Blühmischung": 8,
+      "Kohl": 4,
+      "Bohnen": 4,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 8,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 3,
+      "Kartoffeln": 6,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 10,
+      "Soja": 4,
+      "Sommergerste": 10,
+      "Sommerhafer": 10,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 2,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 10,
+      "Winterraps": 4,
+      "Winterroggen": 10,
+      "Wintertriticale": 10,
+      "Winterweizen": 8,
+      "Zucchini": 4,
+      "Dinkel": 8,
+      "Luzerne": 4,
+      "Öllein": 4,
+      "Sommergetreide - Saatgutproduktion": 10,
+      "Sommerroggen": 10,
+      "Sommertriticale": 10,
+      "Sommerweizen": 10,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Sorghum",
@@ -4836,208 +1386,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 10
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 10
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 10
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 10
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 10
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 10
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 5
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 6
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 8
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 7
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 5
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 5
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 8
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 7
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 10
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 5
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 10,
+      "Leguminosen": 10,
+      "Blühmischung": 10,
+      "Kohl": 10,
+      "Bohnen": 10,
+      "Brokkoli": 10,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 10,
+      "Salat": 10,
+      "Erbsen": 10,
+      "Rüben": 10,
+      "Kartoffeln": 10,
+      "Gurke": 10,
+      "Mais": 10,
+      "Mini-Romana": 10,
+      "Miscanthus": 0,
+      "Möhren": 10,
+      "Pappeln": 0,
+      "Radies": 10,
+      "Porree": 10,
+      "Rote Bete": 10,
+      "Rucola": 10,
+      "Sellerie": 10,
+      "Sorghum": 5,
+      "Soja": 10,
+      "Sommergerste": 6,
+      "Sommerhafer": 6,
+      "Zwischenfrucht": 10,
+      "Sonnenblumen": 10,
+      "Spargel": 10,
+      "Zwiebel": 10,
+      "Kürbis": 8,
+      "Spinat": 10,
+      "Weiden": 0,
+      "Wintergerste": 6,
+      "Winterraps": 7,
+      "Winterroggen": 6,
+      "Wintertriticale": 6,
+      "Winterweizen": 5,
+      "Zucchini": 10,
+      "Dinkel": 5,
+      "Luzerne": 8,
+      "Öllein": 7,
+      "Sommergetreide - Saatgutproduktion": 4,
+      "Sommerroggen": 4,
+      "Sommertriticale": 4,
+      "Sommerweizen": 4,
+      "Lupine": 10,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 5
+    }
   },
   {
     "cropGroup": "Soja",
@@ -5046,208 +1446,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 4
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 8
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 6
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 8
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 2
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 2
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 2
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 2
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 2
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 10
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 4,
+      "Leguminosen": 2,
+      "Blühmischung": 4,
+      "Kohl": 4,
+      "Bohnen": 2,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 4,
+      "Salat": 4,
+      "Erbsen": 2,
+      "Rüben": 8,
+      "Kartoffeln": 8,
+      "Gurke": 4,
+      "Mais": 6,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 8,
+      "Soja": 4,
+      "Sommergerste": 10,
+      "Sommerhafer": 10,
+      "Zwischenfrucht": 2,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 4,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 8,
+      "Winterraps": 2,
+      "Winterroggen": 6,
+      "Wintertriticale": 8,
+      "Winterweizen": 10,
+      "Zucchini": 4,
+      "Dinkel": 10,
+      "Luzerne": 2,
+      "Öllein": 2,
+      "Sommergetreide - Saatgutproduktion": 8,
+      "Sommerroggen": 8,
+      "Sommertriticale": 8,
+      "Sommerweizen": 8,
+      "Lupine": 2,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 10
+    }
   },
   {
     "cropGroup": "Sommergerste",
@@ -5256,208 +1506,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 10
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 10
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 10
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 10
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 10
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 10
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 5
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 8
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 8
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 5
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 5
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 5
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 10
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 5
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 10,
+      "Leguminosen": 10,
+      "Blühmischung": 10,
+      "Kohl": 10,
+      "Bohnen": 10,
+      "Brokkoli": 10,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 10,
+      "Salat": 10,
+      "Erbsen": 10,
+      "Rüben": 10,
+      "Kartoffeln": 10,
+      "Gurke": 10,
+      "Mais": 10,
+      "Mini-Romana": 10,
+      "Miscanthus": 0,
+      "Möhren": 10,
+      "Pappeln": 0,
+      "Radies": 10,
+      "Porree": 10,
+      "Rote Bete": 10,
+      "Rucola": 10,
+      "Sellerie": 10,
+      "Sorghum": 5,
+      "Soja": 10,
+      "Sommergerste": 4,
+      "Sommerhafer": 8,
+      "Zwischenfrucht": 10,
+      "Sonnenblumen": 10,
+      "Spargel": 10,
+      "Zwiebel": 10,
+      "Kürbis": 8,
+      "Spinat": 10,
+      "Weiden": 0,
+      "Wintergerste": 6,
+      "Winterraps": 10,
+      "Winterroggen": 6,
+      "Wintertriticale": 6,
+      "Winterweizen": 4,
+      "Zucchini": 10,
+      "Dinkel": 4,
+      "Luzerne": 8,
+      "Öllein": 10,
+      "Sommergetreide - Saatgutproduktion": 5,
+      "Sommerroggen": 5,
+      "Sommertriticale": 5,
+      "Sommerweizen": 4,
+      "Lupine": 10,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 5
+    }
   },
   {
     "cropGroup": "Sommerhafer",
@@ -5466,208 +1566,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 10
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 10
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 10
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 10
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 10
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 10
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 7
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 2
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 8
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 8
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 8
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 7
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 7
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 7
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 10
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 10,
+      "Leguminosen": 10,
+      "Blühmischung": 10,
+      "Kohl": 10,
+      "Bohnen": 10,
+      "Brokkoli": 10,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 10,
+      "Salat": 10,
+      "Erbsen": 10,
+      "Rüben": 10,
+      "Kartoffeln": 10,
+      "Gurke": 10,
+      "Mais": 10,
+      "Mini-Romana": 10,
+      "Miscanthus": 0,
+      "Möhren": 10,
+      "Pappeln": 0,
+      "Radies": 10,
+      "Porree": 10,
+      "Rote Bete": 10,
+      "Rucola": 10,
+      "Sellerie": 10,
+      "Sorghum": 7,
+      "Soja": 10,
+      "Sommergerste": 6,
+      "Sommerhafer": 2,
+      "Zwischenfrucht": 10,
+      "Sonnenblumen": 10,
+      "Spargel": 10,
+      "Zwiebel": 10,
+      "Kürbis": 8,
+      "Spinat": 10,
+      "Weiden": 0,
+      "Wintergerste": 8,
+      "Winterraps": 8,
+      "Winterroggen": 8,
+      "Wintertriticale": 8,
+      "Winterweizen": 8,
+      "Zucchini": 10,
+      "Dinkel": 8,
+      "Luzerne": 8,
+      "Öllein": 8,
+      "Sommergetreide - Saatgutproduktion": 7,
+      "Sommerroggen": 7,
+      "Sommertriticale": 7,
+      "Sommerweizen": 4,
+      "Lupine": 10,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Zwischenfrucht",
@@ -5676,208 +1626,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 0,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 2
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 2
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 2
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 6
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 6
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 8
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 6
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 6
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 2
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 2,
+      "Leguminosen": 2,
+      "Blühmischung": 2,
+      "Kohl": 4,
+      "Bohnen": 2,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 2,
+      "Salat": 4,
+      "Erbsen": 2,
+      "Rüben": 6,
+      "Kartoffeln": 6,
+      "Gurke": 4,
+      "Mais": 8,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 6,
+      "Soja": 6,
+      "Sommergerste": 6,
+      "Sommerhafer": 6,
+      "Zwischenfrucht": 2,
+      "Sonnenblumen": 6,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 4,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 8,
+      "Winterraps": 6,
+      "Winterroggen": 8,
+      "Wintertriticale": 8,
+      "Winterweizen": 10,
+      "Zucchini": 4,
+      "Dinkel": 10,
+      "Luzerne": 4,
+      "Öllein": 6,
+      "Sommergetreide - Saatgutproduktion": 6,
+      "Sommerroggen": 6,
+      "Sommertriticale": 6,
+      "Sommerweizen": 6,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Sonnenblumen",
@@ -5886,208 +1686,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 8
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 8
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 2
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 2
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 8
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 2
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 8,
+      "Leguminosen": 4,
+      "Blühmischung": 8,
+      "Kohl": 4,
+      "Bohnen": 4,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 8,
+      "Salat": 4,
+      "Erbsen": 6,
+      "Rüben": 2,
+      "Kartoffeln": 2,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 8,
+      "Soja": 4,
+      "Sommergerste": 8,
+      "Sommerhafer": 8,
+      "Zwischenfrucht": 2,
+      "Sonnenblumen": 2,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 4,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 8,
+      "Winterraps": 0,
+      "Winterroggen": 8,
+      "Wintertriticale": 8,
+      "Winterweizen": 10,
+      "Zucchini": 4,
+      "Dinkel": 10,
+      "Luzerne": 4,
+      "Öllein": 0,
+      "Sommergetreide - Saatgutproduktion": 8,
+      "Sommerroggen": 8,
+      "Sommertriticale": 8,
+      "Sommerweizen": 8,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Spargel",
@@ -6096,208 +1746,58 @@ module.exports = [
     "rootCrop": true,
     "minSoil": 20,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 8
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 8
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 3
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 6
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 10
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 2
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 4
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 8
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 8,
+      "Leguminosen": 4,
+      "Blühmischung": 8,
+      "Kohl": 4,
+      "Bohnen": 4,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 8,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 3,
+      "Kartoffeln": 6,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 10,
+      "Soja": 4,
+      "Sommergerste": 10,
+      "Sommerhafer": 10,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 2,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 10,
+      "Winterraps": 4,
+      "Winterroggen": 10,
+      "Wintertriticale": 10,
+      "Winterweizen": 8,
+      "Zucchini": 4,
+      "Dinkel": 8,
+      "Luzerne": 4,
+      "Öllein": 4,
+      "Sommergetreide - Saatgutproduktion": 10,
+      "Sommerroggen": 10,
+      "Sommertriticale": 10,
+      "Sommerweizen": 10,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Zwiebel",
@@ -6306,208 +1806,58 @@ module.exports = [
     "rootCrop": true,
     "minSoil": 20,
     "rotBreak": 4,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 8
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 8
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 3
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 6
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 10
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 2
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 4
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 8
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 8,
+      "Leguminosen": 4,
+      "Blühmischung": 8,
+      "Kohl": 4,
+      "Bohnen": 4,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 8,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 3,
+      "Kartoffeln": 6,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 10,
+      "Soja": 4,
+      "Sommergerste": 10,
+      "Sommerhafer": 10,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 2,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 10,
+      "Winterraps": 4,
+      "Winterroggen": 10,
+      "Wintertriticale": 10,
+      "Winterweizen": 8,
+      "Zucchini": 4,
+      "Dinkel": 8,
+      "Luzerne": 4,
+      "Öllein": 4,
+      "Sommergetreide - Saatgutproduktion": 10,
+      "Sommerroggen": 10,
+      "Sommertriticale": 10,
+      "Sommerweizen": 10,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Kürbis",
@@ -6516,208 +1866,58 @@ module.exports = [
     "rootCrop": true,
     "minSoil": 20,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 6
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 6
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 6
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 4
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 8
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 6
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 6
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 2
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 2
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 2
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 6,
+      "Leguminosen": 4,
+      "Blühmischung": 6,
+      "Kohl": 4,
+      "Bohnen": 4,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 6,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 4,
+      "Kartoffeln": 4,
+      "Gurke": 4,
+      "Mais": 8,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 6,
+      "Soja": 4,
+      "Sommergerste": 6,
+      "Sommerhafer": 6,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 4,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 2,
+      "Winterraps": 2,
+      "Winterroggen": 2,
+      "Wintertriticale": 8,
+      "Winterweizen": 10,
+      "Zucchini": 4,
+      "Dinkel": 10,
+      "Luzerne": 4,
+      "Öllein": 2,
+      "Sommergetreide - Saatgutproduktion": 6,
+      "Sommerroggen": 6,
+      "Sommertriticale": 6,
+      "Sommerweizen": 6,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Spinat",
@@ -6726,208 +1926,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 8
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 8
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 3
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 6
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 10
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 2
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 4
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 8
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 8,
+      "Leguminosen": 4,
+      "Blühmischung": 8,
+      "Kohl": 4,
+      "Bohnen": 4,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 8,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 3,
+      "Kartoffeln": 6,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 10,
+      "Soja": 4,
+      "Sommergerste": 10,
+      "Sommerhafer": 10,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 2,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 10,
+      "Winterraps": 4,
+      "Winterroggen": 10,
+      "Wintertriticale": 10,
+      "Winterweizen": 8,
+      "Zucchini": 4,
+      "Dinkel": 8,
+      "Luzerne": 4,
+      "Öllein": 4,
+      "Sommergetreide - Saatgutproduktion": 10,
+      "Sommerroggen": 10,
+      "Sommertriticale": 10,
+      "Sommerweizen": 10,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Weiden",
@@ -6936,208 +1986,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 0
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 0
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 0
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 0
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 0
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 0
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 0
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 0
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 0
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 0
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 0
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 0
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 0
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 0
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 0
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 0
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 0
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 0
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 0
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 1
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 0
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 0
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 0
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 0
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 0
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 0,
+      "Leguminosen": 0,
+      "Blühmischung": 0,
+      "Kohl": 0,
+      "Bohnen": 0,
+      "Brokkoli": 0,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 0,
+      "Salat": 0,
+      "Erbsen": 0,
+      "Rüben": 0,
+      "Kartoffeln": 0,
+      "Gurke": 0,
+      "Mais": 0,
+      "Mini-Romana": 0,
+      "Miscanthus": 0,
+      "Möhren": 0,
+      "Pappeln": 0,
+      "Radies": 0,
+      "Porree": 0,
+      "Rote Bete": 0,
+      "Rucola": 0,
+      "Sellerie": 0,
+      "Sorghum": 0,
+      "Soja": 0,
+      "Sommergerste": 0,
+      "Sommerhafer": 0,
+      "Zwischenfrucht": 0,
+      "Sonnenblumen": 0,
+      "Spargel": 0,
+      "Zwiebel": 0,
+      "Kürbis": 0,
+      "Spinat": 0,
+      "Weiden": 1,
+      "Wintergerste": 0,
+      "Winterraps": 0,
+      "Winterroggen": 0,
+      "Wintertriticale": 0,
+      "Winterweizen": 0,
+      "Zucchini": 0,
+      "Dinkel": 0,
+      "Luzerne": 0,
+      "Öllein": 0,
+      "Sommergetreide - Saatgutproduktion": 0,
+      "Sommerroggen": 0,
+      "Sommertriticale": 0,
+      "Sommerweizen": 0,
+      "Lupine": 0,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 0
+    }
   },
   {
     "cropGroup": "Wintergerste",
@@ -7146,208 +2046,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 10
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 10
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 10
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 10
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 10
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 10
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 5
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 10
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 4
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 10
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 5
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 5
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 5
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 10
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 5
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 10,
+      "Leguminosen": 10,
+      "Blühmischung": 10,
+      "Kohl": 10,
+      "Bohnen": 10,
+      "Brokkoli": 10,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 10,
+      "Salat": 10,
+      "Erbsen": 10,
+      "Rüben": 10,
+      "Kartoffeln": 10,
+      "Gurke": 10,
+      "Mais": 10,
+      "Mini-Romana": 10,
+      "Miscanthus": 0,
+      "Möhren": 10,
+      "Pappeln": 0,
+      "Radies": 10,
+      "Porree": 10,
+      "Rote Bete": 10,
+      "Rucola": 10,
+      "Sellerie": 10,
+      "Sorghum": 5,
+      "Soja": 10,
+      "Sommergerste": 6,
+      "Sommerhafer": 8,
+      "Zwischenfrucht": 10,
+      "Sonnenblumen": 10,
+      "Spargel": 10,
+      "Zwiebel": 10,
+      "Kürbis": 10,
+      "Spinat": 10,
+      "Weiden": 0,
+      "Wintergerste": 4,
+      "Winterraps": 10,
+      "Winterroggen": 6,
+      "Wintertriticale": 6,
+      "Winterweizen": 4,
+      "Zucchini": 10,
+      "Dinkel": 4,
+      "Luzerne": 10,
+      "Öllein": 10,
+      "Sommergetreide - Saatgutproduktion": 5,
+      "Sommerroggen": 5,
+      "Sommertriticale": 5,
+      "Sommerweizen": 6,
+      "Lupine": 10,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 5
+    }
   },
   {
     "cropGroup": "Winterraps",
@@ -7356,208 +2106,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 4,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 10
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 8
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 8
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 2
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 6
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 0
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 10,
+      "Leguminosen": 4,
+      "Blühmischung": 10,
+      "Kohl": 4,
+      "Bohnen": 2,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 10,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 4,
+      "Kartoffeln": 8,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 8,
+      "Soja": 2,
+      "Sommergerste": 6,
+      "Sommerhafer": 6,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 0,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 8,
+      "Winterraps": 0,
+      "Winterroggen": 8,
+      "Wintertriticale": 8,
+      "Winterweizen": 10,
+      "Zucchini": 4,
+      "Dinkel": 10,
+      "Luzerne": 4,
+      "Öllein": 0,
+      "Sommergetreide - Saatgutproduktion": 8,
+      "Sommerroggen": 8,
+      "Sommertriticale": 8,
+      "Sommerweizen": 8,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Winterroggen",
@@ -7566,208 +2166,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 10
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 10
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 10
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 10
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 10
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 10
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 6
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 10
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 6
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 10
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 10
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 6
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 10,
+      "Leguminosen": 10,
+      "Blühmischung": 10,
+      "Kohl": 10,
+      "Bohnen": 10,
+      "Brokkoli": 10,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 10,
+      "Salat": 10,
+      "Erbsen": 10,
+      "Rüben": 10,
+      "Kartoffeln": 10,
+      "Gurke": 10,
+      "Mais": 10,
+      "Mini-Romana": 10,
+      "Miscanthus": 0,
+      "Möhren": 10,
+      "Pappeln": 0,
+      "Radies": 10,
+      "Porree": 10,
+      "Rote Bete": 10,
+      "Rucola": 10,
+      "Sellerie": 10,
+      "Sorghum": 6,
+      "Soja": 10,
+      "Sommergerste": 8,
+      "Sommerhafer": 8,
+      "Zwischenfrucht": 10,
+      "Sonnenblumen": 10,
+      "Spargel": 10,
+      "Zwiebel": 10,
+      "Kürbis": 10,
+      "Spinat": 10,
+      "Weiden": 0,
+      "Wintergerste": 8,
+      "Winterraps": 10,
+      "Winterroggen": 4,
+      "Wintertriticale": 6,
+      "Winterweizen": 6,
+      "Zucchini": 10,
+      "Dinkel": 6,
+      "Luzerne": 10,
+      "Öllein": 10,
+      "Sommergetreide - Saatgutproduktion": 8,
+      "Sommerroggen": 8,
+      "Sommertriticale": 8,
+      "Sommerweizen": 6,
+      "Lupine": 10,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 6
+    }
   },
   {
     "cropGroup": "Wintertriticale",
@@ -7776,208 +2226,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 10
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 10
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 10
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 10
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 10
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 10
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 5
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 8
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 4
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 8
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 5
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 5
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 5
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 10
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 5
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 10,
+      "Leguminosen": 10,
+      "Blühmischung": 10,
+      "Kohl": 10,
+      "Bohnen": 10,
+      "Brokkoli": 10,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 10,
+      "Salat": 10,
+      "Erbsen": 10,
+      "Rüben": 10,
+      "Kartoffeln": 10,
+      "Gurke": 10,
+      "Mais": 10,
+      "Mini-Romana": 10,
+      "Miscanthus": 0,
+      "Möhren": 10,
+      "Pappeln": 0,
+      "Radies": 10,
+      "Porree": 10,
+      "Rote Bete": 10,
+      "Rucola": 10,
+      "Sellerie": 10,
+      "Sorghum": 5,
+      "Soja": 10,
+      "Sommergerste": 8,
+      "Sommerhafer": 8,
+      "Zwischenfrucht": 10,
+      "Sonnenblumen": 10,
+      "Spargel": 10,
+      "Zwiebel": 10,
+      "Kürbis": 8,
+      "Spinat": 10,
+      "Weiden": 0,
+      "Wintergerste": 6,
+      "Winterraps": 8,
+      "Winterroggen": 6,
+      "Wintertriticale": 4,
+      "Winterweizen": 4,
+      "Zucchini": 10,
+      "Dinkel": 4,
+      "Luzerne": 8,
+      "Öllein": 8,
+      "Sommergetreide - Saatgutproduktion": 5,
+      "Sommerroggen": 5,
+      "Sommertriticale": 5,
+      "Sommerweizen": 6,
+      "Lupine": 10,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 5
+    }
   },
   {
     "cropGroup": "Winterweizen",
@@ -7986,208 +2286,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 8
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 10
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 8
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 10
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 10
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 10
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 10
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 5
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 10
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 10
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 10
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 6
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 8,
+      "Leguminosen": 10,
+      "Blühmischung": 8,
+      "Kohl": 10,
+      "Bohnen": 10,
+      "Brokkoli": 10,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 8,
+      "Salat": 10,
+      "Erbsen": 10,
+      "Rüben": 10,
+      "Kartoffeln": 10,
+      "Gurke": 10,
+      "Mais": 10,
+      "Mini-Romana": 10,
+      "Miscanthus": 0,
+      "Möhren": 10,
+      "Pappeln": 0,
+      "Radies": 10,
+      "Porree": 10,
+      "Rote Bete": 10,
+      "Rucola": 10,
+      "Sellerie": 10,
+      "Sorghum": 5,
+      "Soja": 10,
+      "Sommergerste": 6,
+      "Sommerhafer": 8,
+      "Zwischenfrucht": 10,
+      "Sonnenblumen": 10,
+      "Spargel": 10,
+      "Zwiebel": 10,
+      "Kürbis": 10,
+      "Spinat": 10,
+      "Weiden": 0,
+      "Wintergerste": 6,
+      "Winterraps": 10,
+      "Winterroggen": 6,
+      "Wintertriticale": 6,
+      "Winterweizen": 4,
+      "Zucchini": 10,
+      "Dinkel": 4,
+      "Luzerne": 10,
+      "Öllein": 10,
+      "Sommergetreide - Saatgutproduktion": 6,
+      "Sommerroggen": 6,
+      "Sommertriticale": 6,
+      "Sommerweizen": 4,
+      "Lupine": 10,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 6
+    }
   },
   {
     "cropGroup": "Zucchini",
@@ -8196,208 +2346,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 8
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 8
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 3
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 6
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 10
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 2
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 4
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 8
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 8,
+      "Leguminosen": 4,
+      "Blühmischung": 8,
+      "Kohl": 4,
+      "Bohnen": 4,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 8,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 3,
+      "Kartoffeln": 6,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 10,
+      "Soja": 4,
+      "Sommergerste": 10,
+      "Sommerhafer": 10,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 2,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 10,
+      "Winterraps": 4,
+      "Winterroggen": 10,
+      "Wintertriticale": 10,
+      "Winterweizen": 8,
+      "Zucchini": 4,
+      "Dinkel": 8,
+      "Luzerne": 4,
+      "Öllein": 4,
+      "Sommergetreide - Saatgutproduktion": 10,
+      "Sommerroggen": 10,
+      "Sommertriticale": 10,
+      "Sommerweizen": 10,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Dinkel",
@@ -8406,208 +2406,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 8
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 10
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 8
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 10
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 10
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 10
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 10
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 5
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 10
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 10
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 10
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 6
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 8,
+      "Leguminosen": 10,
+      "Blühmischung": 8,
+      "Kohl": 10,
+      "Bohnen": 10,
+      "Brokkoli": 10,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 8,
+      "Salat": 10,
+      "Erbsen": 10,
+      "Rüben": 10,
+      "Kartoffeln": 10,
+      "Gurke": 10,
+      "Mais": 10,
+      "Mini-Romana": 10,
+      "Miscanthus": 0,
+      "Möhren": 10,
+      "Pappeln": 0,
+      "Radies": 10,
+      "Porree": 10,
+      "Rote Bete": 10,
+      "Rucola": 10,
+      "Sellerie": 10,
+      "Sorghum": 5,
+      "Soja": 10,
+      "Sommergerste": 6,
+      "Sommerhafer": 8,
+      "Zwischenfrucht": 10,
+      "Sonnenblumen": 10,
+      "Spargel": 10,
+      "Zwiebel": 10,
+      "Kürbis": 10,
+      "Spinat": 10,
+      "Weiden": 0,
+      "Wintergerste": 6,
+      "Winterraps": 10,
+      "Winterroggen": 6,
+      "Wintertriticale": 6,
+      "Winterweizen": 4,
+      "Zucchini": 10,
+      "Dinkel": 4,
+      "Luzerne": 10,
+      "Öllein": 10,
+      "Sommergetreide - Saatgutproduktion": 6,
+      "Sommerroggen": 6,
+      "Sommertriticale": 6,
+      "Sommerweizen": 4,
+      "Lupine": 10,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 6
+    }
   },
   {
     "cropGroup": "Luzerne",
@@ -8616,208 +2466,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 0,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 6
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 6
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 6
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 6
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 6
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 6
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 8
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 8
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 6
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 8
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 6
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 6
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 6
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 6
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 6
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 4
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 2
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 6
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 6
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 6
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 6
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 6
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 8
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 2
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 6,
+      "Leguminosen": 2,
+      "Blühmischung": 6,
+      "Kohl": 6,
+      "Bohnen": 4,
+      "Brokkoli": 6,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 6,
+      "Salat": 6,
+      "Erbsen": 2,
+      "Rüben": 8,
+      "Kartoffeln": 8,
+      "Gurke": 6,
+      "Mais": 8,
+      "Mini-Romana": 6,
+      "Miscanthus": 0,
+      "Möhren": 6,
+      "Pappeln": 0,
+      "Radies": 6,
+      "Porree": 6,
+      "Rote Bete": 6,
+      "Rucola": 6,
+      "Sellerie": 6,
+      "Sorghum": 4,
+      "Soja": 2,
+      "Sommergerste": 4,
+      "Sommerhafer": 6,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 2,
+      "Spargel": 6,
+      "Zwiebel": 6,
+      "Kürbis": 4,
+      "Spinat": 6,
+      "Weiden": 0,
+      "Wintergerste": 6,
+      "Winterraps": 6,
+      "Winterroggen": 8,
+      "Wintertriticale": 8,
+      "Winterweizen": 8,
+      "Zucchini": 6,
+      "Dinkel": 8,
+      "Luzerne": 2,
+      "Öllein": 6,
+      "Sommergetreide - Saatgutproduktion": 4,
+      "Sommerroggen": 4,
+      "Sommertriticale": 4,
+      "Sommerweizen": 4,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Öllein",
@@ -8826,208 +2526,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 4,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 10
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 8
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 8
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 2
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 6
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 0
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 4
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 4
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 8
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 10,
+      "Leguminosen": 4,
+      "Blühmischung": 10,
+      "Kohl": 4,
+      "Bohnen": 2,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 10,
+      "Salat": 4,
+      "Erbsen": 4,
+      "Rüben": 4,
+      "Kartoffeln": 8,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 8,
+      "Soja": 2,
+      "Sommergerste": 6,
+      "Sommerhafer": 6,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 4,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 0,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 8,
+      "Winterraps": 0,
+      "Winterroggen": 8,
+      "Wintertriticale": 8,
+      "Winterweizen": 10,
+      "Zucchini": 4,
+      "Dinkel": 10,
+      "Luzerne": 4,
+      "Öllein": 0,
+      "Sommergetreide - Saatgutproduktion": 8,
+      "Sommerroggen": 8,
+      "Sommertriticale": 8,
+      "Sommerweizen": 8,
+      "Lupine": 4,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 8
+    }
   },
   {
     "cropGroup": "Sommergetreide - Saatgutproduktion",
@@ -9036,208 +2586,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 10
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 10
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 10
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 10
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 10
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 10
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 5
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 8
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 5
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 8
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 10
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 5
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 10,
+      "Leguminosen": 10,
+      "Blühmischung": 10,
+      "Kohl": 10,
+      "Bohnen": 10,
+      "Brokkoli": 10,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 10,
+      "Salat": 10,
+      "Erbsen": 10,
+      "Rüben": 10,
+      "Kartoffeln": 10,
+      "Gurke": 10,
+      "Mais": 10,
+      "Mini-Romana": 10,
+      "Miscanthus": 0,
+      "Möhren": 10,
+      "Pappeln": 0,
+      "Radies": 10,
+      "Porree": 10,
+      "Rote Bete": 10,
+      "Rucola": 10,
+      "Sellerie": 10,
+      "Sorghum": 5,
+      "Soja": 10,
+      "Sommergerste": 6,
+      "Sommerhafer": 4,
+      "Zwischenfrucht": 10,
+      "Sonnenblumen": 10,
+      "Spargel": 10,
+      "Zwiebel": 10,
+      "Kürbis": 8,
+      "Spinat": 10,
+      "Weiden": 0,
+      "Wintergerste": 6,
+      "Winterraps": 10,
+      "Winterroggen": 6,
+      "Wintertriticale": 5,
+      "Winterweizen": 4,
+      "Zucchini": 10,
+      "Dinkel": 4,
+      "Luzerne": 8,
+      "Öllein": 10,
+      "Sommergetreide - Saatgutproduktion": 4,
+      "Sommerroggen": 4,
+      "Sommertriticale": 4,
+      "Sommerweizen": 4,
+      "Lupine": 10,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 5
+    }
   },
   {
     "cropGroup": "Sommerroggen",
@@ -9246,208 +2646,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 10
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 10
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 10
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 10
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 10
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 10
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 5
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 8
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 5
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 8
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 10
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 5
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 10,
+      "Leguminosen": 10,
+      "Blühmischung": 10,
+      "Kohl": 10,
+      "Bohnen": 10,
+      "Brokkoli": 10,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 10,
+      "Salat": 10,
+      "Erbsen": 10,
+      "Rüben": 10,
+      "Kartoffeln": 10,
+      "Gurke": 10,
+      "Mais": 10,
+      "Mini-Romana": 10,
+      "Miscanthus": 0,
+      "Möhren": 10,
+      "Pappeln": 0,
+      "Radies": 10,
+      "Porree": 10,
+      "Rote Bete": 10,
+      "Rucola": 10,
+      "Sellerie": 10,
+      "Sorghum": 5,
+      "Soja": 10,
+      "Sommergerste": 6,
+      "Sommerhafer": 4,
+      "Zwischenfrucht": 10,
+      "Sonnenblumen": 10,
+      "Spargel": 10,
+      "Zwiebel": 10,
+      "Kürbis": 8,
+      "Spinat": 10,
+      "Weiden": 0,
+      "Wintergerste": 6,
+      "Winterraps": 10,
+      "Winterroggen": 6,
+      "Wintertriticale": 5,
+      "Winterweizen": 4,
+      "Zucchini": 10,
+      "Dinkel": 4,
+      "Luzerne": 8,
+      "Öllein": 10,
+      "Sommergetreide - Saatgutproduktion": 4,
+      "Sommerroggen": 4,
+      "Sommertriticale": 4,
+      "Sommerweizen": 4,
+      "Lupine": 10,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 5
+    }
   },
   {
     "cropGroup": "Sommertriticale",
@@ -9456,208 +2706,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 10
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 10
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 10
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 10
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 10
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 10
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 5
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 8
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 5
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 8
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 10
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 5
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 10,
+      "Leguminosen": 10,
+      "Blühmischung": 10,
+      "Kohl": 10,
+      "Bohnen": 10,
+      "Brokkoli": 10,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 10,
+      "Salat": 10,
+      "Erbsen": 10,
+      "Rüben": 10,
+      "Kartoffeln": 10,
+      "Gurke": 10,
+      "Mais": 10,
+      "Mini-Romana": 10,
+      "Miscanthus": 0,
+      "Möhren": 10,
+      "Pappeln": 0,
+      "Radies": 10,
+      "Porree": 10,
+      "Rote Bete": 10,
+      "Rucola": 10,
+      "Sellerie": 10,
+      "Sorghum": 5,
+      "Soja": 10,
+      "Sommergerste": 6,
+      "Sommerhafer": 4,
+      "Zwischenfrucht": 10,
+      "Sonnenblumen": 10,
+      "Spargel": 10,
+      "Zwiebel": 10,
+      "Kürbis": 8,
+      "Spinat": 10,
+      "Weiden": 0,
+      "Wintergerste": 6,
+      "Winterraps": 10,
+      "Winterroggen": 6,
+      "Wintertriticale": 5,
+      "Winterweizen": 4,
+      "Zucchini": 10,
+      "Dinkel": 4,
+      "Luzerne": 8,
+      "Öllein": 10,
+      "Sommergetreide - Saatgutproduktion": 4,
+      "Sommerroggen": 4,
+      "Sommertriticale": 4,
+      "Sommerweizen": 4,
+      "Lupine": 10,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 5
+    }
   },
   {
     "cropGroup": "Sommerweizen",
@@ -9666,208 +2766,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 6
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 6
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 10
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 6
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 10
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 10
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 10
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 10
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 5
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 8
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 8
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 8
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 8
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 10
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 5
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 6,
+      "Leguminosen": 10,
+      "Blühmischung": 6,
+      "Kohl": 10,
+      "Bohnen": 10,
+      "Brokkoli": 10,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 6,
+      "Salat": 10,
+      "Erbsen": 10,
+      "Rüben": 10,
+      "Kartoffeln": 10,
+      "Gurke": 10,
+      "Mais": 10,
+      "Mini-Romana": 10,
+      "Miscanthus": 0,
+      "Möhren": 10,
+      "Pappeln": 0,
+      "Radies": 10,
+      "Porree": 10,
+      "Rote Bete": 10,
+      "Rucola": 10,
+      "Sellerie": 10,
+      "Sorghum": 5,
+      "Soja": 10,
+      "Sommergerste": 6,
+      "Sommerhafer": 8,
+      "Zwischenfrucht": 10,
+      "Sonnenblumen": 10,
+      "Spargel": 10,
+      "Zwiebel": 10,
+      "Kürbis": 8,
+      "Spinat": 10,
+      "Weiden": 0,
+      "Wintergerste": 8,
+      "Winterraps": 8,
+      "Winterroggen": 8,
+      "Wintertriticale": 6,
+      "Winterweizen": 4,
+      "Zucchini": 10,
+      "Dinkel": 4,
+      "Luzerne": 8,
+      "Öllein": 8,
+      "Sommergetreide - Saatgutproduktion": 4,
+      "Sommerroggen": 4,
+      "Sommertriticale": 4,
+      "Sommerweizen": 4,
+      "Lupine": 10,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 5
+    }
   },
   {
     "cropGroup": "Lupine",
@@ -9876,208 +2826,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 4,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 6
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 6
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 4
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 6
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 2
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 10
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 4
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 4
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 4
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 4
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 4
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 10
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 2
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 6
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 4
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 4
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 4
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 8
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 4
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 2
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 2
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 10
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 6,
+      "Leguminosen": 4,
+      "Blühmischung": 6,
+      "Kohl": 4,
+      "Bohnen": 2,
+      "Brokkoli": 4,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 6,
+      "Salat": 4,
+      "Erbsen": 2,
+      "Rüben": 10,
+      "Kartoffeln": 10,
+      "Gurke": 4,
+      "Mais": 10,
+      "Mini-Romana": 4,
+      "Miscanthus": 0,
+      "Möhren": 4,
+      "Pappeln": 0,
+      "Radies": 4,
+      "Porree": 4,
+      "Rote Bete": 4,
+      "Rucola": 4,
+      "Sellerie": 4,
+      "Sorghum": 10,
+      "Soja": 2,
+      "Sommergerste": 6,
+      "Sommerhafer": 6,
+      "Zwischenfrucht": 4,
+      "Sonnenblumen": 6,
+      "Spargel": 4,
+      "Zwiebel": 4,
+      "Kürbis": 4,
+      "Spinat": 4,
+      "Weiden": 0,
+      "Wintergerste": 8,
+      "Winterraps": 6,
+      "Winterroggen": 6,
+      "Wintertriticale": 10,
+      "Winterweizen": 10,
+      "Zucchini": 4,
+      "Dinkel": 10,
+      "Luzerne": 2,
+      "Öllein": 6,
+      "Sommergetreide - Saatgutproduktion": 6,
+      "Sommerroggen": 6,
+      "Sommertriticale": 6,
+      "Sommerweizen": 6,
+      "Lupine": 2,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 10
+    }
   },
   {
     "cropGroup": "Unkrautbekämpfung",
@@ -10086,208 +2886,58 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 0
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 0
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 0
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 0
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 0
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 0
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 0
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 0
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 0
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 0
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 0
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 0
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 0
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 0
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 0
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 0
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 0
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 0
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 0
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 0
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 0
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 0
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 0
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 0
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 0
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 0
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 1
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 0
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 0,
+      "Leguminosen": 0,
+      "Blühmischung": 0,
+      "Kohl": 0,
+      "Bohnen": 0,
+      "Brokkoli": 0,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 0,
+      "Salat": 0,
+      "Erbsen": 0,
+      "Rüben": 0,
+      "Kartoffeln": 0,
+      "Gurke": 0,
+      "Mais": 0,
+      "Mini-Romana": 0,
+      "Miscanthus": 0,
+      "Möhren": 0,
+      "Pappeln": 0,
+      "Radies": 0,
+      "Porree": 0,
+      "Rote Bete": 0,
+      "Rucola": 0,
+      "Sellerie": 0,
+      "Sorghum": 0,
+      "Soja": 0,
+      "Sommergerste": 0,
+      "Sommerhafer": 0,
+      "Zwischenfrucht": 0,
+      "Sonnenblumen": 0,
+      "Spargel": 0,
+      "Zwiebel": 0,
+      "Kürbis": 0,
+      "Spinat": 0,
+      "Weiden": 0,
+      "Wintergerste": 0,
+      "Winterraps": 0,
+      "Winterroggen": 0,
+      "Wintertriticale": 0,
+      "Winterweizen": 0,
+      "Zucchini": 0,
+      "Dinkel": 0,
+      "Luzerne": 0,
+      "Öllein": 0,
+      "Sommergetreide - Saatgutproduktion": 0,
+      "Sommerroggen": 0,
+      "Sommertriticale": 0,
+      "Sommerweizen": 0,
+      "Lupine": 0,
+      "Unkrautbekämpfung": 1,
+      "Wintergetreide - Saatgutproduktion": 0
+    }
   },
   {
     "cropGroup": "Wintergetreide - Saatgutproduktion",
@@ -10296,207 +2946,57 @@ module.exports = [
     "rootCrop": false,
     "minSoil": 20,
     "rotBreak": 2,
-    "prevCrops": [
-      {
-        "cropGroup": "Gräser",
-        "value": 10
-      },
-      {
-        "cropGroup": "Leguminosen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Blühmischung",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kohl",
-        "value": 10
-      },
-      {
-        "cropGroup": "Bohnen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Brokkoli",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dauergrünland",
-        "value": 0
-      },
-      {
-        "cropGroup": "Durchwachsene Silphie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Salat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Erbsen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rüben",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kartoffeln",
-        "value": 10
-      },
-      {
-        "cropGroup": "Gurke",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mais",
-        "value": 10
-      },
-      {
-        "cropGroup": "Mini-Romana",
-        "value": 10
-      },
-      {
-        "cropGroup": "Miscanthus",
-        "value": 0
-      },
-      {
-        "cropGroup": "Möhren",
-        "value": 10
-      },
-      {
-        "cropGroup": "Pappeln",
-        "value": 0
-      },
-      {
-        "cropGroup": "Radies",
-        "value": 10
-      },
-      {
-        "cropGroup": "Porree",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rote Bete",
-        "value": 10
-      },
-      {
-        "cropGroup": "Rucola",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sellerie",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sorghum",
-        "value": 5
-      },
-      {
-        "cropGroup": "Soja",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Sommerhafer",
-        "value": 8
-      },
-      {
-        "cropGroup": "Zwischenfrucht",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sonnenblumen",
-        "value": 10
-      },
-      {
-        "cropGroup": "Spargel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Zwiebel",
-        "value": 10
-      },
-      {
-        "cropGroup": "Kürbis",
-        "value": 8
-      },
-      {
-        "cropGroup": "Spinat",
-        "value": 10
-      },
-      {
-        "cropGroup": "Weiden",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergerste",
-        "value": 6
-      },
-      {
-        "cropGroup": "Winterraps",
-        "value": 10
-      },
-      {
-        "cropGroup": "Winterroggen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Wintertriticale",
-        "value": 5
-      },
-      {
-        "cropGroup": "Winterweizen",
-        "value": 6
-      },
-      {
-        "cropGroup": "Zucchini",
-        "value": 10
-      },
-      {
-        "cropGroup": "Dinkel",
-        "value": 6
-      },
-      {
-        "cropGroup": "Luzerne",
-        "value": 8
-      },
-      {
-        "cropGroup": "Öllein",
-        "value": 10
-      },
-      {
-        "cropGroup": "Sommergetreide - Saatgutproduktion",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerroggen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommertriticale",
-        "value": 4
-      },
-      {
-        "cropGroup": "Sommerweizen",
-        "value": 4
-      },
-      {
-        "cropGroup": "Lupine",
-        "value": 10
-      },
-      {
-        "cropGroup": "Unkrautbekämpfung",
-        "value": 0
-      },
-      {
-        "cropGroup": "Wintergetreide - Saatgutproduktion",
-        "value": 6
-      }
-    ]
+    "subseqCrops": {
+      "Gräser": 10,
+      "Leguminosen": 10,
+      "Blühmischung": 10,
+      "Kohl": 10,
+      "Bohnen": 10,
+      "Brokkoli": 10,
+      "Dauergrünland": 0,
+      "Durchwachsene Silphie": 10,
+      "Salat": 10,
+      "Erbsen": 10,
+      "Rüben": 10,
+      "Kartoffeln": 10,
+      "Gurke": 10,
+      "Mais": 10,
+      "Mini-Romana": 10,
+      "Miscanthus": 0,
+      "Möhren": 10,
+      "Pappeln": 0,
+      "Radies": 10,
+      "Porree": 10,
+      "Rote Bete": 10,
+      "Rucola": 10,
+      "Sellerie": 10,
+      "Sorghum": 5,
+      "Soja": 10,
+      "Sommergerste": 6,
+      "Sommerhafer": 8,
+      "Zwischenfrucht": 10,
+      "Sonnenblumen": 10,
+      "Spargel": 10,
+      "Zwiebel": 10,
+      "Kürbis": 8,
+      "Spinat": 10,
+      "Weiden": 0,
+      "Wintergerste": 6,
+      "Winterraps": 10,
+      "Winterroggen": 6,
+      "Wintertriticale": 5,
+      "Winterweizen": 6,
+      "Zucchini": 10,
+      "Dinkel": 6,
+      "Luzerne": 8,
+      "Öllein": 10,
+      "Sommergetreide - Saatgutproduktion": 4,
+      "Sommerroggen": 4,
+      "Sommertriticale": 4,
+      "Sommerweizen": 4,
+      "Lupine": 10,
+      "Unkrautbekämpfung": 0,
+      "Wintergetreide - Saatgutproduktion": 6
+    }
   }
 ]

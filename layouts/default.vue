@@ -6,7 +6,7 @@
       <!-- Scenario selector -->
       <select v-model="settings.curScenario" @change="saveSettings" class="planYear scenario" type="button" value="Standard">
         <option disabled value="">Szenario</option>
-        <option v-for="(scenario,i) in scenarios" :key="i" :value="scenario"> {{ scenario.name }}</option>
+        <option v-for="(scenario,j) in scenarios" :key="j" :value="scenario.name"> {{ scenario.name }}</option>
         <option>Neues Szenario</option>
       </select>
       <!-- Planning year selector -->
@@ -73,9 +73,9 @@ export default {
       this.settings = await this.$db.get('settings')
     } catch(e) {
       if (e.status === 404) {
-        const settings = new Setting(this.settings.curYear)
+        this.settings = new Setting(this.settings)
         // store in db
-        await this.$db.put(settings)
+        await this.$db.put(this.settings)
       } else {
         console.error(e)
       }
@@ -114,6 +114,7 @@ export default {
     async saveSettings() {
       try {
         const settings = await this.$db.get('settings')
+        console.log(this.settings);
         this.settings._rev = settings._rev
         await this.$db.put(this.settings)
       } catch(e) {

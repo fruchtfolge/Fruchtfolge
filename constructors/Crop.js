@@ -9,6 +9,7 @@ module.exports = class Crop {
     //this._id = getId()
     this.type = 'crop',
     this.year = properties.year,
+    this.scenario = properties.scenario,
     this.active = properties.active || false,
 
     // general crop data
@@ -17,9 +18,12 @@ module.exports = class Crop {
     this.code = properties.code,
     this.cropGroup = properties.cropGroup,
     this.variety = properties.variety,
-    this.subseqCrops = properties.subseqCrops || [],
-    this.efaFactor = properties.efaFactor || 0,
-    this.minSoilQuality = properties.minSoilQuality || 0,
+    this.subseqCrops = properties.subseqCrops,
+    this.efaFactor = properties.efaFactor,
+    this.legume = properties.legume,
+    this.rootCrop = properties.rootCrop,
+    this.minSoilQuality = properties.minSoilQuality,
+    this.rotBreak = properties.rotBreak,
 
     // contribution margin related data
     this.price = properties.price,

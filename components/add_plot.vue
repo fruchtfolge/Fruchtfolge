@@ -91,7 +91,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .blur {
   background: #F5F5F5;
   position: absolute;
@@ -107,7 +107,7 @@ export default {
   position: absolute;
   width: 400px;
   height: 500px;
-  top: 45%;
+  top: calc(50% -60px);
   margin-top: -250px;
   left: 50%;
   margin-left: -200px;

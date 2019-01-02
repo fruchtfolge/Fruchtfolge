@@ -3,6 +3,25 @@
     <addCrop v-if="addCrop" v-on:closeAddCrop="addCrop = false"/>
     <cropsSidebar v-on:showAddCrop="addCrop = true" v-on:changeCrop="changeCrop" :crops="crops" :selectedCrop="selectedCrop"/>
     <div v-for="(crop, i) in crops" :key='i' v-if="isSelected(crop)" >
+      <div class="subseqCrops">
+        <table>
+          <thead>
+            <tr>
+              <th>Nachfrucht</th>
+              <th>Wirkungsfaktor (0 - 10)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(subseq) in crops" :key="subseq._id">
+              <td>{{ subseq.name }}</td>
+              <td>{{ subseq.subseqCrops[subseq.cropGroup] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="settings">
+
+      </div>
     </div>
   </div>
 </template>
