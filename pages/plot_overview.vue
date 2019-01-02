@@ -13,13 +13,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(plot, i) in plots" :key='i' style="text-align: center;">
-            <td>{{ plot.name }}</td>
-            <td>{{ plot.size }}</td>
-            <td>{{ plot.distance }}</td>
-            <td>{{ plot.quality }}</td>
-            <td>{{ plot.soilType }}</td>
-            <td><input type="checkbox" :checked="plot.rootCrops"></td>
+          <tr v-for="(plot, i) in plots" :key='i'>
+            <td style="text-align: center;">{{ plot.name }}</td>
+            <td style="text-align: center;">{{ plot.size }}</td>
+            <td style="text-align: center;">{{ plot.distance }}</td>
+            <td style="text-align: center;">{{ plot.quality }}</td>
+            <td style="text-align: center;">{{ plot.soilType }}</td>
+            <td style="text-align: center;"><input type="checkbox" :checked="plot.rootCrops"></td>
           </tr>
         </tbody>
       </table>
