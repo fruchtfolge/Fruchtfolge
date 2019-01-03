@@ -18,6 +18,13 @@ export default {
       curYear: ''
     }
   },
+  notifications: {
+    showAddressWarn: {
+      title: 'ADRESSE UNVOLLSTÄNDIG',
+      message: 'Bitte füllen Sie das Adressfeld komplett aus.',
+      type: 'warn'
+    }
+  },
   async mounted () {
     let settings
     try {
@@ -32,13 +39,13 @@ export default {
       }
     } catch (e) {
       if (e.status === 404) {
-        console.log('Keine Hof-Adresse angegeben. Bitte in den Einstellungen die Hof-Adresse eintragen.')
+        this.showAddressWarn()
         return $nuxt.$router.replace({path: 'settings'})
       }
       console.log(e)
     }
     if (!settings.home) {
-      console.log('Keine Hof-Adresse angegeben. Bitte in den Einstellungen die Hof-Adresse eintragen.')
+      this.showAddressWarn()
       return $nuxt.$router.replace({path: 'settings'})
     }
   },
@@ -143,7 +150,6 @@ export default {
     async create(data) {
       this.$emit('addPlot', data)
       this.Draw.delete(data.features[0].id)
-
     },
     removeDraw() {
       this.Draw.deleteAll()

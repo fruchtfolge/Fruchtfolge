@@ -20,7 +20,7 @@
           <option v-for="(system, i) in systems" :key="i" :value="system">{{ system }}</option>
         </select>
         <label for="add.crop.variety">Sorte</label>
-        <input type="text" id="add.crop.variety" placeholder="Optional" class="input" v-model="variety">
+        <input type="text" id="add.crop.variety" placeholder="Optional" class="input" v-model="variety" @keyup.enter="addCrop">
       </div>
       <p v-if="exists" style="text-align: center; margin-top: 30px; color:red;">Kultur bereits vorhanden. Bitte anderen Sortennamen wählen.</p>
       <button v-if="!exists" class="buttonOk" @click="addCrop">ÜBERNEHMEN</button>
@@ -123,7 +123,7 @@ export default {
   position: absolute;
   width: 400px;
   height: 500px;
-  top: calc(50% - 60px);
+  top: calc(50vh - 120px);
   margin-top: -250px;
   left: 50%;
   margin-left: -200px;

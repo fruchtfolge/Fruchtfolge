@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="plotOverview">
+    <div v-if="plots && plots.length > 0" class="plotOverview">
       <table>
         <thead>
           <tr>
@@ -23,6 +23,9 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div v-else style="text-align: center; margin-top: 100px;">
+      <h2>Noch keine Schläge für das ausgewähle Planungsjahr und Szenario vorhanden.</h2>
     </div>
   </div>
 </template>

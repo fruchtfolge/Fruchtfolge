@@ -48,11 +48,22 @@ export default {
     }
   },
   notifications: {
-    showAddressWarn: { // You can have any name you want instead of 'showLoginError'
-      title: 'Adresse unvollständig',
+    showAddressWarn: {
+      title: 'ADRESSE UNVOLLSTÄNDIG',
       message: 'Bitte füllen Sie das Adressfeld komplett aus.',
-      type: 'warn' // You also can use 'VueNotifications.types.error' instead of 'error'
-    }
+      type: 'warn'
+    },
+    noAddressErr: {
+      title: 'ADRESSE UNGÜLTIG',
+      message: 'Die angegebene Adresse konnte nicht gefunden werden.',
+      type: 'error'
+    },
+    showAddressSucc: {
+      title: 'ADRESSE GESPEICHERT',
+      message: 'Die Hof-Adresse wurde in den Einstellungen gespeichert.',
+      type: 'success'
+    },
+    
   },
   watch: {
     street() {
@@ -93,7 +104,6 @@ export default {
       try {
         const settings = await this.$db.get('settings')
         const address = await mapquest.forward(this.street, this.postcode, this.city)
-        console.log(address)
 
         settings.street = this.street
         settings.city = this.city
@@ -102,8 +112,10 @@ export default {
         settings.state_district = address.state_district
 
         await this.$db.put(settings)
+        this.showAddressSucc()
       } catch (e) {
         console.log(e)
+        this.showAddressErr()
       }
     }
   }

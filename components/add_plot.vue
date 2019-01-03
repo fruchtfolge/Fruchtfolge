@@ -1,11 +1,13 @@
 <template lang="html">
   <div>
-    <div class="blur"></div>
+    <div class="blur" style="margin: auto;">
+      <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
     <div class="plotBox">
       <div class="inputs">
         <h2 class="infoText">NEUEN SCHLAG HINZUFÜGEN</h2>
         <label for="add.plot.name">Name</label>
-        <input type="text" id="add.plot.name" class="input" v-model="name">
+        <input type="text" id="add.plot.name" class="input" v-model="name" @keyup.enter="addPlot">
         <label for="add.plot.prevCrop1">Hauptfrucht {{ curYear - 1 }}</label>
         <select class="dropdown" id="add.plot.prevCrop1" v-model="prevCrop1">
           <option v-for="(crop, i) in crops" :key="i" :value="crop">{{ crop }}</option>

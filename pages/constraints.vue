@@ -1,24 +1,36 @@
 <template>
   <div>
-    <addConstraint v-if="addConstraint" v-on:closeAddConstraint="addConstraint = false"/>
-    <div style="width: 100%;">
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Maximal/mindestens</th>
-            <th>Menge</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>test</td>
-          </tr>
-        </tbody>
-      </table>
+    <div v-if="crops && crops.length > 0">
+      <addConstraint v-if="addConstraint" :crops="crops" v-on:closeAddConstraint="addConstraint = false"/>
+      <div style="width: 100%;">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Maximal/mindestens</th>
+              <th>Menge</th>
+              <th style="background-color: #f5f5f5"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="constraint in constraints" :key="constraint.id">
+              <td>{{ constraint.name }}</td>
+              <td style="text-align: center;">{{ constraint.operator === '>' ? 'mindestens' : 'maximal' }}</td>
+              <td style="text-align: center;">{{ constraint.area + ' ha' }}</td>
+              <td style="background-color: #f5f5f5">
+                <input style="-webkit-appearance: checkbox;" type="checkbox" v-model="constraint._deleted">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="text-align: center; margin-top: 40px;">
+        <button class="addConstraint" style="font-family: 'Open Sans Condensed';" @click="addConstraint = true">HINZUFÜGEN</button>
+        <button class="addConstraint" style="font-family: 'Open Sans Condensed'; margin-left: 20px;" @click="remove">ENTFERNEN</button>
+      </div>
     </div>
-    <div style="text-align: center; margin-top: 40px;">
-      <button class="addConstraint" style="font-family: 'Open Sans Condensed';" @click="addConstraint = true">HINZUFÜGEN</button>
+    <div style="text-align: center; margin-top: 100px;" v-else>
+      <h2>Noch keine Kulturen für das ausgewähle Planungsjahr und Szenario vorhanden.</h2>
     </div>
   </div>
 </template>
@@ -27,14 +39,28 @@
 export default {
   data() {
     return {
-      addConstraint: false
+      addConstraint: false,
+      crops: null,
+      constraints: null,
     }
   },
-  mounted() {
-
+  created() {
+    this.update()
+    this.$bus.$on('changeCurrents', _.debounce(this.update, 200))
   },
   methods: {
-
+    update() {
+      this.$set(this, 'crops', this.$store.curCrops)
+      this.$set(this, 'constraints', this.$store.curConstraints)
+    },
+    async remove() {
+      try {
+        const deleted = this.constraints.filter(constraint => constraint._deleted)
+        await this.$db.bulkDocs(deleted)
+      } catch (e) {
+        console.log(e);
+      }
+    }
   },
   components: {
     addConstraint: () => import('~/components/add_constraint.vue'),

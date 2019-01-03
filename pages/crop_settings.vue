@@ -2,68 +2,73 @@
   <div>
     <addCrop v-if="addCrop" v-on:closeAddCrop="addCrop = false"/>
     <cropsSidebar v-on:showAddCrop="addCrop = true" v-on:changeCrop="changeCrop" :crops="crops" :selectedCrop="selectedCrop"/>
-    <div v-for="(crop, i) in crops" :key='i' v-if="isSelected(crop)" class="cropSettings">
-      <div class="subseqCrops">
-        <table>
-          <thead>
-            <tr>
-              <th>Nachfrucht</th>
-              <th>Wirkungsfaktor (0 - 10)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(subseq) in crops" :key="subseq._id">
-              <td>{{ subseq.name }}</td>
-              <td contenteditable="true" @blur="save($event, i, 'subseqCrops', subseq.cropGroup)">
-                {{ crop.subseqCrops[subseq.cropGroup] }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div v-if="crops && crops.length > 0">
+      <div v-for="(crop, i) in crops" :key='i' v-if="isSelected(crop)" class="cropSettings">
+        <div class="subseqCrops">
+          <table>
+            <thead>
+              <tr>
+                <th>Nachfrucht</th>
+                <th>Wirkungsfaktor (0 - 10)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(subseq) in crops" :key="subseq._id">
+                <td>{{ subseq.name }}</td>
+                <td contenteditable="true" @blur="save($event, i, 'subseqCrops', subseq.cropGroup)">
+                  {{ crop.subseqCrops[subseq.cropGroup] }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="settings">
+          <table>
+            <thead>
+              <tr>
+                <th>Eigenschaft</th>
+                <th>Wert</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Anbauspause in Jahren</td>
+                <td contenteditable="true" @blur="save($event, i, 'rotBreak')">
+                  {{ crop.rotBreak }}
+                </td>
+              </tr>
+              <tr>
+                <td>Max. Anteil Anbaufläche [%]</td>
+                <td contenteditable="true" @blur="save($event, i, 'maxShare')">
+                  {{ crop.maxShare }}
+                </td>
+              </tr>
+              <tr>
+                <td>Mindestanforderung Bodenqualität</td>
+                <td contenteditable="true" @blur="save($event, i, 'minSoilQuality')">
+                  {{ crop.minSoilQuality }}
+                </td>
+              </tr>
+              <tr>
+                <td>Hackfrucht</td>
+                <td><input type="checkbox" @change="saveRootCrop($event,i)" :checked="crop.rootCrop"></td>
+              </tr>
+              <tr>
+                <td>Faktor für Öko. Vorrangfläche (Greening)</td>
+                <td contenteditable="true" @blur="save($event, i, 'efaFactor')">
+                  {{ crop.efaFactor }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="text-align:center;margin-top: 40px;">
+          <button type="button" name="button" @click="remove">ENTFERNEN</button>
+        </div>
       </div>
-      <div class="settings">
-        <table>
-          <thead>
-            <tr>
-              <th>Eigenschaft</th>
-              <th>Wert</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Anbauspause in Jahren</td>
-              <td contenteditable="true" @blur="save($event, i, 'rotBreak')">
-                {{ crop.rotBreak }}
-              </td>
-            </tr>
-            <tr>
-              <td>Max. Anteil Anbaufläche [%]</td>
-              <td contenteditable="true" @blur="save($event, i, 'maxShare')">
-                {{ crop.maxShare }}
-              </td>
-            </tr>
-            <tr>
-              <td>Mindestanforderung Bodenqualität</td>
-              <td contenteditable="true" @blur="save($event, i, 'minSoilQuality')">
-                {{ crop.minSoilQuality }}
-              </td>
-            </tr>
-            <tr>
-              <td>Hackfrucht</td>
-              <td><input type="checkbox" @change="saveRootCrop($event,i)" :checked="crop.rootCrop"></td>
-            </tr>
-            <tr>
-              <td>Faktor für Öko. Vorrangfläche (Greening)</td>
-              <td contenteditable="true" @blur="save($event, i, 'efaFactor')">
-                {{ crop.efaFactor }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div style="text-align:center;margin-top: 40px;">
-        <button type="button" name="button" @click="remove">ENTFERNEN</button>
-      </div>
+    </div>
+    <div style="text-align: center; margin-top: 100px; width: calc(100% - 275px);" v-else>
+      <h2>Noch keine Kulturen für das ausgewähle Planungsjahr und Szenario vorhanden.</h2>
     </div>
   </div>
 </template>
@@ -115,7 +120,7 @@ export default {
       await this.$db.put(this.crops[i])
     },
     async remove() {
-      this.$db.remove(this.crop)
+      this.$db.remove(this.selectedCrop)
     }
   },
   components: {

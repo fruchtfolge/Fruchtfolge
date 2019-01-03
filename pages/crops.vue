@@ -2,10 +2,13 @@
   <div>
     <addCrop v-if="addCrop" v-on:closeAddCrop="addCrop = false"/>
     <cropsSidebar v-on:showAddCrop="addCrop = true" v-on:changeCrop="changeCrop" :crops="crops" :selectedCrop="selectedCrop"/>
-    <div v-for="(crop, i) in crops" :key='i' v-if="isSelected(crop)" >
-      <cropTable :crop="crop"/>
-      <!--<cropSettings/>
-      <cropRevYields/>-->
+    <div v-if="crops && crops.length > 0">
+      <div v-for="(crop, i) in crops" :key='i' v-if="isSelected(crop)" >
+        <cropTable :crop="crop"/>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 100px; width: calc(100% - 275px);" v-else>
+      <h2>Noch keine Kulturen für das ausgewähle Planungsjahr und Szenario vorhanden.</h2>
     </div>
   </div>
 </template>

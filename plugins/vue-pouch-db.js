@@ -60,6 +60,21 @@ const crops = Vue.prototype.$db.liveFind({
   .on('error', (err) => {
     console.log(err)
   })
+  
+// constraints
+const constraints = Vue.prototype.$db.liveFind({
+  selector: {
+    type: 'constraint'
+  },
+  aggregate: true
+})
+  .on('update', (update, aggregate) => {
+    Vue.set(Vue.prototype.$store, 'constraints', aggregate)
+    updateCurrent()
+  })
+  .on('error', (err) => {
+    console.log(err)
+  })
 
 function updateCurrent() {
   if (Vue.prototype.$store.plots) {
@@ -76,6 +91,14 @@ function updateCurrent() {
         return crop.year === Vue.prototype.$store.settings.curYear &&
           crop.active === true &&
           crop.scenario === Vue.prototype.$store.settings.curScenario
+      })
+    )
+  }
+  if (Vue.prototype.$store.constraints) {
+    Vue.set(Vue.prototype.$store, 'curConstraints',
+      Vue.prototype.$store.constraints.filter(constraint => {
+        return constraint.year === Vue.prototype.$store.settings.curYear &&
+          constraint.scenario === Vue.prototype.$store.settings.curScenario
       })
     )
   }

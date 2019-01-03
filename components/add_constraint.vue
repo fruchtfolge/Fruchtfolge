@@ -6,83 +6,64 @@
         <h2 class="infoText">NEUE NEBENBEDINGUNG HINZUFÜGEN</h2>
         <label for="add.constraint.crop1">Kultur</label>
         <select class="dropdown" id="add.constraint.crop1" v-model="crop1">
-          <option v-for="(crop, i) in crops" :key="i" :value="crop">{{ crop1 }}</option>
+          <option disabled value="">Kultur</option>
+          <option v-for="(crop, i) in crops" :key="i" :value="crop.name">{{ crop.name }}</option>
         </select>
         <label for="add.constraint.crop2">und Kultur (optional)</label>
         <select class="dropdown" id="add.constraint.crop2" v-model="crop2">
-          <option v-for="(crop, i) in crops" :key="i" :value="crop">{{ crop2 }}</option>
+          <option disabled value="">Kultur</option>
+          <option value="" selected></option>
+          <option v-for="(crop, i) in crops" :key="i" :value="crop.name">{{ crop.name }}</option>
         </select>
         <label for="add.constraint.crop4">mindestens/maximal</label>
         <select class="dropdown" id="add.constraint.crop4" v-model="operator">
+          <option disabled value="">mindestens/maximal</option>
           <option value="<">maximal</option>
           <option value=">">mindestens</option>
         </select>
         <label for="add.constraint.name">Fläche in ha</label>
-        <input type="number" id="add.constraint.name" class="input" v-model="area">
+        <input type="number" id="add.constraint.name" class="input" v-model="area" @keyup.enter="addConstraint">
       </div>
-      <button class="buttonOk" @click="addPlot">ÜBERNEHMEN</button>
+      <p v-if="!crop1" style="text-align: center; margin-top: 30px; color:red;">Bitte Kultur auswählen.</p>
+      <button v-if="crop1" class="buttonOk" @click="addConstraint">ÜBERNEHMEN</button>
       <button class="buttonCancel" @click="cancel">ABBRECHEN</button>
     </div>
   </div>
 </template>
 
 <script>
-import createPlot from '~/assets/js/createPlot'
-import ktblCrops from '~/assets/js/crops.js'
+import Constraint from '~/constructors/Constraint.js'
 
 export default {
-  props: ['plotData'],
+  props: ['crops'],
   data() {
     return {
-      curYear: 2019,
       crop1: null,
       crop2: null,
       operator: '>',
       area: 0
     }
   },
-  computed: {
-    crops() {
-      let unique = _.uniqBy(ktblCrops, 'cropGroup')
-      if (unique.length > 0) {
-        unique = unique.map(o => {return o.cropGroup})
-        return unique.sort()
-      }
-    },
-    systems() {
-      let data = _.filter(ktblCrops, {farmingType: this.farmingType, crop: this.crop})
-      if (data) {
-        data = data.map(o => {return o.system})
-        return data
-      }
-    }
-  },
-  created() {
-    if (this.$store.curYear) this.curYear = this.$store.curYear
-  },
   methods: {
-    async addPlot() {
-      const settings = await this.$db.get('settings')
-      const size = this.getSize(this.plotData.features[0])
+    async addConstraint() {
       try {
-        const plot = await createPlot({
-          name: this.name,
-          geometry: this.plotData.features[0],
-          size: size
-        }, settings)
-        this.$bus.$emit('drawPlot', plot.geometry)
-        // store new plot in database
-        await this.$db.post(plot)
-        this.$emit('closeAddPlot')
+        const settings = await this.$db.get('settings')
+        
+        const constraint = new Constraint({
+          year: settings.curYear,
+          scenario: settings.curScenario,
+          crop1: this.crop1,
+          crop2: this.crop2,
+          operator: this.operator,
+          area: this.area
+        })
+        // store new constraint in database
+        console.log(constraint);
+        await this.$db.post(constraint)
+        this.$emit('closeAddConstraint')
       } catch (e) {
         console.log(e);
       }
-      //const settings = await this.$db.get('settings')
-      //
-    },
-    getSize(geometry) {
-      const m2 = area(geometry)
-      return Number((m2 / 10000).toFixed(2))
     },
     cancel() {
       this.$emit('closeAddConstraint')
@@ -106,8 +87,8 @@ export default {
 .constraintBox {
   position: absolute;
   width: 400px;
-  height: 500px;
-  top: calc(50% -60px);
+  height: 520px;
+  top: calc(50vh - 120px);
   margin-top: -250px;
   left: 50%;
   margin-left: -200px;
