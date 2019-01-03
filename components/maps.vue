@@ -23,6 +23,16 @@ export default {
       title: 'ADRESSE UNVOLLSTÄNDIG',
       message: 'Bitte füllen Sie das Adressfeld komplett aus.',
       type: 'warn'
+    },
+    showPlotRemoveSucc: {
+      title: 'SCHLAG ENTFERNT',
+      message: 'Schlag wurde erfolgreich entfernt.',
+      type: 'success'
+    },
+    showError: {
+      title: 'FEHLER',
+      message: 'Ein fehler ist aufgetreten.',
+      type: 'error'
     }
   },
   async mounted () {
@@ -122,7 +132,9 @@ export default {
         console.log(plot)
         // remove from Database
         await this.$db.remove(plot)
+        this.showPlotRemoveSucc()
       } catch (e) {
+        this.showError()
         console.log(e)
       }
     },

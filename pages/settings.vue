@@ -62,8 +62,7 @@ export default {
       title: 'ADRESSE GESPEICHERT',
       message: 'Die Hof-Adresse wurde in den Einstellungen gespeichert.',
       type: 'success'
-    },
-    
+    }
   },
   watch: {
     street() {

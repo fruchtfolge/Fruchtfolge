@@ -7,7 +7,7 @@
       <select v-model="settings.curScenario" @change="saveSettings" class="planYear scenario" type="button" value="Standard">
         <option disabled value="">Szenario</option>
         <option v-for="(scenario,j) in scenarios" :key="j" :value="scenario.name"> {{ scenario.name }}</option>
-        <option>Neues Szenario</option>
+        <!-- <option>Neues Szenario</option> -->
       </select>
       <!-- Planning year selector -->
       <select v-model="settings.curYear" @change="saveSettings" class="planYear" type="button" value="2019">

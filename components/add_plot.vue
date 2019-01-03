@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <div class="blur" style="margin: auto;">
+    <div class="blur" :class="{ plotLoading: loading }">
       <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>
     <div class="plotBox">
@@ -38,9 +38,22 @@ export default {
     return {
       curYear: 2019,
       name: 'Unbenannt',
+      loading: false,
       prevCrop1: '',
       prevCrop2: '',
       prevCrop3: ''
+    }
+  },
+  notifications: {
+    showPlotSucc: {
+      title: 'SCHLAG HINZUGEFÜGT',
+      message: 'Der Schlag wurde gespeichert.',
+      type: 'success'
+    },
+    showPlotErr: {
+      title: 'FEHLER',
+      message: 'Beim Hinzufügen des Schlags ist ein Fehler aufgetreten.',
+      type: 'error'
     }
   },
   computed: {
@@ -64,6 +77,7 @@ export default {
   },
   methods: {
     async addPlot() {
+      this.loading = true
       const settings = await this.$db.get('settings')
       const size = this.getSize(this.plotData.features[0])
       try {
@@ -75,8 +89,12 @@ export default {
         this.$bus.$emit('drawPlot', plot.geometry)
         // store new plot in database
         await this.$db.post(plot)
+        this.showPlotSucc()
         this.$emit('closeAddPlot')
+        this.loading = false
       } catch (e) {
+        this.showPlotErr()
+        this.loading = false
         console.log(e);
       }
       //const settings = await this.$db.get('settings')
@@ -117,6 +135,10 @@ export default {
   border: 1px solid;
   border-color: #CCCCCC;
   z-index: 99;
+}
+
+.plotLoading {
+  z-index: 101;
 }
 
 .inputs {

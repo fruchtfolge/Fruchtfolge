@@ -27,7 +27,7 @@ miniToastr.init({
       padding: '12px 18px',
       margin: '0 0 6px 0',
       'background-color': '#000',
-      opacity: 0.8,
+      opacity: 0.95,
       color: '#fff',
       /*
       'border-radius': '3px',
@@ -69,7 +69,7 @@ miniToastr.init({
 // In case of 'error' we will call miniToastr.error(message, title, timeout, cb)
 // and etc.
 function toast ({title, message, type, timeout, cb}) {
-  return miniToastr[type](message, title, 8000, cb)
+  return miniToastr[type](message, title, 5000, cb)
 }
 
 // Here we map vue-notifications method to function abowe (to mini-toastr)
