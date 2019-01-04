@@ -83,17 +83,37 @@ export default {
     async addCrop() {
       try {
         const settings = await this.$db.get('settings')
-        // check if crop already exists, or exists for previous years
-
-        const properties = Object.assign(this.curCrop, {
-          year: settings.curYear,
-          scenario: settings.curScenario,
-          farmingType: this.farmingType,
-          region: settings.region,
-          variety: this.variety
+        // create array of years from 2001 - present for timeline of crops
+        let years = Array(settings.curYear - 2000).fill(0).map((e,i)=>i+2001)
+        // check if crop already exists in current year (but not active), or exists for previous years
+        const crops = await this.$db.find({
+          selector: {name: this.variety || this.crop},
+          fields: ['name', 'year']
         })
-        const { data } = await axios.post('createCrop', properties)
-        await this.$db.bulkDocs(data)
+        // filter out years that are already present in the database (to ensure no duplicates)
+        years = years.filter(year => {
+          const match = _.find(crops.docs, ['year', year])
+          if (match) return false
+          else return true
+        })
+        // create crops for missing years (if any)
+        if (years.length > 0) {
+          const properties = Object.assign(this.curCrop, {
+            year: settings.curYear,
+            years: years,
+            scenario: settings.curScenario,
+            farmingType: this.farmingType,
+            region: settings.state_district,
+            variety: this.variety
+          })
+          console.log(properties);
+          const { data } = await axios.post('createCrop', properties)
+          console.log(data);
+          
+          await this.$db.bulkDocs(data)
+        }
+        console.log(years);
+
       } catch (e) {
         console.log(e);
       }

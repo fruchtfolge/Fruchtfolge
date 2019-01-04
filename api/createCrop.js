@@ -36,8 +36,9 @@ module.exports = {
       if (typeof(year) === 'number') {
         cropData.year = year
       } else {
-        cropData.year = cropData.standardGrossMargin.year
+        cropData.year = year.year
         cropData.contributionMargin = this.adjustCM(cropData.contributionMargin, year)
+        console.log(cropData.year);
       }
       // only activate the crop for the current planning year
       if (properties.year === cropData.year) {
@@ -45,7 +46,6 @@ module.exports = {
       }
       // append crop rotational information to crop
       const rotation = _.find(rotValues, ['cropGroup',properties.cropGroup])
-      console.log(rotation);
       cropData.subseqCrops = rotation.subseqCrops
       cropData.efaFactor = rotation.efa
       cropData.legume = rotation.legume
@@ -70,22 +70,38 @@ module.exports = {
       // when SDB's are present, use that data
       // if not, replicate contribution margin for every year
       const docs = []
-      //if (data.standardGrossMargin.length > 0) {
-      //  if (!properties.region) properties.region = 'Deutschland'
-      //  const regionalData = _.filter(data.standardGrossMargin, {region: properties.region})
-      //  regionalData.forEach(year => {
-      //    const crop = this.createCrop(data, properties, year)
-      //    docs.push(crop)
-      //  })
-      //} else {
-      const years = this.years(properties)
-      //console.log(years);
+      /*
+      if (data.standardGrossMargin.length > 0) {
+        console.log(properties);
+        if (!properties.region) properties.region = 'Deutschland'
+        const regionalData = _.filter(data.standardGrossMargin, {region: properties.region})
+        regionalData.forEach(year => {
+          const clonedCropData = _.cloneDeep(data)
+          const crop = this.createCrop(clonedCropData, properties, year)
+          docs.push(crop)
+        })
+      } else {
+        const years = this.years(properties)
+        //console.log(years);
+        years.forEach(year => {
+          const crop = this.createCrop(data, properties, year)
+          docs.push(crop)
+        })
+      }
+      */
+      const years = properties.years
       years.forEach(year => {
-        const crop = this.createCrop(data, properties, year)
+        const clonedCropData = _.cloneDeep(data)
+        if (data.standardGrossMargin.length > 0) {
+          if (!properties.region) properties.region = 'Deutschland'
+          const regionalData = _.filter(data.standardGrossMargin, {region: properties.region, year: year})
+          if (regionalData.length > 0) year = regionalData[0]
+        }
+        const crop = this.createCrop(clonedCropData, properties, year)
         docs.push(crop)
       })
-      //}
-      //console.log(docs)
+      
+      console.log(docs.length)
       res.writeHead(200, {"Content-Type": "application/json"})
       res.write(JSON.stringify(docs))
       res.end()
@@ -101,14 +117,60 @@ module.exports = {
     }
     return res
   },
-  adjustCM(cm, sdb) {
-    // calculate coefficients between price, yield and direct costs from SDB and default
-    const coeffPrice = this.coefficient(cm.revenues, sdb.mainProduct.price, 'price')
-    const coeffYield = this.coefficient(cm.revenues, sdb.mainProduct.yield, 'amount')
-    const coeffCosts = this.coefficient(cm.directCosts, sdb.total.varCosts, 'total')
+  getData(data,category,type) {
+    let total = 0
+    data[category].forEach(o => {
+      if (o[type].unit === 't/ha') {
+        total += o[type].value * 10        
+      } else if (o[type].unit === '€/t') {
+        total += o[type].value / 10  
+      } else {
+        total += o[type].value
+      }
+    })
+    return total
   },
-  coefficient(cm, sdb, prop) {
-    // create average cm value
+  setData(cm,category,type,corrFactor) {
+    return cm[category].map(o => {
+      o[type].value = _.round(o[type].value * corrFactor, 2)
+      if (type !== 'total') {
+        o.total.value = _.round(o.amount.value * o.price.value, 2)
+      }
+      return o
+    })
+  },
+  getAmountDirectCosts(cm) {
+    let count = 0
+    cm.directCosts.forEach(o => {
+      if (o.total.value > 0) {
+        count++
+      }
+    })
+    return count
+  },
+  adjustCM(cm, sdb) {
+    const oldValueAm = this.getData(cm,'revenues','amount')
+    const corrFactorAm = sdb.mainProduct.yield / oldValueAm
+    console.log(sdb.region,sdb.year,oldValueAm,sdb.mainProduct.yield,corrFactorAm);
+    const newRevenuesAm = this.setData(cm,'revenues','amount',corrFactorAm)
+    cm.revenues = newRevenuesAm
+      
+    const oldValueP = this.getData(cm,'revenues','price')
+    const corrFactorP = sdb.mainProduct.price / oldValueP
+    console.log(sdb.region,sdb.year,oldValueP,sdb.mainProduct.price,corrFactorP);
+    const newRevenuesP = this.setData(cm,'revenues','price',corrFactorP)
+    cm.revenues = newRevenuesP
+      
+    const oldValueD = this.getData(cm, 'directCosts', 'total')
+    const amountDirectCosts = this.getAmountDirectCosts(cm)
+    const corrFactorD = sdb.total.varCosts / oldValueD // (((value / oldValue) - 1) / amountDirectCosts) + 1
+    const newDirectCosts = this.setData(cm,'directCosts','total',corrFactorD)
+    //console.log(crop);
+    cm.directCosts = newDirectCosts
+    
+    return cm
+    
+    /*
     const avgCM = (() => {
       let sum = _.sumBy(cm, o => {return o[prop].value})
       sum = sum * 10
@@ -123,5 +185,6 @@ module.exports = {
     const coefficient = sdb/avgCM
     console.log('coeff', prop, coefficient, avgCM, sdb)
     return coefficient
+    */
   }
 }
