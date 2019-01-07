@@ -8,6 +8,7 @@ export default class Plot {
     this._id = getId()
     this.type = 'plot',
     this.name = properties.name || 'Unbenannt',
+    this.id = properties.id || this._id,
     this.year = properties.year,
     this.scenario = properties.scenario,
     this.geometry = properties.geometry,

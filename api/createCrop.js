@@ -1,4 +1,5 @@
-const querystring = require('querystring')
+// const querystring = require('querystring')
+const query = require('./query.js')
 const _ = require('lodash')
 const Crop = require('../constructors/Crop')
 const rotValues = require('../assets/js/cropRotValues.js')
@@ -9,27 +10,6 @@ const nano = require('nano')('http://localhost:5984');
 // for now, use data from local couch
 
 module.exports = {
-  query(req, res) {
-    return new Promise ((resolve, reject) => {
-      let body = ''
-
-      req.on('data', (data) => {
-        body += data
-
-        if (body.length > 1e6)
-          req.connection.destroy()
-      })
-
-      req.on('end', () => {
-        const post = JSON.parse(body)
-        resolve(post)
-      })
-
-      req.on('error', err => {
-        reject(err)
-      })
-    })
-  },
   createCrop(data, properties, year) {
     try {
       const cropData = Object.assign(data, properties)
@@ -62,7 +42,7 @@ module.exports = {
   },
   async getInfo(req, res) {
     try {
-      const properties = await this.query(req, res)
+      const properties = await query(req, res)
       const id = `${properties.farmingType}::${properties.crop}::${properties.system}`
       const crops = nano.db.use('crops')
       const data = await crops.get(id)
