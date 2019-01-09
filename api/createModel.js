@@ -16,16 +16,16 @@ const model = {
   },
   createInclude(properties,res) {
     console.log('createInclude');
-    let include = 
+    let include =
 `* -------------------------------
 * Fruchtfolge Model - Include file
 * Institute for Food an Resource Economics
-* University of Bonn 
+* University of Bonn
 * (c) Christoph Pahmeyer, ${this.getYear()}
 * -------------------------------
 
 * Static data
-set grossMarginAttr / price,yield,directCosts,variableCosts,fixCosts,grossMargin,revenue /;
+set grossMarginAttr / price,yield,directCosts,variableCosts,fixCosts,grossMargin,revenue,distanceCosts,croppingFactor,yieldCap /;
 set plotAttr / size,distance,quality /;
 set cropAttr / rotBreak,maxShare,minSoilQuality,efaFactor/;
 set symbol / lt,gt /;
@@ -33,19 +33,19 @@ set halfMonths / jan1,jan2,feb1,feb2,MRZ1,MRZ2,apr1,apr2,mai1,mai2,jun1,jun2,jul
 
 set years / 2001*${properties.curYear} /;
 set curYear(years) / ${properties.curYear} /;
-` 
+`
 
     // create plot related data
     const curPlots = []
     let soilTypes = []
     const p_plotData = []
-    const plots_soilTypes = []  
+    const plots_soilTypes = []
     const plots_rootCropCap = []
     const plots_permPast = []
     const plots_excludedCrops = []
-    
+
     soilTypes = _.uniqBy(properties.plots, 'soilType').map(type => { return `'${type.soilType}'` })
-    
+
     properties.curPlots.forEach(plot => {
       curPlots.push(` '${plot.id}'`)
       p_plotData.push(` '${plot.id}'.size ${plot.size}\n '${plot.id}'.distance ${_.round(plot.distance, 2)}\n '${plot.id}'.quality ${plot.quality}`)
@@ -56,7 +56,7 @@ set curYear(years) / ${properties.curYear} /;
         plot.excludedCrops.forEach(crop => {
           plots_excludedCrops.push(` '${plot.id}'.'${crop}' 'YES'`)
         })
-      } 
+      }
     })
 
     // create crop related data
@@ -69,7 +69,7 @@ set curYear(years) / ${properties.curYear} /;
     const croppingFactor = []
     const laborReq = []
     const halfMonths = ['JAN1', 'JAN2','FEB1','FEB2','MRZ1','MRZ2','APR1','APR2','MAI1','MAI2','JUN1','JUN2','JUL1','JUL2','AUG1','AUG2','SEP1','SEP2','OKT1','OKT2','NOV1','NOV2','DEZ1','DEZ2']
-    
+
     properties.curCrops.forEach(crop => {
       if (!crop) return
       if (cropGroup.indexOf(` '${crop.cropGroup}'`) === -1) cropGroup.push(` '${crop.cropGroup}'`)
@@ -94,20 +94,20 @@ set curYear(years) / ${properties.curYear} /;
         }
       })
     })
-  
+
     // create plot & crop related data
     const plots = []
     const plots_years_crops = []
-    
+
     properties.plots.forEach(plot => {
       if (plots.indexOf(` '${plot.id}'`) === -1) plots.push(` '${plot.id}'`)
       if (plot.crop) plots_years_crops.push(` '${plot.id}'.${plot.year}.${plot.crop} 'YES'`)
     })
-    
+
     // create gross margin related data
     const crops = [` ''`]
     const p_grossMarginData = []
-    
+
     properties.crops.forEach(crop => {
       if (crops.indexOf(` '${crop.name}'`) === -1) crops.push(` '${crop.name}'`)
       const amount = _.round(_.sumBy(crop.contributionMargin.revenues, o => { return o.amount.value }), 2)
@@ -116,14 +116,14 @@ set curYear(years) / ${properties.curYear} /;
       const variableCosts = _.round(_.sumBy(crop.contributionMargin.variableCosts, o => { return o.total.value }), 2)
       const fixCosts = _.round(_.sumBy(crop.contributionMargin.fixCosts, o => { return o.total.value }), 2)
       p_grossMarginData.push(` '${crop.name}'.${crop.year}.yield ${amount}\n '${crop.name}'.${crop.year}.price ${price}\n '${crop.name}'.${crop.year}.directCosts ${directCosts}\n '${crop.name}'.${crop.year}.variableCosts ${variableCosts}\n '${crop.name}'.${crop.year}.fixCosts ${fixCosts}`)
-      
+
     })
-    
+
     // constraints related data
     const constraints = []
     const p_constraint = []
     const constraints_lt = []
-    
+
     if (properties.constraints) {
       properties.constraints.forEach(constraint => {
         constraints.push(` '${constraint.name}'`)
@@ -131,17 +131,17 @@ set curYear(years) / ${properties.curYear} /;
         if (constraint.symbol === '<') constraints_lt.push(` '${constraint.name}'.lt YES` )
       })
     }
-    
+
     // build include file
     include += this.save('set soilTypes',soilTypes)
-    include += this.save('set plots',plots)    
-    include += this.save('set curPlots',curPlots)
+    include += this.save('set plots',plots)
+    include += this.save('set curPlots(plots)',curPlots)
     include += this.save('parameter p_plotData(curPlots,plotAttr)', p_plotData )
     include += this.save('set plots_soilTypes(curPlots,soilTypes)', plots_soilTypes)
     include += this.save('set plots_rootCropCap(curPlots)', plots_rootCropCap)
     include += this.save('set plots_permPast(curPlots)', plots_permPast)
     include += this.save('set plots_excludedCrops(curPlots,crops)',plots_excludedCrops)
-    
+
     include += this.save('set crops',crops)
     include += this.save('set curCrops(crops)',curCrops)
     include += this.save('set cropGroup',cropGroup)
@@ -150,7 +150,7 @@ set curYear(years) / ${properties.curYear} /;
     include += this.save('set crops_rootCrop(curCrops)', crops_rootCrop)
     include += this.save('set crops_catchCrop(curCrops)', crops_catchCrop)
     include += this.save('parameter p_croppingFactor(curCrops,curCrops)', croppingFactor)
-    
+
     include += this.save('set plots_years_crops(plots,years,crops)',plots_years_crops)
     include += this.save('parameter p_grossMarginData(crops,years,grossMarginAttr)',p_grossMarginData)
     include += this.save('parameter p_laborReq(crops,halfMonths)',laborReq)
