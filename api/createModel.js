@@ -127,8 +127,8 @@ set curYear(years) / ${properties.curYear} /;
     if (properties.constraints) {
       properties.constraints.forEach(constraint => {
         constraints.push(` '${constraint.name}'`)
-        p_constraint.push(` '${constraint.name}'.'${constraint.crop1}'.${constraint.crop2 ? constraint.crop2 : ''} ${constraint.value}`)
-        if (constraint.symbol === '<') constraints_lt.push(` '${constraint.name}'.lt YES` )
+        p_constraint.push(` '${constraint.name}'.'${constraint.crop1}'.${constraint.crop2 ? constraint.crop2 : '""'} ${constraint.area}`)
+        if (constraint.operator === '<') constraints_lt.push(` '${constraint.name}'.lt YES` )
       })
     }
 
