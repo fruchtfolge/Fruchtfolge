@@ -61,6 +61,7 @@ export default {
       let unique = _.uniqBy(ktblCrops, 'cropGroup')
       if (unique.length > 0) {
         unique = unique.map(o => {return o.cropGroup})
+        console.log(unique);
         return unique.sort()
       }
     },

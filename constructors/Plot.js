@@ -19,7 +19,9 @@ export default class Plot {
     this.soilType = properties.soilType,
     this.distance = properties.distance,
     this.region = properties.region,
+    this.cropGroup = properties.cropGroup,
     this.crop = properties.crop,
+    this.permPast = properties.permPast || false,
     this.rootCrops = properties.rootCrops || true
   }
 }
