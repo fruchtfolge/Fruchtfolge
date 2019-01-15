@@ -106,9 +106,8 @@ export default {
             region: settings.state_district,
             variety: this.variety
           })
-          console.log(properties);
-          const { data } = await axios.post('createCrop', properties)
-          console.log(data);
+          console.log(properties)
+          const { data } = await axios.post('http://localhost:3001/crops/', properties)
           
           await this.$db.bulkDocs(data)
         }

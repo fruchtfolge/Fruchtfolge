@@ -82,14 +82,17 @@ export default {
       const settings = await this.$db.get('settings')
       const size = this.getSize(this.plotData.features[0])
       try {
-        const plot = await createPlot({
+        const properties = {
           name: this.name,
           geometry: this.plotData.features[0],
-          size: size
-        }, settings)
-        this.$bus.$emit('drawPlot', plot.geometry)
+          size: size,
+          settings: settings
+        }
+        console.log(properties)
+        const { data } = await axios.post('http://localhost:3001/plots/', properties)
+        this.$bus.$emit('drawPlot', data.geometry)
         // store new plot in database
-        await this.$db.post(plot)
+        await this.$db.put(data)
         this.showPlotSucc()
         this.$emit('closeAddPlot')
         this.loading = false

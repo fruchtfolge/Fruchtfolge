@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div v-if="loading" class="blur loading">
+      <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <h2 style="text-align: center;top: 480px;position: relative;">Die Antragsdaten werden geladen ... <br> Der Vorgang kann einige Minuten in Anspruch nehmen</h2>
+    </div>
     <div style="width: 50%; min-width: 500px; margin: auto; top: 120px;">
         <h1 style="font-family: 'Open Sans Condensed'; font-weight: normal; letter-spacing: 0.2em">EINSTELLUNGEN</h1>
         <span>Für die Optimierung wird der Standort Ihres Betriebes benötigt. Dieser wird für die Berechnung der Hof-Feld-Distanzen der einzelnen Schläge verwendet. Anhand dieser Information werden die Deckungsbeiträge schlagspezifisch errechnet.</span>
@@ -39,6 +43,7 @@ import mapquest from '~/assets/js/mapquest'
 export default {
   data() {
     return {
+      loading: false,
       zidId: '',
       zidPass: '',
       curYear: 2019,
@@ -53,6 +58,11 @@ export default {
       message: 'Bitte füllen Sie das Adressfeld komplett aus.',
       type: 'warn'
     },
+    showZidErr: {
+      title: 'INVEKOS FEHLER',
+      message: 'Bitte stellen Sie sicher, dass Ihre 12-stellige Betriebsnummer vollständig ist, und Sie das korekkte Passwort eingegeben haben. ',
+      type: 'warn'
+    },
     noAddressErr: {
       title: 'ADRESSE UNGÜLTIG',
       message: 'Die angegebene Adresse konnte nicht gefunden werden.',
@@ -62,6 +72,16 @@ export default {
       title: 'ADRESSE GESPEICHERT',
       message: 'Die Hof-Adresse wurde in den Einstellungen gespeichert.',
       type: 'success'
+    },
+    showZidSucc: {
+      title: 'DATEN IMPORTIERT',
+      message: 'Die ELAN Antragsdaten wurden erfolgreich importiert.',
+      type: 'success'
+    },
+    showError: {
+      title: 'EIN FEHLER IST AUFGETRETEN',
+      message: 'Unbekannter Fehler.',
+      type: 'error'
     }
   },
   watch: {
@@ -114,7 +134,22 @@ export default {
         this.showAddressSucc()
       } catch (e) {
         console.log(e)
-        this.showAddressErr()
+        this.noAddressErr()
+      }
+    },
+    async getElan() {
+      try {
+        const settings = await this.$db.get('settings')
+        const stateCode = this.zidId.slice(0,3)
+        if (this.zidId.length === 12 && stateCode === 276 && this.zidPass) {
+          if (!settings.home || !settings.region) return this.showAddressWarn()
+          // make request
+        } else {
+          this.showZidErr()
+        }
+      } catch (e) {
+        console.log(e)
+        this.showError({message: e})
       }
     }
   }
@@ -122,6 +157,7 @@ export default {
 </script>
 
 <style scoped>
+
 .input {
   margin-bottom: 5px;
   width: 233px;
