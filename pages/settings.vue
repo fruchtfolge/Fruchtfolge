@@ -32,7 +32,7 @@
         <br>
         <input v-model="zidPass" type="password" id='zid-pw' class="input" name="zid-pw" placeholder="Passwort">
         <br>
-        <button type="button" id='zid-btn' class="invekosBtn" name="zid-btn">ABSENDEN</button>
+        <button type="button" id='zid-btn' class="invekosBtn" name="zid-btn" @click="getElan">ABSENDEN</button>
     </div>
   </div>
 </template>
@@ -141,9 +141,21 @@ export default {
       try {
         const settings = await this.$db.get('settings')
         const stateCode = this.zidId.slice(0,3)
-        if (this.zidId.length === 12 && stateCode === 276 && this.zidPass) {
-          if (!settings.home || !settings.region) return this.showAddressWarn()
+        console.log(this.zidId.length, stateCode, this.zidPass);
+        if (this.zidId.length === 15 && stateCode === "276" && this.zidPass) {
+          settings.region = settings.state_district
+          // if (!settings.home || !settings.region) return this.showAddressWarn()
+          const farmno = this.zidId.slice(3)
           // make request
+          const request = {
+            farmno: farmno,
+            pass: this.zidPass,
+            years: [2018],
+            settings: settings
+          }
+          console.log(request);
+          const { data } = await axios.post('http://localhost:3001/elan/', request)
+          await this.$db.bulkDocs(data)
         } else {
           this.showZidErr()
         }

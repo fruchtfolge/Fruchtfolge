@@ -54,10 +54,10 @@ export default {
       }
       console.log(e)
     }
-    if (!settings.home) {
-      this.showAddressWarn()
-      return $nuxt.$router.replace({path: 'settings'})
-    }
+    //if (!settings.home) {
+  //  this.showAddressWarn()
+  //  return $nuxt.$router.replace({path: 'settings'})
+    //}
   },
   async created() {
     // listen to changes in settings and plots (current planning year etc.)
@@ -97,9 +97,8 @@ export default {
       this.map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/satellite-streets-v9?optimize=true',
-        // replace by database info later
-        center: settings.home,
-        zoom: 14,
+        center: settings.home || [7.685235,51.574318],
+        zoom: settings.home ? 14 : 8,
         dragPan: false,
         drageRotate: false
       })
@@ -167,6 +166,7 @@ export default {
       this.Draw.deleteAll()
     },
     select(data) {
+      console.log(data);
       if (data.features.length !== 1)  return
       this.$bus.$emit('selectedPlot', data.features[0].properties._id)
     }

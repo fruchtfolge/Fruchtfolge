@@ -1,15 +1,15 @@
 <template>
   <div class="cropsSidebar">
     <div v-if="crops && crops.length > 0">
-      <div  v-for="(crops, i) in cropGroups" :key='i'>
-        <div class="container" @click="expand(crops[0].cropGroup)">
-          <h2 class="regionText"> {{ crops[0].cropGroup.toUpperCase() }}</h2>
-          <div class="arrow" v-bind:class="{ rotate: shown[crops[0].cropGroup]}"></div>
+      <div  v-for="(crops, i) in displayGroups" :key='i'>
+        <div class="container" @click="expand(crops[0].displayGroup)">
+          <h2 class="regionText"> {{ crops[0].displayGroup.toUpperCase() }}</h2>
+          <div class="arrow" v-bind:class="{ rotate: shown[crops[0].displayGroup]}"></div>
         </div>
         <transition name="expand"
         v-on:before-enter="beforeEnter" v-on:enter="enter"
         v-on:before-leave="beforeLeave" v-on:leave="leave">
-          <div class="body" v-show="shown[crops[0].cropGroup]">
+          <div class="body" v-show="shown[crops[0].displayGroup]">
             <p v-for="(crop, n) of crops" :key='n'
             @click="changeCrop(crop)"
             class="cropsText"
@@ -47,6 +47,9 @@ export default {
     }
   },
   computed: {
+    displayGroups() {
+      return _.groupBy(this.crops, 'displayGroup')
+    },
     cropGroups() {
       return _.groupBy(this.crops, 'cropGroup')
     }
@@ -69,11 +72,11 @@ export default {
     leave(el) {
       el.style.height = '0px';
     },
-    expand(cropGroup) {
-      if (!this.shown[cropGroup]) {
-        this.shown[cropGroup] = true
+    expand(displayGroup) {
+      if (!this.shown[displayGroup]) {
+        this.shown[displayGroup] = true
       } else {
-        this.shown[cropGroup] = false
+        this.shown[displayGroup] = false
       }
     },
     addCrop() {
@@ -81,7 +84,7 @@ export default {
     },
     updateState() {
       // initially collapse all regions, if they aren't opended yet
-      Object.keys(this.cropGroups).forEach((group) => {
+      Object.keys(this.displayGroups).forEach((group) => {
         const shown = true
         this.$set(this.shown,group,shown)
       })

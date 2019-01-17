@@ -1,0 +1,200 @@
+module.exports = {
+  "50": {
+    "displayGroup": "Spezielle Greening-Fruchtarten",
+    "code": 50,
+    "variety": "Mischkulturen Saatgutmischung",
+    "category": "AL",
+    "cropGroupCode": 4,
+    "cropGroup": "Mischkultur",
+    "farmingType": "konventionell/integriert",
+    "crop": "Blühmischung",
+    "system": "wendend, einjährig"
+  },
+  "51": {
+    "displayGroup": "Spezielle Greening-Fruchtarten",
+    "code": 51,
+    "variety": "Mischkulturen in Reihenanbau",
+    "category": "AL",
+    "cropGroupCode": 4,
+    "cropGroup": "Mischkultur",
+    "farmingType": "konventionell/integriert",
+    "crop": "Blühmischung",
+    "system": "wendend, einjährig"
+  },
+  "54": {
+    "displayGroup": "Spezielle Greening-Fruchtarten",
+    "code": 54,
+    "variety": "Streifen am Waldrand ÖVF",
+    "category": "AL",
+    "cropGroupCode": 3,
+    "cropGroup": "Brachliegendes Land",
+    "farmingType": "konventionell/integriert",
+    "crop": "Blühmischung",
+    "system": "wendend, einjährig"
+  },
+  "56": {
+    "displayGroup": "Spezielle Greening-Fruchtarten",
+    "code": 56,
+    "variety": "Pufferstreifen ÖVF AL (inkl. Feldrand ÖVF)",
+    "category": "AL",
+    "cropGroupCode": 3,
+    "cropGroup": "Brachliegendes Land",
+    "farmingType": "konventionell/integriert",
+    "crop": "Blühmischung",
+    "system": "wendend, einjährig"
+  },
+  "57": {
+    "displayGroup": "Spezielle Greening-Fruchtarten",
+    "code": 57,
+    "variety": "Pufferstreifen ÖVF DGL",
+    "category": "DGL",
+    "cropGroupCode": "G",
+    "cropGroup": "Dauergrünland",
+    "farmingType": "konventionell/integriert",
+    "crop": "Dauergrünland - Frischfutter",
+    "system": "Ladewagen"
+  },
+  "112": {
+    "displayGroup": "Getreide",
+    "code": 112,
+    "variety": "Winterhartweizen/Durum",
+    "category": "AL",
+    "cropGroupCode": "1.28.2.1",
+    "cropGroup": "Winterweizen",
+    "farmingType": "konventionell/integriert",
+    "crop": "Winterweizen - Brotweizen",
+    "system": "wendend, gezogene Saatbettbereitung, Saat"
+  },
+  "115": {
+    "displayGroup": "Getreide",
+    "code": 115,
+    "variety": "Winterweichweizen",
+    "category": "AL",
+    "cropGroupCode": "1.28.2.1",
+    "cropGroup": "Winterweizen",
+    "farmingType": "konventionell/integriert",
+    "crop": "Winterweizen - Brotweizen",
+    "system": "wendend, gezogene Saatbettbereitung, Saat"
+  },
+  "116": {
+    "displayGroup": "Getreide",
+    "code": 116,
+    "variety": "Sommerweichweizen",
+    "category": "AL",
+    "cropGroupCode": "1.28.2.2",
+    "cropGroup": "Sommerweizen",
+    "farmingType": "ökologisch",
+    "crop": "Sommerweizen - Futterweizen",
+    "system": "wendend, Gülle"
+  },
+  "118": {
+    "displayGroup": "Getreide",
+    "code": 118,
+    "variety": "Winter-Emmer/ -Einkorn",
+    "category": "AL",
+    "cropGroupCode": "1.28.2.1",
+    "cropGroup": "Winterweizen",
+    "farmingType": "ökologisch",
+    "crop": "Winterweizen - Brotweizen",
+    "system": "wendend, Gülle"
+  },
+  "131": {
+    "displayGroup": "Getreide",
+    "code": 131,
+    "variety": "Wintergerste",
+    "category": "AL",
+    "cropGroupCode": "1.28.4.1",
+    "cropGroup": "Wintergerste",
+    "farmingType": "konventionell/integriert",
+    "crop": "Wintergerste - Futtergerste",
+    "system": "wendend, gezogene Saatbettbereitung, Saat"
+  },
+  "210": {
+    "displayGroup": "Eiweißpflanzen",
+    "code": 210,
+    "variety": "Erbsen zur Körnergewinnung",
+    "category": "AL",
+    "cropGroupCode": "1.14.7",
+    "cropGroup": "Gattung: Pisum (Erbse)",
+    "farmingType": "konventionell/integriert",
+    "crop": "Sommererbsen - Futtererbsen",
+    "system": "wendend, gezogene Saatbettbereitung, Saat"
+  },
+  "220": {
+    "displayGroup": "Eiweißpflanzen",
+    "code": 220,
+    "variety": "Acker-/Puff-/Pferdebohne",
+    "category": "AL",
+    "cropGroupCode": "1.14.8",
+    "cropGroup": "Gattung: Vicia (Wicken)",
+    "farmingType": "konventionell/integriert",
+    "crop": "Sommerackerbohnen - Körnergewinnung",
+    "system": "wendend, gezogene Saatbettbereitung, Saat"
+  },
+  "311": {
+    "displayGroup": "Ölsaaten",
+    "code": 311,
+    "variety": "Winterraps",
+    "category": "AL",
+    "cropGroupCode": "2.1.2.1.1",
+    "cropGroup": "Winterraps",
+    "farmingType": "konventionell/integriert",
+    "crop": "Winterraps",
+    "system": "wendend, gezogene Saatbettbereitung, Saat"
+  },
+  "411": {
+    "displayGroup": "Ackerfutter",
+    "code": 411,
+    "variety": "Silomais (als Hauptfutter)",
+    "category": "AL",
+    "cropGroupCode": "1.28.7",
+    "cropGroup": "Gattung: Zea (Mais)",
+    "farmingType": "konventionell/integriert",
+    "crop": "Mais - Silomais",
+    "system": "wendend, gezogene Saatbettbereitung, Saat"
+  },
+  "602": {
+    "displayGroup": "Hackfrüchte",
+    "code": 602,
+    "variety": "Kartoffeln",
+    "category": "AL",
+    "cropGroupCode": "2.2.2.1",
+    "cropGroup": "Art: Solanum tuberosum (Kartoffel)",
+    "farmingType": "konventionell/integriert",
+    "crop": "Speisekartoffeln",
+    "system": "wendend, gezogene Saatbettbereitung, Legen"
+  },
+  "603": {
+    "displayGroup": "Hackfrüchte",
+    "code": 603,
+    "variety": "Zuckerrüben",
+    "category": "AL",
+    "cropGroupCode": "1.1.2003.",
+    "cropGroup": "Gattung: Beta (Rüben)",
+    "farmingType": "konventionell/integriert",
+    "crop": "Zuckerrüben",
+    "system": "wendend, gezogene Saatbettbereitung, Saat"
+  },
+  "633": {
+    "displayGroup": "Gemüse",
+    "code": 633,
+    "variety": "Zwiebeln/Lauch",
+    "category": "AL",
+    "cropGroupCode": "1.2.2001",
+    "cropGroup": "Gattung: Allium (Lauch)",
+    "farmingType": "konventionell/integriert",
+    "crop": "Speisezwiebeln",
+    "system": "Pflanzzwiebeln, Direktabsatz"
+  },
+  "634": {
+    "displayGroup": "Gemüse",
+    "code": 634,
+    "variety": "Möhre (auch Futtermöhre)",
+    "category": "AL",
+    "cropGroupCode": "1.3.11",
+    "cropGroup": "Gattung: Daucus (Möhren)",
+    "farmingType": "konventionell/integriert",
+    "crop": "Möhren",
+    "system": "Frischmarktware, Waschmöhre, Dammanbau"
+  }
+}

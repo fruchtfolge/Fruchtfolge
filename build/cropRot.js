@@ -1,6 +1,34 @@
 const fs = require('fs')
 const _ = require('lodash');
-const data = JSON.parse(fs.readFileSync('data.json', 'utf8'))
+const data = fs.readFileSync('Früchte.csv', 'utf8')
+var lines = data.split(/\n/g)
+var headers = lines[0].split(/;/g)
+// remove empty cell
+headers.shift()
+
+function getSubseq(cells) {
+  var o = {}
+  headers.forEach((c,i) => {
+    o[c] = Number(cells[i + 1])
+  })
+  return o
+}
+
+var res = []
+lines.forEach((line,i) => {
+  if (i === 0) return
+  const cells = line.split(/;/g)
+  const cropGroupName = cells[0]
+  res.push({
+    'cropGroup': cropGroupName,
+    'efa': 0,
+    'legume': false,
+    'rootCrop': false,
+    'minSoil': 20,
+    'rotBreak': 2,
+    'prevCrops': getSubseq(cells)
+  })
+})
 
 var crops2 = [
   ["Gräser","other grass"],
