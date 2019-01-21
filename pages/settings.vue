@@ -13,13 +13,15 @@
           ADRESSE <!--Padding is optional-->
         </span>
         </div>
-        <input v-model="street" type="text" class="input" placeholder="Straße und Hausnummer">
+        <div style="text-align: center;">
+          <input v-model="street" type="text" class="input" placeholder="Straße und Hausnummer">
+          <br>
+          <input v-model="postcode" type="text" class="input" placeholder="PLZ">
+          <br>
+          <input v-model="city" type="text" class="input" placeholder="Stadt">
+        </div>
         <br>
-        <input v-model="postcode" type="text" class="input" placeholder="PLZ">
-        <br>
-        <input v-model="city" type="text" class="input" placeholder="Stadt">
-        <br>
-        <h1 style="padding-top: 50px; font-family: 'Open Sans Condensed'; font-weight: normal; letter-spacing: 0.2em">DATENEINGABE</h1>
+        <h1 style="padding-top: 20px; font-family: 'Open Sans Condensed'; font-weight: normal; letter-spacing: 0.2em">DATENEINGABE</h1>
         <span>Für die Optimierung werden Daten bezüglich Ihrer bewirtschafteten Flächen benötigt. Dabei werden insbesondere die Schlagskizzen (Geodaten) sowie die Vorfrüchte der Felder für die Optimierungsrechnung verwendet. Wenn Ihr Betrieb den Flächenantrag in Nordrhein-Westfalen stellt, können die Flächendaten aus dem ELAN-Downloadportal durch eingabe der ZID-Nummer und Passwort automatisch eingefügt werden.
         <br>
         <strong>Datenschutzhinweis:</strong> Ihre Invekos-Daten (Betriebsnummer und Passwort) werden über eine gesicherte SSL-Verbindung zur Abfrage im ELAN-Downloadportal übertragen. Die Anmeldedaten werden lokal auf Ihrem Rechner gespeichert.</span>
@@ -28,11 +30,17 @@
           ZID-DATEN ABFRAGE <!--Padding is optional-->
         </span>
         </div>
-        <input v-model="zidId" type="text" id='zid' class="input" name="zid" placeholder="ZID-Betriebsnummer">
-        <br>
-        <input v-model="zidPass" type="password" id='zid-pw' class="input" name="zid-pw" placeholder="Passwort">
-        <br>
-        <button type="button" id='zid-btn' class="invekosBtn" name="zid-btn" @click="getElan">ABSENDEN</button>
+        <div style="text-align: center;">
+          <input v-model="zidId" type="text" id='zid' class="input" name="zid" placeholder="ZID-Betriebsnummer">
+          <br>
+          <input v-model="zidPass" type="password" id='zid-pw' class="input" name="zid-pw" placeholder="Passwort">
+          <br>
+        </div>
+        <div style="text-align: center;">
+          <button type="button" id='zid-btn' class="invekosBtn" name="zid-btn" @click="getElan">ABSENDEN</button>
+          <button style="margin-left: 10px" type="button" id='zid-btn' class="invekosBtn" name="zid-btn" @click="deleteElanData">DATEN LÖSCHEN</button>          
+        </div>
+
     </div>
   </div>
 </template>
@@ -78,6 +86,11 @@ export default {
       message: 'Die ELAN Antragsdaten wurden erfolgreich importiert.',
       type: 'success'
     },
+    showInfo: {
+      title: 'KEINE DATEN',
+      message: 'Es wurden keine ELAN Daten gefunden.',
+      type: 'info'
+    },
     showError: {
       title: 'EIN FEHLER IST AUFGETRETEN',
       message: 'Unbekannter Fehler.',
@@ -106,11 +119,12 @@ export default {
 
       // allocate settings to reactive properties
       this.zidId = this.settings.zidId
-      this.zidPass = this.settings.zidPass
+      // this.zidPass = this.settings.zidPass
       this.curYear = this.settings.curYear
       this.street = this.settings.street
       this.postcode = this.settings.postcode
       this.city = this.settings.city
+      console.log(this.settings);
     } catch (e) {
       console.log(e)
     }
@@ -137,12 +151,30 @@ export default {
         this.noAddressErr()
       }
     },
+    async deleteElanData() {
+      try {
+        const result = await this.$db.find({
+          selector: {elan: true},
+          fields: ['_id','_rev']
+        })
+        if (result && result.docs && result.docs.length > 0) {
+          const toDelete = result.docs.map(o => {o._deleted = true; return o})
+          await this.$db.bulkDocs(toDelete)
+          this.showZidSucc({title: 'DATEN GELÖSCHT', message: 'Die ELAN Daten wurden erfolgreich gelöscht.'})
+        } else {
+          this.showInfo()
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
     async getElan() {
       try {
         const settings = await this.$db.get('settings')
         const stateCode = this.zidId.slice(0,3)
         console.log(this.zidId.length, stateCode, this.zidPass);
         if (this.zidId.length === 15 && stateCode === "276" && this.zidPass) {
+          this.loading = true
           settings.region = settings.state_district
           // if (!settings.home || !settings.region) return this.showAddressWarn()
           const farmno = this.zidId.slice(3)
@@ -150,16 +182,24 @@ export default {
           const request = {
             farmno: farmno,
             pass: this.zidPass,
-            years: [2018],
+            years: [2016,2017,2018],
             settings: settings
           }
           console.log(request);
           const { data } = await axios.post('http://localhost:3001/elan/', request)
-          await this.$db.bulkDocs(data)
+          // save zid id in settings, however don't store password for security reasons
+          settings.zidId = this.zidId
+          const update = data.concat(settings)
+          await this.$db.bulkDocs(update)
+          console.log(settings)
+          console.log(await this.$db.get('settings'))
+          this.loading = false
+          this.showZidSucc()
         } else {
           this.showZidErr()
         }
       } catch (e) {
+        this.loading = false
         console.log(e)
         this.showError({message: e})
       }
@@ -172,7 +212,7 @@ export default {
 
 .input {
   margin-bottom: 5px;
-  width: 233px;
+  width: 485px;
   height: 33px;
   border-style: solid;
   border-width: 1px;

@@ -19,7 +19,7 @@ miniToastr.init({
     '.mini-toastr': {
       position: 'fixed',
       'z-index': 99999,
-      right: '12px',
+      right: '22px',
       top: '72px'
     },
     '.mini-toastr__notification': {

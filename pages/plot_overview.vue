@@ -4,12 +4,18 @@
       <table>
         <thead>
           <tr>
-            <th>Name</th>
+            <th style="min-width: 250px;">Name</th>
             <th>Größe</th>
             <th>Hof-Feld-Distanz</th>
             <th>Bodenqualität (SQR)</th>
             <th>Bodenart</th>
             <th>Hackfruchtfähig</th>
+            <th>Dauergrünland</th>
+            <!--
+            <th style="min-width: 200px;">{{ curYear - 3 }}</th>
+            <th style="min-width: 200px;">{{ curYear - 2 }}</th>
+            <th style="min-width: 200px;">{{ curYear - 1 }}</th>
+          -->
           </tr>
         </thead>
         <tbody>
@@ -20,6 +26,12 @@
             <td style="text-align: center;">{{ plot.quality }}</td>
             <td style="text-align: center;">{{ plot.soilType }}</td>
             <td style="text-align: center;"><input type="checkbox" :checked="plot.rootCrops"></td>
+            <td style="text-align: center;"><input type="checkbox" :checked="plot.permPast"></td>
+            <!--
+            <td style="text-align: center;">{{ plotsPrevCrops[plot.id][curYear - 3] }}</td>
+            <td style="text-align: center;">{{ plotsPrevCrops[plot.id][curYear - 2] }}</td>
+            <td style="text-align: center;">{{ plotsPrevCrops[plot.id][curYear - 1] }}</td>
+          -->
           </tr>
         </tbody>
       </table>
@@ -31,24 +43,51 @@
 </template>
 
 <script>
+import cultures from '~/assets/js/cultures'
+
 export default {
   data() {
     return {
       plots: null,
       selectedPlot: null,
+      curYear: 2019
+    }
+  },
+  computed: {
+    plotsPrevCrops() {
+      if (this.plots && this.plots.length > 0) {
+        let o = {}
+        const that = this
+        function getName(id, year) {
+          const plot = _.find(that.$store.plots, {id: id, year: year})
+          if (plot && cultures[plot.crop]) {
+            return cultures[plot.crop].variety
+          }
+        }
+        
+        this.plots.forEach(plot => {
+          o[plot.id] = {}
+          o[plot.id][this.curYear - 3] = getName(plot.id,this.curYear - 3)
+          o[plot.id][this.curYear - 2] = getName(plot.id,this.curYear - 2)
+          o[plot.id][this.curYear - 1] = getName(plot.id,this.curYear - 1)
+        })
+        return o
+      }
     }
   },
   created() {
     this.update()
     console.log(this.plots)
+    console.log(this.plotsPrevCrops);
     this.$bus.$on('changeCurrents', _.debounce(this.update, 200))
   },
   methods: {
-    changeCrop(crop) {
-      this.selectedCrop = crop
+    changePlot(plot) {
+      this.selectedPlot = plot
     },
     update() {
       this.$set(this, 'plots', this.$store.curPlots)
+      this.$set(this, 'curYear', this.$store.curYear)
     }
   }
 }

@@ -70,7 +70,9 @@ export default {
       // construct planning periods for future/past
       this.constructYears()
       // get settings from db (if available)
-      this.settings = await this.$db.get('settings')
+      const settings = await this.$db.get('settings')
+      this.settings.curYear = settings.curYear
+      this.settings.curScenario = settings.curScenario
     } catch(e) {
       if (e.status === 404) {
         this.settings = new Setting(this.settings)
@@ -114,9 +116,10 @@ export default {
     async saveSettings() {
       try {
         const settings = await this.$db.get('settings')
-        console.log(this.settings);
-        this.settings._rev = settings._rev
-        await this.$db.put(this.settings)
+        settings.curYear = this.settings.curYear
+        settings.curScenario = this.settings.curScenario
+        console.log(settings);
+        await this.$db.put(settings)
       } catch(e) {
         console.log(e)
       }
@@ -126,7 +129,7 @@ export default {
       const year = date.getFullYear()
       const month = date.getMonth()
 
-      for (var i = year - 1; i < year + 6; i++) {
+      for (var i = year - 3; i < year + 6; i++) {
         this.years.push({
           single: i,
           full: `${i - 1}/${i}`

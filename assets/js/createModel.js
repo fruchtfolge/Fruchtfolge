@@ -122,8 +122,8 @@ set curYear(years) / ${properties.curYear} /;
     const p_constraint = []
     const constraints_lt = []
 
-    if (properties.constraints) {
-      properties.constraints.forEach(constraint => {
+    if (properties.curConstraints) {
+      properties.curConstraints.forEach(constraint => {
         constraints.push(` '${constraint.name}'`)
         p_constraint.push(` '${constraint.name}'.'${constraint.crop1}'.${constraint.crop2 ? constraint.crop2 : '""'} ${constraint.area}`)
         if (constraint.operator === '<') constraints_lt.push(` '${constraint.name}'.lt YES` )

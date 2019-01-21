@@ -116,9 +116,15 @@ export default {
     },
     async drawPlots(year, plots) {
       try {
+        //const geometries = []
         plots.forEach(plot => {
           this.Draw.add(plot.geometry)
+          //geometries.push(plot.geometry)
         })
+        // fit map to the bounds of the plots
+        //const extent = featureCollection(geometries)
+        //const bounds = bbox(extent)
+        //this.map.fitBounds(bounds, {padding: 40, duration: 0})
       } catch (e) {
         console.log(e)
       }

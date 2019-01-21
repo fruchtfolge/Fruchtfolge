@@ -1,24 +1,26 @@
 <template>
   <div class="plotsSidebar">
-    <h1 class="sumHa">GESAMT {{ totalHa }} ha</h1>
-    <div v-if="regions" v-for="(region, n) in regions" :key='n'>
-      <div class="container" @click="expand(region[0].region)">
-        <h2 class="regionText"> {{ region[0].region.toUpperCase() }}</h2>
-        <div class="arrow" v-bind:class="{ rotate: shown[region[0].region]}"></div>
-      </div>
-      <transition name="expand"
-      v-on:before-enter="beforeEnter" v-on:enter="enter"
-      v-on:before-leave="beforeLeave" v-on:leave="leave">
-        <div class="body" v-show="shown[region[0].region]">
-          <p v-for="(plot, m) in region" :key='m'
-          @click="flyTo(plot)"
-          class="plotsText"
-          v-bind:class="{ active: isClicked(plot)}"> {{plot.name}} ({{plot.size}} ha) </p>
+    <div class="content-pos">
+      <h1 class="sumHa">GESAMT {{ totalHa }} ha</h1>
+      <div v-if="regions" v-for="(region, n) in regions" :key='n'>
+        <div class="container" @click="expand(region[0].region)">
+          <h2 class="regionText"> {{ region[0].region.toUpperCase() }}</h2>
+          <div class="arrow" v-bind:class="{ rotate: shown[region[0].region]}"></div>
         </div>
-      </transition>
-    </div>
-    <div v-else>
-      <p class="regionText">Klicken Sie auf den Rechteck-Button in der Karte links-unten um ein neues Feld eizuzeichnen.</p>
+        <transition name="expand"
+        v-on:before-enter="beforeEnter" v-on:enter="enter"
+        v-on:before-leave="beforeLeave" v-on:leave="leave">
+          <div class="body" v-show="shown[region[0].region]">
+            <p v-for="(plot, m) in region" :key='m'
+            @click="flyTo(plot)"
+            class="plotsText"
+            v-bind:class="{ active: isClicked(plot)}"> {{plot.name}} ({{plot.size}} ha) </p>
+          </div>
+        </transition>
+      </div>
+      <div v-else>
+        <p class="regionText">Klicken Sie auf den Rechteck-Button in der Karte links-unten um ein neues Feld eizuzeichnen.</p>
+      </div>
     </div>
   </div>
 </template>
@@ -104,14 +106,19 @@ export default {
   position: fixed;
   float: right;
   padding-top: 20px;
+  padding-right: 20px;
   overflow-y: scroll;
   top: 60px;
   right: 0px;
   width: 275px;
   cursor: default;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 80px);
   background: #ececec;
   z-index: 94;
+}
+
+.content-pos {
+  padding-bottom: 50px;
 }
 
 .container {

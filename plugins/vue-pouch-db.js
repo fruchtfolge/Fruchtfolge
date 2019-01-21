@@ -36,6 +36,7 @@ const plots = Vue.prototype.$db.liveFind({
   selector: {
     type: 'plot'
   },
+  sort: [{name: 'asc'}],
   aggregate: true
 })
   .on('update', (update, aggregate) => {
@@ -51,6 +52,7 @@ const crops = Vue.prototype.$db.liveFind({
   selector: {
     type: 'crop'
   },
+  sort: [{name: 'asc'}],
   aggregate: true
 })
   .on('update', (update, aggregate) => {
