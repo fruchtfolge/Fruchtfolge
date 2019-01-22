@@ -40,7 +40,25 @@
           <button type="button" id='zid-btn' class="invekosBtn" name="zid-btn" @click="getElan">ABSENDEN</button>
           <button style="margin-left: 10px" type="button" id='zid-btn' class="invekosBtn" name="zid-btn" @click="deleteElanData">DATEN LÖSCHEN</button>          
         </div>
-
+        
+        <h1 style="padding-top: 40px; font-family: 'Open Sans Condensed'; font-weight: normal; letter-spacing: 0.2em">PERSÖNLICHE DATEN</h1>
+        <span>Persönlich angelegte Daten, z.B. Flächen, Kulturen oder Nebenbedingungen können an dieser Stelle für einzelne Jahre gelöscht werden. So können Sie beispielsweise verhindern, dass vorherige Planungsdaten als duplikate zu den Elan-Daten auftauchen.</span>
+        <div style="width: 100%; height: 12px; border-bottom: 1px solid black; text-align: center; margin-top: 40px; margin-bottom: 40px">
+        </div>
+        <div style="text-align: center;">
+          <select v-model="selectedDeleteYear" class="deleteYear" name="">
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+          </select>
+        </div>
+        <div style="text-align: center;">
+          <button type="button" id='zid-btn' class="invekosBtn" name="zid-btn" @click="deleteYear">LÖSCHEN</button>
+        </div>
     </div>
   </div>
 </template>
@@ -57,7 +75,8 @@ export default {
       curYear: 2019,
       street: '',
       city: '',
-      postcode: ''
+      postcode: '',
+      selectedDeleteYear: 2019
     }
   },
   notifications: {
@@ -151,6 +170,48 @@ export default {
         this.noAddressErr()
       }
     },
+    getLatestElanYear(year,month) {
+      // The Elan Download portal is generally updated on the 1st of September
+      if (month >= 8) return year
+      else return (year-1)
+    },
+    getOldestElanYear(year,month) {
+      // The data is generally downloadable for 5 years.
+      if (month >= 8) year = year + 1
+      if (year - 5 < 2016) return 2016
+      else return year - 5
+    },
+    range(start, end) {
+      return Array(end - start + 1).fill().map((_, idx) => start + idx)
+    },
+    getAvailYears() {
+      const date = new Date()
+      const year = date.getFullYear()
+      const month = date.getMonth()
+      
+      const latest = this.getLatestElanYear(year,month)
+      const oldest = this.getOldestElanYear(year,month)
+      
+      return this.range(oldest,latest)
+    },
+    async deleteYear() {
+      try {
+        const result = await this.$db.find({
+          selector: {year: this.selectedDeleteYear},
+          fields: ['_id','_rev']
+        })
+        console.log(result);
+        if (result && result.docs && result.docs.length > 0) {
+          const toDelete = result.docs.map(o => {o._deleted = true; return o})
+          await this.$db.bulkDocs(toDelete)
+          this.showZidSucc({title: 'DATEN GELÖSCHT', message: 'Die Daten wurden erfolgreich gelöscht.'})
+        } else {
+          this.showInfo({title: 'KEINE DATEN', message: 'Es wurden keine Daten gefunden.'})
+        }
+      } catch (e) {
+        
+      }
+    },
     async deleteElanData() {
       try {
         const result = await this.$db.find({
@@ -167,7 +228,12 @@ export default {
       } catch (err) {
         console.log(err);
       }
-    },
+    },    
+    async asyncForEach(array, callback) {
+      for (let index = 0; index < array.length; index++) {
+        await callback(array[index], index, array)
+      }
+    },  
     async getElan() {
       try {
         const settings = await this.$db.get('settings')
@@ -175,6 +241,15 @@ export default {
         console.log(this.zidId.length, stateCode, this.zidPass);
         if (this.zidId.length === 15 && stateCode === "276" && this.zidPass) {
           this.loading = true
+          // check if older elan data is already stored in db => only download new data
+          let years = this.getAvailYears()
+          years = years.filter(year => {
+            if (!settings.elanYears || settings.elanYears.indexOf(year) === -1) return year
+          })
+          if (years.length === 0) {
+            this.loading = false
+            return this.showInfo({title: 'DATEN AKTUELL', message: 'Die ELAN Daten sind auf dem neuesten Stand.'})
+          }
           settings.region = settings.state_district
           // if (!settings.home || !settings.region) return this.showAddressWarn()
           const farmno = this.zidId.slice(3)
@@ -182,17 +257,16 @@ export default {
           const request = {
             farmno: farmno,
             pass: this.zidPass,
-            years: [2016,2017,2018],
+            years: years,
             settings: settings
           }
           console.log(request);
           const { data } = await axios.post('http://localhost:3001/elan/', request)
           // save zid id in settings, however don't store password for security reasons
           settings.zidId = this.zidId
+          settings.elanYears = settings.elanYears ? years.concat(settings.elanYears) : years
           const update = data.concat(settings)
           await this.$db.bulkDocs(update)
-          console.log(settings)
-          console.log(await this.$db.get('settings'))
           this.loading = false
           this.showZidSucc()
         } else {
@@ -227,5 +301,17 @@ export default {
 .invekosBtn {
   margin-top: 20px;
   width: 241px;
+}
+.deleteYear {
+  width: 240px;
+  font-size: 18px;
+  border-color: black;
+  padding-left: 12px;
+  margin-bottom: 15px;
+  height: 40px;
+  padding-right: 25px;
+  background: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24' height='24' viewBox='0 0 24 24'><path fill='#444' d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'></path></svg>");
+  background-repeat: no-repeat;
+  background-position: 100% 50%;
 }
 </style>

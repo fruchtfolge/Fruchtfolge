@@ -107,6 +107,35 @@ function updateCurrent() {
   Vue.prototype.$bus.$emit('changeCurrents')
 }
 
+
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+// listen to import previous year event
+Vue.prototype.$bus.$on('importPrevYear', async () => {
+  try {
+    const curYear = Vue.prototype.$store.curYear 
+    const result = await Vue.prototype.$db.find({
+      selector: {year: curYear - 1}
+    }) 
+    if (result && result.docs && result.docs.length > 0) {
+      const data = result.docs.map(o => {
+        o._id = uuidv4()
+        delete o._rev
+        o.year = curYear
+        return o
+      })
+      await Vue.prototype.$db.bulkDocs(data)
+    }
+    console.log(result) 
+  } catch (e) {
+    console.log(e)
+  }
+})
 export default (ctx) => {
 
 }

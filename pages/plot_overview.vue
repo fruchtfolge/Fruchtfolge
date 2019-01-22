@@ -38,6 +38,12 @@
     </div>
     <div v-else style="text-align: center; margin-top: 100px;">
       <h2>Noch keine Schläge für das ausgewähle Planungsjahr und Szenario vorhanden.</h2>
+      <h2>
+      Sie können neue Schläge auf der Seite 'Karte' einzeichnen.
+      <br>
+      Alternativ können Sie Daten aus dem vorherigen Anbaujahr importieren.</h2>
+      <button @click="$nuxt.$router.replace({path: 'maps'})">ZUR KARTE</button>
+      <button @click="importPrev" style="margin-left: 20px;">IMPORTIEREN</button>
     </div>
   </div>
 </template>
@@ -50,7 +56,8 @@ export default {
     return {
       plots: null,
       selectedPlot: null,
-      curYear: 2019
+      curYear: 2019,
+      waiting: false
     }
   },
   computed: {
@@ -88,6 +95,10 @@ export default {
     update() {
       this.$set(this, 'plots', this.$store.curPlots)
       this.$set(this, 'curYear', this.$store.curYear)
+    },
+    importPrev() {
+      this.waiting = true
+      this.$bus.$emit('importPrevYear')
     }
   }
 }
