@@ -219,8 +219,12 @@ export default {
           fields: ['_id','_rev']
         })
         if (result && result.docs && result.docs.length > 0) {
+          const settings = await this.$db.get('settings')
           const toDelete = result.docs.map(o => {o._deleted = true; return o})
-          await this.$db.bulkDocs(toDelete)
+          delete settings.elanYears
+          const docs = toDelete.concat(settings)
+          await this.$db.bulkDocs(docs)
+          
           this.showZidSucc({title: 'DATEN GELÖSCHT', message: 'Die ELAN Daten wurden erfolgreich gelöscht.'})
         } else {
           this.showInfo()

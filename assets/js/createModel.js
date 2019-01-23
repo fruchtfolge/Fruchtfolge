@@ -12,6 +12,124 @@ export default {
       return ''
     }
   },
+  getMedianYieldCap(plots) {
+    // disregard plots with a SQR of 0
+    const sqrs = plots.map(plot => {if (plot.quality > 0) return plot.quality})
+    const sorted = sqrs.slice().sort()
+    const middle = Math.floor(sorted.length / 2)
+
+    if (sorted.length % 2 === 0) {
+      return _.round((sorted[middle - 1] + sorted[middle]) / 2,2)
+    }
+
+    return _.round(sorted[middle],2)
+  },
+  getCropFactAndRotBreak(curPlot,crops,plots,curCrop) {
+    let croppingFactor = 1
+    let rotBreakHeld = true
+    // get previous crops grown on the plot
+    const plotPrevYears = plots.filter(plot => {return (plot.id === curPlot.id && plot.year < curPlot.year)})
+    if (plotPrevYears.length > 0) {
+      // check if rotational break for crop is sufficient
+      const sortedPlots = _.sortBy(plotPrevYears, ['year'])
+      sortedPlots.forEach((plotYear,i) => {
+        if (plotYear.year > curPlot.year - curCrop.rotBreak 
+          && plotYear.crop === curCrop.code) rotBreakHeld = false
+        // calculate rotational value of previous crop / current crop combination
+        // however, adjust over time -> last years crop has greatest impact
+        // impact is exponentially decreasing over time
+        // we calculate the exponential moving average of the cropping factors
+        const plotYearCrop = _.find(crops, {code: plotYear.crop, year: plotYear.year})
+        if (i === sortedPlots.length - 1 && plotYearCrop) {
+          croppingFactor = plotYearCrop.subseqCrops[curCrop.cropGroup] / 10
+        } else if (i > 0) {
+          //const prevCrop = sortedPlots[i-1].crop
+          //const cropData = _.find(crops, {code: prevCrop, year: sortedPlots[i-1].year})
+          //let prevFactor = cropData.subseqCrops[plotYearCrop.cropGroup]
+          //prevFactor = prevFactor / (curPlot.year - plotYear.year) ** 2
+        }
+      })
+    }
+    return [croppingFactor,rotBreakHeld]
+  },
+  calculateDistanceCosts(curPlot,cropYield) {
+    if (cropYield > 100) cropYield = 100
+    const value = cropYield * (0.2915 * Math.abs(curPlot.distance - 2) + 1.4287) * curPlot.size
+    if (curPlot.distance > 2) return value
+    return value * -1
+  },
+  buildPlotCropMatrix(store) {
+    const attributes = ['price', 'yield', 'directCosts', 'variableCosts', 'fixCosts', 'grossMargin', 'revenue', 'distanceCosts', 'croppingFactor', 'yieldCap']
+    const matrix = {}
+    const medianYieldCap = this.getMedianYieldCap(store.curPlots)
+    
+    store.curPlots.forEach(plot => {
+      matrix[plot.id] = {}
+      const yieldCap = _.round(plot.quality / medianYieldCap)
+      store.crops.forEach(crop => {
+        if (!matrix[plot.id][crop.year]) matrix[plot.id][crop.year] = {}
+        const that = this
+        const cropFactAndRotBreak = this.getCropFactAndRotBreak(plot,store.crops,store.plots,crop)
+        const amount = _.round(_.sumBy(crop.contributionMargin.revenues, o => { return o.amount.value }))
+        const correctedAmount = _.round(amount * cropFactAndRotBreak[0] * yieldCap, 2)
+        const price = _.round(_.sumBy(crop.contributionMargin.revenues, o => { return o.total.value }) / amount, 2)
+        const revenue = _.round(cropFactAndRotBreak[0] * plot.quality / medianYieldCap * price * correctedAmount, 2)
+        const directCosts = _.round(_.sumBy(crop.contributionMargin.directCosts, o => { return o.total.value }), 2)
+        const variableCosts =  _.round(_.sumBy(crop.contributionMargin.variableCosts, o => { return o.total.value }), 2)
+        const distanceCosts = that.calculateDistanceCosts(plot,correctedAmount)
+        
+        matrix[plot.id][crop.year][crop.code] = {
+          'croppingFactor': cropFactAndRotBreak[0],
+          'rotBreakHeld': cropFactAndRotBreak[1],
+          'name': crop.name,
+          'active': crop.active,
+          'code': crop.code,
+          yieldCap,
+          amount,
+          correctedAmount,
+          price,
+          revenue,
+          directCosts,
+          variableCosts,
+          distanceCosts,
+          'grossMargin': _.round(revenue - directCosts - variableCosts - distanceCosts),
+          'fixCosts': _.round(_.sumBy(crop.contributionMargin.fixCosts, o => { return o.total.value }), 2),
+          'size': plot.size
+        }
+      })
+    })
+    return matrix
+  },
+  buildModel(matrix,store) {
+    const year = store.curYear
+    let include = ''
+    // create set with all possible plots
+    include += 'set plots /\n'
+    Object.keys(matrix).forEach(plot => {
+      include += `'${plot}'\n`
+    })
+    include += '/;\n\n'
+    // create set with all possible crops
+    include += 'set crops /\n'
+    store.curCrops.forEach(crop => {
+      include += `'${crop.code}'\n`
+    })
+    include += '/;\n\n'
+    // create parameter containing gross margins per plot
+    include += 'parameter p_grossMargin(plots,crops) /\n'
+    store.curPlots.forEach(plot => {
+      store.curCrops.forEach(crop => {
+        crop = matrix[plot.id][year][crop.code]
+        if (crop.rotBreakHeld && crop.active) {
+          include += `'${plot.id}'.'${crop.code}' ${crop.grossMargin}\n`
+        }
+      })
+    })
+    include += '/;\n\n'
+    return include
+    // add constraints
+  },
+  /*
   createInclude(properties) {
     console.log('createInclude');
     let include =
@@ -156,12 +274,13 @@ set curYear(years) / ${properties.curYear} /;
     include += this.save('parameter p_constraint(constraints,curCrops,curCrops)',p_constraint)
     include += this.save('set constraints_lt(constraints,symbol)',constraints_lt)
 
-    /*
+    //
     fs.writeFileSync('test.gms',include,'utf-8')
     res.writeHead(200, {"Content-Type": "application/json"})
     res.write('bla')
     res.end()
-    */
+    //
     return include
   }
+  */
 }
