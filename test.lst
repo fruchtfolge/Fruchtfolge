@@ -1,4 +1,4 @@
-GAMS 25.1.2  r67455 Released Aug  1, 2018 WEX-WEI x86 64bit/MS Windows                                                                                                                                                                 01/23/19 17:58:54 Page 1
+GAMS 25.1.2  r67455 Released Aug  1, 2018 WEX-WEI x86 64bit/MS Windows                                                                                                                                                                 01/24/19 09:51:30 Page 1
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 C o m p i l a t i o n
 
@@ -99,18 +99,18 @@ C o m p i l a t i o n
   94  /;
   95   
   96  parameter p_grossMargin(plots,crops) /
-  97  '372'.'602' 5391
-  98  '372'.'634' -4805
-  99  '372'.'411' 599
- 100  '372'.'115' 457
- 101  '372'.'603' 976
- 102  '372'.'633' -2597
- 103  '37'.'220' 81
- 104  '37'.'602' 5395
- 105  '37'.'634' -4796
- 106  '37'.'115' 28
- 107  '37'.'603' -802
- 108  '37'.'633' -2596
+  97  '37'.'220' 81
+  98  '37'.'602' 5395
+  99  '37'.'634' -4796
+ 100  '37'.'115' 28
+ 101  '37'.'603' -802
+ 102  '37'.'633' -2596
+ 103  '372'.'602' 5391
+ 104  '372'.'634' -4805
+ 105  '372'.'411' 599
+ 106  '372'.'115' 457
+ 107  '372'.'603' 976
+ 108  '372'.'633' -2597
  109  '1002'.'220' 115
  110  '1002'.'602' 5829
  111  '1002'.'634' -4479
@@ -148,18 +148,18 @@ C o m p i l a t i o n
  143  '137'.'115' 587
  144  '137'.'603' 1368
  145  '137'.'633' -1993
- 146  '1050'.'220' 103
- 147  '1050'.'602' 5637
- 148  '1050'.'634' 11366
- 149  '1050'.'411' 839
- 150  '1050'.'603' 1304
- 151  '1050'.'633' 31871
- 152  '1011'.'220' 89
- 153  '1011'.'602' 5488
- 154  '1011'.'634' -4588
- 155  '1011'.'115' 41
- 156  '1011'.'603' -753
- 157  '1011'.'633' -2567
+ 146  '1011'.'220' 89
+ 147  '1011'.'602' 5488
+ 148  '1011'.'634' -4588
+ 149  '1011'.'115' 41
+ 150  '1011'.'603' -753
+ 151  '1011'.'633' -2567
+ 152  '1050'.'220' 103
+ 153  '1050'.'602' 5637
+ 154  '1050'.'634' 11366
+ 155  '1050'.'411' 839
+ 156  '1050'.'603' 1304
+ 157  '1050'.'633' 31871
  158  '119'.'220' -296
  159  '119'.'602' 2807
  160  '119'.'634' -3781
@@ -184,18 +184,18 @@ C o m p i l a t i o n
  179  '371'.'411' 621
  180  '371'.'115' 31
  181  '371'.'603' -945
- 182  '2'.'220' -93
- 183  '2'.'634' -3164
- 184  '2'.'411' 523
- 185  '2'.'115' 588
- 186  '2'.'603' 1961
- 187  '2'.'633' -2374
- 188  '201'.'220' -129
- 189  '201'.'634' -4313
- 190  '201'.'411' 118
- 191  '201'.'115' 496
- 192  '201'.'603' 1271
- 193  '201'.'633' -2530
+ 182  '201'.'220' -129
+ 183  '201'.'634' -4313
+ 184  '201'.'411' 118
+ 185  '201'.'115' 496
+ 186  '201'.'603' 1271
+ 187  '201'.'633' -2530
+ 188  '2'.'220' -93
+ 189  '2'.'634' -3164
+ 190  '2'.'411' 523
+ 191  '2'.'115' 588
+ 192  '2'.'603' 1961
+ 193  '2'.'633' -2374
  194  '1371'.'220' -431
  195  '1371'.'602' 411
  196  '1371'.'634' -3806
@@ -274,18 +274,18 @@ C o m p i l a t i o n
  269  '75'.'115' 388
  270  '75'.'603' 896
  271  '75'.'633' -3001
- 272  '86'.'220' -150
- 273  '86'.'634' -4763
- 274  '86'.'411' -42
- 275  '86'.'115' 440
- 276  '86'.'603' 994
- 277  '86'.'633' -2721
- 278  '88'.'220' -142
- 279  '88'.'634' -4514
- 280  '88'.'411' 45
- 281  '88'.'115' 460
- 282  '88'.'603' 1144
- 283  '88'.'633' -2687
+ 272  '88'.'220' -142
+ 273  '88'.'634' -4514
+ 274  '88'.'411' 45
+ 275  '88'.'115' 460
+ 276  '88'.'603' 1144
+ 277  '88'.'633' -2687
+ 278  '86'.'220' -150
+ 279  '86'.'634' -4763
+ 280  '86'.'411' -42
+ 281  '86'.'115' 440
+ 282  '86'.'603' 994
+ 283  '86'.'633' -2721
  284  '56'.'220' -437
  285  '56'.'602' 300
  286  '56'.'411' 858
@@ -352,18 +352,18 @@ C o m p i l a t i o n
  347  '39'.'411' 687
  348  '39'.'603' 1097
  349  '39'.'633' 31753
- 350  '481'.'602' 5522
- 351  '481'.'634' -4514
- 352  '481'.'411' 727
- 353  '481'.'115' 480
- 354  '481'.'603' 1151
- 355  '481'.'633' -2557
- 356  '48'.'602' 6365
- 357  '48'.'634' -3936
- 358  '48'.'411' 1023
- 359  '48'.'115' 608
- 360  '48'.'603' 1524
- 361  '48'.'633' -1957
+ 350  '48'.'602' 6365
+ 351  '48'.'634' -3936
+ 352  '48'.'411' 1023
+ 353  '48'.'115' 608
+ 354  '48'.'603' 1524
+ 355  '48'.'633' -1957
+ 356  '481'.'602' 5522
+ 357  '481'.'634' -4514
+ 358  '481'.'411' 727
+ 359  '481'.'115' 480
+ 360  '481'.'603' 1151
+ 361  '481'.'633' -2557
  362  '138'.'220' 125
  363  '138'.'602' 5888
  364  '138'.'634' -3701
@@ -394,18 +394,18 @@ C o m p i l a t i o n
  389  '6'.'115' 539
  390  '6'.'603' 1301
  391  '6'.'633' -2266
- 392  '117'.'220' 88
- 393  '117'.'602' 5467
- 394  '117'.'634' -4635
- 395  '117'.'115' 38
- 396  '117'.'603' -764
- 397  '117'.'633' -2574
- 398  '46'.'220' 98
- 399  '46'.'602' 5587
- 400  '46'.'634' -4370
- 401  '46'.'115' 55
- 402  '46'.'603' -700
- 403  '46'.'633' -2538
+ 392  '46'.'220' 98
+ 393  '46'.'602' 5587
+ 394  '46'.'634' -4370
+ 395  '46'.'115' 55
+ 396  '46'.'603' -700
+ 397  '46'.'633' -2538
+ 398  '117'.'220' 88
+ 399  '117'.'602' 5467
+ 400  '117'.'634' -4635
+ 401  '117'.'115' 38
+ 402  '117'.'603' -764
+ 403  '117'.'633' -2574
  404  '132'.'220' 55
  405  '132'.'602' 5053
  406  '132'.'634' 10052
@@ -485,13 +485,13 @@ C o m p i l a t i o n
  480  '120'.'411' 881
  481  '120'.'603' 1330
  482  '120'.'633' 35257
- 483  '133'.'220' 63
- 484  '133'.'602' 5142
- 485  '133'.'634' 10249
- 486  '133'.'411' 620
- 487  '133'.'115' 424
- 488  '133'.'603' 1020
- 489  '133'.'633' 30024
+ 483  '134'.'220' -548
+ 484  '134'.'602' -2820
+ 485  '134'.'634' -7827
+ 486  '134'.'411' -1226
+ 487  '134'.'115' -738
+ 488  '134'.'603' -1152
+ 489  '134'.'633' -9131
  490  '135'.'220' 53
  491  '135'.'602' 5024
  492  '135'.'634' 9986
@@ -499,13 +499,13 @@ C o m p i l a t i o n
  494  '135'.'115' 403
  495  '135'.'603' 862
  496  '135'.'633' 29935
- 497  '134'.'220' -548
- 498  '134'.'602' -2820
- 499  '134'.'634' -7827
- 500  '134'.'411' -1226
- 501  '134'.'115' -738
- 502  '134'.'603' -1152
- 503  '134'.'633' -9131
+ 497  '133'.'220' 63
+ 498  '133'.'602' 5142
+ 499  '133'.'634' 10249
+ 500  '133'.'411' 620
+ 501  '133'.'115' 424
+ 502  '133'.'603' 1020
+ 503  '133'.'633' 30024
  504  '1'.'220' 106
  505  '1'.'602' 5674
  506  '1'.'634' -4175
@@ -605,30 +605,48 @@ C o m p i l a t i o n
  600  /;
  601   
  602  Variable v_obje;
- 603  Binary Variable v_binCropPlot(crops,plots);
+ 603      Binary Variable v_binCropPlot(crops,plots);
  604   
- 605  Equations
- 606    e_obje
- 607    e_oneCropPlot(plots)
- 608  ;
+ 605      Equations
+ 606        e_obje
+ 607        e_oneCropPlot(plots)
+ 608      ;
  609   
- 610  e_oneCropPlot(plots)..
- 611    sum(crops, v_binCropPlot(crops,plots))
- 612    =L= 1
- 613  ;
+ 610      e_oneCropPlot(plots)..
+ 611        sum(crops, v_binCropPlot(crops,plots))
+ 612        =L= 1
+ 613      ;
  614   
- 615  e_obje..
- 616    v_obje =E=
- 617      sum((plots,crops),
- 618      v_binCropPlot(crops,plots)
- 619      * p_grossMargin(plots,crops))
+ 615      e_obje..
+ 616        v_obje =E=
+ 617          sum((plots,crops),
+ 618          v_binCropPlot(crops,plots)
+ 619          * p_grossMargin(plots,crops));
  620   
- 621  model Fruchtfolge / all /;
- 622  solve Fruchtfolge using MIP maximizing v_obje;
+ 621      model Fruchtfolge / all /;
+ 622      solve Fruchtfolge using MIP maximizing v_obje;
+ 623   
+ 624  File results / results.json /;
+ 625  results.lw = 40;
+ 626  put results;
+ 627  put "{"
+ 628  put '"model_status":',  Fruchtfolge.modelstat, "," /;
+ 629  put '"solver_status":', Fruchtfolge.solvestat, "," /;
+ 630  put '"objective":', v_obje.l, "," /;
+ 631  put '"recommendation":', "{"/;
+ 632  loop((plots),
+ 633    loop(crops,
+ 634      put$(v_binCropPlot.l(crops,plots) > 0) '"', plots.tl, '":', '"', crops.tl, '"' /
+ 635    )
+ 636    put$(ord(plots) < card(plots)) "," /
+ 637  );
+ 638  put "}" /;
+ 639  put "}" /;
+ 640  putclose;
 
 
-COMPILATION TIME     =        0.015 SECONDS      3 MB  25.1.2 r67455 WEX-WEI
-GAMS 25.1.2  r67455 Released Aug  1, 2018 WEX-WEI x86 64bit/MS Windows                                                                                                                                                                 01/23/19 17:58:54 Page 2
+COMPILATION TIME     =        0.031 SECONDS      3 MB  25.1.2 r67455 WEX-WEI
+GAMS 25.1.2  r67455 Released Aug  1, 2018 WEX-WEI x86 64bit/MS Windows                                                                                                                                                                 01/24/19 09:51:30 Page 2
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 Equation Listing    SOLVE Fruchtfolge Using MIP From line 622
 
@@ -772,7 +790,7 @@ e_oneCropPlot(6)..  v_binCropPlot(115,6) + v_binCropPlot(220,6) + v_binCropPlot(
      
 REMAINING 79 ENTRIES SKIPPED
 
-GAMS 25.1.2  r67455 Released Aug  1, 2018 WEX-WEI x86 64bit/MS Windows                                                                                                                                                                 01/23/19 17:58:54 Page 3
+GAMS 25.1.2  r67455 Released Aug  1, 2018 WEX-WEI x86 64bit/MS Windows                                                                                                                                                                 01/24/19 09:51:30 Page 3
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 Column Listing      SOLVE Fruchtfolge Using MIP From line 622
 
@@ -802,7 +820,7 @@ v_binCropPlot(115,6)
         1       e_oneCropPlot(6)
 
 REMAINING 571 ENTRIES SKIPPED
-GAMS 25.1.2  r67455 Released Aug  1, 2018 WEX-WEI x86 64bit/MS Windows                                                                                                                                                                 01/23/19 17:58:54 Page 4
+GAMS 25.1.2  r67455 Released Aug  1, 2018 WEX-WEI x86 64bit/MS Windows                                                                                                                                                                 01/24/19 09:51:30 Page 4
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 Model Statistics    SOLVE Fruchtfolge Using MIP From line 622
 
@@ -814,11 +832,11 @@ BLOCKS OF VARIABLES           2     SINGLE VARIABLES          575
 NON ZERO ELEMENTS         1,078     DISCRETE VARIABLES        574
 
 
-GENERATION TIME      =        0.031 SECONDS      4 MB  25.1.2 r67455 WEX-WEI
+GENERATION TIME      =        0.125 SECONDS      4 MB  25.1.2 r67455 WEX-WEI
 
 
-EXECUTION TIME       =        0.047 SECONDS      4 MB  25.1.2 r67455 WEX-WEI
-GAMS 25.1.2  r67455 Released Aug  1, 2018 WEX-WEI x86 64bit/MS Windows                                                                                                                                                                 01/23/19 17:58:54 Page 5
+EXECUTION TIME       =        0.125 SECONDS      4 MB  25.1.2 r67455 WEX-WEI
+GAMS 25.1.2  r67455 Released Aug  1, 2018 WEX-WEI x86 64bit/MS Windows                                                                                                                                                                 01/24/19 09:51:30 Page 5
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 Solution Report     SOLVE Fruchtfolge Using MIP From line 622
 
@@ -833,7 +851,7 @@ Solution Report     SOLVE Fruchtfolge Using MIP From line 622
 **** MODEL STATUS      1 Optimal                   
 **** OBJECTIVE VALUE           915468.0000
 
- RESOURCE USAGE, LIMIT          0.313      1000.000
+ RESOURCE USAGE, LIMIT          0.344      1000.000
  ITERATION COUNT, LIMIT         0    2000000000
 
 IBM ILOG CPLEX   25.1.2 r67455 Released Aug  1, 2018 WEI x86 64bit/MS Windows 
@@ -843,10 +861,10 @@ Cplex 12.8.0.0
 Space for names approximately 0.02 Mb
 Use option 'names no' to turn use of names off
 MIP status(101): integer optimal solution
-Cplex Time: 0.08sec (det. 0.29 ticks)
+Cplex Time: 0.09sec (det. 0.29 ticks)
 Fixing integer variables, and solving final LP...
 Fixed MIP status(1): optimal
-Cplex Time: 0.05sec (det. 0.19 ticks)
+Cplex Time: 0.03sec (det. 0.19 ticks)
 Proven optimal solution.
 
 MIP Solution:       915468.000000    (0 iterations, 0 nodes)
@@ -1535,9 +1553,17 @@ Relative gap:            0.000000
 **** REPORT SUMMARY :        0     NONOPT
                              0 INFEASIBLE
                              0  UNBOUNDED
+GAMS 25.1.2  r67455 Released Aug  1, 2018 WEX-WEI x86 64bit/MS Windows                                                                                                                                                                 01/24/19 09:51:30 Page 6
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+E x e c u t i o n
 
 
-EXECUTION TIME       =        0.015 SECONDS      2 MB  25.1.2 r67455 WEX-WEI
+**** REPORT FILE SUMMARY
+
+results C:\Users\pahmeyer\Documents\Fruchtfolge-Electron\Fruchtfolge\results.json
+
+
+EXECUTION TIME       =        0.032 SECONDS      3 MB  25.1.2 r67455 WEX-WEI
 
 
 USER: Large MUD - 20 User License                    S171124:0551AO-WIN

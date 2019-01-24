@@ -1,0 +1,91 @@
+<template lang="html">
+  <div>
+    <div class="cropShares-wrapper">
+      <canvas id="cropShares-chart"></canvas>
+    </div>
+  </div>
+</template>
+<script>
+import Chart from 'chart.js'
+
+export default {
+  data() {
+    return {
+      cropShares: undefined,
+      dataset: undefined
+    }
+  },
+  mounted() {
+    this.prepareData()
+    this.createChart('cropShares-chart', this.cropShares)
+  },
+  props: {
+    shares: {
+      type: Array,
+      required: true
+    }
+  },
+  methods: {
+    prepareData() {
+      this.dataset = {}
+      this.dataset.data = []
+      this.dataset.backgroundColor = []
+      this.dataset.labels = []
+
+      this.shares.forEach(crop => {
+        this.dataset.data.push(crop.data)
+        this.dataset.backgroundColor.push(crop.backgroundColor)
+        this.dataset.labels.push(crop.name)
+      })
+    },
+    createChart(chartId, chartData) {
+      Chart.defaults.global.defaultFontFamily = "Open Sans Light";
+      Chart.defaults.global.defaultFontSize = 16;
+
+      const config = {
+        type: 'pie',
+        data: {
+          datasets: [{
+            data: this.dataset.data,
+            backgroundColor: this.dataset.backgroundColor,
+            label: 'Summe Kulturen'
+          }],
+          labels: this.dataset.labels
+        },
+        options: {
+          responsive: false,
+          legend: {
+            position: "bottom"
+          },
+          tooltips: {
+            callbacks: {
+              label: function(tooltipItem, data) {
+                var value = data.datasets[0].data[tooltipItem.index];
+                var label = data.labels[tooltipItem.index];
+                //                      var percentage = Math.round(value / totalSessions * 100);
+                return label + ': ' + value + ' ha';
+              }
+            },
+            xPadding: 6,
+            yPadding: 7,
+            displayColors: false
+          }
+        }
+      }
+      const ctx = document.getElementById(chartId)
+      this.cropShares = new Chart(ctx, config)
+      console.log(this.cropShares);
+    }
+  }
+}
+</script>
+<style>
+#cropShares-chart {
+  margin-top: 80px;
+}
+
+.cropShares-wrapper {
+  width: calc(100% - 275px);
+  height: calc(85vh - 150px);
+}
+</style>

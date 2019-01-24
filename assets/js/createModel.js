@@ -126,8 +126,51 @@ export default {
       })
     })
     include += '/;\n\n'
-    return include
     // add constraints
+    
+    // load Fruchtfolge base model
+    const baseModel = `Variable v_obje;
+    Binary Variable v_binCropPlot(crops,plots);
+
+    Equations
+      e_obje
+      e_oneCropPlot(plots)
+    ;
+
+    e_oneCropPlot(plots)..
+      sum(crops, v_binCropPlot(crops,plots))
+      =E= 1
+    ;
+
+    e_obje..
+      v_obje =E=
+        sum((plots,crops),
+        v_binCropPlot(crops,plots)
+        * p_grossMargin(plots,crops));
+        
+    model Fruchtfolge / all /;
+    solve Fruchtfolge using MIP maximizing v_obje;
+    
+    File results / %random% /;
+    results.lw = 40;
+    put results;
+    put "{"
+    put '"model_status":',  Fruchtfolge.modelstat, "," /;
+    put '"solver_status":', Fruchtfolge.solvestat, "," /;
+    put '"objective":', v_obje.l, "," /;
+    put '"recommendation":', "{"/;
+    loop((plots),
+      loop(crops,
+        put$(v_binCropPlot.l(crops,plots) > 0) '"', plots.tl, '":', '"', crops.tl, '"' /
+      )
+      put$(ord(plots) < card(plots)) "," /
+    );
+    put "}" /;
+    put "}" /;
+    putclose;`
+    // const baseModel = require('fruchtfolge-model')
+    
+    return include.concat(baseModel)
   },
   /*
   createInclude(properties) {
