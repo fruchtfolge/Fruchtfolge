@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <div class="cropShares-wrapper">
-      <canvas id="cropShares-chart"></canvas>
+      <canvas id="cropShares-chart" width="280" height="280"></canvas>
     </div>
   </div>
 </template>
@@ -40,7 +40,7 @@ export default {
     },
     createChart(chartId, chartData) {
       Chart.defaults.global.defaultFontFamily = "Open Sans Light";
-      Chart.defaults.global.defaultFontSize = 16;
+      Chart.defaults.global.defaultFontSize = 14;
 
       const config = {
         type: 'pie',
@@ -62,7 +62,6 @@ export default {
               label: function(tooltipItem, data) {
                 var value = data.datasets[0].data[tooltipItem.index];
                 var label = data.labels[tooltipItem.index];
-                //                      var percentage = Math.round(value / totalSessions * 100);
                 return label + ': ' + value + ' ha';
               }
             },
@@ -72,7 +71,7 @@ export default {
           }
         }
       }
-      const ctx = document.getElementById(chartId)
+      const ctx = document.getElementById(chartId).getContext('2d')
       this.cropShares = new Chart(ctx, config)
       console.log(this.cropShares);
     }
@@ -81,11 +80,11 @@ export default {
 </script>
 <style>
 #cropShares-chart {
-  margin-top: 80px;
+  
 }
 
 .cropShares-wrapper {
-  width: calc(100% - 275px);
-  height: calc(85vh - 150px);
+  margin-left: 60px;
+  margin-top: 80px;
 }
 </style>

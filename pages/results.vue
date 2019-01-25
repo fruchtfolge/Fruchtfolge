@@ -1,37 +1,44 @@
 <template>
   <div class="">
     <div v-if="plotCropMatrix && result">
-      <table class="result-table">
-        <thead>
-          <tr>
-            <th style="min-width: 150px;">Name</th>
-            <th>Größe</th>
-            <th>Hof-Feld-Distanz</th>
-            <!--
-            <th style="min-width: 200px;">{{ curYear - 3 }}</th>
-            <th style="min-width: 200px;">{{ curYear - 2 }}</th>
-          -->
-            <th style="min-width: 150px;">{{ curYear - 1 }}</th>
-            <th style="min-width: 150px;">Empfehlung {{ curYear }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(plot, i) in plots" :key='i'>
-            <td style="text-align: center;">{{ plot.name }}</td>
-            <td style="text-align: center;">{{ plot.size }}</td>
-            <td style="text-align: center;">{{ plot.distance }}</td>
-            <!--
-            <td style="text-align: center;">{{ plotsPrevCrops[plot.id][curYear - 3] }}</td>
-            <td style="text-align: center;">{{ plotsPrevCrops[plot.id][curYear - 2] }}</td>
-          -->
-            <td style="text-align: center;">{{ plotsPrevCrops[plot.id][curYear - 1] }}</td>
-            <td style="text-align: center;">{{ plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].name }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="crop-shares">
-        <cropShares :shares="calcCropShares"/>
-      </div>
+      <div class="result-wrapper">
+        <table class="result-table">
+          <thead>
+            <tr>
+              <th style="min-width: 150px;">Name</th>
+              <th>Größe</th>
+              <th>Hof-Feld-Distanz</th>
+              <!--
+              <th style="min-width: 200px;">{{ curYear - 3 }}</th>
+              <th style="min-width: 200px;">{{ curYear - 2 }}</th>
+            -->
+              <th style="min-width: 150px;">{{ curYear - 1 }}</th>
+              <th style="min-width: 150px;">Empfehlung {{ curYear }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(plot, i) in plots" :key='i'>
+              <td style="text-align: center;">{{ plot.name }}</td>
+              <td style="text-align: center;">{{ plot.size }}</td>
+              <td style="text-align: center;">{{ plot.distance }}</td>
+              <!--
+              <td style="text-align: center;">{{ plotsPrevCrops[plot.id][curYear - 3] }}</td>
+              <td style="text-align: center;">{{ plotsPrevCrops[plot.id][curYear - 2] }}</td>
+            -->
+              <td style="text-align: center;">{{ plotsPrevCrops[plot.id][curYear - 1] }}</td>
+              <td style="text-align: center;">{{ plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].name }}</td>
+            </tr>
+            <tr>
+              <td colspan="3">Summe</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="crop-shares">
+          <cropShares :shares="calcCropShares"/>
+        </div>
+    </div>
+
     </div>
     <div v-else>
       <button type="button" name="button" @click="solve">Test</button>
@@ -134,7 +141,14 @@ export default {
 }
 </script>
 <style>
+.result-wrapper {
+  display: inline-flex;
+}
 .result-table {
-  
+  float: left;
+  margin: 0;
+  margin-top: 20px;
+  margin-left: 20px;
+  max-width: calc(100vw/2);
 }
 </style>
