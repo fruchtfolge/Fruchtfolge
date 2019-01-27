@@ -33,7 +33,7 @@ export default {
       // check if rotational break for crop is sufficient
       const sortedPlots = _.sortBy(plotPrevYears, ['year'])
       sortedPlots.forEach((plotYear,i) => {
-        if (plotYear.year > curPlot.year - curCrop.rotBreak 
+        if (plotYear.year > curPlot.year - curCrop.rotBreak
           && plotYear.crop === curCrop.code) rotBreakHeld = false
         // calculate rotational value of previous crop / current crop combination
         // however, adjust over time -> last years crop has greatest impact
@@ -62,7 +62,7 @@ export default {
     const attributes = ['price', 'yield', 'directCosts', 'variableCosts', 'fixCosts', 'grossMargin', 'revenue', 'distanceCosts', 'croppingFactor', 'yieldCap']
     const matrix = {}
     const medianYieldCap = this.getMedianYieldCap(store.curPlots)
-    
+
     store.curPlots.forEach(plot => {
       matrix[plot.id] = {}
       const yieldCap = _.round(plot.quality / medianYieldCap)
@@ -77,7 +77,7 @@ export default {
         const directCosts = _.round(_.sumBy(crop.contributionMargin.directCosts, o => { return o.total.value }), 2)
         const variableCosts =  _.round(_.sumBy(crop.contributionMargin.variableCosts, o => { return o.total.value }), 2)
         const distanceCosts = that.calculateDistanceCosts(plot,correctedAmount)
-        
+
         matrix[plot.id][crop.year][crop.code] = {
           'croppingFactor': cropFactAndRotBreak[0],
           'rotBreakHeld': cropFactAndRotBreak[1],
@@ -92,7 +92,7 @@ export default {
           directCosts,
           variableCosts,
           distanceCosts,
-          'grossMargin': _.round(revenue - directCosts - variableCosts - distanceCosts),
+          'grossMargin': _.round((revenue - directCosts - variableCosts - distanceCosts)*plot.size),
           'fixCosts': _.round(_.sumBy(crop.contributionMargin.fixCosts, o => { return o.total.value }), 2),
           'size': plot.size
         }
@@ -127,7 +127,7 @@ export default {
     })
     include += '/;\n\n'
     // add constraints
-    
+
     // load Fruchtfolge base model
     const baseModel = `Variable v_obje;
     Binary Variable v_binCropPlot(crops,plots);
@@ -142,15 +142,18 @@ export default {
       =E= 1
     ;
 
+    v_binCropPlot.up(crops,plots) $ (not p_grossMargin(plots,crops)) = 0;
+
     e_obje..
       v_obje =E=
         sum((plots,crops),
         v_binCropPlot(crops,plots)
         * p_grossMargin(plots,crops));
-        
+
+    option optCR=0;
     model Fruchtfolge / all /;
     solve Fruchtfolge using MIP maximizing v_obje;
-    
+
     File results / %random% /;
     results.lw = 40;
     put results;
@@ -169,7 +172,7 @@ export default {
     put "}" /;
     putclose;`
     // const baseModel = require('fruchtfolge-model')
-    
+
     return include.concat(baseModel)
   },
   /*

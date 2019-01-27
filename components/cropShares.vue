@@ -15,6 +15,16 @@ export default {
       dataset: undefined
     }
   },
+  watch: {
+    shares(val) {
+      console.log(this.shares);
+      this.prepareData()
+      this.cropShares.data.datasets[0].data = this.dataset.data
+      this.cropShares.data.datasets[0].backgroundColor = this.dataset.backgroundColor
+      this.cropShares.data.labels = this.dataset.labels
+      this.cropShares.update()
+    },
+  },
   mounted() {
     this.prepareData()
     this.createChart('cropShares-chart', this.cropShares)
@@ -80,7 +90,7 @@ export default {
 </script>
 <style>
 #cropShares-chart {
-  
+
 }
 
 .cropShares-wrapper {
