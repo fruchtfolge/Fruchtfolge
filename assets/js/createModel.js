@@ -54,7 +54,7 @@ export default {
   },
   calculateDistanceCosts(curPlot,cropYield) {
     if (cropYield > 100) cropYield = 100
-    const value = cropYield * (0.2915 * Math.abs(curPlot.distance - 2) + 1.4287) * curPlot.size
+    const value = cropYield * (0.2915 * Math.abs(curPlot.distance - 2) + 1.4287)
     if (curPlot.distance > 2) return value
     return value * -1
   },
@@ -65,7 +65,7 @@ export default {
 
     store.curPlots.forEach(plot => {
       matrix[plot.id] = {}
-      const yieldCap = _.round(plot.quality / medianYieldCap)
+      const yieldCap = _.round(plot.quality / medianYieldCap,2)
       store.crops.forEach(crop => {
         if (!matrix[plot.id][crop.year]) matrix[plot.id][crop.year] = {}
         const that = this
@@ -73,7 +73,7 @@ export default {
         const amount = _.round(_.sumBy(crop.contributionMargin.revenues, o => { return o.amount.value }))
         const correctedAmount = _.round(amount * cropFactAndRotBreak[0] * yieldCap, 2)
         const price = _.round(_.sumBy(crop.contributionMargin.revenues, o => { return o.total.value }) / amount, 2)
-        const revenue = _.round(cropFactAndRotBreak[0] * plot.quality / medianYieldCap * price * correctedAmount, 2)
+        const revenue = _.round(cropFactAndRotBreak[0] * price * correctedAmount, 2)
         const directCosts = _.round(_.sumBy(crop.contributionMargin.directCosts, o => { return o.total.value }), 2)
         const variableCosts =  _.round(_.sumBy(crop.contributionMargin.variableCosts, o => { return o.total.value }), 2)
         const distanceCosts = that.calculateDistanceCosts(plot,correctedAmount)
@@ -92,7 +92,8 @@ export default {
           directCosts,
           variableCosts,
           distanceCosts,
-          'grossMargin': _.round((revenue - directCosts - variableCosts - distanceCosts)*plot.size),
+          'grossMarginHa': _.round(revenue - directCosts - variableCosts - distanceCosts,2),
+          'grossMargin': _.round((revenue - directCosts - variableCosts - distanceCosts) * plot.size),
           'fixCosts': _.round(_.sumBy(crop.contributionMargin.fixCosts, o => { return o.total.value }), 2),
           'size': plot.size
         }

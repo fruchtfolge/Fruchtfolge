@@ -86,47 +86,57 @@
                         <tr>
                           <td>Leistungen</td>
                           <td style="text-align:center;">{{
-                            plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].price}}
-                          </td>
+                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].price)
+                          }}</td>
                           <td style="text-align:center;">{{
                             plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].correctedAmount
                           }}</td>
                           <td style="text-align:center;">{{
-                            plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].revenue
+                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].revenue)
                           }}</td>
                           <td style="text-align:center;">{{
-                            plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].revenue
-                            * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size
+                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].revenue
+                            * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
                           }}</td>
                         </tr>
                         <tr>
                           <td colspan="3">Direktkosten</td>
                           <td style="text-align:center;">{{
-                            plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].directCosts
+                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].directCosts)
                           }}</td>
                           <td style="text-align:center;">{{
-                            plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].directCosts
-                            * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size
+                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].directCosts
+                            * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
                           }}</td>
                         </tr>
                         <tr>
                           <td colspan="3">Maschinenkosten</td>
                           <td style="text-align:center;">{{
-                            plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].variableCosts
+                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].variableCosts)
                           }}</td>
                           <td style="text-align:center;">{{
-                            plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].variableCosts
-                            * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size
+                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].variableCosts
+                            * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
                           }}</td>
                         </tr>
                         <tr>
                           <td colspan="3">Transportkosten</td>
                           <td style="text-align:center;">{{
-                            plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].distanceCosts
+                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].distanceCosts)
                           }}</td>
                           <td style="text-align:center;">{{
-                            plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].distanceCosts
-                            * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size
+                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].distanceCosts
+                            * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
+                          }}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="3">Deckungsbeitrag</td>
+                          <td style="text-align:center;">{{
+                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].grossMarginHa)
+                          }}</td>
+                          <td style="text-align:center;">{{
+                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].grossMarginHa
+                            * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
                           }}</td>
                         </tr>
                       </tbody>
@@ -339,6 +349,7 @@ export default {
   min-width: 0px;
   max-width: 0px;
 }
+
 .inner-table th {
   height: 25px;
 }
