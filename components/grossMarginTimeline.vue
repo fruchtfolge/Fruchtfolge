@@ -28,7 +28,7 @@ export default {
   },
   mounted() {
     this.prepareData()
-    this.createChart('grossMarginTimeline-chart', this.grossMarginTimeline)
+    //this.createChart('grossMarginTimeline-chart', this.grossMarginTimeline)
   },
   props: {
     plotsPrevCrops: {
@@ -52,15 +52,31 @@ export default {
       const curYear = this.$store.curYear
       const years = Array(curYear - (curYear - 10)).fill(0).map((e,i)=>i+(curYear-9))
       for (var i = 0; i < 3; i++) {
+        let data = []
         years.forEach(year => {
           const o = {}
           // calculate total db for cropping plan of curYear - i under prices/yields/directCosts of year
-          let db = 0
+          let grossMargins = []
+          let grossMargin = 0
           if (i === 0) {
-            db = Object.keys(plotCropMatrix).map(plot => return plotCropMatrix[plot][curYear][result[recommendation][plot]].grossMargin)
+            grossMargins = Object.keys(this.plotCropMatrix).map(plot => {
+              if (this.plotCropMatrix[plot][year][this.result.recommendation[plot]]) {
+                return this.plotCropMatrix[plot][year][this.result.recommendation[plot]].grossMargin
+              }
+            })
+          } else {
+            grossMargins = Object.keys(this.plotCropMatrix).map(plot => {
+              if (this.plotCropMatrix[plot][year][this.plotsPrevCrops[plot][curYear - i].code]) {
+                return this.plotCropMatrix[plot][year][this.plotsPrevCrops[plot][curYear - i].code].grossMargin
+              }
+            })
           }
+          grossMargin = _.sum(grossMargins)
+          this.labels.push(year)
+          console.log(grossMargin,i);
         })
       }
+      /*
       years.forEach(year => {
         
         this.datasets.push()
@@ -69,6 +85,7 @@ export default {
         this.dataset.backgroundColor.push(year.backgroundColor)
         this.dataset.labels.push(year.name)
       })
+      */
     },
     createChart(chartId, chartData) {
       Chart.defaults.global.defaultFontFamily = "Open Sans Light";
