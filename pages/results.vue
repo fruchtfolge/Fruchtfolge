@@ -31,119 +31,115 @@
                   {{ format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].grossMargin) }}
                 </td>
               </tr>
-              <transition name="expand"
-              v-on:before-enter="beforeEnter" v-on:enter="enter"
-              v-on:before-leave="beforeLeave" v-on:leave="leave" :key="plot._id">
-                <tr v-show="plot.id === selection">
-                  <td colspan="6" class="inner-table-wrapper" align="right">
-                    <table class="inner-table">
-                      <thead>
-                        <th></th>
-                        <th>Ertragskorrektur</th>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Durchschnittsertrag</td>
-                          <td style="text-align: center;">{{
-                            plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].amount
-                          }}</td>
-                        </tr>
-                        <tr>
-                          <td>Korrektur Bodenqualität</td>
-                          <td style="text-align:center;">{{
-                            (plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].yieldCap
-                                 * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].amount)
-                                 - plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].amount
-                          }}</td>
-                        </tr>
-                        <tr>
-                          <td>Korrektur Fruchtfolge</td>
-                          <td style="text-align:center;">{{
-                            (plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].croppingFactor
-                                 * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].amount)
-                                 - plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].amount
-                          }}</td>
-                        </tr>
-                        <tr>
-                          <td style="font-weight: bold;">Korrigierter Ertrag</td>
-                          <td style="text-align:center;font-weight: bold;">{{
-                            plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].amount
-                            * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].yieldCap
-                            * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].croppingFactor
-                          }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <table>
-                      <thead>
-                        <th></th>
-                        <th>Preis [1/ha]</th>
-                        <th>Menge [1/ha]</th>
-                        <th>Summe [1/ha]</th>
-                        <th>Summe</th>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Leistungen</td>
-                          <td style="text-align:center;">{{
-                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].price)
-                          }}</td>
-                          <td style="text-align:center;">{{
-                            plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].correctedAmount
-                          }}</td>
-                          <td style="text-align:center;">{{
-                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].revenue)
-                          }}</td>
-                          <td style="text-align:center;">{{
-                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].revenue
-                            * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
-                          }}</td>
-                        </tr>
-                        <tr>
-                          <td colspan="3">Direktkosten</td>
-                          <td style="text-align:center;">{{
-                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].directCosts)
-                          }}</td>
-                          <td style="text-align:center;">{{
-                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].directCosts
-                            * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
-                          }}</td>
-                        </tr>
-                        <tr>
-                          <td colspan="3">Maschinenkosten</td>
-                          <td style="text-align:center;">{{
-                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].variableCosts)
-                          }}</td>
-                          <td style="text-align:center;">{{
-                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].variableCosts
-                            * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
-                          }}</td>
-                        </tr>
-                        <tr>
-                          <td colspan="3">Transportkosten</td>
-                          <td style="text-align:center;">{{
-                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].distanceCosts)
-                          }}</td>
-                          <td style="text-align:center;">{{
-                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].distanceCosts
-                            * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
-                          }}</td>
-                        </tr>
-                        <tr>
-                          <td colspan="3">Deckungsbeitrag</td>
-                          <td style="text-align:center;">{{
-                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].grossMarginHa)
-                          }}</td>
-                          <td style="text-align:center;">{{
-                            format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].grossMarginHa
-                            * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
-                          }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-              </transition>
+              <tr v-show="plot.id === selection" :key="plot._id">
+                <td colspan="6" class="inner-table-wrapper" align="right">
+                  <table class="inner-table">
+                    <thead>
+                      <th></th>
+                      <th>Ertragskorrektur</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Durchschnittsertrag</td>
+                        <td style="text-align: center;">{{
+                          plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].amount
+                        }}</td>
+                      </tr>
+                      <tr>
+                        <td>Korrektur Bodenqualität</td>
+                        <td style="text-align:center;">{{
+                          ((plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].yieldCap
+                               * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].amount)
+                               - plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].amount).toFixed(2)
+                        }}</td>
+                      </tr>
+                      <tr>
+                        <td>Korrektur Fruchtfolge</td>
+                        <td style="text-align:center;">{{
+                          ((plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].croppingFactor
+                               * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].amount)
+                               - plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].amount).toFixed(2)
+                        }}</td>
+                      </tr>
+                      <tr>
+                        <td style="font-weight: bold;">Korrigierter Ertrag</td>
+                        <td style="text-align:center;font-weight: bold;">{{
+                          (plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].amount
+                          * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].yieldCap
+                          * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].croppingFactor).toFixed(2)
+                        }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table>
+                    <thead>
+                      <th></th>
+                      <th>Preis [1/ha]</th>
+                      <th>Menge [1/ha]</th>
+                      <th>Summe [1/ha]</th>
+                      <th>Summe</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Leistungen</td>
+                        <td style="text-align:center;">{{
+                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].price)
+                        }}</td>
+                        <td style="text-align:center;">{{
+                          plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].correctedAmount
+                        }}</td>
+                        <td style="text-align:center;">{{
+                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].revenue)
+                        }}</td>
+                        <td style="text-align:center;">{{
+                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].revenue
+                          * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
+                        }}</td>
+                      </tr>
+                      <tr>
+                        <td colspan="3">Direktkosten</td>
+                        <td style="text-align:center;">{{
+                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].directCosts)
+                        }}</td>
+                        <td style="text-align:center;">{{
+                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].directCosts
+                          * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
+                        }}</td>
+                      </tr>
+                      <tr>
+                        <td colspan="3">Maschinenkosten</td>
+                        <td style="text-align:center;">{{
+                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].variableCosts)
+                        }}</td>
+                        <td style="text-align:center;">{{
+                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].variableCosts
+                          * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
+                        }}</td>
+                      </tr>
+                      <tr>
+                        <td colspan="3">Transportkosten</td>
+                        <td style="text-align:center;">{{
+                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].distanceCosts)
+                        }}</td>
+                        <td style="text-align:center;">{{
+                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].distanceCosts
+                          * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
+                        }}</td>
+                      </tr>
+                      <tr>
+                        <td colspan="3">Deckungsbeitrag</td>
+                        <td style="text-align:center;">{{
+                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].grossMarginHa)
+                        }}</td>
+                        <td style="text-align:center;">{{
+                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].grossMarginHa
+                          * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
+                        }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
             </template>
             <tr>
               <td colspan="5" style="font-weight: bold;">Summe</td>
@@ -153,6 +149,9 @@
         </table>
         <div class="crop-shares">
           <cropShares :shares="calcCropShares"/>
+        </div>
+        <div class="gross-margin-timeline">
+          <grossMarginTimeline :plotsPrevCrops="plotsPrevCrops" :plotCropMatrix="plotCropMatrix" :result="result"/>
         </div>
     </div>
 
@@ -311,6 +310,7 @@ export default {
   },
   components: {
     cropShares: () => import('~/components/cropShares.vue'),
+    grossMarginTimeline: () => import('~/components/grossMarginTimeline.vue')
   }
 }
 </script>
