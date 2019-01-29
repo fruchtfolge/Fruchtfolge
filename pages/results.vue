@@ -255,7 +255,8 @@ export default {
           code = this.plotsPrevCrops[plot.id][year].code
         }
         if (code) {
-          const grossMargin = this.plotCropMatrix[plot.id][year][code].grossMargin
+          const plotData = this.plotCropMatrix[plot.id][year][code]
+          const grossMargin = plotData.grossMargin
           sum += grossMargin
         }
       })
