@@ -93,7 +93,7 @@ export default {
           directCosts,
           variableCosts,
           distanceCosts,
-          'grossMarginNoCropEff': _.round((revenueNoCropEff - directCosts - variableCosts - distanceCosts),2), 
+          'grossMarginNoCropEff': _.round((revenueNoCropEff - directCosts - variableCosts - distanceCosts),2),
           'grossMarginHa': _.round(revenue - directCosts - variableCosts - distanceCosts,2),
           'grossMargin': _.round((revenue - directCosts - variableCosts - distanceCosts) * plot.size),
           'fixCosts': _.round(_.sumBy(crop.contributionMargin.fixCosts, o => { return o.total.value }), 2),
@@ -130,6 +130,18 @@ export default {
     })
     include += '/;\n\n'
     // add constraints
+    if (store.curConstraints) {
+      include += 'set constraint /\n'
+      for (var i = 0; i < store.curConstraints.length; i++) {
+        include += ` 'c${i}'\n`
+      }
+      include += '/;\n\n'
+      include += 'parameter p_constraint(constraint,*,*,operator,sizeType) /\n'
+      store.curConstraints.forEach((constraint,i) => {
+        include += ` 'c${i}'.'${constraint.crop1Code}'.'${constraint.crop2Code}'.'${constraint.operator}'.'${constraint.sizeType}' ${constraint.area}\n`
+      })
+      include += '/;\n\n'
+    }
 
     // load Fruchtfolge base model
     const baseModel = `Variable v_obje;

@@ -147,11 +147,13 @@
             </tr>
           </tbody>
         </table>
-        <div class="crop-shares">
-          <cropShares :shares="calcCropShares"/>
-        </div>
-        <div class="gross-margin-timeline">
-          <grossMarginTimeline :plotsPrevCrops="plotsPrevCrops" :plotCropMatrix="plotCropMatrix" :result="result"/>
+        <div class="">
+          <div class="crop-shares">
+            <cropShares :shares="calcCropShares"/>
+          </div>
+          <div class="gross-margin-timeline">
+            <grossMarginTimeline :plotsPrevCrops="plotsPrevCrops" :plotCropMatrix="plotCropMatrix" :result="result"/>
+          </div>
         </div>
     </div>
 

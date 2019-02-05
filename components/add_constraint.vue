@@ -7,21 +7,29 @@
         <label for="add.constraint.crop1">Kultur</label>
         <select class="dropdown" id="add.constraint.crop1" v-model="crop1">
           <option disabled value="">Kultur</option>
-          <option v-for="(crop, i) in crops" :key="i" :value="crop.name">{{ crop.name }}</option>
+          <option v-for="(crop, i) in crops" :key="i" :value="crop">{{ crop.name }}</option>
+          <option :value="allCrops">Alle Kulturen</option>
+          <option :value="allCropCombis">Alle Kombinationen aus Kulturen</option>
+          <option :value="efa">Ökologische Vorrangfläche</option>
         </select>
         <label for="add.constraint.crop2">und Kultur (optional)</label>
         <select class="dropdown" id="add.constraint.crop2" v-model="crop2">
           <option disabled value="">Kultur</option>
           <option value="" selected></option>
-          <option v-for="(crop, i) in crops" :key="i" :value="crop.name">{{ crop.name }}</option>
+          <option v-for="(crop, i) in crops" :key="i" :value="crop">{{ crop.name }}</option>
         </select>
-        <label for="add.constraint.crop4">mindestens/maximal</label>
+        <label for="add.constraint.crop4">weniger/mehr</label>
         <select class="dropdown" id="add.constraint.crop4" v-model="operator">
-          <option disabled value="">mindestens/maximal</option>
-          <option value="<">maximal</option>
-          <option value=">">mindestens</option>
+          <option disabled value="">weniger/mehr</option>
+          <option value="<">weniger als</option>
+          <option value=">">mehr als</option>
         </select>
-        <label for="add.constraint.name">Fläche in ha</label>
+          <label for="add.constraint.crop4">Flächeneinheit</label>
+        <select class="dropdown" id="add.constraint.crop4" v-model="sizeType">
+          <option value="ha">ha</option>
+          <option value="Prozent">Prozent der Gesamtfläche</option>
+        </select>
+        <label for="add.constraint.name">Fläche in {{sizeType}}</label>
         <input type="number" id="add.constraint.name" class="input" v-model="area" @keyup.enter="addConstraint">
       </div>
       <p v-if="!crop1" style="text-align: center; margin-top: 30px; color:red;">Bitte Kultur auswählen.</p>
@@ -40,7 +48,20 @@ export default {
     return {
       crop1: null,
       crop2: null,
+      allCrops: {
+        name: 'Alle Kulturen',
+        code: 'allCrops'
+      },
+      allCropCombis: {
+        name: 'Alle Kombinationen aus Kulturen',
+        code: 'allCropCombis'
+      },
+      efa: {
+        name: 'Ökologische Vorrangfläche',
+        code: 'efa'
+      },
       operator: '>',
+      sizeType: 'ha',
       area: 0
     }
   },
@@ -48,13 +69,16 @@ export default {
     async addConstraint() {
       try {
         const settings = await this.$db.get('settings')
-        
+
         const constraint = new Constraint({
           year: settings.curYear,
           scenario: settings.curScenario,
-          crop1: this.crop1,
-          crop2: this.crop2,
+          crop1: this.crop1.name,
+          crop2: this.crop2 ? this.crop2.name : '',
+          crop1Code: this.crop1 ? this.crop1.code : '',
+          crop2Code: this.crop2 ? this.crop2.code : '',
           operator: this.operator,
+          sizeType: this.sizeType,
           area: this.area
         })
         // store new constraint in database
@@ -87,7 +111,7 @@ export default {
 .constraintBox {
   position: absolute;
   width: 400px;
-  height: 520px;
+  height: 580px;
   top: calc(50vh - 120px);
   margin-top: -250px;
   left: 50%;

@@ -7,7 +7,7 @@
           <thead>
             <tr>
               <th>Name</th>
-              <th>Maximal/mindestens</th>
+              <th>Mehr/weniger</th>
               <th>Menge</th>
               <th style="background-color: #f5f5f5"></th>
             </tr>
@@ -15,8 +15,8 @@
           <tbody>
             <tr v-for="constraint in constraints" :key="constraint.id">
               <td>{{ constraint.name }}</td>
-              <td style="text-align: center;">{{ constraint.operator === '>' ? 'mindestens' : 'maximal' }}</td>
-              <td style="text-align: center;">{{ constraint.area + ' ha' }}</td>
+              <td style="text-align: center;">{{ constraint.operator === '>' ? 'mehr als' : 'weniger als' }}</td>
+              <td style="text-align: center;">{{ constraint.area + ' ' + constraint.sizeType }}</td>
               <td style="background-color: #f5f5f5">
                 <input style="-webkit-appearance: checkbox;" type="checkbox" v-model="constraint._deleted">
               </td>
