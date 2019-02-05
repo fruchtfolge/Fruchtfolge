@@ -136,7 +136,7 @@ export default {
         include += ` 'c${i}'\n`
       }
       include += '/;\n\n'
-      include += 'parameter p_constraint(constraint,*,*,operator,sizeType) /\n'
+      include += 'parameter p_constraint(constraint,crops,crops,operator,sizeType) /\n'
       store.curConstraints.forEach((constraint,i) => {
         include += ` 'c${i}'.'${constraint.crop1Code}'.'${constraint.crop2Code}'.'${constraint.operator}'.'${constraint.sizeType}' ${constraint.area}\n`
       })
@@ -190,9 +190,7 @@ export default {
 
     return include.concat(baseModel)
   },
-  /*
-  createInclude(properties) {
-    console.log('createInclude');
+  createInclude(matrix,properties) {
     let include =
 `* -------------------------------
 * Fruchtfolge Model - Include file
@@ -250,14 +248,14 @@ set curYear(years) / ${properties.curYear} /;
     properties.curCrops.forEach(crop => {
       if (!crop) return
       if (cropGroup.indexOf(` '${crop.cropGroup}'`) === -1) cropGroup.push(` '${crop.cropGroup}'`)
-      crops_cropGroup.push(` '${crop.name}'.'${crop.cropGroup}'`)
+      crops_cropGroup.push(` '${crop.code}'.'${crop.cropGroup}'`)
       // replace crop name with some sort of id in order to avoid strings that are too long / illegal characters?
-      curCrops.push(` '${crop.name}'`)
-      p_cropData.push(` '${crop.name}'.rotBreak ${crop.rotBreak}\n '${crop.name}'.maxShare ${crop.maxShare}\n '${crop.name}'.minSoilQuality ${crop.minSoilQuality}\n '${crop.name}'.efaFactor ${crop.efaFactor}`)
-      if (crop.rootCrop) crops_rootCrop.push(` '${crop.name}' YES`)
-      if (crop.catchCropCap) crops_catchCrop.push(` '${crop.name}' YES`)
+      curCrops.push(` '${crop.code}'`)
+      p_cropData.push(` '${crop.code}'.rotBreak ${crop.rotBreak}\n '${crop.code}'.maxShare ${crop.maxShare}\n '${crop.code}'.minSoilQuality ${crop.minSoilQuality}\n '${crop.code}'.efaFactor ${crop.efaFactor}`)
+      if (crop.rootCrop) crops_rootCrop.push(` '${crop.code}' YES`)
+      if (crop.catchCropCap) crops_catchCrop.push(` '${crop.code}' YES`)
       properties.curCrops.forEach(subseqCrop => {
-        croppingFactor.push(` '${crop.name}'.'${subseqCrop.name}' ${crop.subseqCrops[subseqCrop.cropGroup]}`)
+        croppingFactor.push(` '${crop.code}'.'${subseqCrop.code}' ${crop.subseqCrops[subseqCrop.cropGroup]}`)
       })
       halfMonths.forEach(halfMonth => {
         var steps = crop.workingSteps.filter(o => {return halfMonth === o.month})
@@ -265,9 +263,8 @@ set curYear(years) / ${properties.curYear} /;
           steps = steps.map(step => {
             return _.sumBy(step.steps, 'time')
           })
-          console.log(_.sum(steps), steps);
           const time = _.sum(steps)
-          laborReq.push(` '${crop.name}'.${halfMonth} ${_.round(time,2)}`)
+          laborReq.push(` '${crop.code}'.${halfMonth} ${_.round(time,2)}`)
         }
       })
     })
@@ -278,7 +275,7 @@ set curYear(years) / ${properties.curYear} /;
 
     properties.plots.forEach(plot => {
       if (plots.indexOf(` '${plot.id}'`) === -1) plots.push(` '${plot.id}'`)
-      if (plot.crop) plots_years_crops.push(` '${plot.id}'.${plot.year}.'${cultures[plot.crop] ? cultures[plot.crop].variety : '""'}' 'YES'`)
+      if (plot.crop) plots_years_crops.push(` '${plot.id}'.${plot.year}.'${cultures[plot.crop] ? cultures[plot.crop].code : '""'}' 'YES'`)
     })
 
     // create gross margin related data
@@ -286,16 +283,20 @@ set curYear(years) / ${properties.curYear} /;
     const p_grossMarginData = []
 
     properties.crops.forEach(crop => {
-      if (crops.indexOf(` '${crop.name}'`) === -1) crops.push(` '${crop.name}'`)
-      const amount = _.round(_.sumBy(crop.contributionMargin.revenues, o => { return o.amount.value }), 2)
-      const price = _.round(_.sumBy(crop.contributionMargin.revenues, o => { return o.total.value }) / amount, 2)
-      const directCosts = _.round(_.sumBy(crop.contributionMargin.directCosts, o => { return o.total.value }), 2)
-      const variableCosts = _.round(_.sumBy(crop.contributionMargin.variableCosts, o => { return o.total.value }), 2)
-      const fixCosts = _.round(_.sumBy(crop.contributionMargin.fixCosts, o => { return o.total.value }), 2)
-      p_grossMarginData.push(` '${crop.name}'.${crop.year}.yield ${amount}\n '${crop.name}'.${crop.year}.price ${price}\n '${crop.name}'.${crop.year}.directCosts ${directCosts}\n '${crop.name}'.${crop.year}.variableCosts ${variableCosts}\n '${crop.name}'.${crop.year}.fixCosts ${fixCosts}`)
-
+      if (crops.indexOf(` '${crop.code}'`) === -1) crops.push(` '${crop.code}'`)
     })
-
+    
+    properties.curPlots.forEach(plot => {
+      properties.curCrops.forEach(crop => {
+        crop = matrix[plot.id][properties.curYear][crop.code]
+        // make sure there only is a gross margin for a plot if the rotational break is held 
+        // and the crop is set to active
+        if (crop.rotBreakHeld && crop.active) {
+          p_grossMarginData.push(` '${plot.id}'.'${crop.code}' ${crop.grossMargin}`)
+        }
+      })
+    })
+    
     // constraints related data
     const constraints = []
     const p_constraint = []
@@ -329,19 +330,12 @@ set curYear(years) / ${properties.curYear} /;
     include += this.save('parameter p_croppingFactor(curCrops,curCrops)', croppingFactor)
 
     include += this.save('set plots_years_crops(plots,years,crops)',plots_years_crops)
-    include += this.save('parameter p_grossMarginData(crops,years,grossMarginAttr)',p_grossMarginData)
+    include += this.save('parameter p_grossMarginData(curPlots,curCrops)',p_grossMarginData)
     include += this.save('parameter p_laborReq(crops,halfMonths)',laborReq)
     include += this.save('set constraints',constraints)
     include += this.save('parameter p_constraint(constraints,curCrops,curCrops)',p_constraint)
     include += this.save('set constraints_lt(constraints,symbol)',constraints_lt)
 
-    //
-    fs.writeFileSync('test.gms',include,'utf-8')
-    res.writeHead(200, {"Content-Type": "application/json"})
-    res.write('bla')
-    res.end()
-    //
     return include
   }
-  */
 }

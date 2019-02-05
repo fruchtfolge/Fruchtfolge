@@ -530,7 +530,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 3,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 4,
@@ -605,7 +605,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 3,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 4,
@@ -1351,11 +1351,11 @@ module.exports = [
   },
   {
     "cropGroup": "Gattung: Pisum (Erbse)",
-    "efa": 0,
-    "legume": false,
+    "efa": 1.0,
+    "legume": true,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 5,
     "subseqCrops": {
       "Winterweizen": 10,
       "Sommerweizen": 6,
@@ -1426,11 +1426,11 @@ module.exports = [
   },
   {
     "cropGroup": "Gattung: Lathryus (Platterbsen)",
-    "efa": 0,
-    "legume": false,
+    "efa": 1.0,
+    "legume": true,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 5,
     "subseqCrops": {
       "Winterweizen": 10,
       "Sommerweizen": 6,
@@ -1501,11 +1501,11 @@ module.exports = [
   },
   {
     "cropGroup": "Gattung: Vicia (Wicken)",
-    "efa": 0,
-    "legume": false,
+    "efa": 1.0,
+    "legume": true,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 5,
     "subseqCrops": {
       "Winterweizen": 10,
       "Sommerweizen": 6,
@@ -1576,11 +1576,11 @@ module.exports = [
   },
   {
     "cropGroup": "Gattung: Lupinen (Lupinus)",
-    "efa": 0,
-    "legume": false,
+    "efa": 1.0,
+    "legume": true,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 4,
     "subseqCrops": {
       "Winterweizen": 10,
       "Sommerweizen": 6,
@@ -1726,11 +1726,11 @@ module.exports = [
   },
   {
     "cropGroup": "Gattung: Lens (Linsen)",
-    "efa": 0,
-    "legume": false,
+    "efa": 1.0,
+    "legume": true,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 5,
     "subseqCrops": {
       "Winterweizen": 10,
       "Sommerweizen": 6,
@@ -1876,11 +1876,11 @@ module.exports = [
   },
   {
     "cropGroup": "Gattung: Onobrychis (Esparsette)",
-    "efa": 0,
+    "efa": 0.3,
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 6,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 4,
@@ -2030,7 +2030,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 4,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 6,
@@ -2105,7 +2105,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 4,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 6,
@@ -2180,7 +2180,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 5,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 6,
@@ -2255,7 +2255,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 5,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 6,
@@ -2330,7 +2330,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 0,
     "subseqCrops": {
       "Winterweizen": 6,
       "Sommerweizen": 6,
@@ -2479,8 +2479,8 @@ module.exports = [
     "efa": 0,
     "legume": false,
     "rootCrop": false,
-    "minSoil": 20,
-    "rotBreak": 2,
+    "minSoil": 0,
+    "rotBreak": 0,
     "subseqCrops": {
       "Winterweizen": 10,
       "Sommerweizen": 10,
@@ -2555,7 +2555,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 4,
     "subseqCrops": {
       "Winterweizen": 10,
       "Sommerweizen": 8,
@@ -2630,7 +2630,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 4,
     "subseqCrops": {
       "Winterweizen": 10,
       "Sommerweizen": 8,
@@ -2705,7 +2705,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 3,
     "subseqCrops": {
       "Winterweizen": 10,
       "Sommerweizen": 8,
@@ -2780,7 +2780,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 3,
     "subseqCrops": {
       "Winterweizen": 10,
       "Sommerweizen": 8,
@@ -2855,7 +2855,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 3,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 6,
@@ -3005,7 +3005,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 4,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 6,
@@ -3080,7 +3080,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 6,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 6,
@@ -3155,7 +3155,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 5,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 6,
@@ -3230,7 +3230,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 4,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 10,
@@ -3303,9 +3303,9 @@ module.exports = [
     "cropGroup": "Art: Solanum tuberosum (Kartoffel)",
     "efa": 0,
     "legume": false,
-    "rootCrop": false,
+    "rootCrop": true,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 3,
     "subseqCrops": {
       "Winterweizen": 10,
       "Sommerweizen": 6,
@@ -3380,7 +3380,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 6,
     "subseqCrops": {
       "Winterweizen": 10,
       "Sommerweizen": 8,
@@ -3451,11 +3451,11 @@ module.exports = [
   },
   {
     "cropGroup": "Gattung: Glycine",
-    "efa": 0,
-    "legume": false,
+    "efa": 1.0,
+    "legume": true,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 3,
     "subseqCrops": {
       "Winterweizen": 10,
       "Sommerweizen": 8,
@@ -3530,7 +3530,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 5,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 10,
@@ -3605,7 +3605,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 3,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 10,
@@ -3680,7 +3680,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 4,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 10,
@@ -3905,7 +3905,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 3,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 10,
@@ -3980,7 +3980,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 4,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 10,
@@ -4055,7 +4055,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 3,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 10,
@@ -4130,7 +4130,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 3,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 10,
@@ -4355,7 +4355,7 @@ module.exports = [
     "legume": false,
     "rootCrop": false,
     "minSoil": 20,
-    "rotBreak": 2,
+    "rotBreak": 3,
     "subseqCrops": {
       "Winterweizen": 8,
       "Sommerweizen": 10,
@@ -4801,11 +4801,11 @@ module.exports = [
   },
   {
     "cropGroup": "Brachliegendes Land",
-    "efa": 0,
+    "efa": 1.0,
     "legume": false,
     "rootCrop": false,
-    "minSoil": 20,
-    "rotBreak": 2,
+    "minSoil": 0,
+    "rotBreak": 0,
     "subseqCrops": {
       "Winterweizen": 6,
       "Sommerweizen": 6,
