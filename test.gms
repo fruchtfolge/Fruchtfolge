@@ -1576,20 +1576,121 @@ parameter p_laborReq(crops,halfMonths) /
  '633'.SEP1 1.08
 /;
 
+*
+*  --- Model specifications
+*
+* initiate global parameters for Greening evaluation
+scalar  p_totLand;
+scalar  p_totArabLand;
+scalar  p_totGreenLand;
+p_totLand = sum(curPlots, p_plotData(curPlots,"size"));
+p_totArabLand = sum(curPlots $ (not plots_permPast(curPlots)), p_plotData(curPlots,"size"));
+p_totGreenLand = p_totLand - p_totArabLand;
+
+alias (cropGroup,cropGroup1);
+alias (curCrops,curCrops1);
+
 Variable v_obje;
 Binary Variable v_binCropPlot(crops,plots);
 
 Equations
   e_obje
   e_oneCropPlot(curPlots)
+* Greening equations  
+  e_efa
+  e_75diversification(cropGroup)
+  e_95diversification(cropGroup,cropGroup1)
+* Crop rotation equations
+  e_maxShares(curCrops)
+$iftheni.constraints defined constraints
+  e_minimumShares(constraints,curCrops,curCrops1)
+  e_maximumShares(constraints,curCrops,curCrops1) 
+$endif.constraints
 ;
 
+* Only activate ecological focus area equation if arable land is greater than 15ha
+e_efa $ (p_totArabLand >= 15)..
+  sum((curPlots,curCrops), 
+      v_binCropPlot(curCrops,curPlots) 
+      * p_plotData(curPlots,"size") 
+      * p_cropData(curCrops,"efaFactor")
+  )
+  =G= p_totArabLand * 0.05 
+;
+
+          
+* Only activate 75% diversifaction rule if arable land is greater than 10ha
+e_75diversification(cropGroup) $ (p_totArabLand >= 10)..
+  sum((curPlots,curCrops) $ crops_cropGroup(curCrops,cropGroup), 
+      v_binCropPlot(curCrops,curPlots) 
+      * p_plotData(curPlots,"size")
+  )
+  =L= p_totArabLand * 0.75
+;
+
+* Only activate 95% diversifaction rule if arable land is greater than 30ha
+e_95diversification(cropGroup,cropGroup1) 
+  $ ((p_totArabLand >= 30)
+  $ (not sameas(cropGroup,cropGroup1)))..
+  sum((curPlots,curCrops) $ crops_cropGroup(curCrops,cropGroup), 
+    v_binCropPlot(curCrops,curPlots) 
+    * p_plotData(curPlots,"size")
+  )
+  + 
+  sum((curPlots,curCrops) $ crops_cropGroup(curCrops,cropGroup1), 
+    v_binCropPlot(curCrops,curPlots) 
+    * p_plotData(curPlots,"size")
+  )
+  =L= p_totArabLand * 0.95
+;
+
+
+e_maxShares(curCrops) $ p_cropData(curCrops,"maxShare")..
+  sum(curPlots, 
+    v_binCropPlot(curCrops,curPlots)
+    * p_plotData(curPlots,"size")
+  )
+  =L= p_totArabLand * p_cropData(curCrops,"maxShare") / 100
+;
+
+*
+*  --- Enter user specified constraints into the model, 
+*
+$iftheni.constraints defined constraints
+e_minimumShares(constraints,curCrops,curCrops1) 
+       $ (p_constraint(constraints,curCrops,curCrops1) 
+       $ (not (constraints_lt(constraints,'lt'))))..
+  sum(curPlots, v_binCropPlot(curCrops,curPlots) * p_plotData(curPlots,'size') + 
+    v_binCropPlot(curCrops1,curPlots) + p_plotData(curPlots,'size'))
+    =G= p_constraint(constraints,curCrops,curCrops1) 
+;  
+
+e_maximumShares(constraints,curCrops,curCrops1) 
+       $ (p_constraint(constraints,curCrops,curCrops1) 
+       $ (constraints_lt(constraints,'lt')))..
+  sum(curPlots, v_binCropPlot(curCrops,curPlots) * p_plotData(curPlots,'size') + 
+    v_binCropPlot(curCrops1,curPlots) + p_plotData(curPlots,'size'))
+    =L= p_constraint(constraints,curCrops,curCrops1) 
+;  
+$endif.constraints
+*
+*  --- ensure that only one crop is grown on a plot
+*
 e_oneCropPlot(curPlots)..
   sum(curCrops, v_binCropPlot(curCrops,curPlots))
   =E= 1
 ;
 
+*
+*  --- prohibit growing a crop on a plot when there is no gross margin present
+*
 v_binCropPlot.up(curCrops,curPlots) $ (not p_grossMarginData(curPlots,curCrops)) = 0;
+*
+*  --- root crops can obly be grown on root crop capable plots
+*
+v_binCropPlot.up(curCrops,curPlots) 
+  $ (crops_rootCrop(curCrops) 
+  $ (not plots_rootCropCap(curPlots))) = 0;
 
 e_obje..
   v_obje =E=
