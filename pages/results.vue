@@ -238,10 +238,10 @@ export default {
           if (!this.plotCropMatrix || force) {
             this.plotCropMatrix = model.buildPlotCropMatrix(this.$store)
           }
-          const gams = model.buildModel(this.plotCropMatrix,this.$store)
-          const test = model.createInclude(this.plotCropMatrix,this.$store)
-          console.log({a: test});
-          //const { data } = await axios.post('http://localhost:3001/model/', {model: gams})
+          //const gams = model.buildModel(this.plotCropMatrix,this.$store)
+          const gams = model.createInclude(this.plotCropMatrix,this.$store)
+          console.log({a: gams});
+          const { data } = await axios.post('http://localhost:3001/model/', {model: gams})
           this.result = data
           console.log(this);
         }

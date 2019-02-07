@@ -3,18 +3,18 @@ export const planetChartData = {
   data: {
     datasets: [{
       yAxisID: 'A',
-      backgroundColor: "rgba(54, 149, 201, 0.3)",
-      pointBackgroundColor: "rgb(54, 149, 201)",
-      borderColor: "rgb(54, 149, 201)",
+      backgroundColor: "rgba(121, 173, 151, 0.3)",
+      pointBackgroundColor: "rgb(121, 173, 151)",
+      borderColor: "rgb(121, 173, 151)",
       borderWidth: 5,
       radius: 8,
       pointHoverRadius: 9,
       pointHitRadius: 25
     }, {
       yAxisID: 'B',
-      backgroundColor: "rgba(121, 173, 151, 0.3)",
-      pointBackgroundColor: "rgb(121, 173, 151)",
-      borderColor: "rgb(121, 173, 151)",
+      backgroundColor: "rgba(74,109,124, 0.3)",
+      pointBackgroundColor: "rgb(74,109,124)",
+      borderColor: "rgb(74,109,124)",
       borderWidth: 5,
       radius: 8,
       pointHoverRadius: 9,
@@ -34,6 +34,7 @@ export const planetChartData = {
   },
   options: {
     dragData: true,
+    dragDataRound: 1,
     maintainAspectRatio: false,
     scales: {
       yAxes: [{
@@ -41,6 +42,7 @@ export const planetChartData = {
         type: 'linear',
         position: 'left',
         ticks: {
+          min: 0,
           beginAtZero: true
         }
       },{
@@ -48,6 +50,7 @@ export const planetChartData = {
         type: 'linear',
         position: 'right',
         ticks: {
+          min: 0,
           beginAtZero: true
         }
       },
@@ -56,6 +59,7 @@ export const planetChartData = {
         type: 'linear',
         position: 'right',
         ticks: {
+          min: 0,
           beginAtZero: true
         }
       }]

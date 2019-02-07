@@ -21,7 +21,22 @@ export default {
   },
   methods: {
     createChart(chartId, chartData) {
-      const ctx = document.getElementById(chartId)
+      const ctx = document.getElementById(chartId).getContext('2d')
+      
+      const gradient1 = ctx.createLinearGradient(0, 0, 0, 450)
+      const gradient2 = ctx.createLinearGradient(0, 0, 0, 450)
+
+      gradient1.addColorStop(0, 'rgba(74,109,124, 1)')
+      gradient1.addColorStop(0.5, 'rgba(74,109,124, 0.8)')
+      gradient1.addColorStop(1, 'rgba(74,109,124, 0.4)')
+
+      gradient2.addColorStop(0, 'rgba(121, 173, 151, 1)')
+      gradient2.addColorStop(0.5, 'rgba(121, 173, 151, 0.8)')
+      gradient2.addColorStop(1, 'rgba(121, 173, 151, 0.4)')
+
+      chartData.data.datasets[0].backgroundColor = gradient1
+      chartData.data.datasets[1].backgroundColor = gradient2
+      
       this.labourChart = new Chart(ctx, {
         type: chartData.type,
         data: chartData.data,

@@ -305,7 +305,7 @@ set curYear(years) / ${properties.curYear} /;
     if (properties.curConstraints) {
       properties.curConstraints.forEach(constraint => {
         constraints.push(` '${constraint.name}'`)
-        p_constraint.push(` '${constraint.name}'.'${constraint.crop1}'.${constraint.crop2 ? constraint.crop2 : '""'} ${constraint.area}`)
+        p_constraint.push(` '${constraint.name}'.'${constraint.crop1Code}'.${constraint.crop2 ? constraint.crop2Code : '""'} ${constraint.area}`)
         if (constraint.operator === '<') constraints_lt.push(` '${constraint.name}'.lt YES` )
       })
     }
@@ -336,6 +336,8 @@ set curYear(years) / ${properties.curYear} /;
     include += this.save('parameter p_constraint(constraints,curCrops,curCrops)',p_constraint)
     include += this.save('set constraints_lt(constraints,symbol)',constraints_lt)
 
-    return include
+    // load base model from fruchtfolge-model
+    const base = require('fruchtfolge-model')
+    return include.concat(base)
   }
 }

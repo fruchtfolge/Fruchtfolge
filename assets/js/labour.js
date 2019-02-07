@@ -3,33 +3,27 @@ export const planetChartData = {
   data: {
     labels: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
     datasets: [
-      { // one line graph
+      {
         label: 'Verfügbare Arbeitszeit',
-        data: [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200],
-        backgroundColor: [
-          'rgba(54,73,93,.5)', // Blue
-          'rgba(54,73,93,.5)',
-          'rgba(54,73,93,.5)',
-          'rgba(54,73,93,.5)',
-          'rgba(54,73,93,.5)',
-          'rgba(54,73,93,.5)',
-          'rgba(54,73,93,.5)',
-          'rgba(54,73,93,.5)'
-        ],
-        radius: 5,
-        pointHoverRadius: 6,
-        pointHitRadius: 15
+        data: [400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400],
+        yAxisID: 'A',
+        pointBackgroundColor: "rgb(74,109,124)",
+        borderColor: "rgb(74,109,124)",
+        borderWidth: 5,
+        radius: 8,
+        pointHoverRadius: 9,
+        pointHitRadius: 25
       },
-      { // another line graph
+      {
         label: 'Verfügbare Feldarbeitstage',
-        data: [4.8, 12.1, 12.7, 6.7, 139.8, 116.4, 50.7, 49.2],
-        backgroundColor: [
-          'rgba(71, 183,132,.5)', // Green
-        ],
-        borderWidth: 3,
-        radius: 5,
-        pointHoverRadius: 6,
-        pointHitRadius: 15
+        data: [0, 0, 3, 17, 21, 21, 22, 22, 23, 19, 9, 0],
+        yAxisID: 'B',
+        pointBackgroundColor: "rgb(121, 173, 151)",
+        borderColor: "rgb(121, 173, 151)",
+        borderWidth: 5,
+        radius: 8,
+        pointHoverRadius: 9,
+        pointHitRadius: 25
       }
     ]
   },
@@ -37,13 +31,28 @@ export const planetChartData = {
     responsive: true,
     //lineTension: 1,
     dragData: true,
+    dragDataRound: 0,
     scales: {
       yAxes: [{
+        id: 'A',
+        beginAtZero: true,
+        padding: 25,
+        type: 'linear',
+        position: 'left',
         ticks: {
-          beginAtZero: true,
-          padding: 25,
           min: 0,
           max: 2000
+        }
+      },
+      {
+        id: 'B',
+        beginAtZero: true,
+        type: 'linear',
+        position: 'right',
+        padding: 25,
+        ticks: {
+          min: 0,
+          max: 31
         }
       }]
     }

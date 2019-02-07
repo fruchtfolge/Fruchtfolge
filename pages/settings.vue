@@ -33,7 +33,7 @@
         <div style="text-align: center;">
           <input v-model="zidId" type="text" id='zid' class="input" name="zid" placeholder="ZID-Betriebsnummer">
           <br>
-          <input v-model="zidPass" type="password" id='zid-pw' class="input" name="zid-pw" placeholder="Passwort">
+          <input v-model="zidPass" type="password" id='zid-pw' class="input" name="zid-pw" @keyup.enter="getElan" placeholder="Passwort">
           <br>
         </div>
         <div style="text-align: center;">

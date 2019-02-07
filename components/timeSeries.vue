@@ -31,7 +31,28 @@ export default {
   },
   methods: {
     createChart(chartId, chartData) {
-      const ctx = document.getElementById(chartId)
+      const ctx = document.getElementById(chartId).getContext('2d')
+      
+      const gradient1 = ctx.createLinearGradient(0, 0, 0, 450)
+      const gradient2 = ctx.createLinearGradient(0, 0, 0, 450)
+      const gradient3 = ctx.createLinearGradient(0, 0, 0, 450)
+      
+      gradient1.addColorStop(0, 'rgba(121, 173, 151, 1)')
+      gradient1.addColorStop(0.5, 'rgba(121, 173, 151, 0.4)')
+      gradient1.addColorStop(1, 'rgba(121, 173, 151, 0.2)')
+      
+      gradient2.addColorStop(0, 'rgba(74,109,124, 1)')
+      gradient2.addColorStop(0.5, 'rgba(74,109,124, 0.4)')
+      gradient2.addColorStop(1, 'rgba(74,109,124, 0.1)')
+      
+      gradient3.addColorStop(0, 'rgba(175, 175, 175, 1)')
+      gradient3.addColorStop(0.5, 'rgba(175, 175, 175, 0.4)')
+      gradient3.addColorStop(1, 'rgba(175, 175, 175, 0.1)')
+      
+      timeseries.data.datasets[0].backgroundColor = gradient1
+      timeseries.data.datasets[1].backgroundColor = gradient2
+      timeseries.data.datasets[2].backgroundColor = gradient3
+      
       this.timeseriesChart = new Chart(ctx, {
         type: timeseries.type,
         data: timeseries.data,
@@ -59,14 +80,14 @@ export default {
         // set initial chart properties
         timeseries.data.labels = years
 
-        timeseries.data.datasets[0].label = `Ertrag [${this.getLabel(this.cropTimeSeries, 'revenues', 'amount')}]`
-        timeseries.data.datasets[0].data = amount
-        timeseries.options.scales.yAxes[0].ticks.max = _.round(highestA * 1.7, 0)
+        timeseries.data.datasets[0].data = price
+        timeseries.data.datasets[0].label = `Preis [${this.getLabel(this.cropTimeSeries, 'revenues', 'price')}]`
+        timeseries.options.scales.yAxes[0].ticks.max = _.round(highestB * 1.9, 0)
 
-        timeseries.data.datasets[1].data = price
-        timeseries.data.datasets[1].label = `Preis [${this.getLabel(this.cropTimeSeries, 'revenues', 'price')}]`
-        timeseries.options.scales.yAxes[1].ticks.max = _.round(highestB * 1.9, 0)
-
+        timeseries.data.datasets[1].label = `Ertrag [${this.getLabel(this.cropTimeSeries, 'revenues', 'amount')}]`
+        timeseries.data.datasets[1].data = amount
+        timeseries.options.scales.yAxes[1].ticks.max = _.round(highestA * 1.7, 0)
+        
         timeseries.data.datasets[2].data = directCosts
         timeseries.options.scales.yAxes[2].ticks.max = _.round(highestC * 1.5, -2)
 
@@ -84,7 +105,11 @@ export default {
     },
     setData(crop,category,type,corrFactor) {
       return crop.contributionMargin[category].map(o => {
-        o[type].value = _.round(o[type].value * corrFactor, 1)
+        if (o[type].value === 0) {
+          o[type].value = _.round(corrFactor, 1)
+        } else {
+          o[type].value = _.round(o[type].value * corrFactor, 1)
+        }
         if (type !== 'total') {
           o.total.value = _.round(o.amount.value * o.price.value, 1)
         }
@@ -104,6 +129,7 @@ export default {
       return data[0].contributionMargin[category][0][type].unit
     },
     async saveChanges(e, datasetIndex, index, value) {
+      console.log(datasetIndex, index, value)
       try {
         // get crop object from database
         const year = timeseries.data.labels[index]
@@ -111,19 +137,19 @@ export default {
         if (datasetIndex === 0) {
           // amount
           const oldValue = this.getData([crop],'revenues','amount')
-          const corrFactor = value / oldValue
+          const corrFactor = oldValue > 0 ? value / oldValue : value
           const newRevenues = this.setData(crop,'revenues','amount',corrFactor)
           crop.contributionMargin.revenues = newRevenues
         } else if (datasetIndex === 1) {
           // price
           const oldValue = this.getData([crop],'revenues','price')
-          const corrFactor = value / oldValue
+          const corrFactor = oldValue > 0 ? value / oldValue : value
           const newRevenues = this.setData(crop,'revenues','price',corrFactor)
           crop.contributionMargin.revenues = newRevenues
         } else {
           const oldValue = this.getData([crop], 'directCosts', 'total')
           const amountDirectCosts = this.getAmountDirectCosts(crop)
-          const corrFactor = value / oldValue // (((value / oldValue) - 1) / amountDirectCosts) + 1
+          const corrFactor = oldValue > 0 ? value / oldValue : value // (((value / oldValue) - 1) / amountDirectCosts) + 1
           console.log(corrFactor,amountDirectCosts);
           const newDirectCosts = this.setData(crop,'directCosts','total',corrFactor)
           //console.log(crop);
