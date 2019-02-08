@@ -72,7 +72,12 @@ export default {
         const cropFactAndRotBreak = this.getCropFactAndRotBreak(plot,store.crops,store.plots,crop)
         const amount = _.round(_.sumBy(crop.contributionMargin.revenues, o => { return o.amount.value }))
         const correctedAmount = _.round(amount * cropFactAndRotBreak[0] * yieldCap, 2)
-        const price = _.round(_.sumBy(crop.contributionMargin.revenues, o => { return o.total.value }) / amount, 2)
+        let price
+        if (amount > 0) {
+          price = _.round(_.sumBy(crop.contributionMargin.revenues, o => { return o.total.value }) / amount, 2)
+        } else {
+          price = _.round(_.sumBy(crop.contributionMargin.revenues, o => { return o.total.value }), 2)          
+        }
         const revenueNoCropEff = _.round(price * amount, 2)
         const revenue = _.round(price * correctedAmount, 2)
         const directCosts = _.round(_.sumBy(crop.contributionMargin.directCosts, o => { return o.total.value }), 2)
@@ -204,7 +209,35 @@ set grossMarginAttr / price,yield,directCosts,variableCosts,fixCosts,grossMargin
 set plotAttr / size,distance,quality /;
 set cropAttr / rotBreak,maxShare,minSoilQuality,efaFactor/;
 set symbol / lt,gt /;
+
+set months /jan,feb,mrz,apr,mai,jun,jul,aug,sep,okt,nov,dez/;
 set halfMonths / jan1,jan2,feb1,feb2,MRZ1,MRZ2,apr1,apr2,mai1,mai2,jun1,jun2,jul1,jul2,aug1,aug2,sep1,sep2,okt1,okt2,nov1,nov2,dez1,dez2 /;
+set months_halfMonths(months,halfMonths) /
+ jan.jan1 YES
+ jan.jan2 YES
+ feb.feb1 YES
+ feb.feb2 YES
+ mrz.MRZ1 YES
+ mrz.MRZ2 YES
+ apr.apr1 YES
+ apr.apr2 YES
+ mai.mai1 YES
+ mai.mai2 YES
+ jun.jun1 YES
+ jun.jun2 YES
+ jul.jul1 YES
+ jul.jul2 YES
+ aug.aug1 YES
+ aug.aug2 YES
+ sep.sep1 YES
+ sep.sep2 YES
+ okt.okt1 YES
+ okt.okt2 YES
+ nov.nov1 YES
+ nov.nov2 YES
+ dez.dez1 YES
+ dez.dez2 YES
+/;
 
 set years / 2001*${properties.curYear} /;
 set curYear(years) / ${properties.curYear} /;
@@ -249,7 +282,6 @@ set curYear(years) / ${properties.curYear} /;
       if (!crop) return
       if (cropGroup.indexOf(` '${crop.cropGroup}'`) === -1) cropGroup.push(` '${crop.cropGroup}'`)
       crops_cropGroup.push(` '${crop.code}'.'${crop.cropGroup}'`)
-      // replace crop name with some sort of id in order to avoid strings that are too long / illegal characters?
       curCrops.push(` '${crop.code}'`)
       p_cropData.push(` '${crop.code}'.rotBreak ${crop.rotBreak}\n '${crop.code}'.maxShare ${crop.maxShare}\n '${crop.code}'.minSoilQuality ${crop.minSoilQuality}\n '${crop.code}'.efaFactor ${crop.efaFactor}`)
       if (crop.rootCrop) crops_rootCrop.push(` '${crop.code}' YES`)
@@ -309,7 +341,19 @@ set curYear(years) / ${properties.curYear} /;
         if (constraint.operator === '<') constraints_lt.push(` '${constraint.name}'.lt YES` )
       })
     }
-
+    
+    // labour constraints
+    const p_availLabour = []
+    const p_availFieldWorkDays = []
+    const months = ['jan','feb','mrz','apr','mai','jun','jul','aug','sep','okt','nov','dez']
+    
+    if (properties.curTimeConstraints) {
+      months.forEach((month,i) => {
+        p_availLabour.push(` ${month} ${properties.curTimeConstraints.data.datasets[0].data[i]}`)
+        p_availFieldWorkDays.push(` ${month} ${properties.curTimeConstraints.data.datasets[1].data[i]}`)
+      })
+    }
+    
     // build include file
     include += this.save('set soilTypes',soilTypes)
     include += this.save('set plots',plots)
@@ -335,6 +379,9 @@ set curYear(years) / ${properties.curYear} /;
     include += this.save('set constraints',constraints)
     include += this.save('parameter p_constraint(constraints,curCrops,curCrops)',p_constraint)
     include += this.save('set constraints_lt(constraints,symbol)',constraints_lt)
+    
+    include += this.save('parameter p_availLabour(months)',p_availLabour)
+    include += this.save('parameter p_availFieldWorkDays(months)',p_availFieldWorkDays)
 
     // load base model from fruchtfolge-model
     const base = require('fruchtfolge-model')

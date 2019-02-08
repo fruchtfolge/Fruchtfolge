@@ -135,16 +135,16 @@ export default {
         const year = timeseries.data.labels[index]
         const crop = _.find(this.cropTimeSeries, ['year', year])
         if (datasetIndex === 0) {
-          // amount
-          const oldValue = this.getData([crop],'revenues','amount')
-          const corrFactor = oldValue > 0 ? value / oldValue : value
-          const newRevenues = this.setData(crop,'revenues','amount',corrFactor)
-          crop.contributionMargin.revenues = newRevenues
-        } else if (datasetIndex === 1) {
           // price
           const oldValue = this.getData([crop],'revenues','price')
           const corrFactor = oldValue > 0 ? value / oldValue : value
           const newRevenues = this.setData(crop,'revenues','price',corrFactor)
+          crop.contributionMargin.revenues = newRevenues
+        } else if (datasetIndex === 1) {
+          // amount
+          const oldValue = this.getData([crop],'revenues','amount')
+          const corrFactor = oldValue > 0 ? value / oldValue : value
+          const newRevenues = this.setData(crop,'revenues','amount',corrFactor)
           crop.contributionMargin.revenues = newRevenues
         } else {
           const oldValue = this.getData([crop], 'directCosts', 'total')
@@ -155,7 +155,9 @@ export default {
           //console.log(crop);
           crop.contributionMargin.directCosts = newDirectCosts
         }
+        console.log(crop);
         const update = await this.$db.put(crop)
+        console.log(update);
         crop._rev = update.rev
       } catch (e) {
         console.log(e);

@@ -287,7 +287,6 @@ export default {
 </script>
 
 <style scoped>
-
 .input {
   margin-bottom: 5px;
   width: 485px;

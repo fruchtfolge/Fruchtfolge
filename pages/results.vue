@@ -1,6 +1,10 @@
 <template>
   <div class="">
-    <div v-if="plotCropMatrix && result">
+    <div v-if="loading" class="blur loading">
+      <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <h2 style="text-align: center;position: relative;">Optimierung wird durchgeführt... <br> Der Vorgang kann einige Minuten in Anspruch nehmen</h2>
+    </div>
+    <div v-else-if="plotCropMatrix && result">
       <div class="result-wrapper">
         <table class="result-table">
           <thead>
@@ -155,11 +159,11 @@
             <grossMarginTimeline :plotsPrevCrops="plotsPrevCrops" :plotCropMatrix="plotCropMatrix" :result="result"/>
           </div>
         </div>
-    </div>
-
+      </div>
     </div>
     <div v-else>
-      <button type="button" name="button" @click="solve">Test</button>
+      <h2>Noch keine Schläge und Kulturen für das gewählte Planungsjahr vorhanden.<br>
+      Bitte fürgen Sie mindestens einen Schlag und eine Kultur hinzu.</h2>
     </div>
   </div>
 </template>
@@ -170,6 +174,7 @@ import model from '~/assets/js/createModel.js'
 export default {
   data() {
     return {
+      loading: true,
       plotCropMatrix: undefined,
       plots: undefined,
       curYear: undefined,
@@ -232,19 +237,33 @@ export default {
     this.$bus.$on('changeCurrents', _.debounce(this.update, 200))
   },
   methods: {
-    async solve(force) {
+    async solve(force,first) {
       try {
-        if (this.$store.curPlots && this.$store.curCrops) {
-          if (!this.plotCropMatrix || force) {
-            this.plotCropMatrix = model.buildPlotCropMatrix(this.$store)
-          }
-          //const gams = model.buildModel(this.plotCropMatrix,this.$store)
-          const gams = model.createInclude(this.plotCropMatrix,this.$store)
-          console.log({a: gams});
-          const { data } = await axios.post('http://localhost:3001/model/', {model: gams})
-          this.result = data
-          console.log(this);
+        let plotCropMatrix = this.plotCropMatrix
+        if (!plotCropMatrix || force) {
+          plotCropMatrix = model.buildPlotCropMatrix(this.$store)
         }
+        const gams = model.createInclude(this.plotCropMatrix,this.$store)
+        console.log({a: gams});
+        const { data } = await axios.post('http://localhost:3001/model/', {model: gams})
+        
+        // save results in database
+        if (first) {
+          plotCropMatrix._id = this.$store.curYear + this.$store.curScenario + 'plotCropMatrix'
+          plotCropMatrix.year = this.$store.curYear
+          plotCropMatrix.scenario = this.$store.curScenario
+          plotCropMatrix.type = 'plotCropMatrix'
+
+          data._id = this.$store.curYear + this.$store.curScenario + 'result'
+          data.year = this.$store.curYear
+          data.scenario = this.$store.curScenario
+          data.type = 'result'
+          
+          await this.$db.bulkDocs([plotCropMatrix,data])
+        } else {
+          
+        }
+        console.log(this);
       } catch (e) {
         console.log(e)
       }
@@ -302,7 +321,12 @@ export default {
     update() {
       this.$set(this, 'plots', this.$store.curPlots)
       this.$set(this, 'curYear', this.$store.curYear)
-      this.$set(this, 'plotCropMatrix', this.$store.plotCropMatrix)
+      if (!this.$store.plotCropMatrix && !this.$store.result) {
+        this.solve(true,true)
+      } else {
+        this.$set(this, 'plotCropMatrix', this.$store.plotCropMatrix)
+        this.$set(this, 'result', this.$store.result)
+      }      
     },
     format(number) {
       const formatter =  new Intl.NumberFormat('de-DE', {
@@ -320,6 +344,9 @@ export default {
 }
 </script>
 <style>
+.loading {
+  top: 480px;
+}
 .result-wrapper {
   display: inline-flex;
 }
