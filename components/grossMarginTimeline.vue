@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <div class="grossMarginTimeline-wrapper">
-      <canvas id="grossMarginTimeline-chart" width="280" height="280"></canvas>
+      <canvas id="grossMarginTimeline-chart" width="350" height="280"></canvas>
     </div>
   </div>
 </template>
@@ -17,15 +17,21 @@ export default {
     }
   },
   watch: {
-    result(val) {
-      console.log(this.shares);
-      this.prepareData()
-      this.grossMarginTimeline.data.datasets = this.datasets
-      this.grossMarginTimeline.data.labels = this.labels
-      this.grossMarginTimeline.update()
-    },
+    result: {
+      handler() {
+        console.log(this.grossMarginTimeline,this.datasets);
+        this.prepareData()
+        this.grossMarginTimeline.data.datasets[0].data = this.datasets[0].data
+        this.grossMarginTimeline.data.datasets[1].data = this.datasets[1].data
+        this.grossMarginTimeline.data.datasets[2].data = this.datasets[2].data
+        // this.grossMarginTimeline.data.labels = this.labels
+        this.grossMarginTimeline.update()
+      },
+      deep: true
+    }
   },
   mounted() {
+    this.createGradient('grossMarginTimeline-chart')
     this.prepareData('grossMarginTimeline-chart')
     this.createChart('grossMarginTimeline-chart', this.grossMarginTimeline)
   },
@@ -48,9 +54,73 @@ export default {
     prepareData(chartId) {
       this.datasets = []
       this.labels = []
-      
       const colors = ["#294D4A", "#4A6D7C", "#7690A5"]
+      const curYear = this.$store.curYear
+      const years = Array(curYear - (curYear - 10)).fill(0).map((e,i)=>i+(curYear-9))
+      
+      let plotCropMatrix = this.$store.curPlotCropMatrix
+      let plotCropMatrix1 = this.$store.plotCropMatrix.filter(o => {return o.year === this.$store.curYear - 1})
+      let plotCropMatrix2 = this.$store.plotCropMatrix.filter(o => {return o.year === this.$store.curYear - 2})
+      if (plotCropMatrix1.length > 0) plotCropMatrix1 = plotCropMatrix1[0]
+      if (plotCropMatrix2.length > 0) plotCropMatrix2 = plotCropMatrix2[0]
+      
+      for (var i = 0; i < 3; i++) {
+        let data = []
+        let shares = []
+        years.forEach(year => {
+          const o = {year: curYear - i, sum: 0}
+          // calculate total db for cropping plan of curYear - i under prices/yields/directCosts of year
+          let curCropPlotMatrix = plotCropMatrix
+          if (i === 1 && plotCropMatrix1) {
+            curCropPlotMatrix = plotCropMatrix1
+          }
+          else if (i === 2 && plotCropMatrix2) {
+            curCropPlotMatrix = plotCropMatrix2 
+          }
+          let grossMargins = []
+          let grossMargin = 0
+          grossMargins = Object.keys(curCropPlotMatrix).map(plot => {
+            if (plot === '_id' || plot === '_rev' || plot === 'type' || plot === 'year' || plot === 'scenario') return
+            const plotData = curCropPlotMatrix[plot][year]
+            let crop
+            let cropGrossMargin
+            if (i === 0) {
+              crop = this.result.recommendation[plot]
+              if (plotData[crop]) {
+                if (o[crop]) o[crop] += plotData[crop].size
+                else o[crop] = plotData[crop].size
+                o.sum += plotData[crop].size
+                return plotData[crop].grossMargin
+              }
+            } else {
+              crop = Object.keys(plotData).filter(crop => {return plotData[crop].grown})
+              if (plotData[crop[0]]) {
+                if (o[crop]) o[crop] += plotData[crop[0]].size
+                else o[crop] = plotData[crop[0]].size
+                o.sum += plotData[crop[0]].size
+                return plotData[crop[0]].grossMarginNoCropEff * plotData[crop[0]].size
+              }
+            }
+              
+          })
+          
+          grossMargin = _.sum(grossMargins)
+          data.push(grossMargin)
+          shares.push(o)
+          if (this.labels.indexOf(year) === -1) this.labels.push(year)
+        })
+        console.log(shares);
+        this.datasets.push({
+          data: data,
+          label: `Anbauplan ${curYear - i}`,
+          borderColor: colors[i],
+          backgroundColor: this.gradient[i]
+        })
+      }
+    },
+    createGradient(chartId) {
       const ctx = document.getElementById(chartId).getContext('2d')
+      const colors = ["#294D4A", "#4A6D7C", "#7690A5"]
       this.gradient = []
       
       this.gradient[0] = ctx.createLinearGradient(0, 0, 0, 450)
@@ -68,52 +138,11 @@ export default {
       this.gradient[2].addColorStop(0, 'rgba(118,144,165, 0.9)')
       this.gradient[2].addColorStop(0.5, 'rgba(118,144,165, 0.25)')
       this.gradient[2].addColorStop(1, 'rgba(118,144,165, 0)')
-      
-      const curYear = this.$store.curYear
-      const years = Array(curYear - (curYear - 10)).fill(0).map((e,i)=>i+(curYear-9))
-      
-      for (var i = 0; i < 3; i++) {
-        let data = []
-        years.forEach(year => {
-          const o = {}
-          // calculate total db for cropping plan of curYear - i under prices/yields/directCosts of year
-          let grossMargins = []
-          let grossMargin = 0
-          grossMargins = Object.keys(this.plotCropMatrix).map(plot => {
-            if (plot === '_id' || plot === '_rev' || plot === 'type' || plot === 'year' || plot === 'scenario') return
-            const plotData = this.plotCropMatrix[plot][year]
-            let crop
-            let cropGrossMargin
-            if (i === 0) {
-              crop = this.result.recommendation[plot]
-              if (plotData[crop]) {
-                return plotData[crop].grossMargin
-              }
-            } else {
-              crop = this.plotsPrevCrops[plot][curYear - i].code
-              if (plotData[crop]) {
-                return plotData[crop].grossMarginNoCropEff * plotData[crop].size
-              }
-            }
-              
-          })
-          
-          grossMargin = _.sum(grossMargins)
-          data.push(grossMargin)
-          if (this.labels.indexOf(year) === -1) this.labels.push(year)
-        })
-        this.datasets.push({
-          data: data,
-          label: `Anbauplan ${curYear - i}`,
-          borderColor: colors[i],
-          backgroundColor: this.gradient[i]
-        })
-      }
     },
     createChart(chartId, chartData) {
       Chart.defaults.global.defaultFontFamily = "Open Sans Light";
       Chart.defaults.global.defaultFontSize = 14;
-
+      
       const config = {
         type: 'line',
         data: {

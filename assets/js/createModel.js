@@ -58,12 +58,15 @@ export default {
     if (curPlot.distance > 2) return value
     return value * -1
   },
-  buildPlotCropMatrix(store) {
+  buildPlotCropMatrix(year,scenario,store) {
+    const curPlots = store.plots.filter(plot => { return plot.year === year && plot.scenario === scenario })
+    if (curPlots.length === 0) return
+    
     const attributes = ['price', 'yield', 'directCosts', 'variableCosts', 'fixCosts', 'grossMargin', 'revenue', 'distanceCosts', 'croppingFactor', 'yieldCap']
     const matrix = {}
-    const medianYieldCap = this.getMedianYieldCap(store.curPlots)
+    const medianYieldCap = this.getMedianYieldCap(curPlots)
 
-    store.curPlots.forEach(plot => {
+    curPlots.forEach(plot => {
       matrix[plot.id] = {}
       const yieldCap = _.round(plot.quality / medianYieldCap,2)
       store.crops.forEach(crop => {
@@ -89,6 +92,7 @@ export default {
           'rotBreakHeld': cropFactAndRotBreak[1],
           'name': crop.name,
           'active': crop.active,
+          'grown': plot.crop === crop.code ? true : false,
           'code': crop.code,
           yieldCap,
           amount,

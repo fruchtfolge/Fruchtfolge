@@ -158,6 +158,7 @@
           <div class="gross-margin-timeline">
             <grossMarginTimeline :plotsPrevCrops="plotsPrevCrops" :plotCropMatrix="plotCropMatrix" :result="result"/>
           </div>
+          <button type="button" name="button" @click="solve(true,false)">Solve</button>
         </div>
       </div>
     </div>
@@ -176,6 +177,8 @@ export default {
     return {
       loading: true,
       plotCropMatrix: undefined,
+      plotCropMatrix1: undefined,
+      plotCropMatrix2: undefined,
       plots: undefined,
       curYear: undefined,
       result: undefined,
@@ -236,22 +239,30 @@ export default {
     this.update()
     this.$bus.$on('changeCurrents', _.debounce(this.update, 200))
   },
-  updated() {
-    console.log('updated');
-    this.$nextTick(() => {
-      //this.loading = false
-    })
-  },
   methods: {
     async solve(force,first) {
+      this.loading = true
       try {
         let plotCropMatrix = this.plotCropMatrix
+        let plotCropMatrix1 = this.plotCropMatrix
+        let plotCropMatrix2 = this.plotCropMatrix
         if (!plotCropMatrix || force) {
-          plotCropMatrix = model.buildPlotCropMatrix(this.$store)
+          plotCropMatrix = model.buildPlotCropMatrix(this.$store.curYear,this.$store.curScenario,this.$store)
+          plotCropMatrix1 = model.buildPlotCropMatrix(this.$store.curYear - 1,'Standard',this.$store)          
+          plotCropMatrix2 = model.buildPlotCropMatrix(this.$store.curYear - 2,'Standard',this.$store)
         }
         const gams = model.createInclude(plotCropMatrix,this.$store)
-        console.log({a: gams});
         const { data } = await axios.post('http://localhost:3001/model/', {model: gams})
+        
+        plotCropMatrix2._id = this.$store.curYear - 2 + 'StandardplotCropMatrix'
+        plotCropMatrix2.year = this.$store.curYear - 2
+        plotCropMatrix2.scenario = 'Standard'
+        plotCropMatrix2.type = 'plotCropMatrix'
+        
+        plotCropMatrix1._id = this.$store.curYear - 1 + 'StandardplotCropMatrix'
+        plotCropMatrix1.year = this.$store.curYear - 1
+        plotCropMatrix1.scenario = 'Standard'
+        plotCropMatrix1.type = 'plotCropMatrix'
         
         plotCropMatrix._id = this.$store.curYear + this.$store.curScenario + 'plotCropMatrix'
         plotCropMatrix.year = this.$store.curYear
@@ -265,13 +276,16 @@ export default {
         
         // save results in database
         if (first) {
-          await this.$db.bulkDocs([plotCropMatrix,data])
+          await this.$db.bulkDocs([plotCropMatrix,plotCropMatrix1,plotCropMatrix2,data])
         } else {
+          if (this.plotCropMatrix1) plotCropMatrix1._rev = this.plotCropMatrix1._rev
+          if (this.plotCropMatrix2) plotCropMatrix2._rev = this.plotCropMatrix2._rev
           plotCropMatrix._rev = this.plotCropMatrix._rev
           data._rev = this.result._rev
           
           if (force) {
-            await this.$db.bulkDocs([plotCropMatrix,data])
+            let test = await this.$db.bulkDocs([plotCropMatrix,plotCropMatrix1,plotCropMatrix2,data])
+            console.log(test);
           } else {
             await this.$db.put(data)
           }
@@ -321,14 +335,23 @@ export default {
     },
     async update() {
       this.loading = true
+      console.log('update');
       this.$set(this, 'plots', this.$store.curPlots)
       this.$set(this, 'curYear', this.$store.curYear)
-      if (!this.$store.curPlotCropMatrix && !this.$store.curResult) {
+      if (!this.$store.curPlotCropMatrix && !this.$store.curResult 
+        && this.plots && this.crops) {
         await this.solve(true,true)
-      } else {
-        this.$set(this, 'plotCropMatrix', this.$store.curPlotCropMatrix)
+      } else if (this.plots) {
+        let plotCropMatrix = {}
+        Object.keys(this.$store.curPlotCropMatrix).forEach(plot => {
+          plotCropMatrix[plot] = {}
+          plotCropMatrix[plot][this.curYear] = this.$store.curPlotCropMatrix[plot][this.curYear]
+        })
+        plotCropMatrix._rev = this.$store.curPlotCropMatrix._rev
+        this.$set(this, 'plotCropMatrix', plotCropMatrix)
         this.$set(this, 'result', this.$store.curResult)
       }
+      
       this.loading = false
     },
     format(number) {

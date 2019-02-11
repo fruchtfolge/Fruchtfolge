@@ -196,8 +196,9 @@ export default {
     },
     async deleteYear() {
       try {
+        const year = Number(this.selectedDeleteYear)
         const result = await this.$db.find({
-          selector: {year: this.selectedDeleteYear},
+          selector: {year: year},
           fields: ['_id','_rev']
         })
         console.log(result);
