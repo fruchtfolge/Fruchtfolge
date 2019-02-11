@@ -239,7 +239,7 @@ set months_halfMonths(months,halfMonths) /
  dez.dez2 YES
 /;
 
-set years / 2001*${properties.curYear} /;
+set years / 2001*2030 /;
 set curYear(years) / ${properties.curYear} /;
 `
 

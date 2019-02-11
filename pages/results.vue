@@ -236,6 +236,12 @@ export default {
     this.update()
     this.$bus.$on('changeCurrents', _.debounce(this.update, 200))
   },
+  updated() {
+    console.log('updated');
+    this.$nextTick(() => {
+      //this.loading = false
+    })
+  },
   methods: {
     async solve(force,first) {
       try {
@@ -243,25 +249,32 @@ export default {
         if (!plotCropMatrix || force) {
           plotCropMatrix = model.buildPlotCropMatrix(this.$store)
         }
-        const gams = model.createInclude(this.plotCropMatrix,this.$store)
+        const gams = model.createInclude(plotCropMatrix,this.$store)
         console.log({a: gams});
         const { data } = await axios.post('http://localhost:3001/model/', {model: gams})
         
+        plotCropMatrix._id = this.$store.curYear + this.$store.curScenario + 'plotCropMatrix'
+        plotCropMatrix.year = this.$store.curYear
+        plotCropMatrix.scenario = this.$store.curScenario
+        plotCropMatrix.type = 'plotCropMatrix'
+        
+        data._id = this.$store.curYear + this.$store.curScenario + 'result'
+        data.year = this.$store.curYear
+        data.scenario = this.$store.curScenario
+        data.type = 'result'
+        
         // save results in database
         if (first) {
-          plotCropMatrix._id = this.$store.curYear + this.$store.curScenario + 'plotCropMatrix'
-          plotCropMatrix.year = this.$store.curYear
-          plotCropMatrix.scenario = this.$store.curScenario
-          plotCropMatrix.type = 'plotCropMatrix'
-
-          data._id = this.$store.curYear + this.$store.curScenario + 'result'
-          data.year = this.$store.curYear
-          data.scenario = this.$store.curScenario
-          data.type = 'result'
-          
           await this.$db.bulkDocs([plotCropMatrix,data])
         } else {
+          plotCropMatrix._rev = this.plotCropMatrix._rev
+          data._rev = this.result._rev
           
+          if (force) {
+            await this.$db.bulkDocs([plotCropMatrix,data])
+          } else {
+            await this.$db.put(data)
+          }
         }
         console.log(this);
       } catch (e) {
@@ -299,18 +312,6 @@ export default {
         }
       }
     },
-    beforeEnter(el) {
-      el.style.height = '0px';
-    },
-    enter(el) {
-      el.style.height = el.scrollHeight + 'px';
-    },
-    beforeLeave(el) {
-      el.style.height = el.scrollHeight + 'px';
-    },
-    leave(el) {
-      el.style.height = '0px';
-    },
     showPlotInfo(id) {
       if (this.selection === id) {
         this.selection = ''
@@ -318,15 +319,17 @@ export default {
         this.selection = id
       }
     },
-    update() {
+    async update() {
+      this.loading = true
       this.$set(this, 'plots', this.$store.curPlots)
       this.$set(this, 'curYear', this.$store.curYear)
-      if (!this.$store.plotCropMatrix && !this.$store.result) {
-        this.solve(true,true)
+      if (!this.$store.curPlotCropMatrix && !this.$store.curResult) {
+        await this.solve(true,true)
       } else {
-        this.$set(this, 'plotCropMatrix', this.$store.plotCropMatrix)
-        this.$set(this, 'result', this.$store.result)
-      }      
+        this.$set(this, 'plotCropMatrix', this.$store.curPlotCropMatrix)
+        this.$set(this, 'result', this.$store.curResult)
+      }
+      this.loading = false
     },
     format(number) {
       const formatter =  new Intl.NumberFormat('de-DE', {

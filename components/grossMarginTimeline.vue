@@ -80,13 +80,13 @@ export default {
           let grossMargins = []
           let grossMargin = 0
           grossMargins = Object.keys(this.plotCropMatrix).map(plot => {
+            if (plot === '_id' || plot === '_rev' || plot === 'type' || plot === 'year' || plot === 'scenario') return
             const plotData = this.plotCropMatrix[plot][year]
             let crop
             let cropGrossMargin
             if (i === 0) {
               crop = this.result.recommendation[plot]
               if (plotData[crop]) {
-                if (year === 2019) console.log(plotData[crop].grossMargin);
                 return plotData[crop].grossMargin
               }
             } else {
