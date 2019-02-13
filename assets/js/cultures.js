@@ -1,14 +1,17 @@
-module.exports = {
+module.exports ={
   "50": {
     "displayGroup": "Spezielle Greening-Fruchtarten",
     "code": 50,
     "variety": "Mischkulturen Saatgutmischung",
     "category": "AL",
     "cropGroupCode": 4,
+    "cropType": "Blattfrucht",
+    "catchCropAfter": true,
     "cropGroup": "Mischkultur",
     "farmingType": "konventionell/integriert",
     "crop": "Blühmischung",
-    "system": "wendend, einjährig"
+    "system": "wendend, einjährig",
+    "season": "Sommerung"
   },
   "51": {
     "displayGroup": "Spezielle Greening-Fruchtarten",
@@ -19,7 +22,9 @@ module.exports = {
     "cropGroup": "Mischkultur",
     "farmingType": "konventionell/integriert",
     "crop": "Blühmischung",
-    "system": "wendend, einjährig"
+    "system": "wendend, einjährig",
+    "catchCropAfter": true,
+    "season": "Sommerung"
   },
   "54": {
     "displayGroup": "Spezielle Greening-Fruchtarten",
@@ -30,7 +35,9 @@ module.exports = {
     "cropGroup": "Brachliegendes Land",
     "farmingType": "konventionell/integriert",
     "crop": "Blühmischung",
-    "system": "wendend, einjährig"
+    "system": "wendend, einjährig",
+    "catchCropAfter": true,
+    "season": "Sommerung"
   },
   "56": {
     "displayGroup": "Spezielle Greening-Fruchtarten",
@@ -41,7 +48,9 @@ module.exports = {
     "cropGroup": "Brachliegendes Land",
     "farmingType": "konventionell/integriert",
     "crop": "Blühmischung",
-    "system": "wendend, einjährig"
+    "system": "wendend, einjährig",
+    "catchCropAfter": true,
+    "season": "Sommerung"
   },
   "57": {
     "displayGroup": "Spezielle Greening-Fruchtarten",
@@ -52,7 +61,9 @@ module.exports = {
     "cropGroup": "Dauergrünland",
     "farmingType": "konventionell/integriert",
     "crop": "Dauergrünland - Frischfutter",
-    "system": "Ladewagen"
+    "system": "Ladewagen",
+    "catchCropAfter": true,
+    "season": "Sommerung"
   },
   "112": {
     "displayGroup": "Getreide",
@@ -63,7 +74,22 @@ module.exports = {
     "cropGroup": "Winterweizen",
     "farmingType": "konventionell/integriert",
     "crop": "Winterweizen - Brotweizen",
-    "system": "wendend, gezogene Saatbettbereitung, Saat"
+    "system": "wendend, gezogene Saatbettbereitung, Saat",
+    "catchCropAfter": true,
+    "season": "Winterung"
+  },
+  "113": {
+    "displayGroup": "Getreide",
+    "code": 113,
+    "variety": "Sommerhartweizen/Durum ",
+    "category": "AL",
+    "cropGroupCode": "1.28.2.2",
+    "cropGroup": "Sommerweizen",
+    "farmingType": "ökologisch",
+    "crop": "Sommerweizen - Futterweizen",
+    "system": "wendend, Gülle",
+    "catchCropAfter": true,
+    "season": "Sommerung"
   },
   "115": {
     "displayGroup": "Getreide",
@@ -74,7 +100,9 @@ module.exports = {
     "cropGroup": "Winterweizen",
     "farmingType": "konventionell/integriert",
     "crop": "Winterweizen - Brotweizen",
-    "system": "wendend, gezogene Saatbettbereitung, Saat"
+    "system": "wendend, gezogene Saatbettbereitung, Saat",
+    "catchCropAfter": true,
+    "season": "Winterung"
   },
   "116": {
     "displayGroup": "Getreide",
@@ -85,7 +113,9 @@ module.exports = {
     "cropGroup": "Sommerweizen",
     "farmingType": "ökologisch",
     "crop": "Sommerweizen - Futterweizen",
-    "system": "wendend, Gülle"
+    "system": "wendend, Gülle",
+    "catchCropAfter": true,
+    "season": "Sommerung"
   },
   "118": {
     "displayGroup": "Getreide",
@@ -96,7 +126,35 @@ module.exports = {
     "cropGroup": "Winterweizen",
     "farmingType": "ökologisch",
     "crop": "Winterweizen - Brotweizen",
-    "system": "wendend, Gülle"
+    "system": "wendend, Gülle",
+    "catchCropAfter": true,
+    "season": "Winterung"
+  },
+  "121": {
+    "displayGroup": "Getreide",
+    "code": 121,
+    "variety": "Winterroggen",
+    "category": "AL",
+    "cropGroupCode": "1.28.3.1",
+    "cropGroup": "Winterroggen",
+    "farmingType": "konventionell/integriert",
+    "crop": "Winterroggen - Mahl- und Brotroggen",
+    "system": "wendend, gezogene Saatbettbereitung, Saat",
+    "catchCropAfter": true,
+    "season": "Winterung"
+  },
+  "122": {
+    "displayGroup": "Getreide",
+    "code": 122,
+    "variety": "Sommerroggen",
+    "category": "AL",
+    "cropGroupCode": "1.28.3.2",
+    "cropGroup": "Sommerroggen",
+    "farmingType": "ökologisch",
+    "crop": "Sommerroggen - Futterroggen",
+    "system": "wendend, Gülle",
+    "catchCropAfter": true,
+    "season": "Sommerung"
   },
   "131": {
     "displayGroup": "Getreide",
@@ -107,7 +165,74 @@ module.exports = {
     "cropGroup": "Wintergerste",
     "farmingType": "konventionell/integriert",
     "crop": "Wintergerste - Futtergerste",
-    "system": "wendend, gezogene Saatbettbereitung, Saat"
+    "system": "wendend, gezogene Saatbettbereitung, Saat",
+    "catchCropAfter": true,
+    "season": "Winterung"
+  },
+  "132": {
+    "displayGroup": "Getreide",
+    "code": 132,
+    "variety": "Sommergerste",
+    "category": "AL",
+    "cropGroupCode": "1.28.4.2",
+    "cropGroup": "Sommergerste",
+    "farmingType": "ökologisch",
+    "crop": "Sommergerste - Futtergerste",
+    "system": "wendend, Festmist",
+    "catchCropAfter": true,
+    "season": "Sommerung"
+  },
+  "143": {
+    "displayGroup": "Getreide",
+    "code": 143,
+    "variety": "Sommerhafer",
+    "category": "AL",
+    "cropGroupCode": "1.28.5.2",
+    "cropGroup": "Sommerhafer",
+    "farmingType": "konventionell/integriert",
+    "crop": "Sommerhafer - Futterhafer",
+    "system": "wendend, gezogene Saatbettbereitung, Saat",
+    "catchCropAfter": true,
+    "season": "Sommerung"
+  },
+  "156": {
+    "displayGroup": "Getreide",
+    "code": 156,
+    "variety": "Wintertriticale",
+    "category": "AL",
+    "cropGroupCode": "1.28.6.1",
+    "cropGroup": "Wintertriticale",
+    "farmingType": "konventionell/integriert",
+    "crop": "Wintertriticale - Futtertriticale",
+    "system": "wendend, gezogene Saatbettbereitung, Saat",
+    "catchCropAfter": true,
+    "season": "Winterung"
+  },
+  "157": {
+    "displayGroup": "Getreide",
+    "code": 157,
+    "variety": "Sommertriticale",
+    "category": "AL",
+    "cropGroupCode": "1.28.6.2",
+    "cropGroup": "Sommertriticale",
+    "farmingType": "ökologisch",
+    "crop": "Sommertriticale - Futtertriticale",
+    "system": "wendend, Gülle",
+    "catchCropAfter": true,
+    "season": "Sommerung"
+  },
+  "171": {
+    "displayGroup": "Getreide",
+    "code": 171,
+    "variety": "Mais (ohne Zucker-/Silomais)",
+    "category": "AL",
+    "cropGroupCode": "1.28.7",
+    "cropGroup": "Gattung: Zea (Mais)",
+    "farmingType": "konventionell/integriert",
+    "crop": "Mais - Körnermais",
+    "system": "wendend, gezogene Saatbettbereitung, Saat",
+    "catchCropAfter": true,
+    "season": "Sommerung"
   },
   "210": {
     "displayGroup": "Eiweißpflanzen",
@@ -118,7 +243,9 @@ module.exports = {
     "cropGroup": "Gattung: Pisum (Erbse)",
     "farmingType": "konventionell/integriert",
     "crop": "Sommererbsen - Futtererbsen",
-    "system": "wendend, gezogene Saatbettbereitung, Saat"
+    "system": "wendend, gezogene Saatbettbereitung, Saat",
+    "catchCropAfter": true,
+    "season": "Sommerung"
   },
   "220": {
     "displayGroup": "Eiweißpflanzen",
@@ -129,7 +256,9 @@ module.exports = {
     "cropGroup": "Gattung: Vicia (Wicken)",
     "farmingType": "konventionell/integriert",
     "crop": "Sommerackerbohnen - Körnergewinnung",
-    "system": "wendend, gezogene Saatbettbereitung, Saat"
+    "system": "wendend, gezogene Saatbettbereitung, Saat",
+    "catchCropAfter": true,
+    "season": "Sommerung"
   },
   "311": {
     "displayGroup": "Ölsaaten",
@@ -140,7 +269,35 @@ module.exports = {
     "cropGroup": "Winterraps",
     "farmingType": "konventionell/integriert",
     "crop": "Winterraps",
-    "system": "wendend, gezogene Saatbettbereitung, Saat"
+    "system": "wendend, gezogene Saatbettbereitung, Saat",
+    "catchCropAfter": true,
+    "season": "Winterung"
+  },
+  "320": {
+    "displayGroup": "Ölsaaten",
+    "code": 320,
+    "variety": "Sonnenblume",
+    "category": "AL",
+    "cropGroupCode": "1.6.13",
+    "cropGroup": "Gattung: Helianthus (Sonnenblumen)",
+    "farmingType": "ökologisch",
+    "crop": "Sonnenblume - Körnersonnenblumen",
+    "system": "wendend, Gülle",
+    "catchCropAfter": true,
+    "season": "Sommerung"
+  },
+  "330": {
+    "displayGroup": "Ölsaaten",
+    "code": 330,
+    "variety": "Sojabohnen",
+    "category": "AL",
+    "cropGroupCode": "1.14.3",
+    "cropGroup": "Gattung: Glycine",
+    "farmingType": "konventionell/integriert",
+    "crop": "Sojabohnen - Speisequalität",
+    "system": "wendend, gezogene Saatbettbereitung, Saat",
+    "catchCropAfter": true,
+    "season": "Sommerung"
   },
   "411": {
     "displayGroup": "Ackerfutter",
@@ -151,7 +308,85 @@ module.exports = {
     "cropGroup": "Gattung: Zea (Mais)",
     "farmingType": "konventionell/integriert",
     "crop": "Mais - Silomais",
-    "system": "wendend, gezogene Saatbettbereitung, Saat"
+    "system": "wendend, gezogene Saatbettbereitung, Saat",
+    "catchCropAfter": true,
+    "season": "Sommerung"
+  },
+  "413": {
+    "displayGroup": "Ackerfutter",
+    "code": 413,
+    "variety": "Futterrübe/Runkelrübe",
+    "category": "AL",
+    "cropGroupCode": "1.28.7",
+    "cropGroup": "Gattung: Beta (Rüben)",
+    "farmingType": "konventionell/integriert",
+    "crop": "Futterrüben (Biogasproduktion)",
+    "system": "wendend, gezogene Saatbettbereitung, Saat",
+    "catchCropAfter": true,
+    "season": "Sommerung"
+  },
+  "422": {
+    "displayGroup": "Ackerfutter",
+    "code": 422,
+    "variety": "Kleegras",
+    "category": "AL",
+    "cropGroupCode": "5.",
+    "cropGroup": "Gras oder andere Grünfutterpflanzen",
+    "farmingType": "ökologisch",
+    "crop": "Kleegras - Frischfutter",
+    "system": "Ladewagen, einjährig",
+    "catchCropAfter": true,
+    "season": "Sommerung"
+  },
+  "424": {
+    "displayGroup": "Ackerfutter",
+    "code": 424,
+    "variety": "Ackergras",
+    "category": "AL",
+    "cropGroupCode": "5.",
+    "cropGroup": "Gras oder andere Grünfutterpflanzen",
+    "farmingType": "konventionell/integriert",
+    "crop": "Ackergras - Anwelksilage",
+    "system": "Ladewagen",
+    "catchCropAfter": true,
+    "season": "Sommerung"
+  },
+  "425": {
+    "displayGroup": "Ackerfutter",
+    "code": 425,
+    "variety": "Klee-Luzerne-Gemisch",
+    "category": "AL",
+    "cropGroupCode": "5.",
+    "cropGroup": "Gras oder andere Grünfutterpflanzen",
+    "farmingType": "ökologisch",
+    "crop": "Klee-Luzerne-Gemisch - Anwelksilage",
+    "system": "Anwelksilage - Ladewagen",
+    "catchCropAfter": true,
+    "season": "Sommerung"
+  },
+  "459": {
+    "displayGroup": "Dauergrünland",
+    "code": 459,
+    "variety": "Grünland (Dauergrünland)",
+    "category": "DGL",
+    "cropGroupCode": "G",
+    "cropGroup": "Dauergrünland",
+    "farmingType": "konventionell/integriert",
+    "crop": "Dauergrünland - Frischfutter",
+    "system": "Ladewagen",
+    "season": "Sommerung"
+  },
+  "461": {
+    "displayGroup": "Dauergrünland",
+    "code": 461,
+    "variety": "Dauergrünland (aus Ackerfutter)",
+    "category": "DGL",
+    "cropGroupCode": "G",
+    "cropGroup": "Dauergrünland",
+    "farmingType": "konventionell/integriert",
+    "crop": "Dauergrünland, grasbetont - Anwelksilage",
+    "system": "Ladewagen",
+    "season": "Sommerung"
   },
   "602": {
     "displayGroup": "Hackfrüchte",
@@ -162,7 +397,8 @@ module.exports = {
     "cropGroup": "Art: Solanum tuberosum (Kartoffel)",
     "farmingType": "konventionell/integriert",
     "crop": "Speisekartoffeln",
-    "system": "wendend, gezogene Saatbettbereitung, Legen"
+    "system": "wendend, gezogene Saatbettbereitung, Legen",
+    "season": "Sommerung"
   },
   "603": {
     "displayGroup": "Hackfrüchte",
@@ -173,7 +409,21 @@ module.exports = {
     "cropGroup": "Gattung: Beta (Rüben)",
     "farmingType": "konventionell/integriert",
     "crop": "Zuckerrüben",
-    "system": "wendend, gezogene Saatbettbereitung, Saat"
+    "system": "wendend, gezogene Saatbettbereitung, Saat",
+    "season": "Sommerung"
+  },
+  "627": {
+    "displayGroup": "Gemüse",
+    "code": 627,
+    "variety": "Salatgurke",
+    "category": "AL",
+    "cropGroupCode": "2.3.1.1",
+    "cropGroup": "Art: Cucumis sativus (Salatgurke)",
+    "farmingType": "konventionell/integriert",
+    "crop": "Gurke",
+    "system": "Einlegegurke, Verarbeitungsware",
+    "catchCropAfter": true,
+    "season": "Sommerung"
   },
   "633": {
     "displayGroup": "Gemüse",
@@ -184,7 +434,9 @@ module.exports = {
     "cropGroup": "Gattung: Allium (Lauch)",
     "farmingType": "konventionell/integriert",
     "crop": "Speisezwiebeln",
-    "system": "Pflanzzwiebeln, Direktabsatz"
+    "system": "Säzwiebeln, Belieferung von Abpackbetrieben",
+    "catchCropAfter": true,
+    "season": "Sommerung"
   },
   "634": {
     "displayGroup": "Gemüse",
@@ -193,8 +445,49 @@ module.exports = {
     "category": "AL",
     "cropGroupCode": "1.3.11",
     "cropGroup": "Gattung: Daucus (Möhren)",
-    "farmingType": "konventionell/integriert",
+    "farmingType": "ökologisch",
     "crop": "Möhren",
-    "system": "Frischmarktware, Waschmöhre, Dammanbau"
+    "system": "Verarbeitungsware, Verkauf ab Feldrand",
+    "catchCropAfter": true,
+    "season": "Sommerung"
+  },
+  "636": {
+    "displayGroup": "Gemüse",
+    "code": 636,
+    "variety": "Feldsalate (auch Rapunzel)",
+    "category": "AL",
+    "cropGroupCode": "1.10.3",
+    "cropGroup": "Gattung: Valerianella (Feldsalate)",
+    "farmingType": "konventionell/integriert",
+    "crop": "Feldsalat",
+    "system": "Frischmarktware, Herbstanbau, Direktsaat, Handernte, 1,8 m Beetbreite",
+    "catchCropAfter": true,
+    "season": "Sommerung"
+  },
+  "638": {
+    "displayGroup": "Gemüse",
+    "code": 638,
+    "variety": "Spinat",
+    "category": "AL",
+    "cropGroupCode": "1.1.5",
+    "cropGroup": "Gattung: Spinacia (Spinat)",
+    "farmingType": "konventionell/integriert",
+    "crop": "Spinat",
+    "system": "Verarbeitungsware, Ernte durch Verarbeiter",
+    "catchCropAfter": true,
+    "season": "Sommerung"
+  },
+  "639": {
+    "displayGroup": "Gemüse",
+    "code": 639,
+    "variety": "Rote Beete",
+    "category": "AL",
+    "cropGroupCode": "1.1.3",
+    "cropGroup": "Gattung: Beta (Rüben)",
+    "farmingType": "konventionell/integriert",
+    "crop": "Rote Beete",
+    "system": "Verarbeitungsware",
+    "catchCropAfter": true,
+    "season": "Sommerung"
   }
 }

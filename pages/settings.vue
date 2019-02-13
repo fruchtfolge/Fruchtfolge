@@ -41,6 +41,17 @@
           <button style="margin-left: 10px" type="button" id='zid-btn' class="invekosBtn" name="zid-btn" @click="deleteElanData">DATEN LÖSCHEN</button>          
         </div>
         
+        <div style="width: 100%; height: 12px; border-bottom: 1px solid black; text-align: center; margin-top: 40px; margin-bottom: 40px">
+            <span style="font-size: 20px; letter-spacing: 0.2em; background-color: #F3F5F6; padding: 0 20px;">
+          ODER ELAN-DATEI UPLOAD
+        </span>
+        </div>
+        <span>XML-Datei</span>
+        <input type="file" accept=".xml" id='xml' name="xml" @change="processFile($event,'xml')">
+        <br>
+        <span>GML-Datei</span>
+        <input type="file" accept=".gml" id='gml' name="gml" @change="processFile($event, 'gml')">
+        
         <h1 style="padding-top: 40px; font-family: 'Open Sans Condensed'; font-weight: normal; letter-spacing: 0.2em">PERSÖNLICHE DATEN</h1>
         <span>Persönlich angelegte Daten, z.B. Flächen, Kulturen oder Nebenbedingungen können an dieser Stelle für einzelne Jahre gelöscht werden. So können Sie beispielsweise verhindern, dass vorherige Planungsdaten als duplikate zu den Elan-Daten auftauchen.</span>
         <div style="width: 100%; height: 12px; border-bottom: 1px solid black; text-align: center; margin-top: 40px; margin-bottom: 40px">
@@ -168,6 +179,49 @@ export default {
       } catch (e) {
         console.log(e)
         this.noAddressErr()
+      }
+    },
+    arrayBufferToString(arrayBuffer, decoderType = 'utf-8') {
+      let decoder = new TextDecoder(decoderType);
+      return decoder.decode(arrayBuffer);
+    },
+    readFileAsync(file) {
+      return new Promise((resolve, reject) => {
+        let reader = new FileReader();
+
+        reader.onload = () => {
+          resolve(reader.result);
+        };
+
+        reader.onerror = reject;
+
+        reader.readAsArrayBuffer(file);
+      })
+    },
+    async processFile(event,type) {
+      try {
+        const file = event.target.files[0] 
+        if (!file) return
+        const buffer = await this.readFileAsync(file)
+        const fileContent = this.arrayBufferToString(buffer)
+        if (type === 'xml' && !this.xml) this.xml = fileContent 
+        if (type === 'gml' && !this.gml) this.gml = fileContent
+        if (this.xml && this.gml) {
+          this.loading = true
+          const settings = await this.$db.get('settings')
+          const request = {
+            xml: this.xml,
+            gml: this.gml,
+            settings: settings
+          }
+          console.log(request);
+          const { data } = await axios.post('http://localhost:3001/elan/files/', request)
+          await this.$db.bulkDocs(data)
+          this.loading = false
+          this.showZidSucc()
+        }
+      } catch (e) {
+        console.log(e)
       }
     },
     getLatestElanYear(year,month) {

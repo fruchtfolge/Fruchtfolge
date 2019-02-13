@@ -244,8 +244,9 @@ export default {
       this.loading = true
       try {
         let plotCropMatrix = this.plotCropMatrix
-        let plotCropMatrix1 = this.plotCropMatrix
-        let plotCropMatrix2 = this.plotCropMatrix
+        let plotCropMatrix1 = this.plotCropMatrix1
+        let plotCropMatrix2 = this.plotCropMatrix2
+        
         if (!plotCropMatrix || force) {
           plotCropMatrix = model.buildPlotCropMatrix(this.$store.curYear,this.$store.curScenario,this.$store)
           plotCropMatrix1 = model.buildPlotCropMatrix(this.$store.curYear - 1,'Standard',this.$store)          
@@ -254,15 +255,18 @@ export default {
         const gams = model.createInclude(plotCropMatrix,this.$store)
         const { data } = await axios.post('http://localhost:3001/model/', {model: gams})
         
-        plotCropMatrix2._id = this.$store.curYear - 2 + 'StandardplotCropMatrix'
-        plotCropMatrix2.year = this.$store.curYear - 2
-        plotCropMatrix2.scenario = 'Standard'
-        plotCropMatrix2.type = 'plotCropMatrix'
-        
-        plotCropMatrix1._id = this.$store.curYear - 1 + 'StandardplotCropMatrix'
-        plotCropMatrix1.year = this.$store.curYear - 1
-        plotCropMatrix1.scenario = 'Standard'
-        plotCropMatrix1.type = 'plotCropMatrix'
+        if (plotCropMatrix2) {
+          plotCropMatrix2._id = this.$store.curYear - 2 + 'StandardplotCropMatrix'
+          plotCropMatrix2.year = this.$store.curYear - 2
+          plotCropMatrix2.scenario = 'Standard'
+          plotCropMatrix2.type = 'plotCropMatrix'
+        }
+        if (plotCropMatrix1) {
+          plotCropMatrix1._id = this.$store.curYear - 1 + 'StandardplotCropMatrix'
+          plotCropMatrix1.year = this.$store.curYear - 1
+          plotCropMatrix1.scenario = 'Standard'
+          plotCropMatrix1.type = 'plotCropMatrix'
+        }
         
         plotCropMatrix._id = this.$store.curYear + this.$store.curScenario + 'plotCropMatrix'
         plotCropMatrix.year = this.$store.curYear
@@ -275,8 +279,12 @@ export default {
         data.type = 'result'
         
         // save results in database
+        let toStore = [data,plotCropMatrix]
+        if (plotCropMatrix1) toStore.push(plotCropMatrix1)
+        if (plotCropMatrix2) toStore.push(plotCropMatrix2)
+        
         if (first) {
-          await this.$db.bulkDocs([plotCropMatrix,plotCropMatrix1,plotCropMatrix2,data])
+          await this.$db.bulkDocs(toStore)
         } else {
           if (this.plotCropMatrix1) plotCropMatrix1._rev = this.plotCropMatrix1._rev
           if (this.plotCropMatrix2) plotCropMatrix2._rev = this.plotCropMatrix2._rev
@@ -284,7 +292,7 @@ export default {
           data._rev = this.result._rev
           
           if (force) {
-            let test = await this.$db.bulkDocs([plotCropMatrix,plotCropMatrix1,plotCropMatrix2,data])
+            let test = await this.$db.bulkDocs(toStore)
             console.log(test);
           } else {
             await this.$db.put(data)
@@ -339,7 +347,7 @@ export default {
       this.$set(this, 'plots', this.$store.curPlots)
       this.$set(this, 'curYear', this.$store.curYear)
       if (!this.$store.curPlotCropMatrix && !this.$store.curResult 
-        && this.plots && this.crops) {
+        && this.plots) {
         await this.solve(true,true)
       } else if (this.plots) {
         let plotCropMatrix = {}
@@ -351,7 +359,6 @@ export default {
         this.$set(this, 'plotCropMatrix', plotCropMatrix)
         this.$set(this, 'result', this.$store.curResult)
       }
-      
       this.loading = false
     },
     format(number) {
