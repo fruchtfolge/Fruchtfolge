@@ -14,7 +14,7 @@ export default {
   },
   getMedianYieldCap(plots) {
     // disregard plots with a SQR of 0
-    const sqrs = plots.map(plot => {if (plot.quality > 0) return plot.quality})
+    const sqrs = plots.map(plot => {if (plot.quality && !isNaN(plot.quality) && plot.quality > 0) return plot.quality})
     const sorted = sqrs.slice().sort()
     const middle = Math.floor(sorted.length / 2)
 
@@ -41,7 +41,15 @@ export default {
         // we calculate the exponential moving average of the cropping factors
         const plotYearCrop = _.find(crops, {code: plotYear.crop, year: plotYear.year})
         if (i === sortedPlots.length - 1 && plotYearCrop) {
-          croppingFactor = plotYearCrop.subseqCrops[curCrop.cropGroup] / 10
+          croppingFactor = plotYearCrop.subseqCrops[curCrop.cropGroup]
+          // if cropping factor is 0 (crop can't be grown), then the yield is 0
+          if (croppingFactor === 0) croppingFactor = 0
+          // if cropping factor is smaller than 8, yield is linearly declining to 40%
+          else if (croppingFactor < 8) croppingFactor = 0.9 + ((croppingFactor - 7) * 0.083)
+          // if croppingFactor is equal to 8, the yield is expected to be 100%
+          else if (croppingFactor === 8) croppingFactor = 1
+          // if cropping factor is greater than 8, the yield is linearly growing to 110%
+          else if (croppingFactor > 8) croppingFactor = 1.1 + (croppingFactor - 10)/2*0.1
         } else if (i > 0) {
           //const prevCrop = sortedPlots[i-1].crop
           //const cropData = _.find(crops, {code: prevCrop, year: sortedPlots[i-1].year})
@@ -65,10 +73,13 @@ export default {
     const attributes = ['price', 'yield', 'directCosts', 'variableCosts', 'fixCosts', 'grossMargin', 'revenue', 'distanceCosts', 'croppingFactor', 'yieldCap']
     const matrix = {}
     const medianYieldCap = this.getMedianYieldCap(curPlots)
-
+    console.log(medianYieldCap);
     curPlots.forEach(plot => {
       matrix[plot.id] = {}
-      const yieldCap = _.round(plot.quality / medianYieldCap,2)
+      let yieldCap = 1
+      if (plot.quality && !isNaN(plot.quality) && plot.quality !== 0) {
+        yieldCap = _.round(plot.quality / medianYieldCap,2)
+      }
       store.crops.forEach(crop => {
         if (!matrix[plot.id][crop.year]) matrix[plot.id][crop.year] = {}
         const that = this
@@ -273,6 +284,7 @@ set curYear(years) / ${properties.curYear} /;
 
     // create crop related data
     const curCrops = [` ''`]
+    const permPastCrops = [` ''`]
     const cropGroup = [` ''`]
     const crops_cropGroup = [` ''.''`]
     const p_cropData = []
@@ -281,12 +293,14 @@ set curYear(years) / ${properties.curYear} /;
     const croppingFactor = []
     const laborReq = []
     const halfMonths = ['JAN1', 'JAN2','FEB1','FEB2','MRZ1','MRZ2','APR1','APR2','MAI1','MAI2','JUN1','JUN2','JUL1','JUL2','AUG1','AUG2','SEP1','SEP2','OKT1','OKT2','NOV1','NOV2','DEZ1','DEZ2']
-
+    const permPastCropCodes = [459,480,492,57,567,572,592,972]
+    
     properties.curCrops.forEach(crop => {
       if (!crop) return
       if (cropGroup.indexOf(` '${crop.cropGroup}'`) === -1) cropGroup.push(` '${crop.cropGroup}'`)
       crops_cropGroup.push(` '${crop.code}'.'${crop.cropGroup}'`)
       curCrops.push(` '${crop.code}'`)
+      if (permPastCropCodes.indexOf(crop.code) > -1) permPastCrops.push(` '${crop.code}'`)
       p_cropData.push(` '${crop.code}'.rotBreak ${crop.rotBreak}\n '${crop.code}'.maxShare ${crop.maxShare}\n '${crop.code}'.minSoilQuality ${crop.minSoilQuality}\n '${crop.code}'.efaFactor ${crop.efaFactor}`)
       if (crop.rootCrop) crops_rootCrop.push(` '${crop.code}' YES`)
       if (crop.catchCropCap) crops_catchCrop.push(` '${crop.code}' YES`)
@@ -370,6 +384,7 @@ set curYear(years) / ${properties.curYear} /;
 
     include += this.save('set crops',crops)
     include += this.save('set curCrops(crops)',curCrops)
+    include += this.save('set permPastCrops(curCrops)',permPastCrops)
     include += this.save('set cropGroup',cropGroup)
     include += this.save('set crops_cropGroup(curCrops,cropGroup)',crops_cropGroup)
     include += this.save('parameter p_cropData(curCrops,cropAttr)', p_cropData )

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="loading" class="blur loading">
+    <div v-show="loading" class="blur loading">
       <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
       <h2 style="text-align: center;top: 480px;position: relative;">Die Antragsdaten werden geladen ... <br> Der Vorgang kann einige Minuten in Anspruch nehmen</h2>
     </div>

@@ -151,13 +151,18 @@
             </tr>
           </tbody>
         </table>
-        <div class="">
+        <div class="plots-wrapper">
+          <cropShares :shares="calcCropShares"/>
+          <grossMarginTimeline :plotsPrevCrops="plotsPrevCrops" :plotCropMatrix="plotCropMatrix" :result="result"/>
+
+          <!--
           <div class="crop-shares">
             <cropShares :shares="calcCropShares"/>
           </div>
           <div class="gross-margin-timeline">
             <grossMarginTimeline :plotsPrevCrops="plotsPrevCrops" :plotCropMatrix="plotCropMatrix" :result="result"/>
           </div>
+        -->
           <button type="button" name="button" @click="solve(true,false)">Solve</button>
         </div>
       </div>
@@ -185,6 +190,10 @@ export default {
       selection: undefined,
       cropColor: {}
     }
+  },
+  async updated() {
+    await this.$nextTick()
+    console.log('updated method');
   },
   computed: {
     calcCropShares() {
@@ -235,73 +244,84 @@ export default {
       return this.yearlyTotal(this.curYear)
     }
   },
-  created() {
+  async created() {
     this.update()
     this.$bus.$on('changeCurrents', _.debounce(this.update, 200))
   },
+  destroyed() {
+    this.$bus.$off('changeCurrents', _.debounce(this.update, 200))
+  },
   methods: {
     async solve(force,first) {
+      console.log(this);
       this.loading = true
-      try {
-        let plotCropMatrix = this.plotCropMatrix
-        let plotCropMatrix1 = this.plotCropMatrix1
-        let plotCropMatrix2 = this.plotCropMatrix2
-        
-        if (!plotCropMatrix || force) {
-          plotCropMatrix = model.buildPlotCropMatrix(this.$store.curYear,this.$store.curScenario,this.$store)
-          plotCropMatrix1 = model.buildPlotCropMatrix(this.$store.curYear - 1,'Standard',this.$store)          
-          plotCropMatrix2 = model.buildPlotCropMatrix(this.$store.curYear - 2,'Standard',this.$store)
-        }
-        const gams = model.createInclude(plotCropMatrix,this.$store)
-        const { data } = await axios.post('http://localhost:3001/model/', {model: gams})
-        
-        if (plotCropMatrix2) {
-          plotCropMatrix2._id = this.$store.curYear - 2 + 'StandardplotCropMatrix'
-          plotCropMatrix2.year = this.$store.curYear - 2
-          plotCropMatrix2.scenario = 'Standard'
-          plotCropMatrix2.type = 'plotCropMatrix'
-        }
-        if (plotCropMatrix1) {
-          plotCropMatrix1._id = this.$store.curYear - 1 + 'StandardplotCropMatrix'
-          plotCropMatrix1.year = this.$store.curYear - 1
-          plotCropMatrix1.scenario = 'Standard'
-          plotCropMatrix1.type = 'plotCropMatrix'
-        }
-        
-        plotCropMatrix._id = this.$store.curYear + this.$store.curScenario + 'plotCropMatrix'
-        plotCropMatrix.year = this.$store.curYear
-        plotCropMatrix.scenario = this.$store.curScenario
-        plotCropMatrix.type = 'plotCropMatrix'
-        
-        data._id = this.$store.curYear + this.$store.curScenario + 'result'
-        data.year = this.$store.curYear
-        data.scenario = this.$store.curScenario
-        data.type = 'result'
-        
-        // save results in database
-        let toStore = [data,plotCropMatrix]
-        if (plotCropMatrix1) toStore.push(plotCropMatrix1)
-        if (plotCropMatrix2) toStore.push(plotCropMatrix2)
-        
-        if (first) {
-          await this.$db.bulkDocs(toStore)
-        } else {
-          if (this.plotCropMatrix1) plotCropMatrix1._rev = this.plotCropMatrix1._rev
-          if (this.plotCropMatrix2) plotCropMatrix2._rev = this.plotCropMatrix2._rev
-          plotCropMatrix._rev = this.plotCropMatrix._rev
-          data._rev = this.result._rev
+      await this.$nextTick()
+      // ugliest hack in existance: for some reason $nextTick is not triggering when
+      // loading is set to true... so do a set timeout of 1ms to trigger the loading animation
+      setTimeout(async () => {
+        try {
+          let plotCropMatrix = this.plotCropMatrix
+          let plotCropMatrix1 = this.plotCropMatrix1
+          let plotCropMatrix2 = this.plotCropMatrix2
           
-          if (force) {
-            let test = await this.$db.bulkDocs(toStore)
-            console.log(test);
-          } else {
-            await this.$db.put(data)
+          if (!plotCropMatrix || force) {
+            plotCropMatrix = model.buildPlotCropMatrix(this.$store.curYear,this.$store.curScenario,this.$store)
+            plotCropMatrix1 = model.buildPlotCropMatrix(this.$store.curYear - 1,'Standard',this.$store)          
+            plotCropMatrix2 = model.buildPlotCropMatrix(this.$store.curYear - 2,'Standard',this.$store)
           }
+          const gams = model.createInclude(plotCropMatrix,this.$store)
+          console.log({a: gams});
+          const { data } = await axios.post('http://localhost:3001/model/', {model: gams})
+          
+          if (plotCropMatrix2) {
+            plotCropMatrix2._id = this.$store.curYear - 2 + 'StandardplotCropMatrix'
+            plotCropMatrix2.year = this.$store.curYear - 2
+            plotCropMatrix2.scenario = 'Standard'
+            plotCropMatrix2.type = 'plotCropMatrix'
+          }
+          if (plotCropMatrix1) {
+            plotCropMatrix1._id = this.$store.curYear - 1 + 'StandardplotCropMatrix'
+            plotCropMatrix1.year = this.$store.curYear - 1
+            plotCropMatrix1.scenario = 'Standard'
+            plotCropMatrix1.type = 'plotCropMatrix'
+          }
+          
+          plotCropMatrix._id = this.$store.curYear + this.$store.curScenario + 'plotCropMatrix'
+          plotCropMatrix.year = this.$store.curYear
+          plotCropMatrix.scenario = this.$store.curScenario
+          plotCropMatrix.type = 'plotCropMatrix'
+          
+          data._id = this.$store.curYear + this.$store.curScenario + 'result'
+          data.year = this.$store.curYear
+          data.scenario = this.$store.curScenario
+          data.type = 'result'
+          
+          // save results in database
+          let toStore = [data,plotCropMatrix]
+          if (plotCropMatrix1) toStore.push(plotCropMatrix1)
+          if (plotCropMatrix2) toStore.push(plotCropMatrix2)
+          
+          if (first) {
+            await this.$db.bulkDocs(toStore)
+          } else {
+            if (this.plotCropMatrix1) plotCropMatrix1._rev = this.plotCropMatrix1._rev
+            if (this.plotCropMatrix2) plotCropMatrix2._rev = this.plotCropMatrix2._rev
+            plotCropMatrix._rev = this.plotCropMatrix._rev
+            data._rev = this.result._rev
+            
+            if (force) {
+              let test = await this.$db.bulkDocs(toStore)
+              console.log(test);
+            } else {
+              await this.$db.put(data)
+            }
+          }
+          console.log(this);
+        } catch (e) {
+          console.log(e)
         }
-        console.log(this);
-      } catch (e) {
-        console.log(e)
-      }
+      }, 1)
+
     },
     yearlyTotal(year) {
       let sum = 0
@@ -349,6 +369,8 @@ export default {
       if (!this.$store.curPlotCropMatrix && !this.$store.curResult 
         && this.plots) {
         await this.solve(true,true)
+        await this.$nextTick()
+        this.loading = false
       } else if (this.plots) {
         let plotCropMatrix = {}
         Object.keys(this.$store.curPlotCropMatrix).forEach(plot => {
@@ -358,8 +380,10 @@ export default {
         plotCropMatrix._rev = this.$store.curPlotCropMatrix._rev
         this.$set(this, 'plotCropMatrix', plotCropMatrix)
         this.$set(this, 'result', this.$store.curResult)
+        await this.$nextTick()
+        this.loading = false
       }
-      this.loading = false
+      console.log('false')  
     },
     format(number) {
       const formatter =  new Intl.NumberFormat('de-DE', {
@@ -380,9 +404,19 @@ export default {
 .loading {
   top: 480px;
 }
+
 .result-wrapper {
+  width: calc(100% - 260px);
   display: inline-flex;
 }
+
+.plots-wrapper {
+  width: 100%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .result-table {
   float: left;
   margin: 0;

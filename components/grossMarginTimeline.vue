@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <div class="grossMarginTimeline-wrapper">
-      <canvas id="grossMarginTimeline-chart" width="350" height="280"></canvas>
+      <canvas id="grossMarginTimeline-chart" width="380" height="320" style="display: unset;"></canvas>
     </div>
   </div>
 </template>
@@ -181,11 +181,12 @@ export default {
 </script>
 <style>
 #grossMarginTimeline-chart {
-
+  display: unset;
 }
 
 .grossMarginTimeline-wrapper {
-  margin-left: 60px;
+  text-align: center;
+  margin: auto;
   margin-top: 80px;
 }
 </style>

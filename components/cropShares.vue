@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <div class="cropShares-wrapper">
-      <canvas id="cropShares-chart" width="280" height="280"></canvas>
+      <canvas id="cropShares-chart" width="300" height="300" style="display: unset;"></canvas>
     </div>
   </div>
 </template>
@@ -90,11 +90,12 @@ export default {
 </script>
 <style>
 #cropShares-chart {
-
+  display: unset;
 }
 
 .cropShares-wrapper {
-  margin-left: 60px;
+  margin: auto;
+  text-align: center;
   margin-top: 80px;
 }
 </style>
