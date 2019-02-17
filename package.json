@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Crop rotation optimisation software",
   "author": "Christoph Pahmeyer <christoph.pahmeyer@ilr.uni-bonn.de>",
+  "license": "MIT",
   "private": true,
   "main": "main.js",
   "build": {
@@ -13,34 +14,47 @@
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=DEV electron .",
-    "build": "nuxt build && electron-builder"
+    "build": "nuxt build && electron-builder",
+    "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
-    "@mapbox/mapbox-gl-draw": "^1.0.9",
+    "@mapbox/mapbox-gl-draw": "^1.1.1",
     "@mapquest/directions": "^0.3.3",
     "@mapquest/geocoding": "0.0.4",
+    "@nuxtjs/axios": "^5.3.6",
     "@turf/turf": "^5.1.6",
     "async": "^2.6.1",
     "axios": "^0.18.0",
     "bgr-apis": "^0.0.1",
-    "elan-api": "^0.0.3",
-    "ktbl-apis": "^1.0.0",
+    "bufferutil": "^4.0.1",
+    "chart.js": "^2.7.3",
+    "chartjs-plugin-dragdata": "^0.3.0",
+    "fruchtfolge-model": "^1.4.0",
     "lodash": "^4.17.11",
     "mapbox-gl": "^0.50.0",
-    "nuxt": "^1.4.0",
+    "mini-toastr": "^0.8.1",
+    "nano": "^7.1.1",
+    "nuxt": "^1.4.5",
+    "pouchdb": "^7.0.0",
     "pouchdb-browser": "^7.0.0",
     "pouchdb-find": "^7.0.0",
-    "pouchdb-live-find": "^0.4.0"
+    "pouchdb-live-find": "^0.4.0",
+    "r": "0.0.5",
+    "utf-8-validate": "^5.0.2",
+    "vue-notifications": "^0.9.0",
+    "xml2js": "^0.4.19"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
     "cross-env": "^5.2.0",
     "electron": "2.0.0-beta.7",
-    "electron-builder": "^20.8.1",
+    "electron-builder": "^20.38.5",
     "electron-devtools-installer": "^2.2.3",
+    "electron-rebuild": "^1.8.4",
     "eslint": "^4.15.0",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.7.1",
-    "eslint-plugin-vue": "^4.0.0"
+    "eslint-plugin-vue": "^4.0.0",
+    "url-parse": "^1.4.4"
   }
 }

@@ -1,17 +1,30 @@
-export default class Crop {
+function getId() {
+  const date = new Date()
+  return date.toISOString()
+}
+
+module.exports = class Crop {
   constructor(properties) {
     // database info
-    this._id = properties._id || `crop:${new Date.toIsoString()}`
+    //this._id = getId()
     this.type = 'crop',
     this.year = properties.year,
+    this.scenario = properties.scenario,
+    this.active = properties.active || false,
 
     // general crop data
-    this.name = properties.name,
+    this.name = properties.variety || properties.crop,
+    this.crop = properties.crop,
     this.code = properties.code,
+    this.cropGroup = properties.cropGroup,
     this.variety = properties.variety,
-    this.subseqCrops = properties.subseqCrops || [],
-    this.efaFactor = properties.efaFactor || 0,
-    this.minSoilQuality = properties.minSoilQuality || 0,
+    this.subseqCrops = properties.subseqCrops,
+    this.efaFactor = properties.efaFactor,
+    this.legume = properties.legume,
+    this.rootCrop = properties.rootCrop,
+    this.minSoilQuality = properties.minSoilQuality,
+    this.rotBreak = properties.rotBreak,
+    this.maxShare = this.rotBreak === 0 ? 100 : 1 / this.rotBreak * 100,
 
     // contribution margin related data
     this.price = properties.price,

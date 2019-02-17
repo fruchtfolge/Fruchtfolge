@@ -5,7 +5,6 @@
 
 <script>
 import { area } from '@turf/turf'
-import createPlot from '~/assets/js/createPlot'
 import mapboxgl from 'mapbox-gl'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 
@@ -17,6 +16,23 @@ export default {
   data() {
     return {
       curYear: ''
+    }
+  },
+  notifications: {
+    showAddressWarn: {
+      title: 'ADRESSE UNVOLLSTÄNDIG',
+      message: 'Bitte füllen Sie das Adressfeld komplett aus.',
+      type: 'warn'
+    },
+    showPlotRemoveSucc: {
+      title: 'SCHLAG ENTFERNT',
+      message: 'Schlag wurde erfolgreich entfernt.',
+      type: 'success'
+    },
+    showError: {
+      title: 'FEHLER',
+      message: 'Ein fehler ist aufgetreten.',
+      type: 'error'
     }
   },
   async mounted () {
@@ -33,15 +49,15 @@ export default {
       }
     } catch (e) {
       if (e.status === 404) {
-        console.log('Keine Hof-Adresse angegeben. Bitte in den Einstellungen die Hof-Adresse eintragen.')
+        this.showAddressWarn()
         return $nuxt.$router.replace({path: 'settings'})
       }
       console.log(e)
     }
-    if (!settings.home) {
-      console.log('Keine Hof-Adresse angegeben. Bitte in den Einstellungen die Hof-Adresse eintragen.')
-      return $nuxt.$router.replace({path: 'settings'})
-    }
+    //if (!settings.home) {
+  //  this.showAddressWarn()
+  //  return $nuxt.$router.replace({path: 'settings'})
+    //}
   },
   async created() {
     // listen to changes in settings and plots (current planning year etc.)
@@ -61,6 +77,17 @@ export default {
         zoom: 15
       })
     })
+
+    this.$bus.$on('resize', () => {
+      setTimeout(() => {
+        //console.log(this.map);
+        this.map.resize()
+      }, 500);
+    })
+
+    this.$bus.$on('drawPlot', geometry => {
+      this.Draw.add(geometry)
+    })
   },
   methods: {
     async createMap(settings) {
@@ -70,9 +97,8 @@ export default {
       this.map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/satellite-streets-v9?optimize=true',
-        // replace by database info later
-        center: settings.home,
-        zoom: 14,
+        center: settings.home || [7.685235,51.574318],
+        zoom: settings.home ? 14 : 8,
         dragPan: false,
         drageRotate: false
       })
@@ -90,16 +116,18 @@ export default {
     },
     async drawPlots(year, plots) {
       try {
+        //const geometries = []
         plots.forEach(plot => {
           this.Draw.add(plot.geometry)
+          //geometries.push(plot.geometry)
         })
+        // fit map to the bounds of the plots
+        //const extent = featureCollection(geometries)
+        //const bounds = bbox(extent)
+        //this.map.fitBounds(bounds, {padding: 40, duration: 0})
       } catch (e) {
         console.log(e)
       }
-    },
-    getSize(geometry) {
-      const m2 = area(geometry)
-      return Number((m2 / 10000).toFixed(2))
     },
     async delete(data) {
       try {
@@ -109,7 +137,9 @@ export default {
         console.log(plot)
         // remove from Database
         await this.$db.remove(plot)
+        this.showPlotRemoveSucc()
       } catch (e) {
+        this.showError()
         console.log(e)
       }
     },
@@ -127,35 +157,23 @@ export default {
         console.log(e)
       }
     },
+    getSize(geometry) {
+      const m2 = area(geometry)
+      return Number((m2 / 10000).toFixed(2))
+    },
     async combine() {
 
     },
     async create(data) {
-      const plotName = 'Test'//prompt('Bitte geben Sie einen Name für das Feld ein', 'Unbenannt')
-      const settings = await this.$db.get('settings')
-      const size = this.getSize(data.features[0])
-      try {
-        const plot = await createPlot({
-          name: plotName,
-          geometry: data.features[0],
-          size: size
-        }, settings)
-        
-        // delete plot from map and replace with newly created one with correct id
-        this.Draw.delete(data.features[0].id)
-        this.Draw.add(plot.geometry)
-        // store new plot in database
-        await this.$db.put(plot)
-      } catch (e) {
-        throw new Error(e)
-      }
+      this.$emit('addPlot', data)
+      this.Draw.delete(data.features[0].id)
     },
     removeDraw() {
       this.Draw.deleteAll()
     },
     select(data) {
-      if (data.features.length !== 1)  return
       console.log(data);
+      if (data.features.length !== 1)  return
       this.$bus.$emit('selectedPlot', data.features[0].properties._id)
     }
   }
@@ -165,7 +183,7 @@ export default {
 <style>
 .map {
   position: relative;
-  width: calc(100% - 255px);
+  width: 100%;
   height: calc(100vh - 60px);
 }
 </style>

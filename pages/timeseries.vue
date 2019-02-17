@@ -4,7 +4,7 @@
     <cropsSidebar v-on:showAddCrop="addCrop = true" v-on:changeCrop="changeCrop" :crops="crops" :selectedCrop="selectedCrop"/>
     <div v-if="crops && crops.length > 0">
       <div v-for="(crop, i) in crops" :key='i' v-if="isSelected(crop)" >
-        <cropTable :crop="crop"/>
+        <timeSeries :crop="crop"/>
       </div>
     </div>
     <div style="text-align: center; margin-top: 100px; width: calc(100% - 275px);" v-else>
@@ -50,11 +50,9 @@ export default {
     }
   },
   components: {
-    cropTable: () => import('~/components/crop_table.vue'),
+    timeSeries: () => import('~/components/timeSeries.vue'),
     addCrop: () => import('~/components/add_crop.vue'),
     cropsSidebar: () => import('~/components/crops_sidebar.vue'),
-    // cropSettings: () => import('~/components/cropSettings.vue'),
-    // cropRevYields: () => import('~/components/cropRevYields.vue')
   }
 }
 </script>

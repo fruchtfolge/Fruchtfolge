@@ -1,21 +1,27 @@
 <template>
-  <div>
+  <div v-if="settings">
     <div class="header">
-      <button @click='toggle' type="button" name="button" class="navIcon"></button>
+      <div @click='toggle' type="button" name="button" class="navIcon"></div>
       <nuxt-link to="/" class="logo">FRUCHTFOLGE</nuxt-link>
-      <select v-model="curPlanYear" @change="changePlanYear" class="planYear" type="button" value="2019">
+      <!-- Scenario selector -->
+      <select v-model="settings.curScenario" @change="saveSettings" class="planYear scenario" type="button" value="Standard">
+        <option disabled value="">Szenario</option>
+        <option v-for="(scenario,j) in scenarios" :key="j" :value="scenario.name"> {{ scenario.name }}</option>
+        <!-- <option>Neues Szenario</option> -->
+      </select>
+      <!-- Planning year selector -->
+      <select v-model="settings.curYear" @change="saveSettings" class="planYear" type="button" value="2019">
         <option disabled value="">Planungsjahr</option>
         <option v-for="(year,i) in years" :key="i" :value="year.single"> {{ year.full }}</option>
       </select>
     </div>
-    <!-- this is the navigation bar on the side -->
+    <!-- navigation bar on the side -->
     <div class="sidenav" v-bind:style="sidenavStyle">
       <ul class="sidenav-container">
-        <li v-for="(link, index) in links"
-            :key='index' @click="follow(link)">
-            <p class="sidenav-links" v-bind:class="{ active: isClicked(link.name)}">
-              <!--v-bind:class="{ active: isClicked(link.name)}"-->
-              {{ link.name }}
+        <li v-for="(route, index) in routes"
+            :key='index' @click="follow(route)">
+            <p class="sidenav-links" v-bind:class="{ active: isClicked(route), subPage: route.subPage }">
+              {{ route.name }}
             </p>
           </li>
       </ul>
@@ -23,17 +29,27 @@
     <!-- this is where the main application lives -->
     <nuxt class="nuxt" v-bind:style="mainStyle"></nuxt>
   </div>
+  <div v-else>
+    <!-- loading component -->
+  </div>
 </template>
 
 <script>
 import Setting from '~/constructors/settings'
-
+import routes from '~/assets/js/routes.js'
+//console.log(routes);
 export default {
   data () {
     return {
-      curPlanYear: null,
-      curPage: 'Home',
+      settings: {
+        curYear: 2019,
+        curScenario: 'Standard'
+      },
+      curPage: '',
       years: [],
+      scenarios: [{
+        name: 'Standard'
+      }],
       isOpen: false,
       sidenavStyle: {
         width: '0px'
@@ -44,64 +60,26 @@ export default {
       clickedPage: {
         backgroundColor: 'rgba(0, 0, 0, .05)'
       },
-      links: [{
-        route: '/',
-        name: 'Home',
-        icon: 'static/home.png'
-      },
-      {
-        route: 'settings',
-        name: 'Einstellungen',
-        icon: 'static/settings.png'
-      },{
-        route: 'maps',
-        name: 'Felder',
-        icon: 'static/plots.png'
-      },
-      {
-        route: 'crops',
-        name: 'Kulturen',
-        icon: 'static/crops.png'
-      },
-      {
-        route: 'constraints',
-        name: 'Nebenbedigungen',
-        icon: 'static/constraints.png'
-      },
-      {
-        route: 'results',
-        name: 'Ergebnisse',
-        icon: 'static/results.png'
-      }]
+      routes
     }
   },
   async created() {
-    const date = new Date()
-    const year = date.getFullYear()
-    const month = date.getMonth()
-    // construct planning periods for future/past
-    for (var i = year - 1; i < year + 6; i++) {
-      this.years.push({
-        single: i,
-        full: `${i - 1}/${i}`
-      })
-    }
-    // switch to new planning period after April
-    if (month > 4) {
-      this.curPlanYear = year + 1
-    } else {
-      this.curPlaYear = year
-    }
-    // construct settings object if it doesn't exist
     try {
+      // set active route
+      this.curPage = this.$nuxt.$route.path
+      // construct planning periods for future/past
+      this.constructYears()
       // get settings from db (if available)
       const settings = await this.$db.get('settings')
-      this.curPlanYear = settings.curYear
+      this.settings.curYear = settings.curYear
+      this.settings.curScenario = settings.curScenario
     } catch(e) {
       if (e.status === 404) {
-        const settings = new Setting(this.curPlanYear)
+        this.settings = new Setting(this.settings)
         // store in db
-        await this.$db.put(settings)
+        await this.$db.put(this.settings)
+      } else {
+        console.error(e)
       }
     }
   },
@@ -109,35 +87,59 @@ export default {
     open() {
       this.sidenavStyle.width = '250px'
       this.mainStyle.marginLeft = '250px'
+      //this.mainStyle.width = 'calc(100% - 250px)'
       this.isOpen = true
     },
     close() {
       this.sidenavStyle.width = '0px'
       this.mainStyle.marginLeft = '0px'
+      //this.mainStyle.width = '100%'
       this.isOpen = false
     },
     toggle() {
+      this.$bus.$emit('resize', null)
       if (this.isOpen) {
         this.close();
       } else {
         this.open();
       }
     },
-    follow(link) {
-      this.curPage = link.name
-      return $nuxt.$router.replace({path: link.route})
+    follow(route) {
+      this.curPage = route.path
+      return $nuxt.$router.replace({path: route.path})
     },
-    isClicked(name) {
-      return this.curPage === name
+    isClicked(route) {
+      if (route.subPage) {
+        return this.curPage === route.path
+      }
     },
-    async changePlanYear() {
+    async saveSettings() {
       try {
-        // get settings from db (if available)
         const settings = await this.$db.get('settings')
-        settings.curYear = this.curPlanYear
+        settings.curYear = this.settings.curYear
+        settings.curScenario = this.settings.curScenario
+        console.log(settings);
         await this.$db.put(settings)
       } catch(e) {
         console.log(e)
+      }
+    },
+    constructYears() {
+      const date = new Date()
+      const year = date.getFullYear()
+      const month = date.getMonth()
+
+      for (var i = year - 3; i < year + 6; i++) {
+        this.years.push({
+          single: i,
+          full: `${i - 1}/${i}`
+        })
+      }
+      // switch to new planning period after April
+      if (month > 4) {
+        this.settings.curYear = year + 1
+      } else {
+        this.settings.curYear = year
       }
     }
   }
@@ -204,6 +206,10 @@ body,html {
   background-color: rgba(0, 0, 0, .02);
 }
 
+.scenario {
+  right: 175px;
+}
+
 .nuxt {
   position: relative;
   top: 60px;
@@ -221,7 +227,7 @@ body,html {
   background-color: #ececec;
   overflow-x: hidden;
   transition: width .5s;
-  padding-top: 60px;
+  padding-top: 10px;
 }
 
 
@@ -239,6 +245,7 @@ body,html {
   padding-left: 40px;
   top: 60px;
   line-height: 40px;
+  font-weight: normal;
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -248,6 +255,12 @@ body,html {
 .active {
   background-color: rgba(0, 0, 0, .05);
 }
+
+.subPage {
+  padding-left: 60px;
+  margin-top: -5px;
+}
+
 .navIcon {
 	position: fixed;
 	left: 22px;
@@ -265,6 +278,6 @@ body,html {
   -moz-user-select: -moz-none;
 }
 
-button:focus {outline:0;}
+
 
 </style>
