@@ -167,7 +167,7 @@
         </div>
       </div>
     </div>
-    <div v-else>
+    <div v-else style="text-align: center; margin-top: 80px;">
       <h2>Noch keine Schläge und Kulturen für das gewählte Planungsjahr vorhanden.<br>
       Bitte fürgen Sie mindestens einen Schlag und eine Kultur hinzu.</h2>
     </div>
@@ -263,16 +263,16 @@ export default {
           let plotCropMatrix = this.plotCropMatrix
           let plotCropMatrix1 = this.plotCropMatrix1
           let plotCropMatrix2 = this.plotCropMatrix2
-          
+
           if (!plotCropMatrix || force) {
             plotCropMatrix = model.buildPlotCropMatrix(this.$store.curYear,this.$store.curScenario,this.$store)
-            plotCropMatrix1 = model.buildPlotCropMatrix(this.$store.curYear - 1,'Standard',this.$store)          
+            plotCropMatrix1 = model.buildPlotCropMatrix(this.$store.curYear - 1,'Standard',this.$store)
             plotCropMatrix2 = model.buildPlotCropMatrix(this.$store.curYear - 2,'Standard',this.$store)
           }
           const gams = model.createInclude(plotCropMatrix,this.$store)
           console.log({a: gams});
           const { data } = await axios.post('http://localhost:3001/model/', {model: gams})
-          
+
           if (plotCropMatrix2) {
             plotCropMatrix2._id = this.$store.curYear - 2 + 'StandardplotCropMatrix'
             plotCropMatrix2.year = this.$store.curYear - 2
@@ -285,22 +285,22 @@ export default {
             plotCropMatrix1.scenario = 'Standard'
             plotCropMatrix1.type = 'plotCropMatrix'
           }
-          
+
           plotCropMatrix._id = this.$store.curYear + this.$store.curScenario + 'plotCropMatrix'
           plotCropMatrix.year = this.$store.curYear
           plotCropMatrix.scenario = this.$store.curScenario
           plotCropMatrix.type = 'plotCropMatrix'
-          
+
           data._id = this.$store.curYear + this.$store.curScenario + 'result'
           data.year = this.$store.curYear
           data.scenario = this.$store.curScenario
           data.type = 'result'
-          
+
           // save results in database
           let toStore = [data,plotCropMatrix]
           if (plotCropMatrix1) toStore.push(plotCropMatrix1)
           if (plotCropMatrix2) toStore.push(plotCropMatrix2)
-          
+
           if (first) {
             await this.$db.bulkDocs(toStore)
           } else {
@@ -308,7 +308,7 @@ export default {
             if (this.plotCropMatrix2) plotCropMatrix2._rev = this.plotCropMatrix2._rev
             plotCropMatrix._rev = this.plotCropMatrix._rev
             data._rev = this.result._rev
-            
+
             if (force) {
               let test = await this.$db.bulkDocs(toStore)
               console.log(test);
@@ -366,7 +366,7 @@ export default {
       console.log('update');
       this.$set(this, 'plots', this.$store.curPlots)
       this.$set(this, 'curYear', this.$store.curYear)
-      if (!this.$store.curPlotCropMatrix && !this.$store.curResult 
+      if (!this.$store.curPlotCropMatrix && !this.$store.curResult
         && this.plots) {
         await this.solve(true,true)
         await this.$nextTick()
@@ -382,8 +382,10 @@ export default {
         this.$set(this, 'result', this.$store.curResult)
         await this.$nextTick()
         this.loading = false
+      } else {
+        this.loading = false
       }
-      console.log('false')  
+      console.log('false')
     },
     format(number) {
       const formatter =  new Intl.NumberFormat('de-DE', {

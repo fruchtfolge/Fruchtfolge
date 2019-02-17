@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <div class="cropShares-wrapper">
-      <canvas id="cropShares-chart" width="300" height="300" style="display: unset;"></canvas>
+      <canvas id="cropShares-chart" width="280" height="280" style="display: unset;"></canvas>
     </div>
   </div>
 </template>
