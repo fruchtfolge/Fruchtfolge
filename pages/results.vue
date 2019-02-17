@@ -191,10 +191,6 @@ export default {
       cropColor: {}
     }
   },
-  async updated() {
-    await this.$nextTick()
-    console.log('updated method');
-  },
   computed: {
     calcCropShares() {
       const colors =["#294D4A", "#4A6D7C", "#7690A5", "#79ae98", "#BBE29D", "#9DD5C0", '#B5DCE1', "#D0D1D3", "#B5DCE1"]
@@ -249,7 +245,7 @@ export default {
     this.$bus.$on('changeCurrents', _.debounce(this.update, 200))
   },
   destroyed() {
-    this.$bus.$off('changeCurrents', _.debounce(this.update, 200))
+    this.$bus.$off('changeCurrents')
   },
   methods: {
     async solve(force,first) {
@@ -363,7 +359,7 @@ export default {
     },
     async update() {
       this.loading = true
-      console.log('update');
+      console.log('update res');
       this.$set(this, 'plots', this.$store.curPlots)
       this.$set(this, 'curYear', this.$store.curYear)
       if (!this.$store.curPlotCropMatrix && !this.$store.curResult
