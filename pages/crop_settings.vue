@@ -90,8 +90,10 @@ export default {
   },
   created() {
     this.update()
-    console.log(this.crops)
     this.$bus.$on('changeCurrents', _.debounce(this.update, 200))
+  },
+  destroyed() {
+    this.$bus.$off('changeCurrents')
   },
   methods: {
     changeCrop(crop) {
@@ -148,7 +150,7 @@ export default {
   }
   .cropSettings table td:nth-child(2) {
     text-align: center;
-  } 
+  }
   .cropSettings table input {
     -webkit-appearance: checkbox;
   }

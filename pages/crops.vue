@@ -31,6 +31,9 @@ export default {
     this.update()
     this.$bus.$on('changeCurrents', _.debounce(this.update, 200))
   },
+  destroyed() {
+    this.$bus.$off('changeCurrents')
+  },
   methods: {
     changeCrop(crop) {
       this.selectedCrop = crop

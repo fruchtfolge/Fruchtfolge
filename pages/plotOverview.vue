@@ -71,7 +71,7 @@ export default {
             return cultures[plot.crop].variety
           }
         }
-        
+
         this.plots.forEach(plot => {
           o[plot.id] = {}
           o[plot.id][this.curYear - 3] = getName(plot.id,this.curYear - 3)
@@ -84,9 +84,10 @@ export default {
   },
   created() {
     this.update()
-    console.log(this.plots)
-    console.log(this.plotsPrevCrops);
     this.$bus.$on('changeCurrents', _.debounce(this.update, 200))
+  },
+  destroyed() {
+    this.$bus.$off('changeCurrents')
   },
   methods: {
     changePlot(plot) {

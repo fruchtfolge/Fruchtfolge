@@ -32,10 +32,13 @@ export default {
     this.update()
     this.$bus.$on('changeCurrents', _.debounce(this.update, 200))
   },
+  destroyed() {
+    this.$bus.$off('changeCurrents')
+  },
   methods: {
     createChart(chartId, chartData) {
       const ctx = document.getElementById(chartId).getContext('2d')
-      
+
       const gradient1 = ctx.createLinearGradient(0, 0, 0, 450)
       const gradient2 = ctx.createLinearGradient(0, 0, 0, 450)
 
@@ -50,7 +53,7 @@ export default {
       chartData.data.datasets[0].backgroundColor = gradient1
       chartData.data.datasets[1].backgroundColor = gradient2
       chartData.options.onDragEnd = this.saveChanges
-      
+
       this.labourChart = new Chart(ctx, {
         type: chartData.chartType,
         data: chartData.data,
@@ -62,7 +65,7 @@ export default {
       // create new time constraints object
       chartDefaults.year = this.$store.curYear
       chartDefaults.scenario = this.$store.curScenario
-      
+
       const timeConstraints = new TimeConstraints(chartDefaults)
       console.log(timeConstraints);
       await this.$db.put(timeConstraints)

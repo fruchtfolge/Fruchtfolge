@@ -23,8 +23,15 @@ module.exports = [{
 },
 {
   subPage: true,
-  path: '/plots_overview',
+  path: '/plotOverview',
   name: 'Übersicht',
+  file: 'plotsTable',
+  icon: 'static/plots.png'
+},
+{
+  subPage: true,
+  path: '/plotPrevCrops',
+  name: 'Vorfrüchte',
   file: 'plotsTable',
   icon: 'static/plots.png'
 },

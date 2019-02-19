@@ -96,36 +96,7 @@ const timeConstraints = Vue.prototype.$db.liveFind({
   .on('error', (err) => {
     console.log(err)
   })
-  
-// Plot crop matrix
-const plotCropMatrix = Vue.prototype.$db.liveFind({
-  selector: {
-    type: 'plotCropMatrix'
-  },
-  aggregate: true
-})
-  .on('update', (update, aggregate) => {
-    Vue.set(Vue.prototype.$store, 'plotCropMatrix', aggregate)
-    updateCurrent()
-  })
-  .on('error', (err) => {
-    console.log(err)
-  })
-  
-// Plot crop matrix
-const result = Vue.prototype.$db.liveFind({
-  selector: {
-    type: 'result'
-  },
-  aggregate: true
-})
-  .on('update', (update, aggregate) => {
-    Vue.set(Vue.prototype.$store, 'result', aggregate)
-    updateCurrent()
-  })
-  .on('error', (err) => {
-    console.log(err)
-  })
+
 
 function updateCurrent() {
   if (Vue.prototype.$store.plots) {
@@ -162,28 +133,6 @@ function updateCurrent() {
       Vue.set(Vue.prototype.$store, 'curTimeConstraints', match[0])
     } else {
       Vue.set(Vue.prototype.$store, 'curTimeConstraints', null)
-    }
-  }
-  if (Vue.prototype.$store.plotCropMatrix) {
-    const match = Vue.prototype.$store.plotCropMatrix.filter(plotCropMatrix => {
-      return plotCropMatrix.year === Vue.prototype.$store.settings.curYear &&
-        plotCropMatrix.scenario === Vue.prototype.$store.settings.curScenario
-    })
-    if (match.length > 0) {
-      Vue.set(Vue.prototype.$store, 'curPlotCropMatrix', match[0])
-    } else {
-      Vue.set(Vue.prototype.$store, 'curPlotCropMatrix', null)
-    }
-  }
-  if (Vue.prototype.$store.result) {
-    const match = Vue.prototype.$store.result.filter(result => {
-      return result.year === Vue.prototype.$store.settings.curYear &&
-        result.scenario === Vue.prototype.$store.settings.curScenario
-    })
-    if (match.length > 0) {
-      Vue.set(Vue.prototype.$store, 'curResult', match[0])
-    } else {
-      Vue.set(Vue.prototype.$store, 'curResult', null)
     }
   }
   Vue.prototype.$bus.$emit('changeCurrents')

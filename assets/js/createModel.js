@@ -66,39 +66,37 @@ export default {
     if (curPlot.distance > 2) return value
     return value * -1
   },
-  buildPlotCropMatrix(year,scenario,store) {
-    const curPlots = store.plots.filter(plot => { return plot.year === year && plot.scenario === scenario })
-    if (curPlots.length === 0) return
-    
-    const attributes = ['price', 'yield', 'directCosts', 'variableCosts', 'fixCosts', 'grossMargin', 'revenue', 'distanceCosts', 'croppingFactor', 'yieldCap']
-    const matrix = {}
-    const medianYieldCap = this.getMedianYieldCap(curPlots)
-    console.log(medianYieldCap);
-    curPlots.forEach(plot => {
-      matrix[plot.id] = {}
+  async buildMatrix(plots,crops,curYear) {
+    // get median yield capacity
+    const medianYieldCap = this.getMedianYieldCap(plots)
+    // loop over all plots and create 'matrix' property where all
+    // gross margin related information for the past 10 years is stored
+    plots.forEach(plot => {
+      plot.matrix = {}
       let yieldCap = 1
       if (plot.quality && !isNaN(plot.quality) && plot.quality !== 0) {
         yieldCap = _.round(plot.quality / medianYieldCap,2)
       }
-      store.crops.forEach(crop => {
-        if (!matrix[plot.id][crop.year]) matrix[plot.id][crop.year] = {}
-        const that = this
-        const cropFactAndRotBreak = this.getCropFactAndRotBreak(plot,store.crops,store.plots,crop)
+      crops.forEach(crop => {
+        // don't consider more than 10 years prior to the optimisation horizon
+        if (crop.year < curYear - 10) return
+        if (!plot.matrix[crop.year]) plot.matrix[crop.year] = {}
+        const cropFactAndRotBreak = this.getCropFactAndRotBreak(plot,crops,plots,crop)
         const amount = _.round(_.sumBy(crop.contributionMargin.revenues, o => { return o.amount.value }))
         const correctedAmount = _.round(amount * cropFactAndRotBreak[0] * yieldCap, 2)
         let price
         if (amount > 0) {
           price = _.round(_.sumBy(crop.contributionMargin.revenues, o => { return o.total.value }) / amount, 2)
         } else {
-          price = _.round(_.sumBy(crop.contributionMargin.revenues, o => { return o.total.value }), 2)          
+          price = _.round(_.sumBy(crop.contributionMargin.revenues, o => { return o.total.value }), 2)
         }
         const revenueNoCropEff = _.round(price * amount, 2)
         const revenue = _.round(price * correctedAmount, 2)
         const directCosts = _.round(_.sumBy(crop.contributionMargin.directCosts, o => { return o.total.value }), 2)
         const variableCosts =  _.round(_.sumBy(crop.contributionMargin.variableCosts, o => { return o.total.value }), 2)
-        const distanceCosts = that.calculateDistanceCosts(plot,correctedAmount)
+        const distanceCosts = this.calculateDistanceCosts(plot,correctedAmount)
 
-        matrix[plot.id][crop.year][crop.code] = {
+        plot.matrix[crop.year][crop.code] = {
           'croppingFactor': cropFactAndRotBreak[0],
           'rotBreakHeld': cropFactAndRotBreak[1],
           'name': crop.name,
@@ -121,96 +119,9 @@ export default {
         }
       })
     })
-    return matrix
+    return plots
   },
-  buildModel(matrix,store) {
-    const year = store.curYear
-    let include = ''
-    // create set with all possible plots
-    include += 'set plots /\n'
-    Object.keys(matrix).forEach(plot => {
-      include += `'${plot}'\n`
-    })
-    include += '/;\n\n'
-    // create set with all possible crops
-    include += 'set crops /\n'
-    store.curCrops.forEach(crop => {
-      include += `'${crop.code}'\n`
-    })
-    include += '/;\n\n'
-    // create parameter containing gross margins per plot
-    include += 'parameter p_grossMargin(plots,crops) /\n'
-    store.curPlots.forEach(plot => {
-      store.curCrops.forEach(crop => {
-        crop = matrix[plot.id][year][crop.code]
-        if (crop.rotBreakHeld && crop.active) {
-          include += `'${plot.id}'.'${crop.code}' ${crop.grossMargin}\n`
-        }
-      })
-    })
-    include += '/;\n\n'
-    // add constraints
-    if (store.curConstraints) {
-      include += 'set constraint /\n'
-      for (var i = 0; i < store.curConstraints.length; i++) {
-        include += ` 'c${i}'\n`
-      }
-      include += '/;\n\n'
-      include += 'parameter p_constraint(constraint,crops,crops,operator,sizeType) /\n'
-      store.curConstraints.forEach((constraint,i) => {
-        include += ` 'c${i}'.'${constraint.crop1Code}'.'${constraint.crop2Code}'.'${constraint.operator}'.'${constraint.sizeType}' ${constraint.area}\n`
-      })
-      include += '/;\n\n'
-    }
-
-    // load Fruchtfolge base model
-    const baseModel = `Variable v_obje;
-    Binary Variable v_binCropPlot(crops,plots);
-
-    Equations
-      e_obje
-      e_oneCropPlot(plots)
-    ;
-
-    e_oneCropPlot(plots)..
-      sum(crops, v_binCropPlot(crops,plots))
-      =E= 1
-    ;
-
-    v_binCropPlot.up(crops,plots) $ (not p_grossMargin(plots,crops)) = 0;
-
-    e_obje..
-      v_obje =E=
-        sum((plots,crops),
-        v_binCropPlot(crops,plots)
-        * p_grossMargin(plots,crops));
-
-    option optCR=0;
-    model Fruchtfolge / all /;
-    solve Fruchtfolge using MIP maximizing v_obje;
-
-    File results / %random% /;
-    results.lw = 40;
-    put results;
-    put "{"
-    put '"model_status":',  Fruchtfolge.modelstat, "," /;
-    put '"solver_status":', Fruchtfolge.solvestat, "," /;
-    put '"objective":', v_obje.l, "," /;
-    put '"recommendation":', "{"/;
-    loop((plots),
-      loop(crops,
-        put$(v_binCropPlot.l(crops,plots) > 0) '"', plots.tl, '":', '"', crops.tl, '"' /
-      )
-      put$(ord(plots) < card(plots)) "," /
-    );
-    put "}" /;
-    put "}" /;
-    putclose;`
-    // const baseModel = require('fruchtfolge-model')
-
-    return include.concat(baseModel)
-  },
-  createInclude(matrix,properties) {
+  createInclude(properties) {
     let include =
 `* -------------------------------
 * Fruchtfolge Model - Include file
@@ -294,7 +205,7 @@ set curYear(years) / ${properties.curYear} /;
     const laborReq = []
     const halfMonths = ['JAN1', 'JAN2','FEB1','FEB2','MRZ1','MRZ2','APR1','APR2','MAI1','MAI2','JUN1','JUN2','JUL1','JUL2','AUG1','AUG2','SEP1','SEP2','OKT1','OKT2','NOV1','NOV2','DEZ1','DEZ2']
     const permPastCropCodes = [459,480,492,57,567,572,592,972]
-    
+
     properties.curCrops.forEach(crop => {
       if (!crop) return
       if (cropGroup.indexOf(` '${crop.cropGroup}'`) === -1) cropGroup.push(` '${crop.cropGroup}'`)
@@ -335,18 +246,18 @@ set curYear(years) / ${properties.curYear} /;
     properties.crops.forEach(crop => {
       if (crops.indexOf(` '${crop.code}'`) === -1) crops.push(` '${crop.code}'`)
     })
-    
+
     properties.curPlots.forEach(plot => {
       properties.curCrops.forEach(crop => {
-        crop = matrix[plot.id][properties.curYear][crop.code]
-        // make sure there only is a gross margin for a plot if the rotational break is held 
+        crop = plot.matrix[properties.curYear][crop.code]
+        // make sure there only is a gross margin for a plot if the rotational break is held
         // and the crop is set to active
         if (crop.rotBreakHeld && crop.active) {
           p_grossMarginData.push(` '${plot.id}'.'${crop.code}' ${crop.grossMargin}`)
         }
       })
     })
-    
+
     // constraints related data
     const constraints = []
     const p_constraint = []
@@ -359,19 +270,19 @@ set curYear(years) / ${properties.curYear} /;
         if (constraint.operator === '<') constraints_lt.push(` '${constraint.name}'.lt YES` )
       })
     }
-    
+
     // labour constraints
     const p_availLabour = []
     const p_availFieldWorkDays = []
     const months = ['jan','feb','mrz','apr','mai','jun','jul','aug','sep','okt','nov','dez']
-    
+
     if (properties.curTimeConstraints) {
       months.forEach((month,i) => {
         p_availLabour.push(` ${month} ${properties.curTimeConstraints.data.datasets[0].data[i]}`)
         p_availFieldWorkDays.push(` ${month} ${properties.curTimeConstraints.data.datasets[1].data[i]}`)
       })
     }
-    
+
     // build include file
     include += this.save('set soilTypes',soilTypes)
     include += this.save('set plots',plots)
@@ -398,7 +309,7 @@ set curYear(years) / ${properties.curYear} /;
     include += this.save('set constraints',constraints)
     include += this.save('parameter p_constraint(constraints,curCrops,curCrops)',p_constraint)
     include += this.save('set constraints_lt(constraints,symbol)',constraints_lt)
-    
+
     include += this.save('parameter p_availLabour(months)',p_availLabour)
     include += this.save('parameter p_availFieldWorkDays(months)',p_availFieldWorkDays)
 

@@ -53,6 +53,7 @@ html {
   -webkit-user-select: none;
   -webkit-user-drag: none;
   cursor: default;
+  font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
 }
 
 input, textarea, select, button, img {

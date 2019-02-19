@@ -4,7 +4,7 @@
       <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
       <h2 style="text-align: center;position: relative;">Optimierung wird durchgeführt... <br> Der Vorgang kann einige Minuten in Anspruch nehmen</h2>
     </div>
-    <div v-else-if="plotCropMatrix && result">
+    <div v-else-if="resultsAvailable">
       <div class="result-wrapper">
         <table class="result-table">
           <thead>
@@ -18,21 +18,21 @@
             </tr>
           </thead>
           <tbody>
-            <template v-for="(plot) in plots">
+            <template v-for="(plot,i) in curPlots">
               <tr :key="plot.id">
                 <td style="text-align: center;">{{ plot.name }}</td>
                 <td style="text-align: center;">{{ plot.size }}</td>
                 <td style="text-align: center;">{{ plot.distance }}</td>
                 <td style="text-align: center;">{{ plotsPrevCrops[plot.id][curYear - 1].name }}</td>
                 <td style="text-align: center;">
-                  <select v-model="result.recommendation[plot.id]" class="selection">
-                    <option v-for="(crop) in plotCropMatrix[plot.id][curYear]" :key="crop.code" :value="crop.code">
+                  <select v-model="plot.selectedCrop" @change="saveCropChange(plot)" class="selection">
+                    <option v-for="(crop) in plot.matrix[curYear]" :key="crop.code" :value="crop.code">
                       {{crop.name}}
                     </option>
                   </select>
                 </td>
                 <td style="text-align: center;" @click="showPlotInfo(plot.id)">
-                  {{ format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].grossMargin) }}
+                  {{ format(plot.matrix[curYear][plot.selectedCrop].grossMargin) }}
                 </td>
               </tr>
               <tr v-show="plot.id === selection" :key="plot._id">
@@ -46,31 +46,31 @@
                       <tr>
                         <td>Durchschnittsertrag</td>
                         <td style="text-align: center;">{{
-                          plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].amount
+                          plot.matrix[curYear][plot.selectedCrop].amount
                         }}</td>
                       </tr>
                       <tr>
                         <td>Korrektur Bodenqualität</td>
-                        <td style="text-align:center;">{{
-                          ((plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].yieldCap
-                               * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].amount)
-                               - plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].amount).toFixed(2)
+                        <td style="text-align:center;" contenteditable="true" @blur="save($event,i,'yieldCap', plot)">{{
+                          ((plot.matrix[curYear][plot.selectedCrop].yieldCap
+                               * plot.matrix[curYear][plot.selectedCrop].amount)
+                               - plot.matrix[curYear][plot.selectedCrop].amount).toFixed(2)
                         }}</td>
                       </tr>
                       <tr>
                         <td>Korrektur Fruchtfolge</td>
-                        <td style="text-align:center;">{{
-                          ((plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].croppingFactor
-                               * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].amount)
-                               - plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].amount).toFixed(2)
+                        <td style="text-align:center;" contenteditable="true" @blur="save($event,i,'croppingFactor', plot)">{{
+                          ((plot.matrix[curYear][plot.selectedCrop].croppingFactor
+                               * plot.matrix[curYear][plot.selectedCrop].amount)
+                               - plot.matrix[curYear][plot.selectedCrop].amount).toFixed(2)
                         }}</td>
                       </tr>
                       <tr>
                         <td style="font-weight: bold;">Korrigierter Ertrag</td>
                         <td style="text-align:center;font-weight: bold;">{{
-                          (plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].amount
-                          * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].yieldCap
-                          * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].croppingFactor).toFixed(2)
+                          (plot.matrix[curYear][plot.selectedCrop].amount
+                          * plot.matrix[curYear][plot.selectedCrop].yieldCap
+                          * plot.matrix[curYear][plot.selectedCrop].croppingFactor).toFixed(2)
                         }}</td>
                       </tr>
                     </tbody>
@@ -86,58 +86,58 @@
                     <tbody>
                       <tr>
                         <td>Leistungen</td>
-                        <td style="text-align:center;">{{
-                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].price)
+                        <td style="text-align:center;" contenteditable="true" @blur="save($event,i,'price', plot)">{{
+                          format(plot.matrix[curYear][plot.selectedCrop].price)
                         }}</td>
                         <td style="text-align:center;">{{
-                          plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].correctedAmount
+                          plot.matrix[curYear][plot.selectedCrop].correctedAmount
                         }}</td>
                         <td style="text-align:center;">{{
-                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].revenue)
+                          format(plot.matrix[curYear][plot.selectedCrop].revenue)
                         }}</td>
                         <td style="text-align:center;">{{
-                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].revenue
-                          * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
+                          format(plot.matrix[curYear][plot.selectedCrop].revenue
+                          * plot.matrix[curYear][plot.selectedCrop].size)
                         }}</td>
                       </tr>
                       <tr>
                         <td colspan="3">Direktkosten</td>
-                        <td style="text-align:center;">{{
-                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].directCosts)
+                        <td style="text-align:center;" contenteditable="true" @blur="save($event,i,'directCosts', plot)">{{
+                          format(plot.matrix[curYear][plot.selectedCrop].directCosts)
                         }}</td>
                         <td style="text-align:center;">{{
-                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].directCosts
-                          * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
+                          format(plot.matrix[curYear][plot.selectedCrop].directCosts
+                          * plot.matrix[curYear][plot.selectedCrop].size)
                         }}</td>
                       </tr>
                       <tr>
                         <td colspan="3">Maschinenkosten</td>
-                        <td style="text-align:center;">{{
-                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].variableCosts)
+                        <td style="text-align:center;" contenteditable="true" @blur="save($event,i,'machineCosts', plot)">{{
+                          format(plot.matrix[curYear][plot.selectedCrop].variableCosts)
                         }}</td>
                         <td style="text-align:center;">{{
-                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].variableCosts
-                          * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
+                          format(plot.matrix[curYear][plot.selectedCrop].variableCosts
+                          * plot.matrix[curYear][plot.selectedCrop].size)
                         }}</td>
                       </tr>
                       <tr>
                         <td colspan="3">Transportkosten</td>
-                        <td style="text-align:center;">{{
-                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].distanceCosts)
+                        <td style="text-align:center;" contenteditable="true" @blur="save($event,i,'distanceCosts', plot)">{{
+                          format(plot.matrix[curYear][plot.selectedCrop].distanceCosts)
                         }}</td>
                         <td style="text-align:center;">{{
-                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].distanceCosts
-                          * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
+                          format(plot.matrix[curYear][plot.selectedCrop].distanceCosts
+                          * plot.matrix[curYear][plot.selectedCrop].size)
                         }}</td>
                       </tr>
                       <tr>
                         <td colspan="3">Deckungsbeitrag</td>
                         <td style="text-align:center;">{{
-                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].grossMarginHa)
+                          format(plot.matrix[curYear][plot.selectedCrop].grossMarginHa)
                         }}</td>
                         <td style="text-align:center;">{{
-                          format(plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].grossMarginHa
-                          * plotCropMatrix[plot.id][curYear][result.recommendation[plot.id]].size)
+                          format(plot.matrix[curYear][plot.selectedCrop].grossMarginHa
+                          * plot.matrix[curYear][plot.selectedCrop].size)
                         }}</td>
                       </tr>
                     </tbody>
@@ -152,18 +152,19 @@
           </tbody>
         </table>
         <div class="plots-wrapper">
-          <cropShares :shares="calcCropShares"/>
-          <grossMarginTimeline :plotsPrevCrops="plotsPrevCrops" :plotCropMatrix="plotCropMatrix" :result="result"/>
-
+          <cropShares :shares="curShares"/>
+          <grossMarginTimeline :plots="curPlots"/>
+          <timeRequirement :shares="shares"/>
           <!--
           <div class="crop-shares">
-            <cropShares :shares="calcCropShares"/>
+            <cropShares :shares="curShares"/>
           </div>
           <div class="gross-margin-timeline">
             <grossMarginTimeline :plotsPrevCrops="plotsPrevCrops" :plotCropMatrix="plotCropMatrix" :result="result"/>
           </div>
         -->
-          <button type="button" name="button" @click="solve(true,false)">Solve</button>
+          <button type="button" name="button" @click="solve(true)">ZURÜCKSETZEN</button>
+          <button type="button" name="button" @click="solve(false)">ERNEUT LÖSEN</button>
         </div>
       </div>
     </div>
@@ -181,31 +182,28 @@ export default {
   data() {
     return {
       loading: true,
-      plotCropMatrix: undefined,
-      plotCropMatrix1: undefined,
-      plotCropMatrix2: undefined,
+      curPlots: undefined,
       plots: undefined,
       curYear: undefined,
-      result: undefined,
+      infeasible: false,
       selection: undefined,
       cropColor: {}
     }
   },
   computed: {
-    calcCropShares() {
+    curShares() {
       const colors =["#294D4A", "#4A6D7C", "#7690A5", "#79ae98", "#BBE29D", "#9DD5C0", '#B5DCE1', "#D0D1D3", "#B5DCE1"]
       // calculate crop shares
       let o = {}
-      this.plots.forEach(plot => {
-        const recommendation = this.result.recommendation[plot.id]
-        if (!o[recommendation]) {
-          o[recommendation] = {
+      this.curPlots.forEach(plot => {
+        const selectedCrop = plot.selectedCrop
+        if (!o[selectedCrop]) {
+          o[selectedCrop] = {
             data: plot.size,
-            name: this.plotCropMatrix[plot.id][this.curYear][recommendation].name
+            name: plot.matrix[this.curYear][selectedCrop].name
           }
         }
-        else o[recommendation].data += plot.size
-
+        else o[selectedCrop].data += plot.size
       })
       // sort crop shares by descending size
       let a = []
@@ -220,11 +218,35 @@ export default {
       })
       return a
     },
+    shares() {
+      const plots = this.$store.plots.filter(plot => {
+        return plot.scenario === this.$store.curScenario
+      })
+      const shares = {}
+      plots.forEach(plot => {
+        if (!shares[plot.year]) shares[plot.year] = {}
+        let crop = plot.crop
+        if (plot.year === this.curYear) crop = plot.selectedCrop
+        if (!crop) return
+        if (!shares[plot.year][crop]) {
+          shares[plot.year][crop] = plot.size
+        } else {
+          shares[plot.year][crop] += plot.size
+        }
+      })
+      return shares
+    },
+    resultsAvailable() {
+      if (this.curPlots && this.curPlots[0].matrix && this.curPlots[0].matrix[this.curYear] ) {
+        return true
+      }
+      return false
+    },
     plotsPrevCrops() {
-      if (this.plots && this.plots.length > 0) {
+      if (this.curPlots && this.curPlots.length > 0) {
         let o = {}
         const that = this
-        this.plots.forEach(plot => {
+        this.curPlots.forEach(plot => {
           o[plot.id] = {}
           o[plot.id][this.curYear - 3] = this.getName(plot.id,this.curYear - 3)
           o[plot.id][this.curYear - 2] = this.getName(plot.id,this.curYear - 2)
@@ -241,101 +263,139 @@ export default {
     }
   },
   async created() {
-    this.update()
+    setTimeout(() => {
+      this.update()
+    },200)
+
     this.$bus.$on('changeCurrents', _.debounce(this.update, 200))
   },
   destroyed() {
     this.$bus.$off('changeCurrents')
   },
+  notifications: {
+    showSolved: {
+      title: 'ERFOLGREICH',
+      message: 'Die Optimierung war erfolgreich und hat eine Lösung gefunden.',
+      type: 'success'
+    },
+    showInfeasible: {
+      title: 'UNMÖGLICH',
+      message: 'Die Optimierung konnte keine Lösunge finden. Versuchen Sie, Restriktionen aufzuweichen.',
+      type: 'error'
+    }
+  },
   methods: {
-    async solve(force,first) {
-      console.log(this);
+    async solve(force) {
       this.loading = true
       await this.$nextTick()
       // ugliest hack in existance: for some reason $nextTick is not triggering when
       // loading is set to true... so do a set timeout of 1ms to trigger the loading animation
       setTimeout(async () => {
         try {
-          let plotCropMatrix = this.plotCropMatrix
-          let plotCropMatrix1 = this.plotCropMatrix1
-          let plotCropMatrix2 = this.plotCropMatrix2
-
-          if (!plotCropMatrix || force) {
-            plotCropMatrix = model.buildPlotCropMatrix(this.$store.curYear,this.$store.curScenario,this.$store)
-            plotCropMatrix1 = model.buildPlotCropMatrix(this.$store.curYear - 1,'Standard',this.$store)
-            plotCropMatrix2 = model.buildPlotCropMatrix(this.$store.curYear - 2,'Standard',this.$store)
+          const store = this.$store
+          if (!store.plots[0].matrix || force) {
+            // add matrix of gross margins per crop and year to all plots
+            store.plots = await model.buildMatrix(store.plots,store.crops,store.curYear)
+            // update current plots with newly created gross margins
+            store.curPlots = store.plots.filter(plot => {
+              return plot.year === store.settings.curYear &&
+                plot.scenario === store.settings.curScenario
+            })
           }
-          const gams = model.createInclude(plotCropMatrix,this.$store)
+          // create single farm model from user data in GAMS format
+          const gams = model.createInclude(store)
           console.log({a: gams});
+          // solve the model
           const { data } = await axios.post('http://localhost:3001/model/', {model: gams})
-
-          if (plotCropMatrix2) {
-            plotCropMatrix2._id = this.$store.curYear - 2 + 'StandardplotCropMatrix'
-            plotCropMatrix2.year = this.$store.curYear - 2
-            plotCropMatrix2.scenario = 'Standard'
-            plotCropMatrix2.type = 'plotCropMatrix'
-          }
-          if (plotCropMatrix1) {
-            plotCropMatrix1._id = this.$store.curYear - 1 + 'StandardplotCropMatrix'
-            plotCropMatrix1.year = this.$store.curYear - 1
-            plotCropMatrix1.scenario = 'Standard'
-            plotCropMatrix1.type = 'plotCropMatrix'
-          }
-
-          plotCropMatrix._id = this.$store.curYear + this.$store.curScenario + 'plotCropMatrix'
-          plotCropMatrix.year = this.$store.curYear
-          plotCropMatrix.scenario = this.$store.curScenario
-          plotCropMatrix.type = 'plotCropMatrix'
-
-          data._id = this.$store.curYear + this.$store.curScenario + 'result'
-          data.year = this.$store.curYear
-          data.scenario = this.$store.curScenario
-          data.type = 'result'
-
-          // save results in database
-          let toStore = [data,plotCropMatrix]
-          if (plotCropMatrix1) toStore.push(plotCropMatrix1)
-          if (plotCropMatrix2) toStore.push(plotCropMatrix2)
-
-          if (first) {
-            await this.$db.bulkDocs(toStore)
+          console.log(data);
+          if (data.model_status === 1) {
+            store.curPlots.forEach(plot => {
+              plot.recommendation = data.recommendation[plot.id]
+              plot.selectedCrop = plot.recommendation
+            })
           } else {
-            if (this.plotCropMatrix1) plotCropMatrix1._rev = this.plotCropMatrix1._rev
-            if (this.plotCropMatrix2) plotCropMatrix2._rev = this.plotCropMatrix2._rev
-            plotCropMatrix._rev = this.plotCropMatrix._rev
-            data._rev = this.result._rev
-
-            if (force) {
-              let test = await this.$db.bulkDocs(toStore)
-              console.log(test);
-            } else {
-              await this.$db.put(data)
-            }
+            this.infeasible = true
+            store.curPlots.forEach(plot => {
+              plot.recommendation = ''
+            })
           }
-          console.log(this);
+          // save results in database
+          await this.$db.bulkDocs(store.plots)
+          if (!this.infeasible) {
+            this.showSolved()
+          } else {
+            this.showInfeasible()
+          }
         } catch (e) {
           console.log(e)
         }
       }, 1)
 
     },
+    async save(e,i,type,plot) {
+      try {
+        const newValue = Number(e.target.innerText)
+        const data = plot.matrix[this.curYear][plot.selectedCrop]
+        const amount = data.amount
+
+        if (type === 'yieldCap' || type === 'croppingFactor') {
+          data[type] = (newValue + amount)/amount
+        } else {
+          data[type] = newValue
+        }
+        // recalculate gross margin
+        const price = data.price
+        const directCosts = data.directCosts
+        const variableCosts = data.variableCosts
+        const distanceCosts = data.distanceCosts
+        const croppingFactor = data.croppingFactor
+        const yieldCap = data.yieldCap
+
+        data.correctedAmount = _.round(amount * croppingFactor * yieldCap, 2)
+        let correctedAmount = data.correctedAmount
+        data.revenue = _.round(price * correctedAmount, 2)
+        data.revenueNoCropEff = _.round(price * amount, 2)
+        let revenueNoCropEff = data.revenueNoCropEff
+        data.grossMarginNoCropEff = _.round((revenueNoCropEff - directCosts - variableCosts - distanceCosts), 2)
+        let revenue = data.revenue
+        data.grossMarginHa = _.round(revenue - directCosts - variableCosts - distanceCosts, 2)
+        data.grossMargin = _.round((revenue - directCosts - variableCosts - distanceCosts) * plot.size)
+        // update plot
+        plot.matrix[this.curYear][plot.selectedCrop] = data
+        await this.$db.put(plot)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async saveCropChange(plot) {
+      try {
+        const id = plot._id
+        const doc = await this.$db.get(id)
+        doc.selectedCrop = plot.selectedCrop
+        await this.$db.put(doc)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+
     yearlyTotal(year) {
       let sum = 0
-      this.plots.forEach(plot => {
-        let code
-        if (year === this.curYear) {
-          code = this.result.recommendation[plot.id]
-        } else {
-          code = this.plotsPrevCrops[plot.id][year].code
-        }
+      const scenario = this.$store.curScenario
+      const plots = this.$store.plots.filter(plot => {
+        return plot.year === year && plot.scenario === scenario
+      })
+
+      plots.forEach(plot => {
+        let code = plot.selectedCrop
         if (code) {
-          const plotData = this.plotCropMatrix[plot.id][year][code]
+          const plotData = plot.matrix[year][code]
           const grossMargin = plotData.grossMargin
           sum += grossMargin
         }
       })
       return sum
     },
+
     getName(id, year) {
       const plot = _.find(this.$store.plots, {id: id, year: year})
       if (plot && cultures[plot.crop]) {
@@ -350,6 +410,7 @@ export default {
         }
       }
     },
+
     showPlotInfo(id) {
       if (this.selection === id) {
         this.selection = ''
@@ -357,32 +418,29 @@ export default {
         this.selection = id
       }
     },
+
     async update() {
       this.loading = true
-      console.log('update res');
-      this.$set(this, 'plots', this.$store.curPlots)
-      this.$set(this, 'curYear', this.$store.curYear)
-      if (!this.$store.curPlotCropMatrix && !this.$store.curResult
-        && this.plots) {
-        await this.solve(true,true)
-        await this.$nextTick()
-        this.loading = false
-      } else if (this.plots) {
-        let plotCropMatrix = {}
-        Object.keys(this.$store.curPlotCropMatrix).forEach(plot => {
-          plotCropMatrix[plot] = {}
-          plotCropMatrix[plot][this.curYear] = this.$store.curPlotCropMatrix[plot][this.curYear]
-        })
-        plotCropMatrix._rev = this.$store.curPlotCropMatrix._rev
-        this.$set(this, 'plotCropMatrix', plotCropMatrix)
-        this.$set(this, 'result', this.$store.curResult)
-        await this.$nextTick()
-        this.loading = false
-      } else {
-        this.loading = false
+      const store = this.$store
+      console.log('update');
+      if (store) {
+        this.$set(this, 'curPlots', store.curPlots)
+        this.$set(this, 'curYear', store.curYear)
+        if (this.curPlots && (!this.curPlots[0].matrix
+          || !this.curPlots[0].matrix[store.curYear] || !this.curPlots[0].recommendation)
+          && !this.infeasible) {
+          await this.solve(true)
+          await this.$nextTick()
+        } else if (this.curPlots && this.curPlots[0].matrix
+          && this.curPlots[0].matrix[store.curYear] && this.curPlots[0].recommendation) {
+          // this.$bus.$off('changeCurrents')
+          this.loading = false
+        } else {
+          this.loading = false
+        }
       }
-      console.log('false')
     },
+
     format(number) {
       const formatter =  new Intl.NumberFormat('de-DE', {
         style: 'currency',
@@ -394,7 +452,8 @@ export default {
   },
   components: {
     cropShares: () => import('~/components/cropShares.vue'),
-    grossMarginTimeline: () => import('~/components/grossMarginTimeline.vue')
+    grossMarginTimeline: () => import('~/components/grossMarginTimeline.vue'),
+    timeRequirement: () => import('~/components/timeRequirement.vue')
   }
 }
 </script>
@@ -464,5 +523,6 @@ export default {
   border-width: 0px;
   background: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24' height='24' viewBox='0 0 24 24'><path fill='#444' d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'></path></svg>");
   background-repeat: no-repeat;
-  background-position: 100% 50%;}
+  background-position: 100% 50%;
+}
 </style>

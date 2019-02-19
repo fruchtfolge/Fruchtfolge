@@ -48,6 +48,9 @@ export default {
     this.update()
     this.$bus.$on('changeCurrents', _.debounce(this.update, 200))
   },
+  destroyed() {
+    this.$bus.$off('changeCurrents')
+  },
   methods: {
     update() {
       this.$set(this, 'crops', this.$store.curCrops)

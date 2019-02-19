@@ -44,6 +44,9 @@ export default {
       return this.activatePlot(id)
     })
   },
+  destroyed() {
+    this.$bus.$off('changeCurrents')
+  },
   methods: {
     beforeEnter(el) {
       el.style.height = '0px';

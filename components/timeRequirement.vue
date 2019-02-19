@@ -37,81 +37,46 @@ export default {
   },
   props: {
     shares: {
-      type: Array,
-      required: true
-    },
-    plots: {
-      type: Array,
+      type: Object,
       required: true
     }
   },
   methods: {
     prepareData(chartId) {
       this.datasets = []
-      this.labels = []
+      this.labels = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember']
+      const store = this.$store
       const colors = ["#294D4A", "#4A6D7C", "#7690A5"]
       const curYear = this.$store.curYear
-
-      
-      this.plots.forEach(plot => {
-
-      })
-
-      let plotCropMatrix = this.$store.curPlotCropMatrix
-      let plotCropMatrix1 = this.$store.plotCropMatrix.filter(o => {return o.year === this.$store.curYear - 1})
-      let plotCropMatrix2 = this.$store.plotCropMatrix.filter(o => {return o.year === this.$store.curYear - 2})
-      if (plotCropMatrix1.length > 0) plotCropMatrix1 = plotCropMatrix1[0]
-      if (plotCropMatrix2.length > 0) plotCropMatrix2 = plotCropMatrix2[0]
+      const months = [['JAN1', 'JAN2'], ['FEB1','FEB2'], ['MRZ1','MRZ2'], ['APR1','APR2'], ['MAI1','MAI2'], ['JUN1','JUN2'], ['JUL1','JUL2'], ['AUG1','AUG2'], ['SEP1','SEP2'], ['OKT1','OKT2'], ['NOV1','NOV2'], ['DEZ1','DEZ2']]
 
       for (var i = 0; i < 3; i++) {
-        let data = []
-        let shares = []
-        years.forEach(year => {
-          const o = {year: curYear - i, sum: 0}
-          // calculate total db for cropping plan of curYear - i under prices/yields/directCosts of year
-          let curCropPlotMatrix = plotCropMatrix
-          if (i === 1 && plotCropMatrix1) {
-            curCropPlotMatrix = plotCropMatrix1
-          }
-          else if (i === 2 && plotCropMatrix2) {
-            curCropPlotMatrix = plotCropMatrix2
-          }
-          let grossMargins = []
-          let grossMargin = 0
-          grossMargins = Object.keys(curCropPlotMatrix).map(plot => {
-            if (plot === '_id' || plot === '_rev' || plot === 'type' || plot === 'year' || plot === 'scenario') return
-            const plotData = curCropPlotMatrix[plot][year]
-            let crop
-            let cropGrossMargin
-            if (i === 0) {
-              crop = this.result.recommendation[plot]
-              if (plotData[crop]) {
-                if (o[crop]) o[crop] += plotData[crop].size
-                else o[crop] = plotData[crop].size
-                o.sum += plotData[crop].size
-                return plotData[crop].grossMargin
-              }
-            } else {
-              crop = Object.keys(plotData).filter(crop => {return plotData[crop].grown})
-              if (plotData[crop[0]]) {
-                if (o[crop]) o[crop] += plotData[crop[0]].size
-                else o[crop] = plotData[crop[0]].size
-                o.sum += plotData[crop[0]].size
-                return plotData[crop[0]].grossMarginNoCropEff * plotData[crop[0]].size
-              }
-            }
-
-          })
-
-          grossMargin = _.sum(grossMargins)
-          data.push(grossMargin)
-          shares.push(o)
-          if (this.labels.indexOf(year) === -1) this.labels.push(year)
+        const croppingYear = curYear - i
+        if (!this.shares[croppingYear]) continue
+        const cropsGrown = Object.keys(this.shares[croppingYear])
+        const crops = store.crops.filter(crop => {
+          return cropsGrown.indexOf(crop.code.toString()) > -1
+          && crop.year === croppingYear
+          && crop.scenario === store.curScenario
         })
-        console.log(shares);
+        const data = months.map(month => {
+          let time = 0
+          crops.forEach(crop => {
+            const share = this.shares[croppingYear][crop.code]
+            let steps = crop.workingSteps.filter(o => {return month[0] === o.month || month[1] === o.month })
+            if (steps && steps.length > 0) {
+              steps = steps.map(step => {
+                return _.sumBy(step.steps, 'time')
+              })
+              time += _.sum(steps) * share
+            }
+          })
+          return _.round(time,2)
+        })
+
         this.datasets.push({
           data: data,
-          label: `Anbauplan ${curYear - i}`,
+          label: `Anbauplan ${croppingYear}`,
           borderColor: colors[i],
           backgroundColor: this.gradient[i]
         })
@@ -163,7 +128,7 @@ export default {
               {
                 ticks: {
                   callback: function(label, index, labels) {
-                    return (label).toLocaleString()+'€';
+                    return label + ' h';
                   }
                 }
               }

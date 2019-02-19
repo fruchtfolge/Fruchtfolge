@@ -89,6 +89,9 @@ export default {
       this.Draw.add(geometry)
     })
   },
+  destroyed() {
+    this.$bus.$off('changeCurrents')
+  },
   methods: {
     async createMap(settings) {
       mapboxgl.accessToken = 'pk.eyJ1IjoidG9mZmkiLCJhIjoiY2l3cXRnNHplMDAxcTJ6cWY1YWp5djBtOSJ9.mBYmcCSgNdaRJ1qoHW5KSQ'

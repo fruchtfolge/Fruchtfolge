@@ -17,9 +17,9 @@ export default {
     }
   },
   watch: {
-    result: {
+    plots: {
       handler() {
-        console.log(this.grossMarginTimeline,this.datasets);
+        //console.log(this.grossMarginTimeline,this.datasets);
         this.prepareData()
         this.grossMarginTimeline.data.datasets[0].data = this.datasets[0].data
         this.grossMarginTimeline.data.datasets[1].data = this.datasets[1].data
@@ -30,86 +30,64 @@ export default {
       deep: true
     }
   },
+  props: {
+    plots: {
+      type: Array,
+      required: true
+    }
+  },
   mounted() {
     this.createGradient('grossMarginTimeline-chart')
     this.prepareData('grossMarginTimeline-chart')
     this.createChart('grossMarginTimeline-chart', this.grossMarginTimeline)
   },
-  props: {
-    plotsPrevCrops: {
-      type: Object,
-      required: true
-    },
-    plotCropMatrix: {
-      type: Object,
-      required: true
-    },
-    result: {
-      type: Object,
-      required: true
-    }
-    
-  },
   methods: {
     prepareData(chartId) {
       this.datasets = []
       this.labels = []
+      const store = this.$store
       const colors = ["#294D4A", "#4A6D7C", "#7690A5"]
-      const curYear = this.$store.curYear
+      const curYear = store.curYear
+      const scenario = store.curScenario
       const years = Array(curYear - (curYear - 10)).fill(0).map((e,i)=>i+(curYear-9))
-      
-      let plotCropMatrix = this.$store.curPlotCropMatrix
-      let plotCropMatrix1 = this.$store.plotCropMatrix.filter(o => {return o.year === this.$store.curYear - 1})
-      let plotCropMatrix2 = this.$store.plotCropMatrix.filter(o => {return o.year === this.$store.curYear - 2})
-      if (plotCropMatrix1.length > 0) plotCropMatrix1 = plotCropMatrix1[0]
-      if (plotCropMatrix2.length > 0) plotCropMatrix2 = plotCropMatrix2[0]
-      
+
       for (var i = 0; i < 3; i++) {
+        const croppingYear = curYear - i
+        const plots = store.plots.filter(plot => {
+          return plot.year === croppingYear && plot.scenario === scenario
+        })
+
         let data = []
         let shares = []
         years.forEach(year => {
-          const o = {year: curYear - i, sum: 0}
+          const o = {year: croppingYear, sum: 0}
           // calculate total db for cropping plan of curYear - i under prices/yields/directCosts of year
-          let curCropPlotMatrix = plotCropMatrix
-          if (i === 1 && plotCropMatrix1) {
-            curCropPlotMatrix = plotCropMatrix1
-          }
-          else if (i === 2 && plotCropMatrix2) {
-            curCropPlotMatrix = plotCropMatrix2 
-          }
           let grossMargins = []
           let grossMargin = 0
-          grossMargins = Object.keys(curCropPlotMatrix).map(plot => {
-            if (plot === '_id' || plot === '_rev' || plot === 'type' || plot === 'year' || plot === 'scenario') return
-            const plotData = curCropPlotMatrix[plot][year]
-            let crop
-            let cropGrossMargin
+          grossMargins = plots.map(plot => {
+            const plotData = plot.matrix[year]
+            let type = 'grossMarginNoCropEff'
+            let crop = plot.crop
             if (i === 0) {
-              crop = this.result.recommendation[plot]
-              if (plotData[crop]) {
-                if (o[crop]) o[crop] += plotData[crop].size
-                else o[crop] = plotData[crop].size
-                o.sum += plotData[crop].size
+              crop = plot.selectedCrop
+            }
+            if (plotData[crop]) {
+              if (o[crop]) o[crop] += plotData[crop].size
+              else o[crop] = plotData[crop].size
+              o.sum += plotData[crop].size
+              if (i === 0) {
                 return plotData[crop].grossMargin
               }
-            } else {
-              crop = Object.keys(plotData).filter(crop => {return plotData[crop].grown})
-              if (plotData[crop[0]]) {
-                if (o[crop]) o[crop] += plotData[crop[0]].size
-                else o[crop] = plotData[crop[0]].size
-                o.sum += plotData[crop[0]].size
-                return plotData[crop[0]].grossMarginNoCropEff * plotData[crop[0]].size
-              }
+              return plotData[crop].grossMarginNoCropEff * plotData[crop].size
             }
-              
           })
-          
-          grossMargin = _.sum(grossMargins)
+
+          grossMargin = _.round(_.sum(grossMargins),2)
           data.push(grossMargin)
           shares.push(o)
           if (this.labels.indexOf(year) === -1) this.labels.push(year)
         })
-        console.log(shares);
+        //console.log(shares);
         this.datasets.push({
           data: data,
           label: `Anbauplan ${curYear - i}`,
@@ -122,7 +100,7 @@ export default {
       const ctx = document.getElementById(chartId).getContext('2d')
       const colors = ["#294D4A", "#4A6D7C", "#7690A5"]
       this.gradient = []
-      
+
       this.gradient[0] = ctx.createLinearGradient(0, 0, 0, 450)
       this.gradient[1] = ctx.createLinearGradient(0, 0, 0, 450)
       this.gradient[2] = ctx.createLinearGradient(0, 0, 0, 450)
@@ -134,7 +112,7 @@ export default {
       this.gradient[1].addColorStop(0, 'rgba(74,109,124, 0.9)')
       this.gradient[1].addColorStop(0.5, 'rgba(74,109,124, 0.25)')
       this.gradient[1].addColorStop(1, 'rgba(74,109,124, 0)')
-      
+
       this.gradient[2].addColorStop(0, 'rgba(118,144,165, 0.9)')
       this.gradient[2].addColorStop(0.5, 'rgba(118,144,165, 0.25)')
       this.gradient[2].addColorStop(1, 'rgba(118,144,165, 0)')
@@ -142,7 +120,7 @@ export default {
     createChart(chartId, chartData) {
       Chart.defaults.global.defaultFontFamily = "Open Sans Light";
       Chart.defaults.global.defaultFontSize = 14;
-      
+
       const config = {
         type: 'line',
         data: {
@@ -174,7 +152,7 @@ export default {
       }
       const ctx = document.getElementById(chartId).getContext('2d')
       this.grossMarginTimeline = new Chart(ctx, config)
-      console.log(this.grossMarginTimeline);
+      //console.log(this.grossMarginTimeline);
     }
   }
 }

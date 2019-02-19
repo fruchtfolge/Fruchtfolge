@@ -10,11 +10,7 @@ config.rootDir = __dirname // for electron-builder
 const nuxt = new Nuxt(config)
 const builder = new Builder(nuxt)
 
-
-// routes
-const route = require('./api/index.js').route(nuxt)
-// create server
-const server = http.createServer(route)
+const server = http.createServer(nuxt.render)
 
 
 // Build only in dev mode
