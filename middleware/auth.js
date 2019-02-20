@@ -11,11 +11,12 @@ export default async function ({$axios,app,redirect,route}) {
       return redirect('/')
     }
   }
-  
+
   let settings
   try {
     settings = await app.$db.get('settings')
   } catch (e) {
+    console.log(e)
     return await deleteAndRedirect()
   }
   try {
@@ -24,6 +25,10 @@ export default async function ({$axios,app,redirect,route}) {
       $axios.setHeader('Authorization','Bearer ' + settings.auth.token + ':' + settings.auth.password)
       // get session
       const { data } = await $axios.get('http://localhost:3001/auth/session')
+      app.$db.sync(settings.auth.userDBs.userdb, {
+        live: true,
+        retry: true
+      })
     } else {
       throw new Error('no auth')
     }

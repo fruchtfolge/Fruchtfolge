@@ -102,13 +102,12 @@ export default {
         return true
       }
     },
-    async getSettings() {
+    async getSettings(date) {
       let settings
       try {
         settings = await this.$db.get('settings')
       } catch (e) {
         if (e.status === 404) {
-          const date = new Date()
           settings = new Setting({
             curYear: date.getFullYear(),
             curScenario: 'Standard'
@@ -122,6 +121,7 @@ export default {
     async handleSuccess(auth,signup) {
       let settings
       let data
+      const date = new Date()
       try {
         this.$axios.setHeader('Authorization','Bearer ' + auth.token + ':' + auth.password)
         // this.loading = true
@@ -131,28 +131,32 @@ export default {
         // show succes banner
         this.success()
         // get settings object and store auth
-        const settings = await this.getSettings()
-        const { data } = await this.$axios.post('http://localhost:3001/auth/userDoc', {
-          username: auth.user_id
+
+        // do a one way replication
+        this.$db.replicate.from(auth.userDBs.userdb).on('complete', async (info) => {
+          console.log(info);
+          const settings = await this.getSettings(date)
+          const { data } = await this.$axios.post('http://localhost:3001/auth/userDoc', {
+            username: auth.user_id
+          })
+          settings.street = data.address
+          settings.postcode = data.postcode
+          settings.city = data.city
+          settings.home = data.home
+          settings.timestamp = date.toISOString()
+          settings.state_district = data.state_district
+          settings.auth = auth
+
+          await this.$db.put(settings)
+
+          if (signup) {
+            return $nuxt.$router.replace({path: '/settings'})
+          }
+          return $nuxt.$router.replace({path: '/maps'})
         })
-        settings.street = data.address
-        settings.postcode = data.postcode
-        settings.city = data.city
-        settings.home = data.home
-        settings.state_district = data.state_district
-        settings.auth = auth
-        // sync database
-        // console.log(auth.userDBs.userdb,auth);
-        this.$db.sync(auth.userDBs.userdb)
-        console.log(settings,data);
-        await this.$db.put(settings)
       } catch(e) {
         return console.error(e)
-      }  
-      if (signup) {
-        return $nuxt.$router.replace({path: '/settings'})
       }
-      return $nuxt.$router.replace({path: '/maps'})
     },
     async signup() {
       try {
