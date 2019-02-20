@@ -5,6 +5,7 @@ export default async function ({$axios,app,redirect,route}) {
       const result = await app.$db.info()
       if (result.doc_count > 0) {
         await app.$db.destroy()
+        app.$db = app.$initalizeDB()
       }
     }
     if (route.path !== '/') {
