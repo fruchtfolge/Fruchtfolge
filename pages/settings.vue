@@ -215,7 +215,7 @@ export default {
             settings: settings
           }
           console.log(request);
-          const { data } = await axios.post('http://localhost:3001/elan/files/', request)
+          const { data } = await this.$axios.post('http://localhost:3001/elan/files/', request,{ progress: true })
           await this.$db.bulkDocs(data)
           this.loading = false
           this.showZidSucc()
@@ -320,7 +320,7 @@ export default {
             settings: settings
           }
           console.log(request);
-          const { data } = await axios.post('http://localhost:3001/elan/', request)
+          const { data } = await this.$axios.post('http://localhost:3001/elan/', request,{ progress: true })
           // save zid id in settings, however don't store password for security reasons
           settings.zidId = this.zidId
           settings.elanYears = settings.elanYears ? years.concat(settings.elanYears) : years

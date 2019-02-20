@@ -2,7 +2,7 @@
   <div v-if="settings">
     <div class="header">
       <div @click='toggle' type="button" name="button" class="navIcon"></div>
-      <nuxt-link to="/" class="logo">FRUCHTFOLGE</nuxt-link>
+      <div class="logo">FRUCHTFOLGE</div>
       <!-- Scenario selector -->
       <select v-model="settings.curScenario" @change="saveSettings" class="planYear scenario" type="button" value="Standard">
         <option disabled value="">Szenario</option>
@@ -104,9 +104,17 @@ export default {
         this.open();
       }
     },
-    follow(route) {
-      this.curPage = route.path
-      return $nuxt.$router.replace({path: route.path})
+    async follow(route) {
+      try {
+        if (route.path === '/') {
+          await this.$axios.post('http://localhost:3001/auth/logout')
+        }
+        this.curPage = route.path
+        return $nuxt.$router.replace({path: route.path})
+      } catch (e) {
+        console.log(e)
+        return $nuxt.$router.replace({path: route.path})
+      }
     },
     isClicked(route) {
       if (route.subPage) {

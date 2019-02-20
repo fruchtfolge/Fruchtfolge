@@ -31,7 +31,7 @@
     "chartjs-plugin-dragdata": "^0.3.0",
     "fruchtfolge-model": "^1.6.0",
     "lodash": "^4.17.11",
-    "mapbox-gl": "^0.50.0",
+    "mapbox-gl": "^0.53.0",
     "mini-toastr": "^0.8.1",
     "nano": "^7.1.1",
     "nuxt": "^1.4.5",

@@ -306,7 +306,7 @@ export default {
           const gams = model.createInclude(store)
           console.log({a: gams});
           // solve the model
-          const { data } = await axios.post('http://localhost:3001/model/', {model: gams})
+          const { data } = await this.$axios.post('http://localhost:3001/model/', {model: gams},{ progress: true })
           console.log(data);
           if (data.model_status === 1) {
             store.curPlots.forEach(plot => {

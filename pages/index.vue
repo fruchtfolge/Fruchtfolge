@@ -6,17 +6,17 @@
       <div class="login">
         <p>ANBAUPLANUNG OPTIMIEREN</p>
         <input v-model="email" id="email" class="email" placeholder="E-Mail" name="email" autofocus="autofocus" />
-        <input v-model="password" class="password" onkeypress="return checkEnterLogin(event)" placeholder="Passwort" type="password" name="password" id="password" />
-        <button type="button" class="login-button" id="login-button">ANMELDEN</button>
+        <input v-model="password" class="password" @keyup.enter="login" placeholder="Passwort" type="password" name="password" id="password" />
+        <button type="button" class="login-button" @click="login" id="login-button">ANMELDEN</button>
         <a class="forgot" href="index.html">Passwort vergessen?</a>
       </div>
       <div class="registrierung">
         <p>JETZT KOSTENLOS ANMELDEN</p>
-        <input v-model="street" id="street" class="street" placeholder="Strasse u. Hausnr. (Betrieb)" />
+        <input v-model="address" id="address" class="address" placeholder="Strasse u. Hausnr. (Betrieb)" />
         <input v-model="postcode" id="postcode" class="postcode" placeholder="PLZ" />
         <input v-model="email" id="email2" class="email2" placeholder="E-Mail Adresse" />
         <input v-model="password" id='password2' class="password2" placeholder="Passwort" type="password" />
-        <input v-model="confirmPassword" id="confirmPassword" class="repeat-password" placeholder="Passwort wiederholen" type="password" />
+        <input v-model="confirmPassword" id="confirmPassword" class="repeat-password" @keyup.enter="signup" placeholder="Passwort wiederholen" type="password" />
         <input class="checkbox" type="checkbox" />
         <input v-model="dsgvoAccepted" type="checkbox" id="c2" name="cc" />
         <label for="c2" class="label-login" style="margin-top: 100px;"><span></span>Ich akzeptiere die Nutzungsbedingungen der Universität Bonn.</label>
@@ -28,16 +28,19 @@
 </template>
 
 <script>
+import Setting from '~/constructors/settings'
+
 export default {
   data() {
     return {
       showRegister: false,
       email: '',
       password: '',
-      street: '',
+      address: '',
       postcode: '',
       confirmPassword: '',
-      dsgvoAccepted: false
+      dsgvoAccepted: false,
+      loading: false
     }
   },
   created() {
@@ -62,13 +65,23 @@ export default {
       message: 'Die Passwörter stimmen nicht überein.',
       type: 'error'
     },
+    loginError: {
+      title: 'FEHLER',
+      message: 'Beim Login ist ein Fehler aufgetreten.',
+      type: 'error'
+    },
+    success: {
+      title: 'WILLKOMMEN',
+      message: 'Schön, dass Sie wieder da sind! Bitte haben Sie einen Augeblick geduld, während Ihre Daten synchronisiert werden.',
+      type: 'success'
+    }
   },
   methods: {
     flip() {
       return this.showRegister ? this.showRegister = false : this.showRegister = true
     },
     checkSignup() {
-      if (!this.street || !this.email || !this.postcode || !this.password || !this.confirmPassword) {
+      if (!this.address || !this.email || !this.postcode || !this.password || !this.confirmPassword) {
         this.incomplete()
         return false
       } else if (!this.dsgvoAccepted) {
@@ -88,45 +101,93 @@ export default {
       } else {
         return true
       }
-    }
+    },
+    async getSettings() {
+      let settings
+      try {
+        settings = await this.$db.get('settings')
+      } catch (e) {
+        if (e.status === 404) {
+          const date = new Date()
+          settings = new Setting({
+            curYear: date.getFullYear(),
+            curScenario: 'Standard'
+          })
+        } else {
+          return console.error(e)
+        }
+      }
+      return settings
+    },
+    async handleSuccess(auth,signup) {
+      let settings
+      let data
+      try {
+        this.$axios.setHeader('Authorization','Bearer ' + auth.token + ':' + auth.password)
+        // this.loading = true
+        // remove passwords after signup
+        this.password = ''
+        this.confirmPassword = ''
+        // show succes banner
+        this.success()
+        // get settings object and store auth
+        const settings = await this.getSettings()
+        const { data } = await this.$axios.post('http://localhost:3001/auth/userDoc', {
+          username: auth.user_id
+        })
+        settings.street = data.address
+        settings.postcode = data.postcode
+        settings.city = data.city
+        settings.home = data.home
+        settings.state_district = data.state_district
+        settings.auth = auth
+        // sync database
+        // console.log(auth.userDBs.userdb,auth);
+        this.$db.sync(auth.userDBs.userdb)
+        console.log(settings,data);
+        await this.$db.put(settings)
+      } catch(e) {
+        return console.error(e)
+      }  
+      if (signup) {
+        return $nuxt.$router.replace({path: '/settings'})
+      }
+      return $nuxt.$router.replace({path: '/maps'})
+    },
     async signup() {
       try {
         if (!this.checkSignup()) return
 
-        const { data } = await axios.post('/auth/signup', {
+        const { data } = await this.$axios.post('http://localhost:3001/auth/register', {
           email: this.email,
           password: this.password,
-          confirmPassword: this.confirmPassword
+          confirmPassword: this.confirmPassword,
+          address: this.address,
+          postcode: this.postcode
         })
-        // remove password after signup
-        this.password = ''
-        this.confirmPassword = ''
-        // set axios headers
-        return $nuxt.$router.replace({path: '/settings'})
+        await this.handleSuccess(data,true)
       } catch (e) {
-        if (error.response && error.response.status === 401) {
-          throw new Error('Bad credentials')
+        if (e.response && e.response.status === 401) {
+          this.loginError({message: e.response.data.message})
+        } else {
+          console.log(e)
         }
-        throw error
       }
     },
     async login() {
       try {
         if (!this.checkLogin()) return
-        const { data } = await axios.post('/auth/login', {
-          email: this.email,
+        const { data } = await this.$axios.post('http://localhost:3001/auth/login', {
+          username: this.email,
           password: this.password
         })
-        // remove password after signup
-        this.password = ''
-        // log out all other users that are logged in from this connection
-        // set axios headers
-        return $nuxt.$router.replace({path: '/maps'})
+        this.handleSuccess(data)
       } catch (e) {
-        if (error.response && error.response.status === 401) {
-          throw new Error('Bad credentials')
+        if (e.response && e.response.status === 401) {
+          this.loginError({message: e.response.data.message})
+        } else {
+          console.log(e)
         }
-        throw error
       }
     }
   },
@@ -297,7 +358,7 @@ div.flip-container {
   border-radius: 0 !important;
 }
 
-.street {
+.address {
   position: absolute;
   top: 50%;
   margin-top: -134px;

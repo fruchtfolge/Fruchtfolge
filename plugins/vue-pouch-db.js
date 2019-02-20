@@ -170,6 +170,12 @@ Vue.prototype.$bus.$on('importPrevYear', async () => {
     console.log(e)
   }
 })
+/*
 export default (ctx) => {
 
+}
+*/
+export default ({ app }, inject) => {
+  inject('store', Vue.prototype.$store),
+  inject('db', Vue.prototype.$db)
 }

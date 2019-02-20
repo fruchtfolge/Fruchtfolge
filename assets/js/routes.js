@@ -1,6 +1,6 @@
 module.exports = [{
   path: '/',
-  name: 'HOME',
+  name: 'LOGOUT',
   icon: 'static/home.png'
 },
 {
