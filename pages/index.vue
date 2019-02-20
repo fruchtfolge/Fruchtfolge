@@ -16,7 +16,7 @@
         <input v-model="postcode" id="postcode" class="postcode" placeholder="PLZ" />
         <input v-model="email" id="email2" class="email2" placeholder="E-Mail Adresse" />
         <input v-model="password" id='password2' class="password2" placeholder="Passwort" type="password" />
-        <input v-model="repeatPass" id="repeatPass" class="repeat-password" placeholder="Passwort wiederholen" type="password" />
+        <input v-model="confirmPassword" id="confirmPassword" class="repeat-password" placeholder="Passwort wiederholen" type="password" />
         <input class="checkbox" type="checkbox" />
         <input v-model="dsgvoAccepted" type="checkbox" id="c2" name="cc" />
         <label for="c2" class="label-login" style="margin-top: 100px;"><span></span>Ich akzeptiere die Nutzungsbedingungen der Universität Bonn.</label>
@@ -36,7 +36,7 @@ export default {
       password: '',
       street: '',
       postcode: '',
-      repeatPass: '',
+      confirmPassword: '',
       dsgvoAccepted: false
     }
   },
@@ -68,23 +68,60 @@ export default {
       return this.showRegister ? this.showRegister = false : this.showRegister = true
     },
     checkSignup() {
-      if (!this.street || !this.email || !this.postcode || !this.password || !this.repeatPass) {
+      if (!this.street || !this.email || !this.postcode || !this.password || !this.confirmPassword) {
         this.incomplete()
         return false
       } else if (!this.dsgvoAccepted) {
         this.noDSGVO()
         return false
-      } else if (this.password !== this.repeatPass) {
+      } else if (this.password !== this.confirmPassword) {
         return this.notMatching()
         return false
       } else {
         return true
       }
     },
+    checkLogin() {
+      if (!this.email || !this.password) {
+        this.incomplete()
+        return false
+      } else {
+        return true
+      }
+    }
     async signup() {
       try {
         if (!this.checkSignup()) return
-        //const { data } = await axios.post('/auth/signup', {this.email})
+
+        const { data } = await axios.post('/auth/signup', {
+          email: this.email,
+          password: this.password,
+          confirmPassword: this.confirmPassword
+        })
+        // remove password after signup
+        this.password = ''
+        this.confirmPassword = ''
+        // set axios headers
+        return $nuxt.$router.replace({path: '/settings'})
+      } catch (e) {
+        if (error.response && error.response.status === 401) {
+          throw new Error('Bad credentials')
+        }
+        throw error
+      }
+    },
+    async login() {
+      try {
+        if (!this.checkLogin()) return
+        const { data } = await axios.post('/auth/login', {
+          email: this.email,
+          password: this.password
+        })
+        // remove password after signup
+        this.password = ''
+        // log out all other users that are logged in from this connection
+        // set axios headers
+        return $nuxt.$router.replace({path: '/maps'})
       } catch (e) {
         if (error.response && error.response.status === 401) {
           throw new Error('Bad credentials')
