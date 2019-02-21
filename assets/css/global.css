@@ -49,11 +49,16 @@
 }
 
 /* Appearance of overall page */
-html {
+html,body {
   -webkit-user-select: none;
   -webkit-user-drag: none;
   cursor: default;
   font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
+  height:100%;
+}
+
+h2 {
+  font-weight: normal;
 }
 
 input, textarea, select, button, img {
@@ -153,15 +158,15 @@ button:focus {outline:0;}
   visibility: visible;
 }
 
+.spinner-container {
+  position: fixed;
+  width: 100%;
+  top: calc(50% - 60px);
+}
+
 .lds-spinner {
   color: black;
-  display: inline-block;
   margin: auto;
-  position: absolute;
-  left: 50%;
-  margin-left: -32px;
-  top: calc(50% - 60px);
-  margin-top: -32px;
   width: 64px;
   height: 64px;
 }

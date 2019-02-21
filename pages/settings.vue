@@ -1,8 +1,10 @@
 <template>
   <div>
-    <div v-show="loading" class="blur loading">
-      <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-      <h2 style="text-align: center;top: 480px;position: relative;">Die Antragsdaten werden geladen ... <br> Der Vorgang kann einige Minuten in Anspruch nehmen</h2>
+    <div v-if="loading" class="blur loading">
+      <div class="spinner-container">
+        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        <h2 style="text-align: center;">Daten werden geladen ... <br> Der Vorgang kann einige Minuten in Anspruch nehmen</h2>      
+      </div>
     </div>
     <div style="width: 50%; min-width: 500px; margin: auto; top: 120px;">
         <h1 style="font-family: 'Open Sans Condensed'; font-weight: normal; letter-spacing: 0.2em">EINSTELLUNGEN</h1>
@@ -215,12 +217,14 @@ export default {
             settings: settings
           }
           console.log(request);
-          const { data } = await axios.post('http://localhost:3001/elan/files/', request)
+          const { data } = await this.$axios.post('http://localhost:3001/elan/files/', request,{ progress: true })
           await this.$db.bulkDocs(data)
           this.loading = false
           this.showZidSucc()
         }
       } catch (e) {
+        this.showError()
+        this.loading = false
         console.log(e)
       }
     },
@@ -320,7 +324,7 @@ export default {
             settings: settings
           }
           console.log(request);
-          const { data } = await axios.post('http://localhost:3001/elan/', request)
+          const { data } = await this.$axios.post('http://localhost:3001/elan/', request,{ progress: true })
           // save zid id in settings, however don't store password for security reasons
           settings.zidId = this.zidId
           settings.elanYears = settings.elanYears ? years.concat(settings.elanYears) : years

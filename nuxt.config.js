@@ -33,10 +33,15 @@ module.exports = {
     },
     plugins: [
       new webpack.ProvidePlugin({
-        '_': 'lodash',
-        'axios': 'axios'
+        '_': 'lodash'
       })
     ]
+  },
+  modules: [
+    '@nuxtjs/axios',
+  ],
+  router: {
+    middleware: 'auth'
   },
   dev: process.env.NODE_ENV === 'DEV',
   css: [

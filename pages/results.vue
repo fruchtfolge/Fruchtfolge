@@ -1,20 +1,22 @@
 <template>
   <div class="">
     <div v-if="loading" class="blur loading">
-      <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-      <h2 style="text-align: center;position: relative;">Optimierung wird durchgeführt... <br> Der Vorgang kann einige Minuten in Anspruch nehmen</h2>
+      <div class="spinner-container">
+        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        <h2 style="text-align: center;">Daten werden geladen ... <br> Der Vorgang kann einige Minuten in Anspruch nehmen</h2>      
+      </div>
     </div>
     <div v-else-if="resultsAvailable">
       <div class="result-wrapper">
         <table class="result-table">
           <thead>
             <tr>
-              <th style="min-width: 150px;">Name</th>
-              <th>Größe</th>
-              <th>Hof-Feld-Distanz</th>
-              <th style="min-width: 100px;">{{ curYear - 1 }}</th>
-              <th style="min-width: 100px;">Empfehlung {{ curYear }}</th>
-              <th>Deckungsbeitrag</th>
+              <th style="min-width: 150px;" @click="sortPlots('name')">Name</th>
+              <th @click="sortPlots('size')">Größe</th>
+              <th @click="sortPlots('distance')">Hof-Feld-Distanz</th>
+              <th style="min-width: 100px;" @click="sortPlots('prevCrop1')">{{ curYear - 1 }}</th>
+              <th style="min-width: 100px;" @click="sortPlots('selectedCrop')">Empfehlung {{ curYear }}</th>
+              <th @click="sortPlots('curGrossMargin')">Deckungsbeitrag</th>
             </tr>
           </thead>
           <tbody>
@@ -23,7 +25,7 @@
                 <td style="text-align: center;">{{ plot.name }}</td>
                 <td style="text-align: center;">{{ plot.size }}</td>
                 <td style="text-align: center;">{{ plot.distance }}</td>
-                <td style="text-align: center;">{{ plotsPrevCrops[plot.id][curYear - 1].name }}</td>
+                <td style="text-align: center;">{{ plot.prevCrop1 }}</td>
                 <td style="text-align: center;">
                   <select v-model="plot.selectedCrop" @change="saveCropChange(plot)" class="selection">
                     <option v-for="(crop) in plot.matrix[curYear]" :key="crop.code" :value="crop.code">
@@ -32,7 +34,7 @@
                   </select>
                 </td>
                 <td style="text-align: center;" @click="showPlotInfo(plot.id)">
-                  {{ format(plot.matrix[curYear][plot.selectedCrop].grossMargin) }}
+                  {{ format(plot.curGrossMargin) }}
                 </td>
               </tr>
               <tr v-show="plot.id === selection" :key="plot._id">
@@ -155,14 +157,6 @@
           <cropShares :shares="curShares"/>
           <grossMarginTimeline :plots="curPlots"/>
           <timeRequirement :shares="shares"/>
-          <!--
-          <div class="crop-shares">
-            <cropShares :shares="curShares"/>
-          </div>
-          <div class="gross-margin-timeline">
-            <grossMarginTimeline :plotsPrevCrops="plotsPrevCrops" :plotCropMatrix="plotCropMatrix" :result="result"/>
-          </div>
-        -->
           <button type="button" name="button" @click="solve(true)">ZURÜCKSETZEN</button>
           <button type="button" name="button" @click="solve(false)">ERNEUT LÖSEN</button>
         </div>
@@ -187,6 +181,8 @@ export default {
       curYear: undefined,
       infeasible: false,
       selection: undefined,
+      sortKey: '',
+      sortOrder: 'desc',
       cropColor: {}
     }
   },
@@ -242,19 +238,6 @@ export default {
       }
       return false
     },
-    plotsPrevCrops() {
-      if (this.curPlots && this.curPlots.length > 0) {
-        let o = {}
-        const that = this
-        this.curPlots.forEach(plot => {
-          o[plot.id] = {}
-          o[plot.id][this.curYear - 3] = this.getName(plot.id,this.curYear - 3)
-          o[plot.id][this.curYear - 2] = this.getName(plot.id,this.curYear - 2)
-          o[plot.id][this.curYear - 1] = this.getName(plot.id,this.curYear - 1)
-        })
-        return o
-      }
-    },
     grossMarginPrevYear() {
       return this.yearlyTotal(this.curYear - 1)
     },
@@ -306,7 +289,7 @@ export default {
           const gams = model.createInclude(store)
           console.log({a: gams});
           // solve the model
-          const { data } = await axios.post('http://localhost:3001/model/', {model: gams})
+          const { data } = await this.$axios.post('http://localhost:3001/model/', {model: gams},{ progress: true })
           console.log(data);
           if (data.model_status === 1) {
             store.curPlots.forEach(plot => {
@@ -331,6 +314,24 @@ export default {
         }
       }, 1)
 
+    },
+    sortPlots(column) {
+      if (this.sortKey === column) {
+        this.sortOrder === 'asc' ? this.sortOrder = 'desc' : this.sortOrder = 'asc'
+      }
+      this.sortKey = column
+      this.curPlots = _.orderBy(this.curPlots,[column],[this.sortOrder])
+    },
+    updatePrevCrops() {
+      if (this.curPlots && this.curPlots.length > 0) {
+        this.curPlots = this.curPlots.map(plot => {
+          plot.prevCrop1 = this.getName(plot.id,this.curYear - 1).name
+          plot.prevCrop2 = this.getName(plot.id,this.curYear - 2).name
+          plot.prevCrop3 = this.getName(plot.id,this.curYear - 3).name
+          plot.curGrossMargin = plot.matrix[this.curYear][plot.selectedCrop].grossMargin
+          return plot
+        })
+      }
     },
     async save(e,i,type,plot) {
       try {
@@ -372,6 +373,7 @@ export default {
         const id = plot._id
         const doc = await this.$db.get(id)
         doc.selectedCrop = plot.selectedCrop
+        doc.curGrossMargin = plot.matrix[this.curYear][plot.selectedCrop].grossMargin
         await this.$db.put(doc)
       } catch (e) {
         console.log(e)
@@ -438,6 +440,8 @@ export default {
         } else {
           this.loading = false
         }
+        // update prev crops
+        this.updatePrevCrops()
       }
     },
 

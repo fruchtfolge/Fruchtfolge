@@ -89,7 +89,7 @@ export default {
           settings: settings
         }
         console.log(properties)
-        const { data } = await axios.post('http://localhost:3001/plots/', properties)
+        const { data } = await this.$axios.post('http://localhost:3001/plots/', properties,{ progress: true })
         this.$bus.$emit('drawPlot', data.geometry)
         // store new plot in database
         await this.$db.put(data)

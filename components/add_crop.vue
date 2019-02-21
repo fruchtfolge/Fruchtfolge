@@ -107,7 +107,7 @@ export default {
             variety: this.variety
           })
           console.log(properties)
-          const { data } = await axios.post('http://localhost:3001/crops/', properties)
+          const { data } = await this.$axios.post('http://localhost:3001/crops/', properties,{ progress: true })
           
           await this.$db.bulkDocs(data)
         }

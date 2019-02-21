@@ -107,7 +107,9 @@ export default {
         // get plot from store
         let storedPlot = _.find(this.$store.plots, {id: plot.id, year: year, scenario: this.$store.curScenario})
         const newCrop = this.plotsPrevCrops[plot.id][year]
-        const newCropCode = _.find(this.crops, {name: newCrop}).code
+        let newCropCode = ''
+        const crop = _.find(this.crops, {name: newCrop})
+        if (crop) newCropCode = crop.code
         console.log(newCropCode,storedPlot);
         if (storedPlot) {
           storedPlot.crop = newCropCode

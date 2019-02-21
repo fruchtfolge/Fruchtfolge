@@ -1,6 +1,6 @@
 module.exports = [{
   path: '/',
-  name: 'HOME',
+  name: 'LOGOUT',
   icon: 'static/home.png'
 },
 {
@@ -50,6 +50,12 @@ module.exports = [{
   subPage: true,
   path: '/timeseries',
   name: 'Marktentwicklung',
+  icon: 'static/crops.png'
+},
+{
+  subPage: true,
+  path: '/cropLabourReq',
+  name: 'Arbeitsbedarf',
   icon: 'static/crops.png'
 },
 {

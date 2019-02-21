@@ -11,11 +11,6 @@
             <th>Bodenart</th>
             <th>Hackfruchtfähig</th>
             <th>Dauergrünland</th>
-            <!--
-            <th style="min-width: 200px;">{{ curYear - 3 }}</th>
-            <th style="min-width: 200px;">{{ curYear - 2 }}</th>
-            <th style="min-width: 200px;">{{ curYear - 1 }}</th>
-          -->
           </tr>
         </thead>
         <tbody>
@@ -27,11 +22,6 @@
             <td style="text-align: center;">{{ plot.soilType }}</td>
             <td style="text-align: center;"><input type="checkbox" :checked="plot.rootCrops"></td>
             <td style="text-align: center;"><input type="checkbox" :checked="plot.permPast"></td>
-            <!--
-            <td style="text-align: center;">{{ plotsPrevCrops[plot.id][curYear - 3] }}</td>
-            <td style="text-align: center;">{{ plotsPrevCrops[plot.id][curYear - 2] }}</td>
-            <td style="text-align: center;">{{ plotsPrevCrops[plot.id][curYear - 1] }}</td>
-          -->
           </tr>
         </tbody>
       </table>
