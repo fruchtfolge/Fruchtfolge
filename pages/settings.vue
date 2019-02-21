@@ -1,8 +1,10 @@
 <template>
   <div>
-    <div v-show="loading" class="blur loading">
-      <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-      <h2 style="text-align: center;top: 480px;position: relative;">Die Antragsdaten werden geladen ... <br> Der Vorgang kann einige Minuten in Anspruch nehmen</h2>
+    <div v-if="loading" class="blur loading">
+      <div class="spinner-container">
+        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        <h2 style="text-align: center;">Daten werden geladen ... <br> Der Vorgang kann einige Minuten in Anspruch nehmen</h2>      
+      </div>
     </div>
     <div style="width: 50%; min-width: 500px; margin: auto; top: 120px;">
         <h1 style="font-family: 'Open Sans Condensed'; font-weight: normal; letter-spacing: 0.2em">EINSTELLUNGEN</h1>
@@ -221,6 +223,8 @@ export default {
           this.showZidSucc()
         }
       } catch (e) {
+        this.showError()
+        this.loading = false
         console.log(e)
       }
     },

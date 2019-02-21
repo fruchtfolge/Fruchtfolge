@@ -1,4 +1,4 @@
-export const planetChartData = {
+export const timeseries = {
   type: 'line',
   data: {
     datasets: [{
@@ -67,4 +67,4 @@ export const planetChartData = {
   }
 }
 
-export default planetChartData;
+export default timeseries;

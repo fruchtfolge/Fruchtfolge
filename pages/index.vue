@@ -1,26 +1,34 @@
 <template>
 <div class="main">
-  <img id="background" class="background" src="~assets/img/background.jpeg" alt="background" />
-  <div class="flip-container" id="login" v-bind:class="{ flip: showRegister }">
-    <div class="flipper">
-      <div class="login">
-        <p>ANBAUPLANUNG OPTIMIEREN</p>
-        <input v-model="email" id="email" class="email" placeholder="E-Mail" name="email" autofocus="autofocus" />
-        <input v-model="password" class="password" @keyup.enter="login" placeholder="Passwort" type="password" name="password" id="password" />
-        <button type="button" class="login-button" @click="login" id="login-button">ANMELDEN</button>
-        <a class="forgot" href="index.html">Passwort vergessen?</a>
-      </div>
-      <div class="registrierung">
-        <p>JETZT KOSTENLOS ANMELDEN</p>
-        <input v-model="address" id="address" class="address" placeholder="Strasse u. Hausnr. (Betrieb)" />
-        <input v-model="postcode" id="postcode" class="postcode" placeholder="PLZ" />
-        <input v-model="email" id="email2" class="email2" placeholder="E-Mail Adresse" />
-        <input v-model="password" id='password2' class="password2" placeholder="Passwort" type="password" />
-        <input v-model="confirmPassword" id="confirmPassword" class="repeat-password" @keyup.enter="signup" placeholder="Passwort wiederholen" type="password" />
-        <input class="checkbox" type="checkbox" />
-        <input v-model="dsgvoAccepted" type="checkbox" id="c2" name="cc" />
-        <label for="c2" class="label-login" style="margin-top: 100px;"><span></span>Ich akzeptiere die Nutzungsbedingungen der Universität Bonn.</label>
-        <button type="button" class="register-button" id="signup" @click="signup">REGISTRIEREN</button>
+  <div v-if="loading" class="blur loading">
+    <div class="spinner-container">
+      <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <h2 style="text-align: center;">Daten werden geladen ... <br> Der Vorgang kann einige Minuten in Anspruch nehmen</h2>      
+    </div>
+  </div>
+  <div v-else>
+    <img id="background" class="background" src="~assets/img/background.jpeg" alt="background" />
+    <div class="flip-container" id="login" v-bind:class="{ flip: showRegister }">
+      <div class="flipper">
+        <div class="login">
+          <p>ANBAUPLANUNG OPTIMIEREN</p>
+          <input v-model="email" id="email" class="email" placeholder="E-Mail" name="email" autofocus="autofocus" />
+          <input v-model="password" class="password" @keyup.enter="login" placeholder="Passwort" type="password" name="password" id="password" />
+          <button type="button" class="login-button" @click="login" id="login-button">ANMELDEN</button>
+          <a class="forgot" href="index.html">Passwort vergessen?</a>
+        </div>
+        <div class="registrierung">
+          <p>JETZT KOSTENLOS ANMELDEN</p>
+          <input v-model="address" id="address" class="address" placeholder="Strasse u. Hausnr. (Betrieb)" />
+          <input v-model="postcode" id="postcode" class="postcode" placeholder="PLZ" />
+          <input v-model="email" id="email2" class="email2" placeholder="E-Mail Adresse" />
+          <input v-model="password" id='password2' class="password2" placeholder="Passwort" type="password" />
+          <input v-model="confirmPassword" id="confirmPassword" class="repeat-password" @keyup.enter="signup" placeholder="Passwort wiederholen" type="password" />
+          <input class="checkbox" type="checkbox" />
+          <input v-model="dsgvoAccepted" type="checkbox" id="c2" name="cc" />
+          <label for="c2" class="label-login" style="margin-top: 100px;"><span></span>Ich akzeptiere die Nutzungsbedingungen der Universität Bonn.</label>
+          <button type="button" class="register-button" id="signup" @click="signup">REGISTRIEREN</button>
+        </div>
       </div>
     </div>
   </div>
@@ -40,6 +48,7 @@ export default {
       postcode: '',
       confirmPassword: '',
       dsgvoAccepted: false,
+      clicked: false,
       loading: false
     }
   },
@@ -124,7 +133,7 @@ export default {
       const date = new Date()
       try {
         this.$axios.setHeader('Authorization','Bearer ' + auth.token + ':' + auth.password)
-        // this.loading = true
+        this.loading = true
         // remove passwords after signup
         this.password = ''
         this.confirmPassword = ''
@@ -153,16 +162,24 @@ export default {
             live: true,
             retry: true
           })
+          // this.loading = false
+          // this.clicked = false
           if (signup) {
             return $nuxt.$router.replace({path: '/settings'})
           }
           return $nuxt.$router.replace({path: '/maps'})
         })
       } catch(e) {
-        return console.error(e)
+        this.loading = false
+        this.clicked = false
+        this.loginError({message: "Fehler beim Verbindungsaufbau."})
+        console.error(e)
       }
     },
     async signup() {
+      if (this.clicked) return
+      this.clicked = true
+      
       try {
         if (!this.checkSignup()) return
 
@@ -175,14 +192,19 @@ export default {
         })
         await this.handleSuccess(data,true)
       } catch (e) {
+        this.clicked = false
         if (e.response && e.response.status === 401) {
           this.loginError({message: e.response.data.message})
         } else {
-          console.log(e)
+          this.loginError({message: "Fehler beim Verbindungsaufbau."})
+          console.error(e)
         }
       }
     },
     async login() {
+      if (this.clicked) return
+      this.clicked = true
+      
       try {
         if (!this.checkLogin()) return
         const { data } = await this.$axios.post('http://localhost:3001/auth/login', {
@@ -191,10 +213,12 @@ export default {
         })
         this.handleSuccess(data)
       } catch (e) {
+        this.clicked = false
         if (e.response && e.response.status === 401) {
           this.loginError({message: e.response.data.message})
         } else {
-          console.log(e)
+          this.loginError({message: "Fehler beim Verbindungsaufbau."})
+          console.error(e)
         }
       }
     }

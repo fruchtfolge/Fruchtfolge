@@ -54,6 +54,12 @@ module.exports = [{
 },
 {
   subPage: true,
+  path: '/cropLabourReq',
+  name: 'Arbeitsbedarf',
+  icon: 'static/crops.png'
+},
+{
+  subPage: true,
   path: '/crops_settings',
   name: 'Eigenschaften',
   icon: 'static/crops.png'

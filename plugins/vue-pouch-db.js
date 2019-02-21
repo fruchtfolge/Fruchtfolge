@@ -101,7 +101,7 @@ function initalizeDB() {
 
 
   function updateCurrent() {
-    if (Vue.prototype.$store.plots) {
+    if (Vue.prototype.$store.plots && Vue.prototype.$store.settings) {
       Vue.set(Vue.prototype.$store, 'curPlots',
         Vue.prototype.$store.plots.filter(plot => {
           return plot.year === Vue.prototype.$store.settings.curYear &&
@@ -109,7 +109,7 @@ function initalizeDB() {
         })
       )
     }
-    if (Vue.prototype.$store.crops) {
+    if (Vue.prototype.$store.crops && Vue.prototype.$store.settings) {
       Vue.set(Vue.prototype.$store, 'curCrops',
         Vue.prototype.$store.crops.filter(crop => {
           return crop.year === Vue.prototype.$store.settings.curYear &&
@@ -118,7 +118,7 @@ function initalizeDB() {
         })
       )
     }
-    if (Vue.prototype.$store.constraints) {
+    if (Vue.prototype.$store.constraints && Vue.prototype.$store.settings) {
       Vue.set(Vue.prototype.$store, 'curConstraints',
         Vue.prototype.$store.constraints.filter(constraint => {
           return constraint.year === Vue.prototype.$store.settings.curYear &&
@@ -126,7 +126,7 @@ function initalizeDB() {
         })
       )
     }
-    if (Vue.prototype.$store.timeConstraints) {
+    if (Vue.prototype.$store.timeConstraints && Vue.prototype.$store.settings) {
       const match = Vue.prototype.$store.timeConstraints.filter(timeConstraints => {
         return timeConstraints.year === Vue.prototype.$store.settings.curYear &&
           timeConstraints.scenario === Vue.prototype.$store.settings.curScenario
