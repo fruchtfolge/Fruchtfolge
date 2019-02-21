@@ -148,7 +148,11 @@ export default {
           settings.auth = auth
 
           await this.$db.put(settings)
-
+          // start syncing
+          this.$store.sync = this.$db.sync(settings.auth.userDBs.userdb, {
+            live: true,
+            retry: true
+          })
           if (signup) {
             return $nuxt.$router.replace({path: '/settings'})
           }
