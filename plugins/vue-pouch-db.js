@@ -13,7 +13,7 @@ Vue.prototype.$bus = new Vue({})
 Vue.prototype.$store = {}
 
 function initalizeDB() {
-  const db = new PouchDB('data')
+  const db = new PouchDB('data',{auto_compaction: true})
   Vue.prototype.$db = db
 
   // store settings and keep updated

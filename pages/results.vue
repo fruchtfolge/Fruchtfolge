@@ -28,7 +28,7 @@
                 <td style="text-align: center;">{{ plot.prevCrop1 }}</td>
                 <td style="text-align: center;">
                   <select v-model="plot.selectedCrop" @change="saveCropChange(plot)" class="selection">
-                    <option v-for="(crop) in plot.matrix[curYear]" :key="crop.code" :value="crop.code">
+                    <option v-for="(crop) in plot.matrix[curYear]" :key="crop.grossMarginNoCropEff" :value="crop.code">
                       {{crop.name}}
                     </option>
                   </select>
@@ -155,10 +155,11 @@
         </table>
         <div class="plots-wrapper">
           <cropShares :shares="curShares"/>
+          <deviationOptimum :shares="shares" :plots="curPlots" :total="grossMarginCurYear"/>
           <grossMarginTimeline :plots="curPlots"/>
           <timeRequirement :shares="shares"/>
-          <button type="button" name="button" @click="solve(true)">ZURÜCKSETZEN</button>
-          <button type="button" name="button" @click="solve(false)">ERNEUT LÖSEN</button>
+          <button type="button" name="button" @click="solve(true)" style="margin-top: 20px;">ZURÜCKSETZEN</button>
+          <button type="button" name="button" @click="solve(false)" style="margin-left: 20px;">ERNEUT LÖSEN</button>
         </div>
       </div>
     </div>
@@ -293,13 +294,16 @@ export default {
           console.log(data);
           if (data.model_status === 1) {
             store.curPlots.forEach(plot => {
-              plot.recommendation = data.recommendation[plot.id]
+              plot.recommendation = data.recommendation[plot._id]
               plot.selectedCrop = plot.recommendation
             })
           } else {
             this.infeasible = true
             store.curPlots.forEach(plot => {
               plot.recommendation = ''
+              if (!plot.selectedCrop) {
+                plot.selectedCrop = Object.keys(plot.matrix[this.curYear])[0]
+              }
             })
           }
           // save results in database
@@ -328,7 +332,11 @@ export default {
           plot.prevCrop1 = this.getName(plot.id,this.curYear - 1).name
           plot.prevCrop2 = this.getName(plot.id,this.curYear - 2).name
           plot.prevCrop3 = this.getName(plot.id,this.curYear - 3).name
-          plot.curGrossMargin = plot.matrix[this.curYear][plot.selectedCrop].grossMargin
+          if (plot.matrix[this.curYear][plot.selectedCrop]) {
+            plot.curGrossMargin = plot.matrix[this.curYear][plot.selectedCrop].grossMargin
+          } else {
+            plot.curGrossMargin = 0
+          }
           return plot
         })
       }
@@ -457,7 +465,8 @@ export default {
   components: {
     cropShares: () => import('~/components/cropShares.vue'),
     grossMarginTimeline: () => import('~/components/grossMarginTimeline.vue'),
-    timeRequirement: () => import('~/components/timeRequirement.vue')
+    timeRequirement: () => import('~/components/timeRequirement.vue'),
+    deviationOptimum: () => import('~/components/deviation_optimum.vue')
   }
 }
 </script>

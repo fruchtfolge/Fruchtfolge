@@ -181,14 +181,14 @@ set curYear(years) / ${properties.curYear} /;
     soilTypes = _.uniqBy(properties.plots, 'soilType').map(type => { return `'${type.soilType}'` })
 
     properties.curPlots.forEach(plot => {
-      curPlots.push(` '${plot.id}'`)
-      p_plotData.push(` '${plot.id}'.size ${plot.size}\n '${plot.id}'.distance ${_.round(plot.distance, 2)}\n '${plot.id}'.quality ${plot.quality || 0}`)
-      plots_soilTypes.push(` '${plot.id}'.'${plot.soilType}'`)
-      if (plot.rootCrops) plots_rootCropCap.push(` '${plot.id}' 'YES'`)
-      if (plot.permPast) plots_permPast.push(` '${plot.id}' 'YES'`)
+      curPlots.push(` '${plot._id}'`)
+      p_plotData.push(` '${plot._id}'.size ${plot.size}\n '${plot._id}'.distance ${_.round(plot.distance, 2)}\n '${plot._id}'.quality ${plot.quality || 0}`)
+      plots_soilTypes.push(` '${plot._id}'.'${plot.soilType}'`)
+      if (plot.rootCrops) plots_rootCropCap.push(` '${plot._id}' 'YES'`)
+      if (plot.permPast) plots_permPast.push(` '${plot._id}' 'YES'`)
       if (plot.excludedCrops && plot.excludedCrops.length > 0) {
         plot.excludedCrops.forEach(crop => {
-          plots_excludedCrops.push(` '${plot.id}'.'${crop}' 'YES'`)
+          plots_excludedCrops.push(` '${plot._id}'.'${crop}' 'YES'`)
         })
       }
     })
@@ -235,8 +235,8 @@ set curYear(years) / ${properties.curYear} /;
     const plots_years_crops = []
 
     properties.plots.forEach(plot => {
-      if (plots.indexOf(` '${plot.id}'`) === -1) plots.push(` '${plot.id}'`)
-      if (plot.crop) plots_years_crops.push(` '${plot.id}'.${plot.year}.'${cultures[plot.crop] ? cultures[plot.crop].code : '""'}' 'YES'`)
+      if (plots.indexOf(` '${plot._id}'`) === -1) plots.push(` '${plot._id}'`)
+      if (plot.crop) plots_years_crops.push(` '${plot._id}'.${plot.year}.'${cultures[plot.crop] ? cultures[plot.crop].code : '""'}' 'YES'`)
     })
 
     // create gross margin related data
@@ -253,7 +253,7 @@ set curYear(years) / ${properties.curYear} /;
         // make sure there only is a gross margin for a plot if the rotational break is held
         // and the crop is set to active
         if (crop.rotBreakHeld && crop.active) {
-          p_grossMarginData.push(` '${plot.id}'.'${crop.code}' ${crop.grossMargin}`)
+          p_grossMarginData.push(` '${plot._id}'.'${crop.code}' ${crop.grossMargin}`)
         }
       })
     })
