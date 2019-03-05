@@ -4,8 +4,8 @@
       <canvas id="labour-chart"></canvas>
     </div>
     <div v-if="!stored" style="width:100%;text-align:center;margin-top: 40px;">
-      <h2>Aktuell sind keine Arbeitszeit-Restriktionen hinterlegt.<br>
-        Sie können durch Klicken auf den 'Hinzufügen'-Button maximale Arbeitsstunden hinzufügen.<br></h2>
+      <h3>Aktuell sind keine Arbeitszeit-Restriktionen hinterlegt.<br>
+        Sie können durch Klicken auf den 'Hinzufügen'-Button maximale Arbeitsstunden hinzufügen.<br></h3>
       <button type="button" name="button" @click="add">HINZUFÜGEN</button>
     </div>
     <div v-if="stored" style="width:100%;text-align:center;margin-top: 40px;">

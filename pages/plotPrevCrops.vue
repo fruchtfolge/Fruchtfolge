@@ -28,11 +28,11 @@
       </table>
     </div>
     <div v-else style="text-align: center; margin-top: 100px;">
-      <h2>Noch keine Schläge für das ausgewähle Planungsjahr und Szenario vorhanden.</h2>
-      <h2>
+      <h3>Noch keine Schläge für das ausgewähle Planungsjahr und Szenario vorhanden.</h3>
+      <h3>
       Sie können neue Schläge auf der Seite 'Karte' einzeichnen.
       <br>
-      Alternativ können Sie Daten aus dem vorherigen Anbaujahr importieren.</h2>
+      Alternativ können Sie Daten aus dem vorherigen Anbaujahr importieren.</h3>
       <button @click="$nuxt.$router.replace({path: 'maps'})">ZUR KARTE</button>
       <button @click="importPrev" style="margin-left: 20px;">IMPORTIEREN</button>
     </div>

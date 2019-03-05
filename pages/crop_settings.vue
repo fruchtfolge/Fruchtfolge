@@ -68,11 +68,11 @@
       </div>
     </div>
     <div style="text-align: center; margin-top: 100px; width: calc(100% - 275px);" v-else>
-      <h2>Noch keine Kulturen für das ausgewähle Planungsjahr und Szenario vorhanden.</h2>
-      <h2>
+      <h3>Noch keine Kulturen für das ausgewähle Planungsjahr und Szenario vorhanden.</h3>
+      <h3>
       Sie können neue Kulturen durch klicken auf den 'Hinzufügen'-Button in der rechten Seitenleiste hinzufügen.
       <br>
-      Alternativ können Sie Daten aus dem vorherigen Anbaujahr importieren.</h2>
+      Alternativ können Sie Daten aus dem vorherigen Anbaujahr importieren.</h3>
       <button @click="importPrev" style="margin-left: 20px;">IMPORTIEREN</button>
     </div>
   </div>

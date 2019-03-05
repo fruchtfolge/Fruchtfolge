@@ -1,10 +1,18 @@
 <template lang="html">
   <div>
-    <h2>Differenz zum Optimum:</h2>
-    <h2>{{ format(difference) }}</h2>
-    <div class="">
-      <p v-for="(deviation,i) in deviations" :key="i">{{ deviation }}</p>
-    </div>
+    <transition name="expand"
+    v-on:before-enter="beforeEnter" v-on:enter="enter"
+    v-on:before-leave="beforeLeave" v-on:leave="leave">
+      <div v-show="shown">
+        <div v-if="difference !== 0">
+          <h2>Differenz zum Optimum:</h2>
+          <h2 class="number" v-bind:class="{ positive: difference > 0 }">{{ format(difference) }}</h2>
+        </div>
+        <div class="">
+          <p v-for="(deviation,i) in deviations" :key="i">{{ deviation }}</p>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 <script>
@@ -12,6 +20,7 @@ export default {
   data() {
     return {
       dataset: undefined,
+      shown: false,
       curYear: 2019,
       optimum: 0,
       arableLand: 0,
@@ -20,6 +29,7 @@ export default {
   },
   mounted() {
     this.curYear = this.$store.curYear
+    this.shown = true
     this.getValues(this.plots)
   },
   props: {
@@ -124,6 +134,25 @@ export default {
     }
   },
   methods: {
+    beforeEnter(el) {
+      el.style.height = '0px';
+    },
+    enter(el) {
+      el.style.height = el.scrollHeight + 'px';
+    },
+    beforeLeave(el) {
+      el.style.height = el.scrollHeight + 'px';
+    },
+    leave(el) {
+      el.style.height = '0px';
+    },
+    expand(displayGroup) {
+      if (!this.shown[displayGroup]) {
+        this.shown[displayGroup] = true
+      } else {
+        this.shown[displayGroup] = false
+      }
+    },
     getValues(plots) {
       let optimum = 0
       let arableLand = 0
@@ -139,7 +168,7 @@ export default {
           greenLand += plot.size
         } else {
           arableLand += plot.size
-        }        
+        }
       })
       console.log(optimum);
       this.optimum = optimum
@@ -158,5 +187,12 @@ export default {
 }
 </script>
 <style>
-
+.number {
+  margin-top: -20px;
+  letter-spacing: 0.05em;
+  color: rgb(187, 67, 29);
+}
+.positive {
+  color: rgb(121, 173, 151);
+}
 </style>

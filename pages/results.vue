@@ -3,7 +3,7 @@
     <div v-if="loading" class="blur loading">
       <div class="spinner-container">
         <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-        <h2 style="text-align: center;">Daten werden geladen ... <br> Der Vorgang kann einige Minuten in Anspruch nehmen</h2>      
+        <h2 style="text-align: center;">Daten werden geladen ... <br> Der Vorgang kann einige Minuten in Anspruch nehmen</h2>
       </div>
     </div>
     <div v-else-if="resultsAvailable">
@@ -164,8 +164,8 @@
       </div>
     </div>
     <div v-else style="text-align: center; margin-top: 80px;">
-      <h2>Noch keine Schläge und Kulturen für das gewählte Planungsjahr vorhanden.<br>
-      Bitte fürgen Sie mindestens einen Schlag und eine Kultur hinzu.</h2>
+      <h3>Noch keine Schläge und Kulturen für das gewählte Planungsjahr vorhanden.<br>
+      Bitte fürgen Sie mindestens einen Schlag und eine Kultur hinzu.</h3>
     </div>
   </div>
 </template>
@@ -239,11 +239,18 @@ export default {
       }
       return false
     },
-    grossMarginPrevYear() {
-      return this.yearlyTotal(this.curYear - 1)
-    },
     grossMarginCurYear() {
-      return this.yearlyTotal(this.curYear)
+      const year = this.curYear
+      let sum = 0
+      this.curPlots.forEach(plot => {
+        let code = plot.selectedCrop
+        if (code) {
+          const plotData = plot.matrix[year][code]
+          const grossMargin = plotData.grossMargin
+          sum += grossMargin
+        }
+      })
+      return sum
     }
   },
   async created() {
@@ -332,7 +339,7 @@ export default {
           plot.prevCrop1 = this.getName(plot.id,this.curYear - 1).name
           plot.prevCrop2 = this.getName(plot.id,this.curYear - 2).name
           plot.prevCrop3 = this.getName(plot.id,this.curYear - 3).name
-          if (plot.matrix[this.curYear][plot.selectedCrop]) {
+          if (plot.matrix && plot.matrix[this.curYear] && plot.matrix[this.curYear][plot.selectedCrop]) {
             plot.curGrossMargin = plot.matrix[this.curYear][plot.selectedCrop].grossMargin
           } else {
             plot.curGrossMargin = 0
@@ -386,24 +393,6 @@ export default {
       } catch (e) {
         console.log(e)
       }
-    },
-
-    yearlyTotal(year) {
-      let sum = 0
-      const scenario = this.$store.curScenario
-      const plots = this.$store.plots.filter(plot => {
-        return plot.year === year && plot.scenario === scenario
-      })
-
-      plots.forEach(plot => {
-        let code = plot.selectedCrop
-        if (code) {
-          const plotData = plot.matrix[year][code]
-          const grossMargin = plotData.grossMargin
-          sum += grossMargin
-        }
-      })
-      return sum
     },
 
     getName(id, year) {

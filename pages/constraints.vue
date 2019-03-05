@@ -30,7 +30,7 @@
       </div>
     </div>
     <div style="text-align: center; margin-top: 100px;" v-else>
-      <h2>Noch keine Kulturen für das ausgewähle Planungsjahr und Szenario vorhanden.</h2>
+      <h3>Noch keine Kulturen für das ausgewähle Planungsjahr und Szenario vorhanden.</h3>
     </div>
   </div>
 </template>
