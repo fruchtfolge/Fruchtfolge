@@ -1,3 +1,8 @@
+# **DEPRECATED**
+
+This [Electron.js](https://electronjs.org/) version of the Fruchtfolge application is deprecated. 
+Development of the Fruchtfolge client application continues at [https://github.com/fruchtfolge/client](https://github.com/fruchtfolge/client)
+
 # Fruchtfolge
 Fruchtfolge is an open-source crop planning optimization tool.
 It's main focus are usability and data security.
